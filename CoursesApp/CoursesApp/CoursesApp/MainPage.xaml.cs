@@ -5,9 +5,10 @@ namespace CoursesApp
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage(CourseCollectionViewModel courses)
+        public MainPage(CourseCollectionViewModel courseCollectionViewModel)
         {
             InitializeComponent();
+            BindingContext = courseCollectionViewModel;
         }
     }
 }
