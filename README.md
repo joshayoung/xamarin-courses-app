@@ -39,7 +39,7 @@
     --
     +Age : int
     --
-    +Major : Major
+    +Major : string
   }
 
   entity "Teacher" as t {
@@ -47,7 +47,7 @@
     --
     +Age : int
     --
-    +Experience : Major
+    +Experience : int
   }
 
   c::CourseType ||..|| ct
