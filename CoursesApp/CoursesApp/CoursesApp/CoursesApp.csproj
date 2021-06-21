@@ -15,5 +15,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\CoursesApp.Models\CoursesApp.Models.csproj" />
+      <ProjectReference Include="..\..\CoursesApp.ViewModels\CoursesApp.ViewModels.csproj" />
     </ItemGroup>
 </Project>
