@@ -19,5 +19,70 @@ namespace CoursesApp.Models.Test
             student.Major.Should().Be(major);
         }
         
+        [Fact]
+        public void Name_PropertyChanged_ExpectPropertyChangedEvent()
+        {
+            string name = "name";
+            int age = 20;
+            string major = "major";
+            bool wasChanged = false;
+            
+            var student = new Student(name, age, major);
+
+            student.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(student.Name))
+                {
+                    wasChanged = true;
+                }
+            };
+
+            student.Name = "new name";
+            wasChanged.Should().BeTrue();
+        }
+        
+        [Fact]
+        public void Age_PropertyChanged_ExpectPropertyChangedEvent()
+        {
+            string name = "name";
+            int age = 20;
+            string major = "major";
+            bool wasChanged = false;
+            
+            var student = new Student(name, age, major);
+
+            student.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(student.Age))
+                {
+                    wasChanged = true;
+                }
+            };
+
+            student.Age = 24;
+            wasChanged.Should().BeTrue();
+        }
+        
+        [Fact]
+        public void Major_PropertyChanged_ExpectPropertyChangedEvent()
+        {
+            string name = "name";
+            int age = 20;
+            string major = "major";
+            bool wasChanged = false;
+            
+            var student = new Student(name, age, major);
+
+            student.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(student.Major))
+                {
+                    wasChanged = true;
+                }
+            };
+
+            student.Major = "new major";
+            wasChanged.Should().BeTrue();
+        }
     }
 }
