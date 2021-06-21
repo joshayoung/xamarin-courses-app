@@ -1,21 +1,79 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace CoursesApp.Models
 {
-    public class Course
+    public class Course : INotifyPropertyChanged
     {
-        public string Title;
-        public float Length;
-        public List<Student> Students = new List<Student>();
-        public List<Teacher> Teachers = new List<Teacher>();
-        public CourseType Type;
+        public event PropertyChangedEventHandler PropertyChanged;
+        
+        private string title;
+        public string Title
+        {
+            get => title;
+            set
+            {
+                title = value;
+                NotifyPropertyChanged(nameof(Title));
+            }
+        }
+
+        private float length;
+        public float Length
+        {
+            get => length;
+            set
+            {
+                length = value;
+                NotifyPropertyChanged(nameof(Length));
+            }
+        }
+
+        private List<Student> students;
+        public List<Student> Students
+        {
+            get => students;
+            set
+            {
+                students = value;
+                NotifyPropertyChanged(nameof(Students));
+            }
+
+        }
+
+        private List<Teacher> teachers;
+        public List<Teacher> Teachers
+        {
+            get => teachers;
+            set
+            {
+                teachers = value;
+                NotifyPropertyChanged(nameof(Teachers));
+            }
+        }
+
+        private CourseType type;
+        public CourseType Type
+        {
+            get => type;
+            set
+            {
+                type = value;
+                NotifyPropertyChanged(nameof(Type));
+            }
+        }
 
         public Course(string title, float length, CourseType type)
         {
             Title = title;
             Length = length;
             Type = type;
+        }
+
+        private void NotifyPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }
