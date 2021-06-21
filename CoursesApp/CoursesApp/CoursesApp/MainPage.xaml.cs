@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using CoursesApp.Models;
-using CoursesApp.ViewModels;
+﻿using CoursesApp.ViewModels;
 using Xamarin.Forms;
 
 namespace CoursesApp
