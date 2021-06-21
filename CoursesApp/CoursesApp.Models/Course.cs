@@ -64,10 +64,17 @@ namespace CoursesApp.Models
             }
         }
 
-        public Course(string title, float length, CourseType type)
+        public Course(
+            string title, 
+            float length, 
+            List<Student> students, 
+            List<Teacher> teachers, 
+            CourseType type)
         {
             Title = title;
             Length = length;
+            Students = students;
+            Teachers = teachers;
             Type = type;
         }
 
