@@ -15,9 +15,12 @@ namespace CoursesApp.Models.Test
             List<Teacher> teachers = new List<Teacher>();
             CourseType type = CourseType.Lab;
             
-            var course = new Course(title, length, type);
+            var course = new Course(title, length, students, teachers, type);
 
             course.Title.Should().Be(title);
+            course.Length.Should().Be(length);
+            course.Students.Should().BeEquivalentTo(students);
+            course.Teachers.Should().BeEquivalentTo(teachers);
         }
 
         [Fact]
@@ -30,7 +33,7 @@ namespace CoursesApp.Models.Test
             CourseType type = CourseType.Lab;
             bool wasChanged = false;
             
-            var course = new Course(title, length, type);
+            var course = new Course(title, length, students, teachers, type);
 
             course.PropertyChanged += (sender, args) =>
             {
@@ -53,8 +56,8 @@ namespace CoursesApp.Models.Test
             List<Teacher> teachers = new List<Teacher>();
             CourseType type = CourseType.Lab;
             bool wasChanged = false;
-            
-            var course = new Course(title, length, type);
+             
+            var course = new Course(title, length, students, teachers, type);
 
             course.PropertyChanged += (sender, args) =>
             {
@@ -78,7 +81,7 @@ namespace CoursesApp.Models.Test
             CourseType type = CourseType.Lab;
             bool wasChanged = false;
             
-            var course = new Course(title, length, type);
+            var course = new Course(title, length, students, teachers, type);
 
             course.PropertyChanged += (sender, args) =>
             {
@@ -102,7 +105,7 @@ namespace CoursesApp.Models.Test
             CourseType type = CourseType.Lab;
             bool wasChanged = false;
             
-            var course = new Course(title, length, type);
+            var course = new Course(title, length, students, teachers, type);
 
             course.PropertyChanged += (sender, args) =>
             {
@@ -126,7 +129,7 @@ namespace CoursesApp.Models.Test
             CourseType type = CourseType.Lab;
             bool wasChanged = false;
             
-            var course = new Course(title, length, type);
+            var course = new Course(title, length, students, teachers, type);
 
             course.PropertyChanged += (sender, args) =>
             {
