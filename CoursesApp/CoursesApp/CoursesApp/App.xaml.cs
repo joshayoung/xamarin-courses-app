@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CoursesApp.Models;
 using CoursesApp.Models.Builders;
+using CoursesApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,7 +17,8 @@ namespace CoursesApp
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            var vm = new CourseCollectionViewModel(Courses);
+            MainPage = new MainPage(vm);
         }
 
         protected override void OnStart() { }
