@@ -1,4 +1,5 @@
-﻿using CoursesApp.ViewModels;
+﻿using System;
+using CoursesApp.ViewModels;
 using Xamarin.Forms;
 
 namespace CoursesApp
@@ -9,6 +10,13 @@ namespace CoursesApp
         {
             InitializeComponent();
             BindingContext = courseCollectionViewModel;
+        }
+
+        private void NavigateToDetails(object sender, EventArgs e)
+        {
+            if (!(((VisualElement)sender).BindingContext is CourseViewModel courseViewModel)) return;
+            
+            Navigation.PushAsync(new CoursePage(courseViewModel));
         }
     }
 }
