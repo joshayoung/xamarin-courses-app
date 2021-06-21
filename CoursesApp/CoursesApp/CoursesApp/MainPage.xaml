@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:CoursesApp"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
+             x:DataType="viewModels:CourseCollectionViewModel"
              ios:Page.UseSafeArea="true"
              BackgroundColor="WhiteSmoke"
              x:Class="CoursesApp.MainPage">
@@ -19,14 +21,14 @@
         HasShadow="False"
         BackgroundColor="Tomato"
         >
-        <Label Text="Welcome to the Courses Application. Please select a course below to view the students and teachers participating in this course." 
+        <Label Text="Welcome to the Courses Application. Please select a course below to view the students and teachers participating in this course."
                FontSize="24"
                />
       </Frame>
       
-      <CollectionView>
+      <CollectionView ItemsSource="{Binding AllCourses}">
         <CollectionView.ItemTemplate>
-          <DataTemplate>
+          <DataTemplate x:DataType="viewModels:CourseViewModel">
             <StackLayout>
               <Label Text="{Binding Title}" />
               <Label Text="{Binding Length}" />
