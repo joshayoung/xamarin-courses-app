@@ -29,11 +29,16 @@
       <CollectionView ItemsSource="{Binding AllCourses}">
         <CollectionView.ItemTemplate>
           <DataTemplate x:DataType="viewModels:CourseViewModel">
-            <StackLayout>
-              <Label Text="{Binding Title}" />
-              <Label Text="{Binding Length}" />
-              <Label Text="{Binding Type}" />
-            </StackLayout>
+            <Frame BackgroundColor="Tomato" HasShadow="False" Padding="10">
+              <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="NavigateToDetails" />
+              </Frame.GestureRecognizers>
+              <StackLayout>
+                <Label Text="{Binding Title}" />
+                <Label Text="{Binding Length}" />
+                <Label Text="{Binding Type}" />
+              </StackLayout>
+            </Frame>
           </DataTemplate>
         </CollectionView.ItemTemplate>
       </CollectionView>

@@ -18,7 +18,7 @@ namespace CoursesApp
             InitializeComponent();
 
             var vm = new CourseCollectionViewModel(Courses);
-            MainPage = new MainPage(vm);
+            MainPage = new NavigationPage(new MainPage(vm));
         }
 
         protected override void OnStart() { }
