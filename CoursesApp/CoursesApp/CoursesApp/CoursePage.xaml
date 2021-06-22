@@ -10,6 +10,7 @@
       <Label Text="Course:" /> 
       <Label Text="{Binding Title}" /> 
     
+      <Label Text="Students" FontSize="Large" />
       <CollectionView ItemsSource="{Binding Students}">
         <CollectionView.ItemTemplate>
           <DataTemplate x:DataType="viewModels:StudentViewModel">
@@ -22,6 +23,24 @@
                 <Label Text="{Binding Name}" TextColor="White" /> 
                 <Label Text="{Binding Age}" TextColor="White" />
                 <Label Text="{Binding Major}" TextColor="White" />
+              </StackLayout>
+            </Frame>
+          </DataTemplate>
+        </CollectionView.ItemTemplate>
+      </CollectionView>
+      
+      <Label Text="Teachers" FontSize="Large" />
+      <CollectionView ItemsSource="{Binding Teachers}">
+        <CollectionView.ItemTemplate>
+          <DataTemplate x:DataType="viewModels:TeacherViewModel">
+            <Frame Margin="0" Padding="0" HasShadow="False">
+              <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="ViewStudentDetails" />
+              </Frame.GestureRecognizers>
+              <StackLayout BackgroundColor="Blue" Padding="4" Margin="10">
+                <Label Text="{Binding Name}" TextColor="White" /> 
+                <Label Text="{Binding Age}" TextColor="White" />
+                <Label Text="{Binding Experience}" TextColor="White" />
               </StackLayout>
             </Frame>
           </DataTemplate>

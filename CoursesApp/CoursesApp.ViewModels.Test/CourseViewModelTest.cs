@@ -35,7 +35,7 @@ namespace CoursesApp.ViewModels.Test
             courseViewModel.Title = "new title";
             courseViewModel.Length = 3;
             courseViewModel.Students = new List<StudentViewModel>();
-            courseViewModel.Teachers = new List<Teacher>();
+            courseViewModel.Teachers = new List<TeacherViewModel>();
             courseViewModel.Type = CourseType.Seminar;
 
             titleWasChanged.Should().BeTrue();

@@ -52,13 +52,26 @@ namespace CoursesApp.ViewModels
             }
         }
         
-        public List<Teacher> Teachers
+        private List<TeacherViewModel> teachers;
+        public List<TeacherViewModel> Teachers
         {
-            get => course.Teachers;
+            get
+            {
+                if (teachers == null)
+                {
+                    teachers = new List<TeacherViewModel>();
+                }
+                foreach (var teacher in course.Teachers)
+                {
+                    teachers.Add(new TeacherViewModel(teacher));
+                }
+
+                return teachers;
+            }
             set
             {
-                course.Teachers = value;
-                NotifyPropertyChanged(nameof(Teachers));
+                teachers = value;
+                NotifyPropertyChanged(nameof(Teacher));
             }
         }
         

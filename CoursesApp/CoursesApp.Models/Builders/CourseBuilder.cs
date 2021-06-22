@@ -29,14 +29,14 @@ namespace CoursesApp.Models.Builders
                     1,
                     new List<Student>
                     {
-                        new Student("Jimmy", 20, "Biology"),
-                        new Student("Sally", 19, "Math"),
-                        new Student("Pat", 19, "History"),
+                        new Student("James", 29, "Theology"),
+                        new Student("Robert", 17, "Science"),
+                        new Student("Phillip", 24, "History"),
                     },
                     new List<Teacher>
                     {
-                        new Teacher("Tom", 41, 12),
-                        new Teacher("Sandra", 35, 7)
+                        new Teacher("Charles", 47, 18),
+                        new Teacher("Peter", 30, 4)
                     },
                     CourseType.Lab
                 ),
