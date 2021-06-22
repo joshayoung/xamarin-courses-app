@@ -14,6 +14,10 @@
         <CollectionView.ItemTemplate>
           <DataTemplate x:DataType="viewModels:StudentViewModel">
             <Frame BackgroundColor="Blue">
+              <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="ViewStudentDetails" />
+                
+              </Frame.GestureRecognizers>
               <StackLayout>
                 <Label Text="{Binding Name}" /> 
                 <Label Text="{Binding Age}" />
