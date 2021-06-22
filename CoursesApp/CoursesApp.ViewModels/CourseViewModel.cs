@@ -7,7 +7,7 @@ namespace CoursesApp.ViewModels
     public class CourseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private Course course;
+        private readonly Course course;
 
         public string Title
         {

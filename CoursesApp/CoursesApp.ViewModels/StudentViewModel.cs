@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data.SqlTypes;
 using CoursesApp.Models;
 
 namespace CoursesApp.ViewModels
@@ -9,7 +7,8 @@ namespace CoursesApp.ViewModels
     public class StudentViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
+        private readonly Student student;
+        
         public List<int> Ages
         {
             get
@@ -23,8 +22,6 @@ namespace CoursesApp.ViewModels
                 };
             }
         }
-
-        private readonly Student student;
         
         public string Name
         {
