@@ -7,7 +7,7 @@ namespace CoursesApp.ViewModels
     public class CourseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private readonly Course course;
+        private Course course;
 
         public string Title
         {
@@ -28,13 +28,26 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged(nameof(Length));
             }
         }
-        
-        public List<Student> Students
+
+        private List<StudentViewModel> students;
+        public List<StudentViewModel> Students
         {
-            get => course.Students;
+            get
+            {
+                if (students == null)
+                {
+                    students = new List<StudentViewModel>();
+                }
+                foreach (var student in course.Students)
+                {
+                    students.Add(new StudentViewModel(student));
+                }
+
+                return students;
+            }
             set
             {
-                course.Students = value;
+                students = value;
                 NotifyPropertyChanged(nameof(Students));
             }
         }
