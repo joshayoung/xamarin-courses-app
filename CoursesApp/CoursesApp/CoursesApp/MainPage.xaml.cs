@@ -18,7 +18,6 @@ namespace CoursesApp
             frame.BackgroundColor = Color.Coral;
             
             if (!(((VisualElement)sender).BindingContext is CourseViewModel courseViewModel)) return;
-            
             Navigation.PushAsync(new CoursePage(courseViewModel));
         }
     }

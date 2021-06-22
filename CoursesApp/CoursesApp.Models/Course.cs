@@ -38,7 +38,6 @@ namespace CoursesApp.Models
                 students = value;
                 NotifyPropertyChanged(nameof(Students));
             }
-
         }
 
         private List<Teacher> teachers;

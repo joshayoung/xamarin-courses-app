@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using CoursesApp.Models;
 using FluentAssertions;
@@ -14,7 +13,7 @@ namespace CoursesApp.ViewModels.Test
             var courses = new List<Course>();
             var courseCollectionViewModel = new CourseCollectionViewModel(courses);
 
-            courseCollectionViewModel.AllCourses.Should().BeEquivalentTo(courses);
+            courseCollectionViewModel.Courses.Should().BeEquivalentTo(courses);
         }
     }
 }

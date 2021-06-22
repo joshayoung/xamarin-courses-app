@@ -11,13 +11,13 @@ namespace CoursesApp
 {
     public partial class App : Application
     {
-        public List<Course> Courses = CourseBuilder.Build();
+        private readonly List<Course> allCourses = CourseBuilder.Build();
         
         public App()
         {
             InitializeComponent();
 
-            var vm = new CourseCollectionViewModel(Courses);
+            var vm = new CourseCollectionViewModel(allCourses);
             MainPage = new NavigationPage(new MainPage(vm));
         }
 

@@ -37,7 +37,7 @@
       
       <BoxView HeightRequest="2" Margin="0, 10, 0, 10" BackgroundColor="Tomato" />
       
-      <CollectionView ItemsSource="{Binding AllCourses}">
+      <CollectionView ItemsSource="{Binding Courses}">
         <CollectionView.ItemTemplate>
           <DataTemplate x:DataType="viewModels:CourseViewModel">
             <Frame HasShadow="False"  BackgroundColor="Transparent" Padding="10" Margin="0" CornerRadius="10" IsClippedToBounds="True">
@@ -56,7 +56,6 @@
           </DataTemplate>
         </CollectionView.ItemTemplate>
       </CollectionView>
-      
     </StackLayout>
 
 </ContentPage>
