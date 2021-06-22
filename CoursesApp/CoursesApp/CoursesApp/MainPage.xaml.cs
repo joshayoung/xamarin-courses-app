@@ -14,6 +14,9 @@ namespace CoursesApp
 
         private void NavigateToDetails(object sender, EventArgs e)
         {
+            var frame = (Frame)sender;
+            frame.BackgroundColor = Color.Coral;
+            
             if (!(((VisualElement)sender).BindingContext is CourseViewModel courseViewModel)) return;
             
             Navigation.PushAsync(new CoursePage(courseViewModel));
