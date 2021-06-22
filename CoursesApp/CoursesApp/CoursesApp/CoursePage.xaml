@@ -2,11 +2,27 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
+             x:DataType="viewModels:CourseViewModel"
              x:Class="CoursesApp.CoursePage">
   <ContentPage.Content>
     <StackLayout>
       <Label Text="{Binding Title}" /> 
       <Label Text="{Binding Length}" />
+    
+      <CollectionView ItemsSource="{Binding Students}">
+        <CollectionView.ItemTemplate>
+          <DataTemplate x:DataType="viewModels:StudentViewModel">
+            <Frame BackgroundColor="Blue">
+              <StackLayout>
+                <Label Text="{Binding Name}" /> 
+                <Label Text="{Binding Age}" />
+                <Label Text="{Binding Major}" />
+              </StackLayout>
+            </Frame>
+          </DataTemplate>
+        </CollectionView.ItemTemplate>
+      </CollectionView>
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>

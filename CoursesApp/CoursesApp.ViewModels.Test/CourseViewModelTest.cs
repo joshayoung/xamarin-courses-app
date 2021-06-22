@@ -9,7 +9,7 @@ namespace CoursesApp.ViewModels.Test
     {
         
         [Fact]
-        public void CompletedVM_PropertyChanged_ExpectPropertyChangedEvents()
+        public void ViewModel_PropertyChanged_ExpectPropertyChangedEvents()
         {
             var title = "title";
             float length = 2;
@@ -34,7 +34,7 @@ namespace CoursesApp.ViewModels.Test
 
             courseViewModel.Title = "new title";
             courseViewModel.Length = 3;
-            courseViewModel.Students = new List<Student>();
+            courseViewModel.Students = new List<StudentViewModel>();
             courseViewModel.Teachers = new List<Teacher>();
             courseViewModel.Type = CourseType.Seminar;
 
@@ -46,7 +46,7 @@ namespace CoursesApp.ViewModels.Test
         }
         
         [Fact]
-        public void CompletedModel_PropertyChanged_ExpectPropertyChangedEvent()
+        public void Model_PropertyChanged_ExpectPropertyChangedEvent()
         {
             string title = "title";
             float length = 2;
