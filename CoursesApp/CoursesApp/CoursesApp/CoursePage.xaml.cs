@@ -23,5 +23,11 @@ namespace CoursesApp
             if (!(((VisualElement)sender).BindingContext is StudentViewModel studentViewModel)) return;
             Navigation.PushAsync(new StudentPage(studentViewModel));
         }
+
+        private void ViewTeacherDetails(object sender, EventArgs e)
+        {
+            if (!(((VisualElement)sender).BindingContext is TeacherViewModel teacherViewModel)) return;
+            Navigation.PushAsync(new TeacherPage(teacherViewModel));
+        }
     }
 }
