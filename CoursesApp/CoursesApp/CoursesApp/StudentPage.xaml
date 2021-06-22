@@ -5,8 +5,11 @@
              x:Class="CoursesApp.StudentPage">
   <ContentPage.Content>
     <StackLayout>
-      <Label Text="{Binding Name}" />
-      <Label Text="{Binding Age}" />
+      <Label Text="Student Details"></Label>
+      <StackLayout>
+        <Label Text="{Binding Name}" />
+        <Label Text="{Binding Age}" />
+      </StackLayout>
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>
