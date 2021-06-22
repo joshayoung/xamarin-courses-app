@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Mime;
 using CoursesApp.Models;
+using Xamarin.Forms;
 
 namespace CoursesApp.ViewModels
 {

@@ -9,7 +9,6 @@ namespace CoursesApp.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
         
-        private string name;
         public string Name
         {
             get => teacher.Name;
@@ -20,7 +19,6 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        private int age;
         public int Age
         {
             get => teacher.Age;
@@ -31,7 +29,6 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        private int experience;
         public int Experience
         {
             get => teacher.Experience;
