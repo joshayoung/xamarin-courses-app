@@ -6,23 +6,27 @@
              x:DataType="viewModels:CourseViewModel"
              x:Class="CoursesApp.CoursePage">
   <ContentPage.Content>
-    <StackLayout>
-      <Label Text="Course:" /> 
-      <Label Text="{Binding Title}" /> 
+    <StackLayout Padding="10">
+      <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+        <Label Text="Course:" HorizontalOptions="Start" FontSize="24" /> 
+        <Label Text="{Binding Title}" HorizontalOptions="Start" FontSize="24" /> 
+      </StackLayout>
     
       <Label Text="Students" FontSize="Large" />
-      <CollectionView ItemsSource="{Binding Students}">
+      <CollectionView ItemsSource="{Binding Students}" Margin="0, 0, 0, 20">
         <CollectionView.ItemTemplate>
           <DataTemplate x:DataType="viewModels:StudentViewModel">
             <Frame Margin="0" Padding="0" HasShadow="False">
               <Frame.GestureRecognizers>
                 <TapGestureRecognizer Tapped="ViewStudentDetails" />
-                
               </Frame.GestureRecognizers>
-              <StackLayout BackgroundColor="Blue" Padding="4" Margin="10">
-                <Label Text="{Binding Name}" TextColor="White" /> 
-                <Label Text="{Binding Age}" TextColor="White" />
-                <Label Text="{Binding Major}" TextColor="White" />
+              <StackLayout Margin="0, 0, 0, 10">
+                <Frame HasShadow="False" BackgroundColor="Tomato" CornerRadius="4">
+                  <StackLayout>
+                    <Label Text="{Binding Name}" TextColor="White" /> 
+                    <Label Text="{Binding Major}" TextColor="White" />
+                  </StackLayout>
+                </Frame>
               </StackLayout>
             </Frame>
           </DataTemplate>
@@ -35,12 +39,15 @@
           <DataTemplate x:DataType="viewModels:TeacherViewModel">
             <Frame Margin="0" Padding="0" HasShadow="False">
               <Frame.GestureRecognizers>
-                <TapGestureRecognizer Tapped="ViewStudentDetails" />
+                <TapGestureRecognizer Tapped="ViewTeacherDetails" />
               </Frame.GestureRecognizers>
-              <StackLayout BackgroundColor="Blue" Padding="4" Margin="10">
-                <Label Text="{Binding Name}" TextColor="White" /> 
-                <Label Text="{Binding Age}" TextColor="White" />
-                <Label Text="{Binding Experience}" TextColor="White" />
+              <StackLayout Margin="0, 0, 0, 10">
+                <Frame HasShadow="False" BackgroundColor="Khaki" CornerRadius="4">
+                  <StackLayout>
+                    <Label Text="{Binding Name}" TextColor="Black" /> 
+                    <Label Text="{Binding Experience}" TextColor="Black" />
+                  </StackLayout>
+                </Frame>
               </StackLayout>
             </Frame>
           </DataTemplate>
