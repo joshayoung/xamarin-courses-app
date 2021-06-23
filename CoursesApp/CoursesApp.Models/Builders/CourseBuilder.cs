@@ -15,6 +15,7 @@ namespace CoursesApp.Models.Builders
                     {
                         new Student("Joe", 20, "English"),
                         new Student("Sally", 19, "Math"),
+                        new Student("Pedro", 19, "Biology"),
                         new Student("Frank", 18, "Math"),
                     },
                     new List<Teacher>
@@ -31,6 +32,7 @@ namespace CoursesApp.Models.Builders
                     {
                         new Student("James", 29, "Theology"),
                         new Student("Robert", 17, "Science"),
+                        new Student("Theressa", 19, "Science"),
                         new Student("Phillip", 24, "History"),
                     },
                     new List<Teacher>
@@ -47,6 +49,7 @@ namespace CoursesApp.Models.Builders
                     {
                         new Student("Matt", 19, "Math"),
                         new Student("Greg", 18, "History"),
+                        new Student("Marty", 18, "Biology"),
                         new Student("Deb", 18, "History"),
                     },
                     new List<Teacher>

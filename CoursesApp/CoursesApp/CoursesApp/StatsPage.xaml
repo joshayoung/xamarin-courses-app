@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CoursesApp.StatsPage">
+  <ContentPage.Content>
+    <StackLayout>
+      <Label Text="Student Details" />
+      <StackLayout>
+        <Label Text="Student Count:" />
+        <Label Text="{Binding StudentCount}" />
+        
+        <Label Text="Average Student Age:" />
+        <Label Text="{Binding AverageStudentAge}" />
+        
+        <Button Text="View Students for Class" Clicked="ViewStudents" />
+      </StackLayout>
+      
+      <Label Text="Teacher Details" />
+      <StackLayout>
+        <Label Text="Average Teacher Age:" />
+        <Label Text="{Binding AverageTeacherAge}" />
+        <Label Text="Most Popular Major:" />
+        <Label Text="{Binding HighestMajor}" />
+        
+        <Button Text="View Teachers for Class" Clicked="ViewTeachers" />
+      </StackLayout>
+    </StackLayout>
+  </ContentPage.Content>
+</ContentPage>

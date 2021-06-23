@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using CoursesApp.Models;
 
 namespace CoursesApp.ViewModels
@@ -8,6 +9,73 @@ namespace CoursesApp.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly Course course;
+
+        public int StudentCount => course.Students.Count;
+
+        private string highestMajor;
+        public string HighestMajor
+        {
+            get
+            {
+                Dictionary<string, int> counts = new Dictionary<string, int>();
+                foreach (var student in course.Students)
+                {
+                    if (!counts.ContainsKey(student.Major))
+                    {
+                        counts.Add(student.Major, 1);
+                    }
+                    else
+                    {
+                        counts[student.Major]++;
+                    }
+                }
+
+                //counts.ToList().Sort((val1, val2) => val1.Value.CompareTo(val2.Value));
+
+                var sorted = counts.OrderBy(v => v.Value).ToDictionary(v => v.Key, v => v.Value);
+
+                return sorted.Last().Key;
+            }
+            set => highestMajor = value;
+        }
+
+        private int averageStudentAge;
+        public int AverageStudentAge
+        {
+            get
+            {
+                int sum = 0;
+                foreach (var student in course.Students)
+                {
+                    sum += student.Age;
+                }
+
+                return sum / course.Students.Count;
+            }
+            set
+            {
+                averageStudentAge = value;
+            }
+        }
+        
+        private int averageTeacherAge;
+        public int AverageTeacherAge
+        {
+            get
+            {
+                int sum = 0;
+                foreach (var teacher in course.Teachers)
+                {
+                    sum += teacher.Age;
+                }
+
+                return sum / course.Teachers.Count;
+            }
+            set
+            {
+                averageTeacherAge = value;
+            }
+        }
 
         public string Title
         {
