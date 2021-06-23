@@ -2,27 +2,31 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
+             x:DataType="viewModels:CourseViewModel"
+             ios:Page.UseSafeArea="true"
+             BackgroundColor="Beige"
              x:Class="CoursesApp.StatsPage">
   <ContentPage.Content>
-    <StackLayout>
-      <Label Text="Student Details" />
-      <StackLayout>
+    <StackLayout Padding="10">
+      <StackLayout Margin="0, 0, 0, 20">
+        <Label Text="Student Details" FontAttributes="Bold" FontSize="24" HorizontalOptions="Center" />
         <Label Text="Student Count:" />
         <Label Text="{Binding StudentCount}" />
-        
         <Label Text="Average Student Age:" />
-        <Label Text="{Binding AverageStudentAge}" />
-        
+        <Label Text="{Binding AverageStudentAgeWithText}" />
+
         <Button Text="View Students for Class" Clicked="ViewStudents" />
       </StackLayout>
-      
-      <Label Text="Teacher Details" />
+
       <StackLayout>
+        <Label Text="Teacher Details" FontAttributes="Bold" FontSize="24" HorizontalOptions="Center" />
         <Label Text="Average Teacher Age:" />
         <Label Text="{Binding AverageTeacherAge}" />
         <Label Text="Most Popular Major:" />
         <Label Text="{Binding HighestMajor}" />
-        
+
         <Button Text="View Teachers for Class" Clicked="ViewTeachers" />
       </StackLayout>
     </StackLayout>

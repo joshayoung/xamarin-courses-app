@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using CoursesApp.Models;
+using Xamarin.Forms;
 
 namespace CoursesApp.ViewModels
 {
@@ -37,6 +38,18 @@ namespace CoursesApp.ViewModels
                 return sorted.Last().Key;
             }
             set => highestMajor = value;
+        }
+
+        public string AverageStudentAgeWithText => AverageAgeString();
+
+        public string AverageAgeString()
+        {
+            return "Average Student Age: " + AverageStudentAge.ToString();
+            Label myLabel = new Label
+            {
+                BackgroundColor = Color.Red,
+                FontSize = 24
+            };
         }
 
         private int averageStudentAge;
