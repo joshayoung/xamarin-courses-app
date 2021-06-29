@@ -25,5 +25,10 @@ namespace CoursesApp
                 studentViewModel.Age = (int)picker.ItemsSource[selectedIndex];
             }
         }
+
+        private void UpdateMajor(object sender, EventArgs e)
+        {
+            studentViewModel.UpdateMajor();
+        }
     }
 }

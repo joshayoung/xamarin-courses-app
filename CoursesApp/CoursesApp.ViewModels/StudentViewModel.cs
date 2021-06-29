@@ -64,6 +64,10 @@ namespace CoursesApp.ViewModels
             student.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
 
+
+        // A button would call this:
+        public void UpdateMajor() => student.UpdateMajor(student.Id);
+
         private void NotifyPropertyChanged(string propName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));

@@ -15,6 +15,7 @@
         <Grid.RowDefinitions>
           <RowDefinition />
           <RowDefinition />
+          <RowDefinition />
         </Grid.RowDefinitions>
         <Label Text="Name" Grid.Column="0" Grid.Row="0" />
         <Entry 
@@ -31,6 +32,7 @@
           Grid.Row="1"
           >
         </Picker>
+        <Button Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Clicked="UpdateMajor" Text="Update Major" BackgroundColor="Tomato" />
       </Grid>
     </StackLayout>
   </ContentPage.Content>

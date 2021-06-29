@@ -32,7 +32,7 @@ namespace CoursesApp
         {
             try
             {
-                var api = new RestClient("http://localhost:5000/courses");
+                var api = new RestClient("http://localhost:5000/api/courses");
                 api.Timeout = -1;
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = api.Execute(request);
