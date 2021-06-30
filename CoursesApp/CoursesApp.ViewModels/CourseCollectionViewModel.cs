@@ -5,10 +5,13 @@ namespace CoursesApp.ViewModels
 {
     public class CourseCollectionViewModel
     {
-        public List<CourseViewModel> Courses { get; } = new List<CourseViewModel>();
-        public CourseCollectionViewModel(List<Course> courses)
+        private readonly CourseCollection coursesCollection;
+        //public List<CourseViewModel> Courses { get; } = new List<CourseViewModel>();
+        
+        public CourseCollectionViewModel(CourseCollection coursesCollection)
         {
-            courses.ForEach(course => Courses.Add(new CourseViewModel(course)));
+            this.coursesCollection = coursesCollection;
+            //courses.ForEach(course => Courses.Add(new CourseViewModel(course)));
         }
     }
 }
