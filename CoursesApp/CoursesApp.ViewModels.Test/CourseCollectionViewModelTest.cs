@@ -10,10 +10,61 @@ namespace CoursesApp.ViewModels.Test
         [Fact]
         public void Constructor_ValidParams_ExpectAssignment()
         {
-            var courses = new List<Course>();
-            var courseCollectionViewModel = new CourseCollectionViewModel(courses);
+            var courseCollection = new CourseCollection();
+            var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
 
-            courseCollectionViewModel.Courses.Should().BeEquivalentTo(courses);
+            courseCollectionViewModel.LastCourse.Should().BeNull();
+            courseCollectionViewModel.CoursesWithMultipleStudents.Should().BeEmpty();
+        }
+        
+        [Fact]
+        public void LastCourse_ReloadTheClasses_ExpectPropertyChangeEvent()
+        {
+            var courseCollection = new CourseCollection();
+            var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
+            var lastCourse = new Course("title", 2, new List<Student>(), new List<Teacher>(), CourseType.Discussion);
+            var courses = new List<Course> { 
+                new Course("title", 2, new List<Student>(), new List<Teacher>(), CourseType.Discussion),
+                lastCourse
+            };
+            
+            var wasChanged = false;
+            courseCollectionViewModel.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(courseCollectionViewModel.LastCourse)) wasChanged = true;
+            };
+            
+            courseCollection.Courses.Clear();
+            courses.ForEach(course => courseCollection.Courses.Add(course));
+                
+            courseCollectionViewModel.LastCourse.Should().BeEquivalentTo(new CourseViewModel(lastCourse));
+            wasChanged.Should().BeTrue();
+        }
+        
+        [Fact]
+        public void CoursesWithMultipleStudents_ReloadTheClasses_ExpectCollectionChangedEvent()
+        {
+            var courseCollection = new CourseCollection();
+            var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
+            var multipleStudents = new Course(
+                "title",
+                3,
+                new List<Student> {new Student("name", 20, "Biology"), new Student("name", 30, "Math")},
+                new List<Teacher>(),
+                CourseType.Discussion);
+            var courses = new List<Course> { 
+                new Course("title", 2, new List<Student>(), new List<Teacher>(), CourseType.Discussion),
+                multipleStudents
+            };
+            
+            var coursesWithMultipleStudentsViewModels = new List<CourseViewModel>();
+
+            courseCollection.Courses.Clear();
+            courses.ForEach(course => courseCollection.Courses.Add(course));
+
+            coursesWithMultipleStudentsViewModels.Add(new CourseViewModel(multipleStudents));
+            
+            courseCollectionViewModel.CoursesWithMultipleStudents.Should().BeEquivalentTo(coursesWithMultipleStudentsViewModels);
         }
     }
 }

@@ -18,6 +18,10 @@ namespace CoursesApp.ViewModels
         {
             get
             {
+                if (course.Students.Count < 1)
+                {
+                    return null;
+                }
                 Dictionary<string, int> counts = new Dictionary<string, int>();
                 foreach (var student in course.Students)
                 {
@@ -30,11 +34,11 @@ namespace CoursesApp.ViewModels
                         counts[student.Major]++;
                     }
                 }
-
+        
                 //counts.ToList().Sort((val1, val2) => val1.Value.CompareTo(val2.Value));
-
+        
                 var sorted = counts.OrderBy(v => v.Value).ToDictionary(v => v.Key, v => v.Value);
-
+        
                 return sorted.Last().Key;
             }
             set => highestMajor = value;
@@ -51,18 +55,22 @@ namespace CoursesApp.ViewModels
                 FontSize = 24
             };
         }
-
+        
         private int averageStudentAge;
         public int AverageStudentAge
         {
             get
             {
+                if (course.Students.Count < 1)
+                {
+                    return 0;
+                }
                 int sum = 0;
                 foreach (var student in course.Students)
                 {
                     sum += student.Age;
                 }
-
+        
                 return sum / course.Students.Count;
             }
             set
@@ -76,12 +84,16 @@ namespace CoursesApp.ViewModels
         {
             get
             {
+                if (course.Teachers.Count < 1)
+                {
+                    return 0;
+                }
                 int sum = 0;
                 foreach (var teacher in course.Teachers)
                 {
                     sum += teacher.Age;
                 }
-
+        
                 return sum / course.Teachers.Count;
             }
             set
