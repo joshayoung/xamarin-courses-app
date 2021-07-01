@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using CoursesApp.Models;
-using Xamarin.Forms;
 
 namespace CoursesApp.ViewModels
 {
@@ -13,7 +12,6 @@ namespace CoursesApp.ViewModels
 
         public int StudentCount => course.Students.Count;
 
-        private string highestMajor;
         public string HighestMajor
         {
             get
@@ -22,6 +20,7 @@ namespace CoursesApp.ViewModels
                 {
                     return null;
                 }
+
                 Dictionary<string, int> counts = new Dictionary<string, int>();
                 foreach (var student in course.Students)
                 {
@@ -34,71 +33,35 @@ namespace CoursesApp.ViewModels
                         counts[student.Major]++;
                     }
                 }
-        
-                //counts.ToList().Sort((val1, val2) => val1.Value.CompareTo(val2.Value));
-        
+
                 var sorted = counts.OrderBy(v => v.Value).ToDictionary(v => v.Key, v => v.Value);
-        
+
                 return sorted.Last().Key;
             }
-            set => highestMajor = value;
         }
 
-        public string AverageStudentAgeWithText => AverageAgeString();
+        public string AverageAgeString => "Average Student Age: " + AverageStudentAge();
 
-        public string AverageAgeString()
+        private int AverageStudentAge()
         {
-            return "Average Student Age: " + AverageStudentAge.ToString();
-            Label myLabel = new Label
-            {
-                BackgroundColor = Color.Red,
-                FontSize = 24
-            };
+            if (course.Students.Count < 1) return 0;
+
+            int sum = 0;
+            course.Students.ForEach(student => sum += student.Age);
+
+            return sum / course.Students.Count;
         }
-        
-        private int averageStudentAge;
-        public int AverageStudentAge
-        {
-            get
-            {
-                if (course.Students.Count < 1)
-                {
-                    return 0;
-                }
-                int sum = 0;
-                foreach (var student in course.Students)
-                {
-                    sum += student.Age;
-                }
-        
-                return sum / course.Students.Count;
-            }
-            set
-            {
-                averageStudentAge = value;
-            }
-        }
-        
-        private int averageTeacherAge;
+
         public int AverageTeacherAge
         {
             get
             {
-                if (course.Teachers.Count < 1)
-                {
-                    return 0;
-                }
+                if (course.Teachers.Count < 1) return 0;
+
                 int sum = 0;
-                foreach (var teacher in course.Teachers)
-                {
-                    sum += teacher.Age;
-                }
-        
+                course.Teachers.ForEach(teacher => sum += teacher.Age);
+
                 return sum / course.Teachers.Count;
-            }
-            set
-            {
-                averageTeacherAge = value;
             }
         }
 
@@ -111,7 +74,7 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged(nameof(Title));
             }
         }
-        
+
         public float Length
         {
             get => course.Length;
@@ -123,6 +86,7 @@ namespace CoursesApp.ViewModels
         }
 
         private List<StudentViewModel> students;
+
         public List<StudentViewModel> Students
         {
             get
@@ -131,6 +95,7 @@ namespace CoursesApp.ViewModels
                 {
                     students = new List<StudentViewModel>();
                 }
+
                 foreach (var student in course.Students)
                 {
                     students.Add(new StudentViewModel(student));
@@ -144,8 +109,9 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged(nameof(Students));
             }
         }
-        
+
         private List<TeacherViewModel> teachers;
+
         public List<TeacherViewModel> Teachers
         {
             get
@@ -154,6 +120,7 @@ namespace CoursesApp.ViewModels
                 {
                     teachers = new List<TeacherViewModel>();
                 }
+
                 foreach (var teacher in course.Teachers)
                 {
                     teachers.Add(new TeacherViewModel(teacher));
@@ -167,7 +134,7 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged(nameof(Teacher));
             }
         }
-        
+
         public CourseType Type
         {
             get => course.Type;
@@ -181,11 +148,11 @@ namespace CoursesApp.ViewModels
         public CourseViewModel(Course course)
         {
             this.course = course;
-            
+
             // Update my model's state:
             course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
-        
+
         private void NotifyPropertyChanged(string name)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
