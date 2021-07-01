@@ -1,0 +1,74 @@
+[
+  {
+    "title": "English III",
+    "length": 3,
+    "students": [
+      {
+        "name": "James",
+        "age": 21,
+        "major": "Biology"
+      },
+      {
+        "name": "Sarah",
+        "age": 18,
+        "major": "History"
+      }
+    ],
+    "teachers": [
+      {
+        "name": "Frank",
+        "age": 40,
+        "experience": 20
+      }
+    ],
+    "type": 3
+  },
+  {
+    "title": "Algebra I",
+    "length": 2,
+    "students": [
+      {
+        "name": "Joe",
+        "age": 20,
+        "major": "English"
+      }
+    ],
+    "teachers": [
+      {
+        "name": "Jack",
+        "age": 35,
+        "experience": 10
+      }
+    ],
+    "type": 3
+  },
+  {
+    "title": "Advanced Math",
+    "length": 3,
+    "students": [
+      {
+        "name": "Joe",
+        "age": 20,
+        "major": "English"
+      },
+      {
+        "name": "Sally",
+        "age": 19,
+        "major": "Math"
+      }
+    ],
+    "teachers": [
+      {
+        "name": "Jack",
+        "age": 35,
+        "experience": 10
+      },
+      {
+        "name": "Jill",
+        "age": 34,
+        "experience": 9
+      }
+    ],
+    "type": 2
+  }
+]

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using Newtonsoft.Json;
 
 namespace CoursesApp.Models
 {
@@ -62,6 +63,7 @@ namespace CoursesApp.Models
             }
         }
 
+        [JsonConstructor]
         public Course(
             string title, 
             float length, 
