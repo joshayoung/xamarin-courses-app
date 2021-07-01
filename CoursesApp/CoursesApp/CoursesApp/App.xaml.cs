@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using CoursesApp.Models;
-using CoursesApp.Models.Builders;
 using CoursesApp.ViewModels;
 using Newtonsoft.Json;
 using RestSharp;
@@ -42,7 +41,7 @@ namespace CoursesApp
             }
             catch (Exception e)
             {
-                return CourseBuilder.Build();
+                return null;
             }
         }
     }
