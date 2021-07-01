@@ -3,11 +3,11 @@ using System.IO;
 using System.Reflection;
 using Newtonsoft.Json;
 
-namespace CoursesApp.Models
+namespace CoursesApp.Models.Service
 {
     public static class CourseDataService
     {
-        private const string DataPath = "CoursesApp.Models.courses.json";
+        private const string DataPath = "CoursesApp.Models.Service.courses.json";
 
         public static List<Course> GetCourses()
         {

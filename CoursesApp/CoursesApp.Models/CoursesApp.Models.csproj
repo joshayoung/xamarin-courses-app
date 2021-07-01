@@ -11,7 +11,10 @@
 
     <ItemGroup>
       <None Remove="courses.json" />
-      <EmbeddedResource Include="courses.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Service\courses.json" />
     </ItemGroup>
 
 </Project>

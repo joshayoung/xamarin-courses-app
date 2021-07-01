@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using CoursesApp.Models.Service;
 
 namespace CoursesApp.Models
 {

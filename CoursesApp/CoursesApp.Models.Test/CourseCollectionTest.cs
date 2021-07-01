@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using CoursesApp.Models.Service;
 using FluentAssertions;
 using Xunit;
 
