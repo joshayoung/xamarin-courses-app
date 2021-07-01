@@ -8,7 +8,7 @@ namespace CoursesApp.Models
     {
         public event PropertyChangedEventHandler PropertyChanged;
         
-        public readonly ObservableCollection<Course> Courses = new ObservableCollection<Course>();
+        public ObservableCollection<Course> Courses { get; } = new ObservableCollection<Course>();
 
         public void RepopulateCourseList()
         {

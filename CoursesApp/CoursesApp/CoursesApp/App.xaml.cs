@@ -14,13 +14,13 @@ namespace CoursesApp
 {
     public partial class App : Application
     {
-        private readonly List<Course> allCourses = GetData();
+        //private readonly List<Course> allCourses = GetData();
         
         public App()
         {
             InitializeComponent();
 
-            var vm = new CourseCollectionViewModel(allCourses);
+            var vm = new CourseCollectionViewModel(new CourseCollection());
             MainPage = new NavigationPage(new MainPage(vm));
         }
 
