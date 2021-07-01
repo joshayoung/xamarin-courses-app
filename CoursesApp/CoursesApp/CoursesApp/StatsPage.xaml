@@ -15,7 +15,7 @@
         <Label Text="Student Count:" />
         <Label Text="{Binding StudentCount}" />
         <Label Text="Average Student Age:" />
-        <Label Text="{Binding AverageStudentAgeWithText}" />
+        <Label Text="{Binding AverageAgeString}" />
 
         <Button Text="View Students for Class" Clicked="ViewStudents" />
       </StackLayout>
