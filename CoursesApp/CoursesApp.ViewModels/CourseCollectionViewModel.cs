@@ -9,12 +9,13 @@ namespace CoursesApp.ViewModels
     public class CourseCollectionViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private readonly CourseCollection coursesCollection;
 
         public CourseViewModel LastCourse => FindLastCourse();
 
         public ObservableCollection<CourseViewModel> CoursesWithMultipleStudents { get; } =
             new ObservableCollection<CourseViewModel>();
+        
+        private readonly CourseCollection coursesCollection;
 
         public CourseCollectionViewModel(CourseCollection coursesCollection)
         {
@@ -22,15 +23,12 @@ namespace CoursesApp.ViewModels
             
             coursesCollection.Courses.CollectionChanged += CoursesOnCollectionChanged;
         }
-        
-        public void ReloadTheClasses() => coursesCollection.RepopulateCourseList();
 
         private void CoursesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LastCourse)));
-
                 RefreshMultiStudentCourses();
             }
         }
@@ -38,19 +36,13 @@ namespace CoursesApp.ViewModels
         private void RefreshMultiStudentCourses()
         {
             CoursesWithMultipleStudents.Clear();
-
             coursesCollection.Courses.ToList().FindAll(course => course.Students.Count > 1).ToList()
                 .ForEach(rec => CoursesWithMultipleStudents.Add(new CourseViewModel(rec)));
         }
 
-        private CourseViewModel FindLastCourse()
-        {
-            if (coursesCollection.Courses.Count > 0)
-            {
-                return new CourseViewModel(coursesCollection.Courses.Last());
-            }
-
-            return null;
-        }
+        private CourseViewModel FindLastCourse() =>
+            (coursesCollection.Courses.Count > 0) ? new CourseViewModel(coursesCollection.Courses.Last()) : null;
+        
+        public void ReloadTheClasses() => coursesCollection.RepopulateCourseList();
     }
 }

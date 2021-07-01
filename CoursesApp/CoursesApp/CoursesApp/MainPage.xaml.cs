@@ -6,10 +6,11 @@ namespace CoursesApp
 {
     public partial class MainPage : ContentPage
     {
+        private readonly CourseCollectionViewModel courseCollectionViewModel;
         public MainPage(CourseCollectionViewModel courseCollectionViewModel)
         {
             InitializeComponent();
-            BindingContext = courseCollectionViewModel;
+            BindingContext = this.courseCollectionViewModel = courseCollectionViewModel;
         }
 
         private void NavigateToDetails(object sender, EventArgs e)
@@ -19,6 +20,13 @@ namespace CoursesApp
             
             if (!(((VisualElement)sender).BindingContext is CourseViewModel courseViewModel)) return;
             Navigation.PushAsync(new StatsPage(courseViewModel));
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            
+            courseCollectionViewModel.ReloadTheClasses();
         }
     }
 }
