@@ -1,6 +1,5 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using CoursesApp.Models.Builders;
 using FluentAssertions;
 using Xunit;
 
@@ -32,7 +31,7 @@ namespace CoursesApp.Models.Test
             courseCollection.RepopulateCourseList();
 
             listUpdated.Should().BeTrue();
-            courseCollection.Courses.Should().BeEquivalentTo(CourseBuilder.Build());
+            courseCollection.Courses.Should().BeEquivalentTo(CourseDataService.GetCourses());
         }
     }
 }
