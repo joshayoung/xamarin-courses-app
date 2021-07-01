@@ -12,8 +12,9 @@ namespace CoursesApp.Models
 
         public void RepopulateCourseList()
         {
+            var allCourses = CourseDataService.GetCourses();
+            
             Courses.Clear();
-            var allCourses = CourseBuilder.Build();
             allCourses.ForEach(cs => Courses.Add(cs));
         }
     }
