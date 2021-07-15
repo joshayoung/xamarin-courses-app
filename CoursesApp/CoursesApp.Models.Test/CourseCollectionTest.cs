@@ -20,6 +20,7 @@ namespace CoursesApp.Models.Test
         public void Courses_RefreshCourseList_ExpectAnEventWithPopulatedData()
         {
             var courseCollection = new CourseCollection();
+            var courseData = new CourseDataService();
             var listUpdated = false;
             courseCollection.Courses.CollectionChanged += (sender, args) =>
             {
@@ -32,7 +33,7 @@ namespace CoursesApp.Models.Test
             courseCollection.RepopulateCourseList();
 
             listUpdated.Should().BeTrue();
-            courseCollection.Courses.Should().BeEquivalentTo(CourseDataService.GetCourses());
+            courseCollection.Courses.Should().BeEquivalentTo(courseData.GetCourses());
         }
     }
 }
