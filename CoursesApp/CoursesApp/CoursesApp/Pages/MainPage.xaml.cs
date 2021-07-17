@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using CoursesApp.ViewModels;
 using Xamarin.Forms;
 
-namespace CoursesApp
+namespace CoursesApp.Pages
 {
     public partial class MainPage : ContentPage
     {

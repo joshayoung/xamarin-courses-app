@@ -2,7 +2,7 @@ using CoursesApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace CoursesApp
+namespace CoursesApp.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TeacherPage : ContentPage

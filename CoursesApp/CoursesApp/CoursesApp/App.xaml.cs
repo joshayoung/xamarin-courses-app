@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CoursesApp.Models;
+using CoursesApp.Pages;
 using CoursesApp.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;

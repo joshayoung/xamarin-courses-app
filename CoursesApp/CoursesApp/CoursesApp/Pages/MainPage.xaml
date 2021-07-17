@@ -6,7 +6,7 @@
              x:DataType="viewModels:CourseCollectionViewModel"
              ios:Page.UseSafeArea="true"
              BackgroundColor="WhiteSmoke"
-             x:Class="CoursesApp.MainPage">
+             x:Class="CoursesApp.Pages.MainPage">
 
     <StackLayout Padding="10">
       <Label 

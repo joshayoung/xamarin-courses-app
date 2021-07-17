@@ -7,7 +7,7 @@
              x:DataType="viewModels:CourseViewModel"
              ios:Page.UseSafeArea="true"
              BackgroundColor="Beige"
-             x:Class="CoursesApp.StatsPage">
+             x:Class="CoursesApp.Pages.StatsPage">
   <ContentPage.Content>
     <StackLayout Padding="10">
       <Label Text="Course Stats" />
