@@ -8,30 +8,36 @@
              ios:Page.UseSafeArea="true"
              x:Class="CoursesApp.Pages.StatsPage">
   <ContentPage.Content>
-    <StackLayout Padding="10">
-      <Label Text="Course Stats" FontSize="30" HorizontalTextAlignment="Center" />
-      <StackLayout Margin="0, 0, 0, 20">
-        <StackLayout Orientation="Horizontal">
-          <Label Text="Student Count:" />
-          <Label Text="{Binding StudentCount}" />
-        </StackLayout>
-        <StackLayout Orientation="Horizontal">
-          <Label Text="Average Student Age:" />
-          <Label Text="{Binding AverageStudentValue}" />
-        </StackLayout>
-        
-        <StackLayout Orientation="Horizontal">
-          <Label Text="Average Teacher Age:" />
-          <Label Text="{Binding AverageTeacherAge}" />
-        </StackLayout>
+    <StackLayout Margin="20">
+      <Label Text="Course Stats" FontSize="30" HorizontalTextAlignment="Center" Margin="0, 0, 0, 20" />
+      <Frame HasShadow="False" BackgroundColor="Tomato" Padding="10">
+        <StackLayout>
+          <StackLayout Orientation="Horizontal">
+            <Label Text="Student Count:" />
+            <Label Text="{Binding StudentCount}" />
+          </StackLayout>
+          <StackLayout Orientation="Horizontal">
+            <Label Text="Average Student Age:" />
+            <Label Text="{Binding AverageStudentValue}" />
+          </StackLayout>
 
-        <StackLayout Orientation="Horizontal">
-          <Label Text="Most Popular Major:" />
-          <Label Text="{Binding HighestMajor}" />
-        </StackLayout>
+          <StackLayout Orientation="Horizontal">
+            <Label Text="Average Teacher Age:" />
+            <Label Text="{Binding AverageTeacherAge}" />
+          </StackLayout>
 
-        <Button Text="View Students for Class" Clicked="ViewStudents" />
-        <Button Text="View Teachers for Class" Clicked="ViewTeachers" />
+          <StackLayout Orientation="Horizontal">
+            <Label Text="Most Popular Major:" />
+            <Label Text="{Binding HighestMajor}" />
+          </StackLayout>
+        </StackLayout>
+      </Frame>
+      <BoxView BackgroundColor="DarkGray" HeightRequest="2" Margin="0,20" />
+      <StackLayout Orientation="Horizontal">
+        <Button Text="Class Students" BackgroundColor="Black" TextColor="White" Padding="10,0" FontAttributes="Bold"
+                Clicked="ViewStudents" />
+        <Button Text="Class Teachers" BackgroundColor="Black" TextColor="White" Padding="10,0" FontAttributes="Bold"
+                Clicked="ViewTeachers" />
       </StackLayout>
     </StackLayout>
   </ContentPage.Content>
