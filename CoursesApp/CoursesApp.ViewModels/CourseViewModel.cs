@@ -41,6 +41,7 @@ namespace CoursesApp.ViewModels
         }
 
         public string AverageAgeString => "Average Student Age: " + AverageStudentAge();
+        public string AverageStudentValue => AverageStudentAge().ToString();
 
         private int AverageStudentAge()
         {

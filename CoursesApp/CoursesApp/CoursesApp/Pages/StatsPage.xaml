@@ -6,28 +6,31 @@
              xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
              x:DataType="viewModels:CourseViewModel"
              ios:Page.UseSafeArea="true"
-             BackgroundColor="Beige"
              x:Class="CoursesApp.Pages.StatsPage">
   <ContentPage.Content>
     <StackLayout Padding="10">
-      <Label Text="Course Stats" />
+      <Label Text="Course Stats" FontSize="30" HorizontalTextAlignment="Center" />
       <StackLayout Margin="0, 0, 0, 20">
-        <Label Text="Student Details" FontAttributes="Bold" FontSize="24" HorizontalOptions="Center" />
-        <Label Text="Student Count:" />
-        <Label Text="{Binding StudentCount}" />
-        <Label Text="Average Student Age:" />
-        <Label Text="{Binding AverageAgeString}" />
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Student Count:" />
+          <Label Text="{Binding StudentCount}" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Average Student Age:" />
+          <Label Text="{Binding AverageStudentValue}" />
+        </StackLayout>
+        
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Average Teacher Age:" />
+          <Label Text="{Binding AverageTeacherAge}" />
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Most Popular Major:" />
+          <Label Text="{Binding HighestMajor}" />
+        </StackLayout>
 
         <Button Text="View Students for Class" Clicked="ViewStudents" />
-      </StackLayout>
-
-      <StackLayout>
-        <Label Text="Teacher Details" FontAttributes="Bold" FontSize="24" HorizontalOptions="Center" />
-        <Label Text="Average Teacher Age:" />
-        <Label Text="{Binding AverageTeacherAge}" />
-        <Label Text="Most Popular Major:" />
-        <Label Text="{Binding HighestMajor}" />
-
         <Button Text="View Teachers for Class" Clicked="ViewTeachers" />
       </StackLayout>
     </StackLayout>

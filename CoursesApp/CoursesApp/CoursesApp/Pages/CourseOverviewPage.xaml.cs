@@ -6,9 +6,9 @@ using Xamarin.Forms.Xaml;
 namespace CoursesApp.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CoursePage : ContentPage
+    public partial class CourseOverviewPage : ContentPage
     {
-        public CoursePage(CourseViewModel courseViewModel)
+        public CourseOverviewPage(CourseViewModel courseViewModel)
         {
             InitializeComponent();
             BindingContext = courseViewModel;
