@@ -38,7 +38,7 @@
         <DependentUpon>EditStudentPage.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="Pages\CourseOverviewPage.xaml.cs">
+      <Compile Update="Pages\StudentListPage.xaml.cs">
         <DependentUpon>CoursePage.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>

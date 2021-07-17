@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO.Compression;
 using System.Linq;
 using CoursesApp.Models;
 
@@ -97,9 +98,12 @@ namespace CoursesApp.ViewModels
                     students = new List<StudentViewModel>();
                 }
 
-                foreach (var student in course.Students)
+                if (students.Count < 1)
                 {
-                    students.Add(new StudentViewModel(student));
+                    foreach (var student in course.Students)
+                    {
+                        students.Add(new StudentViewModel(student));
+                    }
                 }
 
                 return students;
@@ -122,9 +126,12 @@ namespace CoursesApp.ViewModels
                     teachers = new List<TeacherViewModel>();
                 }
 
-                foreach (var teacher in course.Teachers)
+                if (teachers.Count < 1)
                 {
-                    teachers.Add(new TeacherViewModel(teacher));
+                    foreach (var teacher in course.Teachers)
+                    {
+                        teachers.Add(new TeacherViewModel(teacher));
+                    }
                 }
 
                 return teachers;

@@ -19,12 +19,12 @@ namespace CoursesApp.Pages
 
         private void ViewStudents(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new CourseOverviewPage(courseViewModel));
+            Navigation.PushAsync(new StudentListPage(courseViewModel));
         }
 
         private void ViewTeachers(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new CourseOverviewPage(courseViewModel));
+            Navigation.PushAsync(new TeacherListPage(courseViewModel));
         }
     }
 }

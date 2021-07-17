@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
              x:DataType="viewModels:CourseViewModel"
-             x:Class="CoursesApp.Pages.CourseOverviewPage">
+             x:Class="CoursesApp.Pages.StudentListPage">
   <ContentPage.Content>
     <StackLayout Padding="10">
       <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
@@ -33,26 +33,7 @@
         </CollectionView.ItemTemplate>
       </CollectionView>
       
-      <Label Text="Teachers" FontSize="Large" />
-      <CollectionView ItemsSource="{Binding Teachers}">
-        <CollectionView.ItemTemplate>
-          <DataTemplate x:DataType="viewModels:TeacherViewModel">
-            <Frame Margin="0" Padding="0" HasShadow="False">
-              <Frame.GestureRecognizers>
-                <TapGestureRecognizer Tapped="ViewTeacherDetails" />
-              </Frame.GestureRecognizers>
-              <StackLayout Margin="0, 0, 0, 10">
-                <Frame HasShadow="False" BackgroundColor="Khaki" CornerRadius="4">
-                  <StackLayout>
-                    <Label Text="{Binding Name}" TextColor="Black" /> 
-                    <Label Text="{Binding Experience}" TextColor="Black" />
-                  </StackLayout>
-                </Frame>
-              </StackLayout>
-            </Frame>
-          </DataTemplate>
-        </CollectionView.ItemTemplate>
-      </CollectionView>
+      <Button Text="Add Student" BackgroundColor="Tomato" />
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>
