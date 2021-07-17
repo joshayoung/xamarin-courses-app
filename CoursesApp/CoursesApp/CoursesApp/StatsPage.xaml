@@ -10,6 +10,7 @@
              x:Class="CoursesApp.StatsPage">
   <ContentPage.Content>
     <StackLayout Padding="10">
+      <Label Text="Course Stats" />
       <StackLayout Margin="0, 0, 0, 20">
         <Label Text="Student Details" FontAttributes="Bold" FontSize="24" HorizontalOptions="Center" />
         <Label Text="Student Count:" />
