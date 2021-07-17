@@ -20,4 +20,27 @@
       <ProjectReference Include="..\..\CoursesApp.Models\CoursesApp.Models.csproj" />
       <ProjectReference Include="..\..\CoursesApp.ViewModels\CoursesApp.ViewModels.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Pages\StatsPage.xaml.cs">
+        <DependentUpon>StatsPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Pages\MainPage.xaml.cs">
+        <DependentUpon>MainPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Pages\EditTeacherPage.xaml.cs">
+        <DependentUpon>EditTeacherPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Pages\EditStudentPage.xaml.cs">
+        <DependentUpon>EditStudentPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Pages\CoursePage.xaml.cs">
+        <DependentUpon>CoursePage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
 </Project>

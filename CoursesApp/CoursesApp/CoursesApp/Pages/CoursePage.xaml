@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
              x:DataType="viewModels:CourseViewModel"
-             x:Class="CoursesApp.CoursePage">
+             x:Class="CoursesApp.Pages.CoursePage">
   <ContentPage.Content>
     <StackLayout Padding="10">
       <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
