@@ -4,6 +4,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
              x:DataType="viewModels:CourseViewModel"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
              x:Class="CoursesApp.Pages.TeacherListPage">
   <ContentPage.Content>
     <StackLayout Padding="10">
@@ -32,7 +34,7 @@
           </DataTemplate>
         </CollectionView.ItemTemplate>
       </CollectionView>
-      <Button Text="Add Teacher" BackgroundColor="Tomato" />
+      <Button Text="Add Teacher" TextColor="White" FontAttributes="Bold" Clicked="AddTeacher" BackgroundColor="Tomato" />
     </StackLayout>
   </ContentPage.Content>
   </ContentPage>

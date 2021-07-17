@@ -44,6 +44,7 @@ namespace CoursesApp
             }
             catch (Exception e)
             {
+                Console.Write(e.ToString());
                 return null;
             }
         }

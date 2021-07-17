@@ -19,5 +19,10 @@ namespace CoursesApp.Pages
             if (!(((VisualElement)sender).BindingContext is StudentViewModel studentViewModel)) return;
             Navigation.PushAsync(new StudentPage(studentViewModel));
         }
+
+        private void AddStudent(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AddStudentPage());
+        }
     }
 }

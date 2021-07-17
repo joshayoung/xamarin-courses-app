@@ -3,6 +3,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
              x:DataType="viewModels:CourseViewModel"
              x:Class="CoursesApp.Pages.StudentListPage">
   <ContentPage.Content>
@@ -33,7 +35,7 @@
         </CollectionView.ItemTemplate>
       </CollectionView>
       
-      <Button Text="Add Student" BackgroundColor="Tomato" />
+      <Button Text="Add Student" TextColor="White" FontAttributes="Bold" Clicked="AddStudent" BackgroundColor="Tomato" />
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>
