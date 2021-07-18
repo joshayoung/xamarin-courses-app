@@ -5,8 +5,13 @@
              x:Class="CoursesApp.Views.ListMembersView">
   <ContentView.Content>
     <StackLayout>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+          <Label Text="Course:" HorizontalOptions="Start" FontSize="24" />
+          <Label Text="{Binding Title}" HorizontalOptions="Start" FontSize="24" />
+        </StackLayout>
       <ContentView x:Name="innerContent" />
-      <Button Text="Add Student" x:Name="addButton" TextColor="White" FontAttributes="Bold" Clicked="AddClicked"
+      <Button x:Name="addButton" TextColor="White" FontAttributes="Bold" Clicked="AddClicked"
+              Text="{Binding ButtonText}"
               BackgroundColor="Tomato" />
     </StackLayout>
   </ContentView.Content>
