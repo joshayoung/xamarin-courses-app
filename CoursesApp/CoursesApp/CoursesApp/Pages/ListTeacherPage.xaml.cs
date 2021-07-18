@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using CoursesApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,6 +13,8 @@ namespace CoursesApp.Pages
         {
             InitializeComponent();
             BindingContext = courseViewModel;
+            
+            membersView.AddButtonAction = async () => await AddTeacher();
         }
 
         private void ViewTeacherDetails(object sender, EventArgs e)
@@ -20,9 +23,9 @@ namespace CoursesApp.Pages
             Navigation.PushAsync(new TeacherPage(teacherViewModel));
         }
 
-        private void AddTeacher(object sender, EventArgs e)
+        private async Task AddTeacher()
         {
-            Navigation.PushAsync(new AddTeacherPage());
+            await Navigation.PushAsync(new AddTeacherPage());
         }
     }
 }
