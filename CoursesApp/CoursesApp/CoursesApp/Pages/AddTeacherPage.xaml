@@ -5,7 +5,7 @@
              x:Class="CoursesApp.Pages.AddTeacherPage">
   <ContentPage.Content>
     <StackLayout>
-      <Label Text="Hello, world!"
+      <Label Text="Add Teacher"
              VerticalOptions="CenterAndExpand"
              HorizontalOptions="CenterAndExpand" />
     </StackLayout>

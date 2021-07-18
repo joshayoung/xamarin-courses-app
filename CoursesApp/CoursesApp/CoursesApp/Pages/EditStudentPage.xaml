@@ -32,7 +32,7 @@
           Grid.Row="1"
           >
         </Picker>
-        <Button Grid.Row="2" Grid.Column="0" Clicked="UpdateMajor" Text="Update Student" BackgroundColor="Tomato" />
+        <Button Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" Clicked="UpdateMajor" TextColor="White" Text="Update Student" BackgroundColor="Tomato" />
       </Grid>
     </StackLayout>
   </ContentPage.Content>

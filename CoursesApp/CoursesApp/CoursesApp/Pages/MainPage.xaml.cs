@@ -12,7 +12,6 @@ namespace CoursesApp.Pages
         {
             InitializeComponent();
             BindingContext = this.courseCollectionViewModel = courseCollectionViewModel;
-
             AddWelcomeText();
         }
 
