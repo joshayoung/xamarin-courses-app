@@ -31,6 +31,11 @@
         "name": "Joe",
         "age": 20,
         "major": "English"
+      },
+      {
+        "name": "Janet",
+        "age": 22,
+        "major": "Physics"
       }
     ],
     "teachers": [
@@ -70,5 +75,34 @@
       }
     ],
     "type": 2
+  },
+  {
+    "title": "Physical Science",
+    "length": 4,
+    "students": [
+      {
+        "name": "Peter",
+        "age": 20,
+        "major": "Physical Education"
+      },
+      {
+        "name": "Sue",
+        "age": 18,
+        "major": "Physics"
+      }
+    ],
+    "teachers": [
+      {
+        "name": "Cal",
+        "age": 55,
+        "experience": 30
+      },
+      {
+        "name": "Peggy",
+        "age": 40,
+        "experience": 19
+      }
+    ],
+    "type": 3
   }
 ]
