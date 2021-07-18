@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using CoursesApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,21 +9,67 @@ namespace CoursesApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListMembersView : ContentView
     {
-        
-        public Action AddButtonAction { get; set; } = () => throw new NotImplementedException();
+        public Action AddButtonAction { get; set; }
         public Button AddButton => addButton;
-        
-        public View InnerContent
+
+        public List<TeacherViewModel> Teachers
         {
-            get => innerContent.Content; 
-            set => innerContent.Content = value;
+            get => (List<TeacherViewModel>) GetValue(TeachersProperty);
+            set => SetValue(TeachersProperty, value);
         }
         
+        public static readonly BindableProperty TeachersProperty = BindableProperty.Create(
+            nameof(Teachers),
+            typeof(List<TeacherViewModel>),
+            typeof(List<TeacherViewModel>)
+        );
+        
+        public List<StudentViewModel> Students
+        {
+            get => (List<StudentViewModel>) GetValue(StudentsProperty);
+            set => SetValue(StudentsProperty, value);
+        }
+        
+        public static readonly BindableProperty StudentsProperty = BindableProperty.Create(
+            nameof(Students),
+            typeof(List<StudentViewModel>),
+            typeof(List<StudentViewModel>)
+        );
+
+        public static readonly BindableProperty ButtonTextProperty = BindableProperty.Create(
+            nameof(ButtonText),
+            typeof(string),
+            typeof(string),
+            defaultValue: "Add",
+            propertyChanged: SetButtonText
+            );
+
+        public View InnerContent
+        {
+            get => innerContent.Content;
+            set => innerContent.Content = value;
+        }
+
+        public string ButtonText
+        {
+            get => (string) GetValue(ButtonTextProperty);
+            set => SetValue(ButtonTextProperty, value);
+        }
+
         public ListMembersView()
         {
             InitializeComponent();
+            BindingContext = this;
         }
-        
+
         void AddClicked(object sender, EventArgs e) => AddButtonAction?.Invoke();
+        
+        // TODO: See if the button text still works if this is removed:
+        private static void SetButtonText(BindableObject bindable, object oldValue, object textValue)
+        {
+            var view = (ListMembersView)bindable;
+            var text = (string)textValue;
+            view.ButtonText = text;
+        }
     }
 }

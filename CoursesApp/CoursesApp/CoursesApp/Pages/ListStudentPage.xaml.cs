@@ -15,17 +15,20 @@ namespace CoursesApp.Pages
             BindingContext = courseViewModel;
             
             membersView.AddButtonAction = async () => await AddStudent();
-        }
-
-        private void ViewStudentDetails(object sender, EventArgs e)
-        {
-            if (!(((VisualElement)sender).BindingContext is StudentViewModel studentViewModel)) return;
-            Navigation.PushAsync(new StudentPage(studentViewModel));
+            membersView.ButtonText = "Add Student";
+            membersView.Students = courseViewModel.Students;
+            Console.WriteLine("tes");
         }
 
         private async Task AddStudent()
         {
             await Navigation.PushAsync(new AddStudentPage());
+        }
+
+        private void ViewDetails(object sender, EventArgs e)
+        {
+            if (!(((VisualElement)sender).BindingContext is TeacherViewModel teacherViewModel)) return;
+            Navigation.PushAsync(new TeacherPage(teacherViewModel));
         }
     }
 }

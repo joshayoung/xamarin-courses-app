@@ -15,6 +15,8 @@ namespace CoursesApp.Pages
             BindingContext = courseViewModel;
             
             membersView.AddButtonAction = async () => await AddTeacher();
+            membersView.ButtonText = "Add Teacher";
+            membersView.Teachers = courseViewModel.Teachers;
         }
 
         private void ViewTeacherDetails(object sender, EventArgs e)
