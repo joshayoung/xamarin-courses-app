@@ -17,14 +17,10 @@ namespace CoursesApp.Pages
             BindingContext = this.courseViewModel = courseViewModel;
         }
 
-        private void ViewStudents(object sender, EventArgs e)
-        {
+        private void ViewStudents(object sender, EventArgs e) =>
             Navigation.PushAsync(new ListStudentPage(courseViewModel));
-        }
 
-        private void ViewTeachers(object sender, EventArgs e)
-        {
+        private void ViewTeachers(object sender, EventArgs e) =>
             Navigation.PushAsync(new ListTeacherPage(courseViewModel));
-        }
     }
 }

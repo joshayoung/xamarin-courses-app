@@ -11,6 +11,18 @@ namespace CoursesApp.Views
     {
         public Action AddButtonAction { get; set; }
         public Button AddButton => addButton;
+        
+        public string Title
+        {
+            get => (string) GetValue(TitleProperty);
+            set => SetValue(TitleProperty, value);
+        }
+        
+        public static readonly BindableProperty TitleProperty = BindableProperty.Create(
+            nameof(Title),
+            typeof(string),
+            typeof(string)
+        );
 
         public List<TeacherViewModel> Teachers
         {

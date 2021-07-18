@@ -12,12 +12,14 @@ namespace CoursesApp.Pages
         public ListStudentPage(CourseViewModel courseViewModel)
         {
             InitializeComponent();
-            BindingContext = courseViewModel;
+            
+            // NOTE: All of the binding happens in the view:
+            // BindingContext = courseViewModel;
             
             membersView.AddButtonAction = async () => await AddStudent();
             membersView.ButtonText = "Add Student";
             membersView.Students = courseViewModel.Students;
-            Console.WriteLine("tes");
+            membersView.Title = courseViewModel.Title;
         }
 
         private async Task AddStudent()
@@ -27,8 +29,8 @@ namespace CoursesApp.Pages
 
         private void ViewDetails(object sender, EventArgs e)
         {
-            if (!(((VisualElement)sender).BindingContext is TeacherViewModel teacherViewModel)) return;
-            Navigation.PushAsync(new TeacherPage(teacherViewModel));
+            if (!(((VisualElement)sender).BindingContext is StudentViewModel studentViewModel)) return;
+            Navigation.PushAsync(new StudentPage(studentViewModel));
         }
     }
 }
