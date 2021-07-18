@@ -5,36 +5,37 @@
              xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
              x:DataType="viewModels:CourseViewModel"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:views="clr-namespace:CoursesApp.Views;assembly=CoursesApp"
              ios:Page.UseSafeArea="true"
              x:Class="CoursesApp.Pages.ListTeacherPage">
-  <ContentPage.Content>
-    <StackLayout Padding="10">
-      <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-        <Label Text="Course:" HorizontalOptions="Start" FontSize="24" /> 
-        <Label Text="{Binding Title}" HorizontalOptions="Start" FontSize="24" /> 
+  <views:ListMembersView x:Name="membersView">
+    <views:ListMembersView.InnerContent>
+      <StackLayout Padding="10">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+          <Label Text="Course:" HorizontalOptions="Start" FontSize="24" />
+          <Label Text="{Binding Title}" HorizontalOptions="Start" FontSize="24" />
+        </StackLayout>
+        <Label Text="Teachers" FontSize="Large" />
+        <CollectionView ItemsSource="{Binding Teachers}">
+          <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="viewModels:TeacherViewModel">
+              <Frame Margin="0" Padding="0" HasShadow="False">
+                <Frame.GestureRecognizers>
+                  <TapGestureRecognizer Tapped="ViewTeacherDetails" />
+                </Frame.GestureRecognizers>
+                <StackLayout Margin="0, 0, 0, 10">
+                  <Frame HasShadow="False" BackgroundColor="Khaki" CornerRadius="4">
+                    <StackLayout>
+                      <Label Text="{Binding Name}" TextColor="Black" />
+                      <Label Text="{Binding Experience}" TextColor="Black" />
+                    </StackLayout>
+                  </Frame>
+                </StackLayout>
+              </Frame>
+            </DataTemplate>
+          </CollectionView.ItemTemplate>
+        </CollectionView>
       </StackLayout>
-      
-      <Label Text="Teachers" FontSize="Large" />
-      <CollectionView ItemsSource="{Binding Teachers}">
-        <CollectionView.ItemTemplate>
-          <DataTemplate x:DataType="viewModels:TeacherViewModel">
-            <Frame Margin="0" Padding="0" HasShadow="False">
-              <Frame.GestureRecognizers>
-                <TapGestureRecognizer Tapped="ViewTeacherDetails" />
-              </Frame.GestureRecognizers>
-              <StackLayout Margin="0, 0, 0, 10">
-                <Frame HasShadow="False" BackgroundColor="Khaki" CornerRadius="4">
-                  <StackLayout>
-                    <Label Text="{Binding Name}" TextColor="Black" /> 
-                    <Label Text="{Binding Experience}" TextColor="Black" />
-                  </StackLayout>
-                </Frame>
-              </StackLayout>
-            </Frame>
-          </DataTemplate>
-        </CollectionView.ItemTemplate>
-      </CollectionView>
-      <Button Text="Add Teacher" TextColor="White" FontAttributes="Bold" Clicked="AddTeacher" BackgroundColor="Tomato" />
-    </StackLayout>
-  </ContentPage.Content>
-  </ContentPage>
+    </views:ListMembersView.InnerContent>
+  </views:ListMembersView>
+</ContentPage>
