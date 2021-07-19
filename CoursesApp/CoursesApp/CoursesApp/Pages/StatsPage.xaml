@@ -1,16 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
-             x:DataType="viewModels:CourseViewModel"
-             ios:Page.UseSafeArea="true"
-             x:Class="CoursesApp.Pages.StatsPage">
+<ContentPage
+  ios:Page.UseSafeArea="true"
+  x:Class="CoursesApp.Pages.StatsPage"
+  x:DataType="viewModels:CourseViewModel"
+  xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+  xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
   <ContentPage.Content>
     <StackLayout Margin="20">
-      <Label Text="Course Stats" FontSize="30" HorizontalTextAlignment="Center" Margin="0, 0, 0, 20" />
-      <Frame HasShadow="False" BackgroundColor="Tomato" Padding="10">
+      <Label
+        FontSize="30"
+        HorizontalTextAlignment="Center"
+        Margin="0,0,0,20"
+        Text="Course Stats" />
+      <Frame
+        BackgroundColor="Tomato"
+        HasShadow="False"
+        Padding="10">
         <StackLayout>
           <StackLayout Orientation="Horizontal">
             <Label Text="Student Count:" />
@@ -32,12 +40,25 @@
           </StackLayout>
         </StackLayout>
       </Frame>
-      <BoxView BackgroundColor="DarkGray" HeightRequest="2" Margin="0,20" />
+      <BoxView
+        BackgroundColor="DarkGray"
+        HeightRequest="2"
+        Margin="0,20" />
       <StackLayout Orientation="Horizontal">
-        <Button Text="Class Students" BackgroundColor="Black" TextColor="White" Padding="10,0" FontAttributes="Bold"
-                Clicked="ViewStudents" />
-        <Button Text="Class Teachers" BackgroundColor="Black" TextColor="White" Padding="10,0" FontAttributes="Bold"
-                Clicked="ViewTeachers" />
+        <Button
+          BackgroundColor="Black"
+          Clicked="ViewStudents"
+          FontAttributes="Bold"
+          Padding="10,0"
+          Text="Class Students"
+          TextColor="White" />
+        <Button
+          BackgroundColor="Black"
+          Clicked="ViewTeachers"
+          FontAttributes="Bold"
+          Padding="10,0"
+          Text="Class Teachers"
+          TextColor="White" />
       </StackLayout>
     </StackLayout>
   </ContentPage.Content>

@@ -29,6 +29,7 @@ namespace CoursesApp.Pages
         private void UpdateMajor(object sender, EventArgs e)
         {
             studentViewModel.UpdateMajor();
+            Navigation.PopAsync();
         }
     }
 }
