@@ -1,12 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CoursesApp.Pages.StudentPage">
+<ContentPage
+  x:Class="CoursesApp.Pages.StudentPage"
+  xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
   <ContentPage.Content>
     <StackLayout Padding="10">
-      <Label Text="Student Details" FontAttributes="Bold" FontSize="24" HorizontalOptions="CenterAndExpand"
-             Margin="0,0,0,20"/>
+      <Label
+        FontAttributes="Bold"
+        FontSize="24"
+        HorizontalOptions="CenterAndExpand"
+        Margin="0,0,0,20"
+        Text="Student Details" />
       <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition />
@@ -17,22 +22,32 @@
           <RowDefinition />
           <RowDefinition />
         </Grid.RowDefinitions>
-        <Label Text="Name" Grid.Column="0" Grid.Row="0" />
-        <Entry 
-          Text="{Binding Name, Mode=TwoWay}"
+        <Label
+          Grid.Column="0"
+          Grid.Row="0"
+          Text="Name" />
+        <Entry
           Grid.Column="0"
           Grid.Row="1"
-        />
-        
-        <Label Text="Age" Grid.Column="1" Grid.Row="0" />
-        <Picker 
-          SelectedIndexChanged="Picker_OnSelectedIndexChanged"
-          ItemsSource="{Binding Ages, Mode=TwoWay}"
+          Text="{Binding Name, Mode=TwoWay}" />
+
+        <Label
+          Grid.Column="1"
+          Grid.Row="0"
+          Text="Age" />
+        <Picker
           Grid.Column="1"
           Grid.Row="1"
-          >
-        </Picker>
-        <Button Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" Clicked="UpdateMajor" TextColor="White" Text="Update Student" BackgroundColor="Tomato" />
+          ItemsSource="{Binding Ages, Mode=TwoWay}"
+          SelectedIndexChanged="Picker_OnSelectedIndexChanged" />
+        <Button
+          BackgroundColor="Tomato"
+          Clicked="UpdateMajor"
+          Grid.Column="0"
+          Grid.ColumnSpan="2"
+          Grid.Row="2"
+          Text="Update Student"
+          TextColor="White" />
       </Grid>
     </StackLayout>
   </ContentPage.Content>

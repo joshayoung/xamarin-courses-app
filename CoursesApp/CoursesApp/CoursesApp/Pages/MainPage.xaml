@@ -1,49 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
-             x:DataType="viewModels:CourseCollectionViewModel"
-             ios:Page.UseSafeArea="true"
-             BackgroundColor="WhiteSmoke"
-             x:Class="CoursesApp.Pages.MainPage">
+<ContentPage
+  BackgroundColor="WhiteSmoke"
+  ios:Page.UseSafeArea="true"
+  x:Class="CoursesApp.Pages.MainPage"
+  x:DataType="viewModels:CourseCollectionViewModel"
+  xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+  xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <StackLayout Padding="10">
-      <Label 
-        Text="Courses App" 
-        FontAttributes="Bold"
-        FontSize="32"
-        Margin="0, 0, 0, 30 "
-        HorizontalOptions="Center"
-      />
-      <Frame
-        HasShadow="False"
-        BackgroundColor="LightGray"
-        CornerRadius="4"
-        >
-        <StackLayout x:Name="Welcome" />
-      </Frame>
-      
-      <BoxView HeightRequest="2" Margin="0, 10, 0, 10" BackgroundColor="Tomato" />
-      
-      <CollectionView ItemsSource="{Binding CoursesWithMultipleStudents}">
-        <CollectionView.ItemTemplate>
-          <DataTemplate x:DataType="viewModels:CourseViewModel">
-            <Frame HasShadow="False"  BackgroundColor="Transparent" Padding="10" Margin="0" CornerRadius="10" IsClippedToBounds="True">
-              <StackLayout Margin="0,0,0,0">
-                <Frame HasShadow="False" BackgroundColor="Tomato" CornerRadius="10">
-                  <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="NavigateToDetails" />
-                  </Frame.GestureRecognizers>
-                  <StackLayout Orientation="Horizontal">
-                    <Label Text="{Binding Title}" HorizontalOptions="Start" />
-                    <Label Text="{Binding Type}" HorizontalOptions="EndAndExpand" FontAttributes="Italic" />
-                  </StackLayout>
-                </Frame>
-              </StackLayout>
-            </Frame>
-          </DataTemplate>
-        </CollectionView.ItemTemplate>
-      </CollectionView>
-    </StackLayout>
+  <StackLayout Padding="10">
+    <Label
+      FontAttributes="Bold"
+      FontSize="32"
+      HorizontalOptions="Center"
+      Margin="0,0,0,30"
+      Text="Courses App" />
+    <Frame
+      BackgroundColor="LightGray"
+      CornerRadius="4"
+      HasShadow="False">
+      <StackLayout x:Name="Welcome" />
+    </Frame>
+
+    <BoxView
+      BackgroundColor="Tomato"
+      HeightRequest="2"
+      Margin="0,10,0,10" />
+
+    <CollectionView ItemsSource="{Binding CoursesWithMultipleStudents}">
+      <CollectionView.ItemTemplate>
+        <DataTemplate x:DataType="viewModels:CourseViewModel">
+          <Frame
+            BackgroundColor="Transparent"
+            CornerRadius="10"
+            HasShadow="False"
+            IsClippedToBounds="True"
+            Margin="0"
+            Padding="10">
+            <StackLayout Margin="0,0,0,0">
+              <Frame
+                BackgroundColor="Tomato"
+                CornerRadius="10"
+                HasShadow="False">
+                <Frame.GestureRecognizers>
+                  <TapGestureRecognizer Tapped="NavigateToDetails" />
+                </Frame.GestureRecognizers>
+                <StackLayout Orientation="Horizontal">
+                  <Label HorizontalOptions="Start" Text="{Binding Title}" />
+                  <Label
+                    FontAttributes="Italic"
+                    HorizontalOptions="EndAndExpand"
+                    Text="{Binding Type}" />
+                </StackLayout>
+              </Frame>
+            </StackLayout>
+          </Frame>
+        </DataTemplate>
+      </CollectionView.ItemTemplate>
+    </CollectionView>
+  </StackLayout>
 </ContentPage>
