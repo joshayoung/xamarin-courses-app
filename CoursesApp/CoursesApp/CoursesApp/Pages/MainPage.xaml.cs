@@ -48,7 +48,7 @@ namespace CoursesApp.Pages
         {
             base.OnAppearing();
 
-            courseCollectionViewModel.ReloadTheClasses();
+            // courseCollectionViewModel.ReloadTheClasses();
         }
     }
 }

@@ -16,7 +16,9 @@ namespace CoursesApp
         public static void Init()
         {
             serviceCollection = new ServiceCollection();
-            var courseCollectionViewModel = new CourseCollectionViewModel(new CourseCollection());
+            var courseCollection = new CourseCollection();
+            var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
+            courseCollectionViewModel.ReloadTheClasses();
             serviceCollection.AddSingleton(courseCollectionViewModel);
 
             serviceProvider = serviceCollection.BuildServiceProvider();
