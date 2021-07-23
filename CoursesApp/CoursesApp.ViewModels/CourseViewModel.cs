@@ -116,15 +116,15 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        private List<TeacherViewModel> teachers;
+        private ObservableCollection<TeacherViewModel> teachers;
 
-        public List<TeacherViewModel> Teachers
+        public ObservableCollection<TeacherViewModel> Teachers
         {
             get
             {
                 if (teachers == null)
                 {
-                    teachers = new List<TeacherViewModel>();
+                    teachers = new ObservableCollection<TeacherViewModel>();
                 }
 
                 if (teachers.Count < 1)

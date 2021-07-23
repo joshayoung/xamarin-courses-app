@@ -25,16 +25,16 @@ namespace CoursesApp.Views
             typeof(string)
         );
 
-        public List<TeacherViewModel> Teachers
+        public ObservableCollection<TeacherViewModel> Teachers
         {
-            get => (List<TeacherViewModel>) GetValue(TeachersProperty);
+            get => (ObservableCollection<TeacherViewModel>) GetValue(TeachersProperty);
             set => SetValue(TeachersProperty, value);
         }
         
         public static readonly BindableProperty TeachersProperty = BindableProperty.Create(
             nameof(Teachers),
-            typeof(List<TeacherViewModel>),
-            typeof(List<TeacherViewModel>)
+            typeof(ObservableCollection<TeacherViewModel>),
+            typeof(ObservableCollection<TeacherViewModel>)
         );
         
         public ObservableCollection<StudentViewModel> Students
