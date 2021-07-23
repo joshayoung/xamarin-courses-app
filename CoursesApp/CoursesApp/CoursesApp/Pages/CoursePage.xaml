@@ -2,7 +2,7 @@
 
 <ContentPage
   ios:Page.UseSafeArea="true"
-  x:Class="CoursesApp.Pages.StatsPage"
+  x:Class="CoursesApp.Pages.CoursePage"
   x:DataType="viewModels:CourseViewModel"
   xmlns="http://xamarin.com/schemas/2014/forms"
   xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
