@@ -49,6 +49,7 @@
           BackgroundColor="Black"
           Clicked="ViewStudents"
           FontAttributes="Bold"
+          HorizontalOptions="FillAndExpand"
           Padding="10,0"
           Text="Class Students"
           TextColor="White" />

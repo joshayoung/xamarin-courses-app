@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using CoursesApp.Models;
-using CoursesApp.Pages;
-using Newtonsoft.Json;
-using RestSharp;
+﻿using CoursesApp.Pages;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -25,24 +20,5 @@ namespace CoursesApp
         protected override void OnStart() { }
         protected override void OnSleep() { }
         protected override void OnResume() { }
-
-        private static List<Course> GetData()
-        {
-            try
-            {
-                var api = new RestClient("http://localhost:5000/api/courses");
-                api.Timeout = -1;
-                var request = new RestRequest(Method.GET);
-                IRestResponse response = api.Execute(request);
-
-                List<Course> allCourses = JsonConvert.DeserializeObject<List<Course>>(response.Content);
-                return allCourses;
-            }
-            catch (Exception e)
-            {
-                Console.Write(e.ToString());
-                return null;
-            }
-        }
     }
 }
