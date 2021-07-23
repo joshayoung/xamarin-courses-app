@@ -10,19 +10,20 @@ namespace CoursesApp.Pages
     public partial class AddStudentPage : ContentPage
     {
         private readonly CourseViewModel courseViewModel;
+        private readonly StudentViewModel studentViewModel;
         
         public AddStudentPage(CourseViewModel courseViewModel)
+        //public AddStudentPage(StudentViewModel studentViewModel)
         {
-            InitializeComponent();
             this.courseViewModel = courseViewModel;
-
-            BindingContext = new StudentViewModel(new Student("", 0, ""));
+            InitializeComponent();
+            BindingContext = new Student("", 1, "");
         }
 
         private void SaveStudent(object sender, EventArgs e)
         {
-            var studentViewModel = (StudentViewModel)((BindableObject) sender).BindingContext;
-            courseViewModel.AddStudent(studentViewModel);
+            var student = (Student)((BindableObject) sender).BindingContext;
+            courseViewModel.AddStudent(student);
             Navigation.PopAsync();
         }
     }

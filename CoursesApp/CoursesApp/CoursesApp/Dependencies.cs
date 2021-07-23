@@ -8,20 +8,18 @@ namespace CoursesApp
     public static class Dependencies
     {
         private static IServiceCollection serviceCollection;
-        private static IServiceProvider serviceProvider { get; set; }
+        private static IServiceProvider ServiceProvider { get; set; }
 
-        public static CourseCollectionViewModel CourseCollectionViewModel =>
-            serviceProvider.GetService<CourseCollectionViewModel>();
+        public static CourseCollection CourseCollection =>
+            ServiceProvider.GetService<CourseCollection>();
 
         public static void Init()
         {
             serviceCollection = new ServiceCollection();
-            var courseCollection = new CourseCollection();
-            var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
-            courseCollectionViewModel.ReloadTheClasses();
-            serviceCollection.AddSingleton(courseCollectionViewModel);
+            
+            serviceCollection.AddSingleton<CourseCollection>();
 
-            serviceProvider = serviceCollection.BuildServiceProvider();
+            ServiceProvider = serviceCollection.BuildServiceProvider();
         }
     }
 }
