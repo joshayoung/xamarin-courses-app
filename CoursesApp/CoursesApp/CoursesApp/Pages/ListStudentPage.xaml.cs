@@ -1,6 +1,4 @@
 using System;
-using System.Threading.Tasks;
-using CoursesApp.Models;
 using CoursesApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,12 +8,11 @@ namespace CoursesApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListStudentPage : ContentPage
     {
-        public StudentViewModel StudentViewModel = new StudentViewModel(new Student("", 0, ""));
-        public CourseViewModel CourseViewModel { get; set; }
+        private readonly CourseViewModel courseViewModel;
         public ListStudentPage(CourseViewModel courseViewModel)
         {
             InitializeComponent();
-            CourseViewModel = courseViewModel;
+            this.courseViewModel = courseViewModel;
             BindingContext = courseViewModel;
         }
 
@@ -27,8 +24,7 @@ namespace CoursesApp.Pages
 
         private async void AddStudent(object sender, EventArgs eventArgs)
         {
-            await Navigation.PushAsync(new AddStudentPage(CourseViewModel));
+            await Navigation.PushAsync(new AddStudentPage(courseViewModel));
         }
-
     }
 }

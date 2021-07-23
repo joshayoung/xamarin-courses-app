@@ -20,14 +20,12 @@
       BackgroundColor="LightGray"
       CornerRadius="4"
       HasShadow="False">
-      <StackLayout x:Name="Welcome" />
+      <StackLayout x:Name="welcome" />
     </Frame>
-
     <BoxView
       BackgroundColor="Tomato"
       HeightRequest="2"
       Margin="0,10,0,10" />
-
     <CollectionView ItemsSource="{Binding CoursesWithMultipleStudents}">
       <CollectionView.ItemTemplate>
         <DataTemplate x:DataType="viewModels:CourseViewModel">

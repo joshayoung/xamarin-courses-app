@@ -156,5 +156,12 @@ namespace CoursesApp.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+
+        public void AddStudent(StudentViewModel studentViewModel)
+        {
+            Students.Add(studentViewModel);
+            // Refresh the list:
+            NotifyPropertyChanged(nameof(Students));
+        }
     }
 }
