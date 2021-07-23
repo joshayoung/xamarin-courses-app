@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO.Compression;
 using System.Linq;
@@ -87,15 +88,15 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        private List<StudentViewModel> students;
+        private ObservableCollection<StudentViewModel> students;
 
-        public List<StudentViewModel> Students
+        public ObservableCollection<StudentViewModel> Students
         {
             get
             {
                 if (students == null)
                 {
-                    students = new List<StudentViewModel>();
+                    students = new ObservableCollection<StudentViewModel>();
                 }
 
                 if (students.Count < 1)

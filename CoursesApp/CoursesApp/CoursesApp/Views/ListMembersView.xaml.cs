@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using CoursesApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -36,16 +37,19 @@ namespace CoursesApp.Views
             typeof(List<TeacherViewModel>)
         );
         
-        public List<StudentViewModel> Students
+        public ObservableCollection<StudentViewModel> Students
         {
-            get => (List<StudentViewModel>) GetValue(StudentsProperty);
+            get
+            {
+                return (ObservableCollection<StudentViewModel>) GetValue(StudentsProperty);
+            }
             set => SetValue(StudentsProperty, value);
         }
-        
+
         public static readonly BindableProperty StudentsProperty = BindableProperty.Create(
             nameof(Students),
-            typeof(List<StudentViewModel>),
-            typeof(List<StudentViewModel>)
+            typeof(ObservableCollection<StudentViewModel>),
+            typeof(ObservableCollection<StudentViewModel>)
         );
 
         public static readonly BindableProperty ButtonTextProperty = BindableProperty.Create(
@@ -67,13 +71,13 @@ namespace CoursesApp.Views
             get => (string) GetValue(ButtonTextProperty);
             set => SetValue(ButtonTextProperty, value);
         }
-
+        
         public ListMembersView()
         {
             InitializeComponent();
             BindingContext = this;
         }
-
+        
         void AddClicked(object sender, EventArgs e) => AddButtonAction?.Invoke();
         
         // TODO: See if the button text still works if this is removed:

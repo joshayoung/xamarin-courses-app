@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CoursesApp.Models;
 using CoursesApp.ViewModels;
 using Xamarin.Forms;
@@ -28,6 +24,7 @@ namespace CoursesApp.Pages
         {
             var studentViewModel = (StudentViewModel)((BindableObject) sender).BindingContext;
             courseViewModel.Students.Add(studentViewModel);
+            Navigation.PopAsync();
         }
     }
 }
