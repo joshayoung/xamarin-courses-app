@@ -6,12 +6,10 @@ namespace CoursesApp.Pages
 {
     public partial class MainPage : ContentPage
     {
-        private readonly CourseCollectionViewModel courseCollectionViewModel;
-
         public MainPage(CourseCollectionViewModel courseCollectionViewModel)
         {
             InitializeComponent();
-            BindingContext = this.courseCollectionViewModel = courseCollectionViewModel;
+            BindingContext = courseCollectionViewModel;
             AddWelcomeText();
         }
 
