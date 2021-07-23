@@ -3,42 +3,51 @@
 <ContentPage
   ios:Page.UseSafeArea="true"
   x:Class="CoursesApp.Pages.ListStudentPage"
-  x:DataType="views:ListMembersView"
+  x:DataType="viewModels:CourseViewModel"
   xmlns="http://xamarin.com/schemas/2014/forms"
   xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
   xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
-  xmlns:views="clr-namespace:CoursesApp.Views;assembly=CoursesApp"
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-  <views:ListMembersView x:Name="membersView">
-    <views:ListMembersView.InnerContent>
-      <StackLayout>
-        <Label FontSize="Large" Text="Students" />
-        <CollectionView ItemsSource="{Binding Students}" Margin="0,0,0,20">
-          <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="viewModels:StudentViewModel">
+  <StackLayout Padding="20">
+    <Label
+      FontSize="24"
+      HorizontalOptions="Start"
+      Text="Course:" />
+    <Label
+      FontSize="24"
+      HorizontalOptions="Start"
+      Text="{Binding Title}" />
+
+    <CollectionView ItemsSource="{Binding Students}">
+      <CollectionView.ItemTemplate>
+        <DataTemplate x:DataType="viewModels:StudentViewModel">
+          <Frame
+            HasShadow="False"
+            Margin="0"
+            Padding="0">
+            <Frame.GestureRecognizers>
+              <TapGestureRecognizer Tapped="ViewDetails" />
+            </Frame.GestureRecognizers>
+            <StackLayout Margin="0,0,0,10">
               <Frame
-                HasShadow="False"
-                Margin="0"
-                Padding="0">
-                <Frame.GestureRecognizers>
-                  <TapGestureRecognizer Tapped="ViewDetails" />
-                </Frame.GestureRecognizers>
-                <StackLayout Margin="0,0,0,10">
-                  <Frame
-                    BackgroundColor="Tomato"
-                    CornerRadius="4"
-                    HasShadow="False">
-                    <StackLayout>
-                      <Label Text="{Binding Name}" TextColor="White" />
-                      <Label Text="{Binding Major}" TextColor="White" />
-                    </StackLayout>
-                  </Frame>
+                BackgroundColor="Tomato"
+                CornerRadius="4"
+                HasShadow="False">
+                <StackLayout>
+                  <Label Text="{Binding Name}" TextColor="Black" />
+                  <Label Text="{Binding Major}" TextColor="Black" />
                 </StackLayout>
               </Frame>
-            </DataTemplate>
-          </CollectionView.ItemTemplate>
-        </CollectionView>
-      </StackLayout>
-    </views:ListMembersView.InnerContent>
-  </views:ListMembersView>
+            </StackLayout>
+          </Frame>
+        </DataTemplate>
+      </CollectionView.ItemTemplate>
+    </CollectionView>
+    <Button
+      BackgroundColor="Tomato"
+      Clicked="AddStudent"
+      FontAttributes="Bold"
+      Text="Add Student"
+      TextColor="White" />
+  </StackLayout>
 </ContentPage>

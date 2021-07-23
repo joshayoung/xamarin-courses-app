@@ -16,24 +16,18 @@ namespace CoursesApp.Pages
             InitializeComponent();
             CourseViewModel = courseViewModel;
             
-            // NOTE: All of the binding happens in the view:
-            // BindingContext = courseViewModel;
-            
-            membersView.AddButtonAction = async () => await AddTeacher();
-            membersView.ButtonText = "Add Teacher";
-            membersView.Teachers = courseViewModel.Teachers;
-            membersView.Title = courseViewModel.Title;
-        }
-
-        private async Task AddTeacher()
-        {
-            await Navigation.PushAsync(new AddTeacherPage(CourseViewModel));
+            BindingContext = courseViewModel;
         }
 
         private void ViewTeacherDetails(object sender, EventArgs e)
         {
             if (!(((VisualElement)sender).BindingContext is TeacherViewModel teacherViewModel)) return;
             Navigation.PushAsync(new TeacherPage(teacherViewModel));
+        }
+
+        private void AddClicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AddTeacherPage(CourseViewModel));
         }
     }
 }

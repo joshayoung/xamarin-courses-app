@@ -43,12 +43,5 @@ namespace CoursesApp.Pages
             if (!(((VisualElement) sender).BindingContext is CourseViewModel courseViewModel)) return;
             Navigation.PushAsync(new StatsPage(courseViewModel));
         }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            // courseCollectionViewModel.ReloadTheClasses();
-        }
     }
 }
