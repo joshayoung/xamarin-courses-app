@@ -25,8 +25,8 @@ namespace CoursesApp.Pages
 
         private async void AddStudent(object sender, EventArgs eventArgs)
         {
-            //await Navigation.PushAsync(new AddStudentPage(new StudentViewModel(new Student("", 0, ""))));
-            await Navigation.PushAsync(new AddStudentPage(courseViewModel));
+            await Navigation.PushAsync(new AddStudentPage(new StudentViewModel(new Student("", 0, "")), courseViewModel.Students));
+            // await Navigation.PushAsync(new AddStudentPage(courseViewModel));
         }
     }
 }

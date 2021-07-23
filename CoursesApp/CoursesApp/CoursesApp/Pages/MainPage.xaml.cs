@@ -6,8 +6,10 @@ namespace CoursesApp.Pages
 {
     public partial class MainPage : ContentPage
     {
+        public CourseCollectionViewModel CourseCollectionViewModel;
         public MainPage(CourseCollectionViewModel courseCollectionViewModel)
         {
+            CourseCollectionViewModel = courseCollectionViewModel;
             InitializeComponent();
             BindingContext = courseCollectionViewModel;
             AddWelcomeText();
@@ -39,7 +41,7 @@ namespace CoursesApp.Pages
             frame.BackgroundColor = Color.Coral;
 
             if (!(((VisualElement) sender).BindingContext is CourseViewModel courseViewModel)) return;
-            Navigation.PushAsync(new CoursePage(courseViewModel));
+            Navigation.PushAsync(new CoursePage(courseViewModel), CourseCollectionViewModel.CoursesCollection.Courses);
         }
     }
 }
