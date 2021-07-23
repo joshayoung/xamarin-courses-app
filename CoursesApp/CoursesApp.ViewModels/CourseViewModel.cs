@@ -82,14 +82,14 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged(nameof(Length));
             }
         }
-        private ObservableCollection<StudentViewModel> students;
-        public ObservableCollection<StudentViewModel> Students
+        private List<StudentViewModel> students;
+        public List<StudentViewModel> Students
         {
             get
             {
                 if (students == null)
                 {
-                    students = new ObservableCollection<StudentViewModel>();
+                    students = new List<StudentViewModel>();
                 }
 
                 if (students.Count < 1)
@@ -108,14 +108,14 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged(nameof(Students));
             }
         }
-        private ObservableCollection<TeacherViewModel> teachers;
-        public ObservableCollection<TeacherViewModel> Teachers
+        private List<TeacherViewModel> teachers;
+        public List<TeacherViewModel> Teachers
         {
             get
             {
                 if (teachers == null)
                 {
-                    teachers = new ObservableCollection<TeacherViewModel>();
+                    teachers = new List<TeacherViewModel>();
                 }
 
                 if (teachers.Count < 1)
