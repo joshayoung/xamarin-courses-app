@@ -1,4 +1,5 @@
 using System;
+using CoursesApp.Models;
 using CoursesApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -24,6 +25,7 @@ namespace CoursesApp.Pages
 
         private async void AddStudent(object sender, EventArgs eventArgs)
         {
+            //await Navigation.PushAsync(new AddStudentPage(new StudentViewModel(new Student("", 0, ""))));
             await Navigation.PushAsync(new AddStudentPage(courseViewModel));
         }
     }
