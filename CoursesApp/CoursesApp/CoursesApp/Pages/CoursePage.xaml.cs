@@ -6,11 +6,11 @@ using Xamarin.Forms.Xaml;
 namespace CoursesApp.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class StatsPage : ContentPage
+    public partial class CoursePage : ContentPage
     {
         private CourseViewModel courseViewModel;
         
-        public StatsPage(CourseViewModel courseViewModel)
+        public CoursePage(CourseViewModel courseViewModel)
         {
             InitializeComponent();
 
