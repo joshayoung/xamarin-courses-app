@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using CoursesApp.Models;
 using CoursesApp.Pages;
-using CoursesApp.ViewModels;
-using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using RestSharp;
 using Xamarin.Forms;
@@ -15,8 +13,6 @@ namespace CoursesApp
 {
     public partial class App : Application
     {
-        //private readonly List<Course> allCourses = GetData();
-
         public App()
         {
             InitializeComponent();

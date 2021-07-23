@@ -32,7 +32,7 @@ namespace CoursesApp.Pages
             formattedString.Spans.Add(spanPenultimate);
             formattedString.Spans.Add(spanFinal);
             label.FormattedText = formattedString;
-            Welcome.Children.Add(label);
+            welcome.Children.Add(label);
         }
 
         private void NavigateToDetails(object sender, EventArgs e)
