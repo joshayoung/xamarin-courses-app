@@ -52,14 +52,34 @@
           Padding="10,0"
           Text="Class Students"
           TextColor="White" />
-        <Button
-          BackgroundColor="Black"
-          Clicked="ViewTeachers"
-          FontAttributes="Bold"
-          Padding="10,0"
-          Text="Class Teachers"
-          TextColor="White" />
       </StackLayout>
+
+      <Label Text="Teachers" />
+      <CollectionView ItemsSource="{Binding Teachers}">
+        <CollectionView.ItemTemplate>
+          <DataTemplate x:DataType="viewModels:TeacherViewModel">
+            <Frame
+              HasShadow="False"
+              Margin="0"
+              Padding="0">
+              <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="ViewTeacherDetails" />
+              </Frame.GestureRecognizers>
+              <StackLayout Margin="0,0,0,10">
+                <Frame
+                  BackgroundColor="Khaki"
+                  CornerRadius="4"
+                  HasShadow="False">
+                  <StackLayout>
+                    <Label Text="{Binding Name}" TextColor="Black" />
+                    <Label Text="{Binding Experience}" TextColor="Black" />
+                  </StackLayout>
+                </Frame>
+              </StackLayout>
+            </Frame>
+          </DataTemplate>
+        </CollectionView.ItemTemplate>
+      </CollectionView>
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>
