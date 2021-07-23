@@ -73,5 +73,10 @@ namespace CoursesApp.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
+
+        public void AddStudent(StudentViewModel studentViewModel)
+        {
+            
+        }
     }
 }

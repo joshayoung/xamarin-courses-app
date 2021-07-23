@@ -85,23 +85,7 @@ namespace CoursesApp.ViewModels
         private List<StudentViewModel> students;
         public List<StudentViewModel> Students
         {
-            get
-            {
-                if (students == null)
-                {
-                    students = new List<StudentViewModel>();
-                }
-
-                if (students.Count < 1)
-                {
-                    foreach (var student in course.Students)
-                    {
-                        students.Add(new StudentViewModel(student));
-                    }
-                }
-
-                return students;
-            }
+            get => students;
             set
             {
                 students = value;
@@ -147,6 +131,9 @@ namespace CoursesApp.ViewModels
         public CourseViewModel(Course course)
         {
             this.course = course;
+            Students = new List<StudentViewModel>();
+            
+            course.Students.ForEach(student => Students.Add(new StudentViewModel(student)));
 
             // Update my model's state:
             course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
@@ -157,9 +144,10 @@ namespace CoursesApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        public void AddStudent(Student student)
+        // Move this to Course.cs and inject that into your StudentViewModel:
+        public void AddStudent(StudentViewModel studentViewModel)
         {
-            Students.Add(new StudentViewModel(student));
+            Students.Add(studentViewModel);
             // Refresh the list:
             NotifyPropertyChanged(nameof(Students));
         }

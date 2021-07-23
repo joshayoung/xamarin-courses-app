@@ -15,11 +15,11 @@ namespace CoursesApp.ViewModels
         public ObservableCollection<CourseViewModel> CoursesWithMultipleStudents { get; } =
             new ObservableCollection<CourseViewModel>();
         
-        private readonly CourseCollection coursesCollection;
+        public readonly CourseCollection CoursesCollection;
 
         public CourseCollectionViewModel(CourseCollection coursesCollection)
         {
-            this.coursesCollection = coursesCollection;
+            CoursesCollection = coursesCollection;
             
             coursesCollection.Courses.CollectionChanged += CoursesOnCollectionChanged;
         }
@@ -36,13 +36,13 @@ namespace CoursesApp.ViewModels
         private void RefreshMultiStudentCourses()
         {
             CoursesWithMultipleStudents.Clear();
-            coursesCollection.Courses.ToList().FindAll(course => course.Students.Count > 1).ToList()
+            CoursesCollection.Courses.ToList().FindAll(course => course.Students.Count > 1).ToList()
                 .ForEach(rec => CoursesWithMultipleStudents.Add(new CourseViewModel(rec)));
         }
 
         private CourseViewModel FindLastCourse() =>
-            (coursesCollection.Courses.Count > 0) ? new CourseViewModel(coursesCollection.Courses.Last()) : null;
+            (CoursesCollection.Courses.Count > 0) ? new CourseViewModel(CoursesCollection.Courses.Last()) : null;
         
-        public void ReloadTheClasses() => coursesCollection.RepopulateCourseList();
+        public void ReloadTheClasses() => CoursesCollection.RepopulateCourseList();
     }
 }
