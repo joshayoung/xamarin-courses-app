@@ -1,15 +1,59 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <ContentPage
+  ios:Page.UseSafeArea="true"
   x:Class="CoursesApp.Pages.AddTeacherPage"
+  x:DataType="viewModels:TeacherViewModel"
   xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+  xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
   <ContentPage.Content>
-    <StackLayout>
+    <StackLayout Padding="20">
       <Label
+        FontAttributes="Bold"
+        FontSize="30"
         HorizontalOptions="CenterAndExpand"
-        Text="Add Teacher"
-        VerticalOptions="CenterAndExpand" />
+        Margin="0,0,0,30"
+        Text="Add New Teacher" />
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition />
+          <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition />
+          <RowDefinition />
+          <RowDefinition />
+          <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label Text="Teacher Name:" />
+        <Entry
+          BackgroundColor="LightGray"
+          Grid.Column="1"
+          Text="{Binding Name, Mode=TwoWay}" />
+        <Label Grid.Row="1" Text="Teacher Age:" />
+        <Entry
+          BackgroundColor="LightGray"
+          Grid.Column="1"
+          Grid.Row="1"
+          Text="{Binding Age, Mode=TwoWay}" />
+        <Label Grid.Row="2" Text="Experience" />
+        <Entry
+          BackgroundColor="LightGray"
+          Grid.Column="1"
+          Grid.Row="2"
+          Text="{Binding Experience, Mode=TwoWay}" />
+        <Button
+          BackgroundColor="Tomato"
+          Clicked="SaveTeacher"
+          Grid.Column="0"
+          Grid.ColumnSpan="2"
+          Grid.Row="3"
+          Margin="0,10,0,0"
+          Text="Save"
+          TextColor="White" />
+      </Grid>
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>
