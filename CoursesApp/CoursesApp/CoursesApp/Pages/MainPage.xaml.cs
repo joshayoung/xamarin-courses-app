@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using CoursesApp.Models;
 using CoursesApp.ViewModels;
 using Xamarin.Forms;
 
@@ -6,8 +8,11 @@ namespace CoursesApp.Pages
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage(CourseCollectionViewModel courseCollectionViewModel)
+        private readonly CourseCollection courseCollection;
+
+        public MainPage(CourseCollectionViewModel courseCollectionViewModel, CourseCollection courseCollection)
         {
+            this.courseCollection = courseCollection;
             InitializeComponent();
             BindingContext = courseCollectionViewModel;
             AddWelcomeText();
@@ -40,6 +45,11 @@ namespace CoursesApp.Pages
 
             if (!(((VisualElement) sender).BindingContext is CourseViewModel courseViewModel)) return;
             Navigation.PushAsync(new CoursePage(courseViewModel));
+        }
+
+        private void AddCourse(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AddCoursePage(new CourseViewModel(new Course("", 1, new List<Student>(), CourseType.Discussion), courseCollection)));
         }
     }
 }

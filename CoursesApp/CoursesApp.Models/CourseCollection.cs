@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using CoursesApp.Models.Service;
@@ -13,6 +14,12 @@ namespace CoursesApp.Models
         {
             Courses.Clear();
             Courses = new CourseDataService().GetCourses();
+        }
+
+        public void AddCourse(Course course)
+        {
+            Courses.Add(course);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
         }
     }
 }

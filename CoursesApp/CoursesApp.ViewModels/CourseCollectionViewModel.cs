@@ -11,7 +11,7 @@ namespace CoursesApp.ViewModels
         
         public CourseCollectionViewModel(CourseCollection coursesCollection)
         {
-            coursesCollection.Courses.ForEach(course => Courses.Add(new CourseViewModel(course)));
+            coursesCollection.Courses.ForEach(course => Courses.Add(new CourseViewModel(course, coursesCollection)));
         }
     }
 }

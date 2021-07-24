@@ -66,12 +66,11 @@
                       <Label Text="{Binding Name}" TextColor="Black" />
                       <Label Text="{Binding Age, StringFormat='({0})'}" TextColor="Black" />
                       <Label
+                        FontAttributes="Bold"
                         HorizontalOptions="EndAndExpand"
                         Text="{Binding Major}"
                         TextColor="DimGray"
-                        FontAttributes="Bold"
-                        TextDecorations="Underline"
-                        />
+                        TextDecorations="Underline" />
                     </StackLayout>
                   </StackLayout>
                 </Frame>
@@ -80,12 +79,6 @@
           </DataTemplate>
         </BindableLayout.ItemTemplate>
       </StackLayout>
-    </StackLayout>
-  </ContentPage.Content>
-</ContentPage>/StackLayout>
-    </StackLayout>
-  </ContentPage.Content>
-</ContentPage>/StackLayout>
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>
