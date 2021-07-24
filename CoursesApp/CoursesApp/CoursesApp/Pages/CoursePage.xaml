@@ -10,11 +10,18 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
   <ContentPage.Content>
     <StackLayout Margin="20">
-      <Label
-        FontSize="30"
-        HorizontalTextAlignment="Center"
-        Margin="0,0,0,20"
-        Text="Course Stats" />
+      <StackLayout Orientation="Horizontal">
+        <Label
+          FontSize="30"
+          HorizontalTextAlignment="Center"
+          Margin="0,0,0,20"
+          Text="Course:" />
+        <Label
+          FontSize="30"
+          HorizontalTextAlignment="Center"
+          Margin="0,0,0,20"
+          Text="{Binding Title}" />
+      </StackLayout>
       <Frame
         BackgroundColor="Tomato"
         HasShadow="False"
@@ -39,7 +46,37 @@
         BackgroundColor="DarkGray"
         HeightRequest="2"
         Margin="0,20" />
-      <StackLayout Orientation="Horizontal" />
+      <StackLayout BindableLayout.ItemsSource="{Binding Students}" Orientation="Horizontal">
+        <BindableLayout.ItemTemplate>
+          <DataTemplate x:DataType="viewModels:StudentViewModel">
+            <Frame
+              HasShadow="False"
+              Margin="0"
+              Padding="0">
+              <StackLayout Margin="0,0,0,10">
+                <Frame
+                  BackgroundColor="Tomato"
+                  CornerRadius="4"
+                  HasShadow="False">
+                  <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                      <Label Text="{Binding Name}" TextColor="Black" />
+                      <Label Text="(" TextColor="Black" />
+                      <Label Text="{Binding Age}" TextColor="Black" />
+                      <Label Text=")" TextColor="Black" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                      <Label Text="{Binding Major}" TextColor="Black" />
+                    </StackLayout>
+                  </StackLayout>
+                </Frame>
+              </StackLayout>
+            </Frame>
+          </DataTemplate>
+        </BindableLayout.ItemTemplate>
+      </StackLayout>
     </StackLayout>
   </ContentPage.Content>
+</ContentPage>ontentPage.Content>
+</ContentPage>ontentPage.Content>
 </ContentPage>
