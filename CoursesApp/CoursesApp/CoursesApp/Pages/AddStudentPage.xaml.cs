@@ -14,7 +14,6 @@ namespace CoursesApp.Pages
         private readonly StudentViewModel studentViewModel;
         
         public AddStudentPage(StudentViewModel studentViewModel, List<StudentViewModel> students)
-        //public AddStudentPage(StudentViewModel studentViewModel)
         {
             this.studentViewModel = studentViewModel;
             InitializeComponent();
@@ -24,7 +23,6 @@ namespace CoursesApp.Pages
         private void SaveStudent(object sender, EventArgs e)
         {
             var student = (StudentViewModel)((BindableObject) sender).BindingContext;
-            student.AddStudent(student);
             //courseViewModel.AddStudent(student);
             Navigation.PopAsync();
         }

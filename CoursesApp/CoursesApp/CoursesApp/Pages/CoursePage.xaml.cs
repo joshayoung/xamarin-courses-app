@@ -19,12 +19,5 @@ namespace CoursesApp.Pages
 
         private void ViewStudents(object sender, EventArgs e) =>
             Navigation.PushAsync(new ListStudentPage(courseViewModel));
-
-        private void ViewTeacherDetails(object sender, EventArgs e)
-        {
-            if (!(((VisualElement) sender).BindingContext is TeacherViewModel teacherViewModel)) return;
-            Navigation.PushAsync(new TeacherPage(teacherViewModel));
-        }
-
     }
 }
