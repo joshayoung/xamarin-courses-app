@@ -16,8 +16,5 @@ namespace CoursesApp.Pages
 
             BindingContext = this.courseViewModel = courseViewModel;
         }
-
-        private void ViewStudents(object sender, EventArgs e) =>
-            Navigation.PushAsync(new ListStudentPage(courseViewModel));
     }
 }

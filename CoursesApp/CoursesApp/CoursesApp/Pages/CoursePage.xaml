@@ -39,16 +39,7 @@
         BackgroundColor="DarkGray"
         HeightRequest="2"
         Margin="0,20" />
-      <StackLayout Orientation="Horizontal">
-        <Button
-          BackgroundColor="Black"
-          Clicked="ViewStudents"
-          FontAttributes="Bold"
-          HorizontalOptions="FillAndExpand"
-          Padding="10,0"
-          Text="Class Students"
-          TextColor="White" />
-      </StackLayout>
+      <StackLayout Orientation="Horizontal" />
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>
