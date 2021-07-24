@@ -16,14 +16,17 @@ namespace CoursesApp
             InitializeComponent();
             
             Dependencies.Init();
-            courseCollectionViewModel = new CourseCollectionViewModel(Dependencies.CourseCollection);
+            var courseCollection = Dependencies.CourseCollection;
+            courseCollection.RepopulateCourseList();
+            courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
+            // courseCollectionViewModel.ReloadTheClasses();
 
             MainPage = new NavigationPage(new MainPage(courseCollectionViewModel));
         }
 
         protected override void OnStart()
         {
-            courseCollectionViewModel.ReloadTheClasses();
+            //courseCollectionViewModel.ReloadTheClasses();
         }
         
         protected override void OnSleep() { }

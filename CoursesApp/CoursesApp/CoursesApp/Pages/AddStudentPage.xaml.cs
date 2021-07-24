@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using CoursesApp.Models;
 using CoursesApp.ViewModels;
 using Xamarin.Forms;
@@ -12,7 +13,7 @@ namespace CoursesApp.Pages
         private readonly CourseViewModel courseViewModel;
         private readonly StudentViewModel studentViewModel;
         
-        public AddStudentPage(StudentViewModel studentViewModel)
+        public AddStudentPage(StudentViewModel studentViewModel, List<StudentViewModel> students)
         //public AddStudentPage(StudentViewModel studentViewModel)
         {
             this.studentViewModel = studentViewModel;
