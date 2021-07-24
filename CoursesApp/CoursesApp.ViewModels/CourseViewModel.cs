@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO.Compression;
 using System.Linq;
 using CoursesApp.Models;
 
@@ -80,32 +78,6 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged(nameof(Students));
             }
         }
-        private List<TeacherViewModel> teachers;
-        public List<TeacherViewModel> Teachers
-        {
-            get
-            {
-                if (teachers == null)
-                {
-                    teachers = new List<TeacherViewModel>();
-                }
-
-                if (teachers.Count < 1)
-                {
-                    foreach (var teacher in course.Teachers)
-                    {
-                        teachers.Add(new TeacherViewModel(teacher));
-                    }
-                }
-
-                return teachers;
-            }
-            set
-            {
-                teachers = value;
-                NotifyPropertyChanged(nameof(Teacher));
-            }
-        }
         public CourseType Type
         {
             get => course.Type;
@@ -130,14 +102,6 @@ namespace CoursesApp.ViewModels
         private void NotifyPropertyChanged(string name)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
-        // Move this to Course.cs and inject that into your StudentViewModel:
-        public void AddStudent(StudentViewModel studentViewModel)
-        {
-            Students.Add(studentViewModel);
-            // Refresh the list:
-            NotifyPropertyChanged(nameof(Students));
         }
     }
 }
