@@ -41,17 +41,6 @@ namespace CoursesApp.Models
             }
         }
 
-        private List<Teacher> teachers;
-        public List<Teacher> Teachers
-        {
-            get => teachers;
-            set
-            {
-                teachers = value;
-                NotifyPropertyChanged(nameof(Teachers));
-            }
-        }
-
         private CourseType type;
         public CourseType Type
         {
@@ -68,13 +57,11 @@ namespace CoursesApp.Models
             string title, 
             float length, 
             List<Student> students, 
-            List<Teacher> teachers, 
             CourseType type)
         {
             Title = title;
             Length = length;
             Students = students;
-            Teachers = teachers;
             Type = type;
         }
 

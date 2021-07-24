@@ -9,6 +9,7 @@ namespace CoursesApp.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly Course course;
+        private readonly CourseCollection courseCollection;
 
         public int StudentCount => course.Students.Count;
 
@@ -105,9 +106,10 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        public CourseViewModel(Course course)
+        public CourseViewModel(Course course, CourseCollection courseCollection)
         {
             this.course = course;
+            this.courseCollection = courseCollection;
             Students = new List<StudentViewModel>();
             
             course.Students.ForEach(student => Students.Add(new StudentViewModel(student)));
@@ -119,6 +121,11 @@ namespace CoursesApp.ViewModels
         private void NotifyPropertyChanged(string name)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        public void AddCourse()
+        {
+            courseCollection.AddCourse(course);
         }
     }
 }
