@@ -1,6 +1,4 @@
 using System.ComponentModel;
-using Newtonsoft.Json.Linq;
-using RestSharp;
 
 namespace CoursesApp.Models
 {
@@ -59,20 +57,6 @@ namespace CoursesApp.Models
             Major = major;
         }
 
-        public void UpdateMajor(string id)
-        {
-            var api = new RestClient($"http://localhost:5000/api/courses/{id}");
-            api.Timeout = -1;
-            var request = new RestRequest(Method.PUT);
-            request.AddHeader("Content-Type", "application/json");
-            JObject jObjectbody = new JObject();
-            jObjectbody.Add("Title", Name);
-            jObjectbody.Add("designation", Age);
-
-            request.AddParameter("application/json", jObjectbody, ParameterType.RequestBody);
-            IRestResponse response = api.Execute(request);
-        }
-        
         private void NotifyPropertyChanged(string theName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(theName));

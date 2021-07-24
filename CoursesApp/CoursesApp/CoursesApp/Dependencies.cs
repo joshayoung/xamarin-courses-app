@@ -1,6 +1,5 @@
 using System;
 using CoursesApp.Models;
-using CoursesApp.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CoursesApp
@@ -17,9 +16,7 @@ namespace CoursesApp
         public static void Init()
         {
             serviceCollection = new ServiceCollection();
-            
             serviceCollection.AddSingleton<CourseCollection>();
-
             ServiceProvider = serviceCollection.BuildServiceProvider();
         }
     }

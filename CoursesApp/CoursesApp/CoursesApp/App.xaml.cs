@@ -9,8 +9,6 @@ namespace CoursesApp
 {
     public partial class App : Application
     {
-        private readonly CourseCollectionViewModel courseCollectionViewModel;
-        
         public App()
         {
             InitializeComponent();
@@ -18,16 +16,11 @@ namespace CoursesApp
             Dependencies.Init();
             var courseCollection = Dependencies.CourseCollection;
             courseCollection.RepopulateCourseList();
-            courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
-            // courseCollectionViewModel.ReloadTheClasses();
-
-            MainPage = new NavigationPage(new MainPage(courseCollectionViewModel));
+            MainPage = new NavigationPage(new MainPage(new CourseCollectionViewModel(courseCollection)));
         }
 
-        protected override void OnStart()
-        {
-            //courseCollectionViewModel.ReloadTheClasses();
-        }
+        // TODO: Will not load courses correctly here:
+        protected override void OnStart() {}
         
         protected override void OnSleep() { }
         protected override void OnResume() { }
