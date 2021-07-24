@@ -52,18 +52,6 @@ namespace CoursesApp.ViewModels
 
             return sum / course.Students.Count;
         }
-        public int AverageTeacherAge
-        {
-            get
-            {
-                if (course.Teachers.Count < 1) return 0;
-
-                int sum = 0;
-                course.Teachers.ForEach(teacher => sum += teacher.Age);
-
-                return sum / course.Teachers.Count;
-            }
-        }
         public string Title
         {
             get => course.Title;

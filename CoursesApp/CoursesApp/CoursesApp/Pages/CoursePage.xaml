@@ -30,11 +30,6 @@
           </StackLayout>
 
           <StackLayout Orientation="Horizontal">
-            <Label Text="Average Teacher Age:" />
-            <Label Text="{Binding AverageTeacherAge}" />
-          </StackLayout>
-
-          <StackLayout Orientation="Horizontal">
             <Label Text="Most Popular Major:" />
             <Label Text="{Binding HighestMajor}" />
           </StackLayout>
@@ -54,33 +49,6 @@
           Text="Class Students"
           TextColor="White" />
       </StackLayout>
-
-      <Label Text="Teachers" />
-      <CollectionView ItemsSource="{Binding Teachers}">
-        <CollectionView.ItemTemplate>
-          <DataTemplate x:DataType="viewModels:TeacherViewModel">
-            <Frame
-              HasShadow="False"
-              Margin="0"
-              Padding="0">
-              <Frame.GestureRecognizers>
-                <TapGestureRecognizer Tapped="ViewTeacherDetails" />
-              </Frame.GestureRecognizers>
-              <StackLayout Margin="0,0,0,10">
-                <Frame
-                  BackgroundColor="Khaki"
-                  CornerRadius="4"
-                  HasShadow="False">
-                  <StackLayout>
-                    <Label Text="{Binding Name}" TextColor="Black" />
-                    <Label Text="{Binding Experience}" TextColor="Black" />
-                  </StackLayout>
-                </Frame>
-              </StackLayout>
-            </Frame>
-          </DataTemplate>
-        </CollectionView.ItemTemplate>
-      </CollectionView>
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>

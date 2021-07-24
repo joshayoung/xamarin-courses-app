@@ -38,13 +38,6 @@
         "major": "Physics"
       }
     ],
-    "teachers": [
-      {
-        "name": "Jack",
-        "age": 35,
-        "experience": 10
-      }
-    ],
     "type": 3
   },
   {
@@ -62,18 +55,6 @@
         "major": "Math"
       }
     ],
-    "teachers": [
-      {
-        "name": "Jack",
-        "age": 35,
-        "experience": 10
-      },
-      {
-        "name": "Jill",
-        "age": 34,
-        "experience": 9
-      }
-    ],
     "type": 2
   },
   {
@@ -89,18 +70,6 @@
         "name": "Sue",
         "age": 18,
         "major": "Physics"
-      }
-    ],
-    "teachers": [
-      {
-        "name": "Cal",
-        "age": 55,
-        "experience": 30
-      },
-      {
-        "name": "Peggy",
-        "age": 40,
-        "experience": 19
       }
     ],
     "type": 3
