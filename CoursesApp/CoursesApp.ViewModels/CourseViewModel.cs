@@ -9,7 +9,7 @@ namespace CoursesApp.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly Course course;
-        private readonly CourseCollection courseCollection;
+        public readonly CourseCollection courseCollection;
 
         public int StudentCount => course.Students.Count;
 
@@ -113,7 +113,7 @@ namespace CoursesApp.ViewModels
             Students = new List<StudentViewModel>();
             
             course.Students.ForEach(student => Students.Add(new StudentViewModel(student)));
-
+            
             // Update my model's state:
             course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
