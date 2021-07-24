@@ -26,7 +26,7 @@
       BackgroundColor="Tomato"
       HeightRequest="2"
       Margin="0,10,0,10" />
-    <CollectionView ItemsSource="{Binding CoursesWithMultipleStudents}">
+    <CollectionView ItemsSource="{Binding Courses}">
       <CollectionView.ItemTemplate>
         <DataTemplate x:DataType="viewModels:CourseViewModel">
           <Frame

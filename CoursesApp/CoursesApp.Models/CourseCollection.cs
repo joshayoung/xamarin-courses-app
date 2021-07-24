@@ -1,4 +1,5 @@
-using System.Collections.ObjectModel;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using CoursesApp.Models.Service;
 
@@ -8,13 +9,12 @@ namespace CoursesApp.Models
     {
         public event PropertyChangedEventHandler PropertyChanged;
         
-        public ObservableCollection<Course> Courses { get; } = new ObservableCollection<Course>();
+        public List<Course> Courses { get; set; } = new List<Course>();
 
         public void RepopulateCourseList()
         {
-            var allCourses = new CourseDataService().GetCourses();
-            Courses.Clear();
-            allCourses.ForEach(cs => Courses.Add(cs));
+            // Courses.Clear();
+            Courses = new CourseDataService().GetCourses();
         }
     }
 }
