@@ -12,6 +12,24 @@ namespace CoursesApp.ViewModels
 
         public int StudentCount => course.Students.Count;
 
+        public string OldestStudent
+        {
+            get
+            {
+                var oldest = students.First().Name;
+                var oldestAge = students.First().Age;
+                foreach (var student in course.Students)
+                {
+                    if (student.Age > oldestAge)
+                    {
+                        oldest = student.Name;
+                    }
+                }
+
+                return oldest;
+            }
+        }
+
         public string HighestMajor
         {
             get
@@ -39,7 +57,6 @@ namespace CoursesApp.ViewModels
                 return sorted.Last().Key;
             }
         }
-        public string AverageAgeString => "Average Student Age: " + AverageStudentAge();
         public string AverageStudentValue => AverageStudentAge().ToString();
         private int AverageStudentAge()
         {

@@ -35,7 +35,10 @@
             <Label Text="Average Student Age:" />
             <Label Text="{Binding AverageStudentValue}" />
           </StackLayout>
-
+          <StackLayout Orientation="Horizontal">
+            <Label Text="Oldest Student:" />
+            <Label Text="{Binding OldestStudent}" />
+          </StackLayout>
           <StackLayout Orientation="Horizontal">
             <Label Text="Most Popular Major:" />
             <Label Text="{Binding HighestMajor}" />
@@ -46,7 +49,7 @@
         BackgroundColor="DarkGray"
         HeightRequest="2"
         Margin="0,20" />
-      <StackLayout BindableLayout.ItemsSource="{Binding Students}" Orientation="Horizontal">
+      <StackLayout BindableLayout.ItemsSource="{Binding Students}">
         <BindableLayout.ItemTemplate>
           <DataTemplate x:DataType="viewModels:StudentViewModel">
             <Frame
@@ -61,12 +64,14 @@
                   <StackLayout>
                     <StackLayout Orientation="Horizontal">
                       <Label Text="{Binding Name}" TextColor="Black" />
-                      <Label Text="(" TextColor="Black" />
-                      <Label Text="{Binding Age}" TextColor="Black" />
-                      <Label Text=")" TextColor="Black" />
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                      <Label Text="{Binding Major}" TextColor="Black" />
+                      <Label Text="{Binding Age, StringFormat='({0})'}" TextColor="Black" />
+                      <Label
+                        HorizontalOptions="EndAndExpand"
+                        Text="{Binding Major}"
+                        TextColor="DimGray"
+                        FontAttributes="Bold"
+                        TextDecorations="Underline"
+                        />
                     </StackLayout>
                   </StackLayout>
                 </Frame>
@@ -75,6 +80,12 @@
           </DataTemplate>
         </BindableLayout.ItemTemplate>
       </StackLayout>
+    </StackLayout>
+  </ContentPage.Content>
+</ContentPage>/StackLayout>
+    </StackLayout>
+  </ContentPage.Content>
+</ContentPage>/StackLayout>
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>
