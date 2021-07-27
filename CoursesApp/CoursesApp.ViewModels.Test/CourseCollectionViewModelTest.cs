@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using CoursesApp.Models;
+using CoursesApp.Models.Service;
 using FluentAssertions;
+using NSubstitute;
 using Xunit;
 
 namespace CoursesApp.ViewModels.Test
@@ -10,7 +12,8 @@ namespace CoursesApp.ViewModels.Test
         [Fact]
         public void Constructor_ValidParams_ExpectAssignment()
         {
-            var courseCollection = new CourseCollection();
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
             
             var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
 

@@ -12,17 +12,15 @@ namespace CoursesApp
         public App()
         {
             InitializeComponent();
-            
+
             Dependencies.Init();
             var courseCollection = Dependencies.CourseCollection;
             courseCollection.RepopulateCourseList();
-            MainPage = new NavigationPage(new MainPage(new CourseCollectionViewModel(courseCollection), courseCollection));
+            MainPage = new NavigationPage(new MainPage(new CourseCollectionViewModel(courseCollection)));
         }
 
-        // TODO: Will not load courses correctly here:
         protected override void OnStart() {}
-        
-        protected override void OnSleep() { }
-        protected override void OnResume() { }
+        protected override void OnSleep() {}
+        protected override void OnResume() {}
     }
 }

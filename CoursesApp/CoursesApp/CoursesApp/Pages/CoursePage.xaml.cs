@@ -8,13 +8,10 @@ namespace CoursesApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CoursePage : ContentPage
     {
-        private CourseViewModel courseViewModel;
-        
         public CoursePage(CourseViewModel courseViewModel)
         {
             InitializeComponent();
-
-            BindingContext = this.courseViewModel = courseViewModel;
+            BindingContext = courseViewModel;
         }
     }
 }
