@@ -58,6 +58,7 @@ namespace CoursesApp.ViewModels
                 return sorted.Last().Key;
             }
         }
+        
         public string AverageStudentValue => AverageStudentAge().ToString();
         private int AverageStudentAge()
         {
@@ -68,6 +69,7 @@ namespace CoursesApp.ViewModels
 
             return sum / course.Students.Count;
         }
+        
         public string Title
         {
             get => course.Title;
@@ -77,6 +79,7 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged(nameof(Title));
             }
         }
+        
         public float Length
         {
             get => course.Length;
@@ -86,6 +89,7 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged(nameof(Length));
             }
         }
+        
         private List<StudentViewModel> students;
         public List<StudentViewModel> Students
         {
@@ -96,6 +100,7 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged(nameof(Students));
             }
         }
+        
         public CourseType Type
         {
             get => course.Type;
@@ -123,9 +128,6 @@ namespace CoursesApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        public void AddCourse()
-        {
-            courseCollection.AddCourse(course);
-        }
+        public void AddCourse() => courseCollection.AddCourse(course);
     }
 }

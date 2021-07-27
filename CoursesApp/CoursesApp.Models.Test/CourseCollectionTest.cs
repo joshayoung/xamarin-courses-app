@@ -1,5 +1,7 @@
 using System.Collections.ObjectModel;
+using CoursesApp.Models.Service;
 using FluentAssertions;
+using NSubstitute;
 using Xunit;
 
 namespace CoursesApp.Models.Test
@@ -9,7 +11,8 @@ namespace CoursesApp.Models.Test
         [Fact]
         public void Constructor_ValidParams_ExpectAssignment()
         {
-            var courseCollection = new CourseCollection();
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
 
             courseCollection.Courses.Should().BeEquivalentTo(new ObservableCollection<Course>());
         }

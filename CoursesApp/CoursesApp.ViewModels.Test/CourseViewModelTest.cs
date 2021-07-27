@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using CoursesApp.Models;
+using CoursesApp.Models.Service;
 using FluentAssertions;
+using NSubstitute;
 using Xunit;
 
 namespace CoursesApp.ViewModels.Test
@@ -14,7 +16,8 @@ namespace CoursesApp.ViewModels.Test
             var title = "title";
             float length = 2;
             List<Student> students = new List<Student>();
-            var courseCollection = new CourseCollection();
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
             CourseType type = CourseType.Lab;
             var titleWasChanged = false;
             var lengthWasChanged = false;
@@ -48,7 +51,8 @@ namespace CoursesApp.ViewModels.Test
             string title = "title";
             float length = 2;
             List<Student> students = new List<Student>();
-            var courseCollection = new CourseCollection();
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
             CourseType type = CourseType.Lab;
             var course = new Course(title, length, students, type);
             var wasChanged = false;
