@@ -12,15 +12,13 @@ namespace CoursesApp.Models.Test
             string title = "title";
             float length = 2;
             List<Student> students = new List<Student>();
-            List<Teacher> teachers = new List<Teacher>();
             CourseType type = CourseType.Lab;
             
-            var course = new Course(title, length, students, teachers, type);
+            var course = new Course(title, length, students, type);
 
             course.Title.Should().Be(title);
             course.Length.Should().Be(length);
             course.Students.Should().BeEquivalentTo(students);
-            course.Teachers.Should().BeEquivalentTo(teachers);
         }
 
         [Fact]
@@ -29,11 +27,10 @@ namespace CoursesApp.Models.Test
             string title = "title";
             float length = 2;
             List<Student> students = new List<Student>();
-            List<Teacher> teachers = new List<Teacher>();
             CourseType type = CourseType.Lab;
             bool wasChanged = false;
             
-            var course = new Course(title, length, students, teachers, type);
+            var course = new Course(title, length, students, type);
 
             course.PropertyChanged += (sender, args) =>
             {
@@ -53,11 +50,10 @@ namespace CoursesApp.Models.Test
             string title = "title";
             float length = 2;
             List<Student> students = new List<Student>();
-            List<Teacher> teachers = new List<Teacher>();
             CourseType type = CourseType.Lab;
             bool wasChanged = false;
              
-            var course = new Course(title, length, students, teachers, type);
+            var course = new Course(title, length, students, type);
 
             course.PropertyChanged += (sender, args) =>
             {
@@ -77,11 +73,10 @@ namespace CoursesApp.Models.Test
             string title = "title";
             float length = 2;
             List<Student> students = new List<Student>();
-            List<Teacher> teachers = new List<Teacher>();
             CourseType type = CourseType.Lab;
             bool wasChanged = false;
             
-            var course = new Course(title, length, students, teachers, type);
+            var course = new Course(title, length, students, type);
 
             course.PropertyChanged += (sender, args) =>
             {
@@ -96,40 +91,15 @@ namespace CoursesApp.Models.Test
         }
         
         [Fact]
-        public void Teachers_PropertyChanged_ExpectPropertyChangedEvent()
-        {
-            string title = "title";
-            float length = 2;
-            List<Student> students = new List<Student>();
-            List<Teacher> teachers = new List<Teacher>();
-            CourseType type = CourseType.Lab;
-            bool wasChanged = false;
-            
-            var course = new Course(title, length, students, teachers, type);
-
-            course.PropertyChanged += (sender, args) =>
-            {
-                if (args.PropertyName == nameof(course.Teachers))
-                {
-                    wasChanged = true;
-                }
-            };
-
-            course.Teachers = new List<Teacher>();
-            wasChanged.Should().BeTrue();
-        }
-        
-        [Fact]
         public void CourseType_PropertyChanged_ExpectPropertyChangedEvent()
         {
             string title = "title";
             float length = 2;
             List<Student> students = new List<Student>();
-            List<Teacher> teachers = new List<Teacher>();
             CourseType type = CourseType.Lab;
             bool wasChanged = false;
             
-            var course = new Course(title, length, students, teachers, type);
+            var course = new Course(title, length, students, type);
 
             course.PropertyChanged += (sender, args) =>
             {
