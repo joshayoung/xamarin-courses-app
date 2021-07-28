@@ -8,9 +8,9 @@ namespace CoursesApp.Models.Test
         [Fact]
         public void Constructor_ValidParams_ExpectAssignment()
         {
-            string name = "name";
-            int age = 20;
-            string major = "major";
+            var name = "name";
+            var age = 20;
+            var major = "major";
             
             var student = new Student(name, age, major);
 
@@ -22,10 +22,10 @@ namespace CoursesApp.Models.Test
         [Fact]
         public void Name_PropertyChanged_ExpectPropertyChangedEvent()
         {
-            string name = "name";
-            int age = 20;
-            string major = "major";
-            bool wasChanged = false;
+            var name = "name";
+            var age = 20;
+            var major = "major";
+            var wasChanged = false;
             
             var student = new Student(name, age, major);
 
@@ -44,10 +44,10 @@ namespace CoursesApp.Models.Test
         [Fact]
         public void Age_PropertyChanged_ExpectPropertyChangedEvent()
         {
-            string name = "name";
-            int age = 20;
-            string major = "major";
-            bool wasChanged = false;
+            var name = "name";
+            var age = 20;
+            var major = "major";
+            var wasChanged = false;
             
             var student = new Student(name, age, major);
 
@@ -66,10 +66,10 @@ namespace CoursesApp.Models.Test
         [Fact]
         public void Major_PropertyChanged_ExpectPropertyChangedEvent()
         {
-            string name = "name";
-            int age = 20;
-            string major = "major";
-            bool wasChanged = false;
+            var name = "name";
+            var age = 20;
+            var major = "major";
+            var wasChanged = false;
             
             var student = new Student(name, age, major);
 
