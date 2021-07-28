@@ -45,7 +45,7 @@ namespace CoursesApp.ViewModels
         }
 
         public CourseViewModel NewCourseViewModel() =>
-            new CourseViewModel(new Course("", 1, new List<Student>(), CourseType.Discussion), courseCollection);
+            new CourseViewModel(new Course("", 1, new List<Student>() { new Student("name", 1, "Major")}, CourseType.Discussion), courseCollection);
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

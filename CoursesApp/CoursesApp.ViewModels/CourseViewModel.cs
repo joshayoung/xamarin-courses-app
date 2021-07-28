@@ -17,6 +17,11 @@ namespace CoursesApp.ViewModels
         {
             get
             {
+                if (students.Count == 0)
+                {
+                    return "";
+                }
+
                 var oldest = students.First().Name;
                 var oldestAge = students.First().Age;
                 foreach (var student in course.Students.Where(student => student.Age > oldestAge))
@@ -55,8 +60,9 @@ namespace CoursesApp.ViewModels
                 return sorted.Last().Key;
             }
         }
-        
+
         public string AverageStudentValue => AverageStudentAge().ToString();
+
         private int AverageStudentAge()
         {
             if (course.Students.Count < 1) return 0;
@@ -66,7 +72,7 @@ namespace CoursesApp.ViewModels
 
             return sum / course.Students.Count;
         }
-        
+
         public string Title
         {
             get => course.Title;
@@ -76,7 +82,7 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged(nameof(Title));
             }
         }
-        
+
         public float Length
         {
             get => course.Length;
@@ -86,8 +92,9 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged(nameof(Length));
             }
         }
-        
+
         private List<StudentViewModel> students;
+
         public List<StudentViewModel> Students
         {
             get => students;
@@ -97,7 +104,7 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged(nameof(Students));
             }
         }
-        
+
         public CourseType Type
         {
             get => course.Type;
@@ -113,9 +120,9 @@ namespace CoursesApp.ViewModels
             this.course = course;
             this.courseCollection = courseCollection;
             Students = new List<StudentViewModel>();
-            
+
             course.Students.ForEach(student => Students.Add(new StudentViewModel(student)));
-            
+
             // Update my model's state:
             course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
@@ -125,6 +132,10 @@ namespace CoursesApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        public void AddCourse() => courseCollection.AddCourse(course);
+        public void AddCourse()
+        {
+            
+            courseCollection.AddCourse(course);
+        }
     }
 }
