@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using CoursesApp.Models;
 using CoursesApp.Models.Service;
 using FluentAssertions;

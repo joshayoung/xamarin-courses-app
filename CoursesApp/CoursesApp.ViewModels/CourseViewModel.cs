@@ -9,7 +9,7 @@ namespace CoursesApp.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly Course course;
-        public readonly CourseCollection courseCollection;
+        private readonly CourseCollection courseCollection;
 
         public int StudentCount => course.Students.Count;
 
@@ -19,12 +19,9 @@ namespace CoursesApp.ViewModels
             {
                 var oldest = students.First().Name;
                 var oldestAge = students.First().Age;
-                foreach (var student in course.Students)
+                foreach (var student in course.Students.Where(student => student.Age > oldestAge))
                 {
-                    if (student.Age > oldestAge)
-                    {
-                        oldest = student.Name;
-                    }
+                    oldest = student.Name;
                 }
 
                 return oldest;

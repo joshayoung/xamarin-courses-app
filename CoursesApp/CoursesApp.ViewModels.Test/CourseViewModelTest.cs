@@ -22,7 +22,6 @@ namespace CoursesApp.ViewModels.Test
             var titleWasChanged = false;
             var lengthWasChanged = false;
             var studentsWasChanged = false;
-            var teachersWasChanged = false;
             var typeWasChanged = false;
             var course = new Course(title, length, students, type);
             var courseViewModel = new CourseViewModel(course, courseCollection);
@@ -45,12 +44,13 @@ namespace CoursesApp.ViewModels.Test
             typeWasChanged.Should().BeTrue();
         }
         
+        
         [Fact]
         public void Model_PropertyChanged_ExpectPropertyChangedEvent()
         {
-            string title = "title";
+            var title = "title";
             float length = 2;
-            List<Student> students = new List<Student>();
+            var students = new List<Student>();
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = new CourseCollection(courseDataService);
             CourseType type = CourseType.Lab;
