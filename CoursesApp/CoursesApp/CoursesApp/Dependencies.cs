@@ -10,7 +10,6 @@ namespace CoursesApp
         private static IServiceCollection serviceCollection;
         private static IServiceProvider ServiceProvider { get; set; }
 
-        // TODO: Why is this necessary?
         public static CourseCollection CourseCollection =>
             ServiceProvider.GetService<CourseCollection>();
 

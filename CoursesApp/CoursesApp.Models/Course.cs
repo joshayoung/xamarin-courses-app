@@ -69,5 +69,11 @@ namespace CoursesApp.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+
+        public void AddStudent(Student student)
+        {
+            students.Add(student);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
+        }
     }
 }

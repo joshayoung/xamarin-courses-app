@@ -52,6 +52,13 @@
           </DataTemplate>
         </BindableLayout.ItemTemplate>
       </StackLayout>
+
+      <Button
+        BackgroundColor="Khaki"
+        Clicked="AddStudent"
+        Text="Add Student"
+        TextColor="Black"
+        VerticalOptions="EndAndExpand" />
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>
