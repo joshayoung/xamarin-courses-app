@@ -6,7 +6,7 @@
   xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
   <ContentPage.Content>
-    <StackLayout x:DataType="viewModels:StudentViewModel">
+    <StackLayout x:DataType="viewModels:StudentViewModel" Padding="20">
       <Label Text="Name:" />
       <Entry Text="{Binding Name}" />
 
@@ -16,7 +16,7 @@
       <Label Text="Major:" />
       <Entry Text="{Binding Major}" />
 
-      <Button Clicked="SaveStudent" Text="Save Student" />
+      <Button Clicked="SaveStudent" Text="Save Student" BackgroundColor="Tomato" TextColor="Black" />
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>

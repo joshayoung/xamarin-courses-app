@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
 using CoursesApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

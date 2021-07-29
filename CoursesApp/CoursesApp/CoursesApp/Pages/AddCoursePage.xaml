@@ -16,7 +16,6 @@
       Text="Add Course" />
     <Label Text="Course Name:" />
     <Entry Text="{Binding Title, Mode=TwoWay}" />
-
     <Button
       BackgroundColor="Tomato"
       Clicked="SaveCourse"

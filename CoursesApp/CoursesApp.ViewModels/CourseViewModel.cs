@@ -57,23 +57,14 @@ namespace CoursesApp.ViewModels
         {
             this.course = course;
             this.courseCollection = courseCollection;
-
-            //this.PropertyChanged += OnPropertyChanged;
-            //course.Students.ForEach(student => Students.Add(new StudentViewModel(student)));
             RefreshStudents();
-
             course.PropertyChanged += OnPropertyChanged;
-
-            // Update my model's state:
             course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Students))
-            {
-                RefreshStudents();
-            }
+            if (e.PropertyName == nameof(Students)) RefreshStudents();
         }
 
         private void RefreshStudents()
