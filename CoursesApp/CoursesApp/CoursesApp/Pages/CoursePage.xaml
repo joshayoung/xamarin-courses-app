@@ -22,33 +22,6 @@
           Margin="0,0,0,20"
           Text="{Binding Title}" />
       </StackLayout>
-      <Frame
-        BackgroundColor="Tomato"
-        HasShadow="False"
-        Padding="10">
-        <StackLayout>
-          <StackLayout Orientation="Horizontal">
-            <Label Text="Student Count:" />
-            <Label Text="{Binding StudentCount}" />
-          </StackLayout>
-          <StackLayout Orientation="Horizontal">
-            <Label Text="Average Student Age:" />
-            <Label Text="{Binding AverageStudentValue}" />
-          </StackLayout>
-          <StackLayout Orientation="Horizontal">
-            <Label Text="Oldest Student:" />
-            <Label Text="{Binding OldestStudent}" />
-          </StackLayout>
-          <StackLayout Orientation="Horizontal">
-            <Label Text="Most Popular Major:" />
-            <Label Text="{Binding HighestMajor}" />
-          </StackLayout>
-        </StackLayout>
-      </Frame>
-      <BoxView
-        BackgroundColor="DarkGray"
-        HeightRequest="2"
-        Margin="0,20" />
       <StackLayout BindableLayout.ItemsSource="{Binding Students}">
         <BindableLayout.ItemTemplate>
           <DataTemplate x:DataType="viewModels:StudentViewModel">
