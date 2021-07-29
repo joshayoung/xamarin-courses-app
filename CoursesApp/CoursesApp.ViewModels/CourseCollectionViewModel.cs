@@ -10,7 +10,7 @@ namespace CoursesApp.ViewModels
     {
         private readonly CourseCollection courseCollection;
         private List<CourseViewModel> courses;
-        
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public List<CourseViewModel> Courses
@@ -39,13 +39,13 @@ namespace CoursesApp.ViewModels
         {
             IEnumerable<CourseViewModel> courseList =
                 courseCollection.Courses.Select(course => new CourseViewModel(course, courseCollection));
-            
-            // Setting the value will emit a property changed event:
             Courses = new List<CourseViewModel>(courseList);
         }
 
         public CourseViewModel NewCourseViewModel() =>
-            new CourseViewModel(new Course("", 1, new List<Student>() { new Student("name", 1, "Major")}, CourseType.Discussion), courseCollection);
+            new CourseViewModel(
+                new Course("", 1, new List<Student>() {new Student("name", 1, "Major")}, CourseType.Discussion),
+                courseCollection);
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

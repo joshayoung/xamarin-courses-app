@@ -52,7 +52,6 @@
           </DataTemplate>
         </BindableLayout.ItemTemplate>
       </StackLayout>
-
       <Button
         BackgroundColor="Khaki"
         Clicked="AddStudent"
