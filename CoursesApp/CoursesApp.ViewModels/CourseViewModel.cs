@@ -11,68 +11,6 @@ namespace CoursesApp.ViewModels
         private readonly Course course;
         private readonly CourseCollection courseCollection;
 
-        public int StudentCount => course.Students.Count;
-
-        public string OldestStudent
-        {
-            get
-            {
-                if (students.Count == 0)
-                {
-                    return "";
-                }
-
-                var oldest = students.First().Name;
-                var oldestAge = students.First().Age;
-                foreach (var student in course.Students.Where(student => student.Age > oldestAge))
-                {
-                    oldest = student.Name;
-                }
-
-                return oldest;
-            }
-        }
-
-        public string HighestMajor
-        {
-            get
-            {
-                if (course.Students.Count < 1)
-                {
-                    return null;
-                }
-
-                Dictionary<string, int> counts = new Dictionary<string, int>();
-                foreach (var student in course.Students)
-                {
-                    if (!counts.ContainsKey(student.Major))
-                    {
-                        counts.Add(student.Major, 1);
-                    }
-                    else
-                    {
-                        counts[student.Major]++;
-                    }
-                }
-
-                var sorted = counts.OrderBy(v => v.Value).ToDictionary(v => v.Key, v => v.Value);
-
-                return sorted.Last().Key;
-            }
-        }
-
-        public string AverageStudentValue => AverageStudentAge().ToString();
-
-        private int AverageStudentAge()
-        {
-            if (course.Students.Count < 1) return 0;
-
-            int sum = 0;
-            course.Students.ForEach(student => sum += student.Age);
-
-            return sum / course.Students.Count;
-        }
-
         public string Title
         {
             get => course.Title;
