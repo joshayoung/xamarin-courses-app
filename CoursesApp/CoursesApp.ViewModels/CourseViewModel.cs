@@ -57,12 +57,30 @@ namespace CoursesApp.ViewModels
         {
             this.course = course;
             this.courseCollection = courseCollection;
-            Students = new List<StudentViewModel>();
 
-            course.Students.ForEach(student => Students.Add(new StudentViewModel(student)));
+            //this.PropertyChanged += OnPropertyChanged;
+            //course.Students.ForEach(student => Students.Add(new StudentViewModel(student)));
+            RefreshStudents();
+
+            course.PropertyChanged += OnPropertyChanged;
 
             // Update my model's state:
             course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
+        }
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Students))
+            {
+                RefreshStudents();
+            }
+        }
+
+        private void RefreshStudents()
+        {
+            IEnumerable<StudentViewModel>
+                studentList = course.Students.Select(student => new StudentViewModel(student, this));
+            Students = new List<StudentViewModel>(studentList);
         }
 
         private void NotifyPropertyChanged(string name)
@@ -70,10 +88,11 @@ namespace CoursesApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        public void AddCourse()
-        {
-            
-            courseCollection.AddCourse(course);
-        }
+        public void AddCourse() => courseCollection.AddCourse(course);
+
+        public void AddStudent(Student student) => course.AddStudent(student);
+
+        public StudentViewModel NewStudent() =>
+            new StudentViewModel(new Student("name", 1, "Major"), this);
     }
 }
