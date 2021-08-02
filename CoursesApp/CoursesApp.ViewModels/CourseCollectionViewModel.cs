@@ -46,7 +46,7 @@ namespace CoursesApp.ViewModels
 
         public CourseViewModel NewCourseViewModel() =>
             new CourseViewModel(
-                new Course("", 1, CourseType.Discussion),
+                new Course("123", "", 1, CourseType.Discussion),
                 courseCollection);
 
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)

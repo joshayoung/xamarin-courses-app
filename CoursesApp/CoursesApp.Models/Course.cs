@@ -8,6 +8,17 @@ namespace CoursesApp.Models
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         
+        private string id;
+        public string Id
+        {
+            get => id;
+            set
+            {
+                id = value;
+                NotifyPropertyChanged(nameof(Id));
+            }
+        }
+        
         private string title;
         public string Title
         {
@@ -54,15 +65,17 @@ namespace CoursesApp.Models
 
         [JsonConstructor]
         public Course(
+            string id,
             string title, 
             float length, 
             CourseType type,
             List<Student>? students = null)
         {
+            this.id = id;
             this.title = title;
-            Length = length;
-            Students = students ?? new List<Student>();
-            Type = type;
+            this.length = length;
+            this.students = students ?? new List<Student>();
+            this.type = type;
         }
 
         private void NotifyPropertyChanged(string name)

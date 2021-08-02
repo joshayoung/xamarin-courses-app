@@ -13,6 +13,7 @@ namespace CoursesApp.ViewModels.Test
         [Fact]
         public void ViewModel_PropertyChanged_ExpectPropertyChangedEvents()
         {
+            var id = "1";
             var title = "title";
             float length = 2;
             List<Student> students = new List<Student>();
@@ -23,7 +24,7 @@ namespace CoursesApp.ViewModels.Test
             var lengthWasChanged = false;
             var studentsWasChanged = false;
             var typeWasChanged = false;
-            var course = new Course(title, length, type, students);
+            var course = new Course(id, title, length, type, students);
             var courseViewModel = new CourseViewModel(course, courseCollection);
             courseViewModel.PropertyChanged += (sender, args) =>
             {
@@ -48,13 +49,14 @@ namespace CoursesApp.ViewModels.Test
         [Fact]
         public void Model_PropertyChanged_ExpectPropertyChangedEvent()
         {
+            var id = "1";
             var title = "title";
             float length = 2;
             var students = new List<Student>();
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = new CourseCollection(courseDataService);
             CourseType type = CourseType.Lab;
-            var course = new Course(title, length, type, students);
+            var course = new Course(id, title, length, type, students);
             var wasChanged = false;
             var courseViewModel = new CourseViewModel(course, courseCollection);
             courseViewModel.PropertyChanged += (sender, args) =>

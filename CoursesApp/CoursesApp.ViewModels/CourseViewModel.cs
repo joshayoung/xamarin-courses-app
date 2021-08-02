@@ -10,6 +10,16 @@ namespace CoursesApp.ViewModels
         public event PropertyChangedEventHandler? PropertyChanged;
         private readonly Course course;
         private readonly CourseCollection courseCollection;
+        
+        public string Id
+        {
+            get => course.Id;
+            set
+            {
+                course.Id = value;
+                NotifyPropertyChanged(nameof(Id));
+            }
+        }
 
         public string Title
         {

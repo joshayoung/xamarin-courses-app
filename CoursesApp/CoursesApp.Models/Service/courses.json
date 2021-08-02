@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "title": "English III",
     "length": 3,
     "students": [
@@ -24,6 +25,7 @@
     "type": 3
   },
   {
+    "id": 2,
     "title": "Algebra I",
     "length": 2,
     "students": [
@@ -41,6 +43,7 @@
     "type": 3
   },
   {
+    "id": 3,
     "title": "Advanced Math",
     "length": 3,
     "students": [
@@ -63,6 +66,7 @@
     "type": 2
   },
   {
+    "id": 4,
     "title": "Physical Science",
     "length": 4,
     "students": [
