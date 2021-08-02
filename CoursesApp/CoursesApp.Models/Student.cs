@@ -4,10 +4,10 @@ namespace CoursesApp.Models
 {
     public class Student : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged = null!;
         
-        private string id;
-        public string Id
+        private string? id;
+        public string? Id
         {
             get => id;
             set
@@ -17,8 +17,8 @@ namespace CoursesApp.Models
             }
         }
 
-        private string name;
-        public string Name
+        private string? name;
+        public string? Name
         {
             get => name;
             set
@@ -39,8 +39,8 @@ namespace CoursesApp.Models
             }
         }
         
-        private string major;
-        public string Major
+        private string? major;
+        public string? Major
         {
             get => major;
             set
@@ -50,11 +50,11 @@ namespace CoursesApp.Models
             }
         }
 
-        public Student(string name, int age, string major)
+        public Student(string? name = null, int? age = null, string? major = null)
         {
-            Name = name;
-            Age = age;
-            Major = major;
+            Name = name ?? "";
+            Age = age ?? 0;
+            Major = major ?? "";
         }
 
         private void NotifyPropertyChanged(string theName)

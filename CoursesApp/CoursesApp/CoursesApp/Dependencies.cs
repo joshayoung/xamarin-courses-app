@@ -7,11 +7,11 @@ namespace CoursesApp
 {
     public static class Dependencies
     {
-        private static IServiceCollection serviceCollection;
-        private static IServiceProvider ServiceProvider { get; set; }
+        private static IServiceCollection? serviceCollection;
+        private static IServiceProvider? ServiceProvider { get; set; }
 
-        public static CourseCollection CourseCollection =>
-            ServiceProvider.GetService<CourseCollection>();
+        public static CourseCollection? CourseCollection =>
+            ServiceProvider?.GetService<CourseCollection>();
 
         public static void Init()
         {

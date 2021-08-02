@@ -14,7 +14,7 @@ namespace CoursesApp.Models.Test
             var students = new List<Student>();
             var type = CourseType.Lab;
             
-            var course = new Course(title, length, students, type);
+            var course = new Course(title, length, type, students);
 
             course.Title.Should().Be(title);
             course.Length.Should().Be(length);
@@ -30,7 +30,7 @@ namespace CoursesApp.Models.Test
             var type = CourseType.Lab;
             var wasChanged = false;
             
-            var course = new Course(title, length, students, type);
+            var course = new Course(title, length, type, students);
 
             course.PropertyChanged += (sender, args) =>
             {
@@ -53,7 +53,7 @@ namespace CoursesApp.Models.Test
             var type = CourseType.Lab;
             var wasChanged = false;
              
-            var course = new Course(title, length, students, type);
+            var course = new Course(title, length, type, students);
 
             course.PropertyChanged += (sender, args) =>
             {
@@ -76,7 +76,7 @@ namespace CoursesApp.Models.Test
             var type = CourseType.Lab;
             var wasChanged = false;
             
-            var course = new Course(title, length, students, type);
+            var course = new Course(title, length, type, students);
 
             course.PropertyChanged += (sender, args) =>
             {
@@ -99,7 +99,7 @@ namespace CoursesApp.Models.Test
             var type = CourseType.Lab;
             var wasChanged = false;
             
-            var course = new Course(title, length, students, type);
+            var course = new Course(title, length, type, students);
 
             course.PropertyChanged += (sender, args) =>
             {

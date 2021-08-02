@@ -6,7 +6,7 @@ namespace CoursesApp.ViewModels
 {
     public class StudentViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         private readonly Student student;
         private readonly CourseViewModel courseViewModel;
 
@@ -24,7 +24,7 @@ namespace CoursesApp.ViewModels
             }
         }
         
-        public string Name
+        public string? Name
         {
             get => student.Name;
             set
@@ -44,7 +44,7 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        public string Major
+        public string? Major
         {
             get => student.Major;
             set

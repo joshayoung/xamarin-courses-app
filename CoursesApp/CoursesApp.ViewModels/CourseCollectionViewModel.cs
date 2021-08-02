@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -9,11 +10,11 @@ namespace CoursesApp.ViewModels
     public class CourseCollectionViewModel : INotifyPropertyChanged
     {
         private readonly CourseCollection courseCollection;
-        private List<CourseViewModel> courses;
+        private List<CourseViewModel>? courses;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        public List<CourseViewModel> Courses
+        public List<CourseViewModel>? Courses
         {
             get => courses;
             set
@@ -23,9 +24,10 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        public CourseCollectionViewModel(CourseCollection courseCollection)
+        public CourseCollectionViewModel(CourseCollection? courseCollection)
         {
-            this.courseCollection = courseCollection;
+            this.courseCollection = courseCollection ?? throw new ArgumentException();
+            
             courseCollection.PropertyChanged += CoursesCollectionOnPropertyChanged;
             RefreshList();
         }
@@ -44,10 +46,10 @@ namespace CoursesApp.ViewModels
 
         public CourseViewModel NewCourseViewModel() =>
             new CourseViewModel(
-                new Course("", 1, new List<Student>() {new Student("name", 1, "Major")}, CourseType.Discussion),
+                new Course("", 1, CourseType.Discussion),
                 courseCollection);
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
