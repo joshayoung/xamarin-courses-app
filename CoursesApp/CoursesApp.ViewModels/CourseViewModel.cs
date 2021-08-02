@@ -7,7 +7,7 @@ namespace CoursesApp.ViewModels
 {
     public class CourseViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         private readonly Course course;
         private readonly CourseCollection courseCollection;
 
@@ -31,9 +31,9 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        private List<StudentViewModel> students;
+        private List<StudentViewModel>? students;
 
-        public List<StudentViewModel> Students
+        public List<StudentViewModel>? Students
         {
             get => students;
             set
@@ -69,6 +69,8 @@ namespace CoursesApp.ViewModels
 
         private void RefreshStudents()
         {
+            if (course.Students == null) return;
+            
             IEnumerable<StudentViewModel>
                 studentList = course.Students.Select(student => new StudentViewModel(student, this));
             Students = new List<StudentViewModel>(studentList);
@@ -84,6 +86,6 @@ namespace CoursesApp.ViewModels
         public void AddStudent(Student student) => course.AddStudent(student);
 
         public StudentViewModel NewStudent() =>
-            new StudentViewModel(new Student("name", 1, "Major"), this);
+            new StudentViewModel(new Student(), this);
     }
 }

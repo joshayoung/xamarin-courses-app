@@ -1,5 +1,6 @@
 using CoursesApp.Models;
 using FluentAssertions;
+using NSubstitute;
 using Xunit;
 
 namespace CoursesApp.ViewModels.Test
@@ -13,7 +14,8 @@ namespace CoursesApp.ViewModels.Test
             int age = 31;
             string major = "Physics";
             var student = new Student(name, age, major);
-            var studentViewModel = new StudentViewModel(student);
+            var courseViewModel = Substitute.ForPartsOf<CourseViewModel>();
+            var studentViewModel = new StudentViewModel(student, courseViewModel);
 
             studentViewModel.Name.Should().Be(student.Name);
             studentViewModel.Age.Should().Be(student.Age);
@@ -27,7 +29,8 @@ namespace CoursesApp.ViewModels.Test
             int age = 31;
             string major = "Physics";
             var student = new Student(name, age, major);
-            var studentViewModel = new StudentViewModel(student);
+            var courseViewModel = Substitute.ForPartsOf<CourseViewModel>();
+            var studentViewModel = new StudentViewModel(student, courseViewModel);
             var nameWasChanged = false;
             var ageWasChanged = false;
             var majorWasChanged = false;
@@ -55,7 +58,8 @@ namespace CoursesApp.ViewModels.Test
             int age = 31;
             string major = "Physics";
             var student = new Student(name, age, major);
-            var studentViewModel = new StudentViewModel(student);
+            var courseViewModel = Substitute.ForPartsOf<CourseViewModel>();
+            var studentViewModel = new StudentViewModel(student, courseViewModel);
             var wasChanged = false;
 
             studentViewModel.PropertyChanged += (sender, args) =>

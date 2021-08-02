@@ -6,7 +6,7 @@ namespace CoursesApp.Models
 {
     public class Course : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         
         private string title;
         public string Title
@@ -30,8 +30,8 @@ namespace CoursesApp.Models
             }
         }
 
-        private List<Student> students;
-        public List<Student> Students
+        private List<Student>? students;
+        public List<Student>? Students
         {
             get => students;
             set
@@ -56,12 +56,12 @@ namespace CoursesApp.Models
         public Course(
             string title, 
             float length, 
-            List<Student> students, 
-            CourseType type)
+            CourseType type,
+            List<Student>? students = null)
         {
-            Title = title;
+            this.title = title;
             Length = length;
-            Students = students;
+            Students = students ?? new List<Student>();
             Type = type;
         }
 
@@ -72,7 +72,7 @@ namespace CoursesApp.Models
 
         public void AddStudent(Student student)
         {
-            students.Add(student);
+            students?.Add(student);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
         }
     }
