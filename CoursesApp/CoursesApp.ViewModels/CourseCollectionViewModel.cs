@@ -44,14 +44,23 @@ namespace CoursesApp.ViewModels
             Courses = new List<CourseViewModel>(courseList);
         }
 
-        public CourseViewModel NewCourseViewModel() =>
-            new CourseViewModel(
-                new Course("123", "", 1, CourseType.Discussion),
+        public CourseViewModel NewCourseViewModel()
+        {
+            var id = GetNextCourseId();
+            return new CourseViewModel(
+                new Course(id.ToString(), "", 1, CourseType.Discussion),
                 courseCollection);
+        }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private int GetNextCourseId()
+        {
+            var id = Int32.Parse(Courses.Max(course => course.Id));
+            return ++id;
         }
     }
 }
