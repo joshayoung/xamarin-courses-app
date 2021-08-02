@@ -9,13 +9,15 @@ namespace CoursesApp.Models.Test
         [Fact]
         public void Constructor_ValidParams_ExpectAssignment()
         {
+            var id = "1";
             var title = "title";
             float length = 2;
             var students = new List<Student>();
             var type = CourseType.Lab;
             
-            var course = new Course(title, length, type, students);
+            var course = new Course(id, title, length, type, students);
 
+            course.Id.Should().Be(id);
             course.Title.Should().Be(title);
             course.Length.Should().Be(length);
             course.Students.Should().BeEquivalentTo(students);
@@ -24,13 +26,14 @@ namespace CoursesApp.Models.Test
         [Fact]
         public void Title_PropertyChanged_ExpectPropertyChangedEvent()
         {
+            var id = "1";
             var title = "title";
             float length = 2;
             var students = new List<Student>();
             var type = CourseType.Lab;
             var wasChanged = false;
             
-            var course = new Course(title, length, type, students);
+            var course = new Course(id, title, length, type, students);
 
             course.PropertyChanged += (sender, args) =>
             {
@@ -47,13 +50,14 @@ namespace CoursesApp.Models.Test
         [Fact]
         public void Length_PropertyChanged_ExpectPropertyChangedEvent()
         {
+            var id = "1";
             var title = "title";
             float length = 2;
             var students = new List<Student>();
             var type = CourseType.Lab;
             var wasChanged = false;
              
-            var course = new Course(title, length, type, students);
+            var course = new Course(id, title, length, type, students);
 
             course.PropertyChanged += (sender, args) =>
             {
@@ -70,13 +74,14 @@ namespace CoursesApp.Models.Test
         [Fact]
         public void Students_PropertyChanged_ExpectPropertyChangedEvent()
         {
+            var id = "1";
             var title = "title";
             float length = 2;
             var students = new List<Student>();
             var type = CourseType.Lab;
             var wasChanged = false;
             
-            var course = new Course(title, length, type, students);
+            var course = new Course(id, title, length, type, students);
 
             course.PropertyChanged += (sender, args) =>
             {
@@ -93,13 +98,14 @@ namespace CoursesApp.Models.Test
         [Fact]
         public void CourseType_PropertyChanged_ExpectPropertyChangedEvent()
         {
+            var id = "1";
             var title = "title";
             float length = 2;
             var students = new List<Student>();
             var type = CourseType.Lab;
             var wasChanged = false;
             
-            var course = new Course(title, length, type, students);
+            var course = new Course(id, title, length, type, students);
 
             course.PropertyChanged += (sender, args) =>
             {
