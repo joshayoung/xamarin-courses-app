@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using CoursesApp.Models.Service;
 
 namespace CoursesApp.Models
@@ -25,6 +26,11 @@ namespace CoursesApp.Models
         {
             Courses.Add(course);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
+        }
+
+        public void EditCourse(Course course)
+        {
+            // This is where I could call out to my API to save this record in the DB.
         }
     }
 }
