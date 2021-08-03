@@ -10,7 +10,36 @@ namespace CoursesApp.ViewModels
         public event PropertyChangedEventHandler? PropertyChanged;
         private readonly Course course;
         private readonly CourseCollection courseCollection;
-        
+
+        private CourseType selectedType;
+        public CourseType SelectedType
+        {
+            get => selectedType;
+            set
+            {
+                course.Type = value;
+                NotifyPropertyChanged(nameof(Type));
+            }
+        }
+
+        private List<CourseType> courseTypeList;
+        public List<CourseType> CourseTypesList
+        {
+            get => new List<CourseType>
+            {
+                CourseType.Discussion,
+                CourseType.Lab,
+                CourseType.Lecture,
+                CourseType.Seminar,
+                CourseType.IndependentStudy
+            };
+            set
+            {
+                courseTypeList = value;
+                NotifyPropertyChanged(nameof(Type));
+            }
+        }
+
         public string Id
         {
             get => course.Id;
@@ -42,7 +71,6 @@ namespace CoursesApp.ViewModels
         }
 
         private List<StudentViewModel>? students;
-
         public List<StudentViewModel>? Students
         {
             get => students;

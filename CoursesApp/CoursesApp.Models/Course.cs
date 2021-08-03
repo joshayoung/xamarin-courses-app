@@ -19,8 +19,8 @@ namespace CoursesApp.Models
             }
         }
         
-        private string title;
-        public string Title
+        private string? title;
+        public string? Title
         {
             get => title;
             set
@@ -66,13 +66,13 @@ namespace CoursesApp.Models
         [JsonConstructor]
         public Course(
             string id,
-            string title, 
-            float length, 
-            CourseType type,
+            string title = "", 
+            float length = 0, 
+            CourseType type = CourseType.Lecture,
             List<Student>? students = null)
         {
             this.id = id;
-            this.title = title;
+            this.title = title ?? "";
             this.length = length;
             this.students = students ?? new List<Student>();
             this.type = type;

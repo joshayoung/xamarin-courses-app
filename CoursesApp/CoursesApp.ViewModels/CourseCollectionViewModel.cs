@@ -48,7 +48,7 @@ namespace CoursesApp.ViewModels
         {
             var id = GetNextCourseId();
             return new CourseViewModel(
-                new Course(id.ToString(), "", 1, CourseType.Discussion),
+                new Course(GetNextCourseId().ToString()),
                 courseCollection);
         }
 
