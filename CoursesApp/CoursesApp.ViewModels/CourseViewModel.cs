@@ -93,6 +93,8 @@ namespace CoursesApp.ViewModels
 
         public void AddCourse() => courseCollection.AddCourse(course);
 
+        public void EditCourse() => courseCollection.EditCourse(course);
+
         public void AddStudent(Student student) => course.AddStudent(student);
 
         public StudentViewModel NewStudent() =>

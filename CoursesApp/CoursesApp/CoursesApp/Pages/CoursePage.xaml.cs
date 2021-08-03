@@ -20,5 +20,10 @@ namespace CoursesApp.Pages
         {
             Navigation.PushAsync(new AddStudentPage(courseViewModel.NewStudent()));
         }
+
+        private void EditCourse(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new EditCoursePage(courseViewModel));
+        }
     }
 }

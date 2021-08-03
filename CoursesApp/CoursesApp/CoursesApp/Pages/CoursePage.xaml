@@ -54,10 +54,16 @@
       </StackLayout>
       <Button
         BackgroundColor="Khaki"
+        Clicked="EditCourse"
+        Text="Edit Course"
+        TextColor="Black"
+        VerticalOptions="EndAndExpand" />
+      <Button
+        BackgroundColor="Tomato"
         Clicked="AddStudent"
         Text="Add Student"
         TextColor="Black"
-        VerticalOptions="EndAndExpand" />
+        VerticalOptions="End" />
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>
