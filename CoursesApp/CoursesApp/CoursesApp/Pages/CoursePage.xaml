@@ -26,30 +26,42 @@
         <StackLayout Orientation="Horizontal">
           <StackLayout>
             <StackLayout Orientation="Horizontal">
-              <Label HorizontalOptions="Center" Text="Title:" />
-              <Label HorizontalOptions="Center" Text="{Binding Title}" />
+              <Label Style="{StaticResource CourseLabelStyle}" Text="Title:" />
+              <Label Style="{StaticResource CourseLabelStyle}" Text="{Binding Title}" />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-              <Label HorizontalOptions="Center" Text="Length:" />
-              <Label FontAttributes="Italic" Text="{Binding Length, StringFormat='({0} hours)'}" />
+              <Label Style="{StaticResource CourseLabelStyle}" Text="Length:" />
+              <Label
+                FontAttributes="Italic"
+                Style="{StaticResource CourseLabelStyle}"
+                Text="{Binding Length, StringFormat='({0} hours)'}"
+                />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-              <Label HorizontalOptions="Center" Text="Type:" />
-              <Label HorizontalOptions="Center" Text="{Binding Type}" />
+              <Label Style="{StaticResource CourseLabelStyle}" Text="Type:" />
+              <Label Style="{StaticResource CourseLabelStyle}" Text="{Binding Type}" />
             </StackLayout>
           </StackLayout>
-          <StackLayout>
+          <StackLayout HorizontalOptions="EndAndExpand">
             <StackLayout Orientation="Horizontal">
-              <Label HorizontalOptions="Center" Text="Number Students:" />
-              <Label HorizontalOptions="Center" Text="??" />
+              <Label Style="{StaticResource CourseLabelStyle}" Text="Number Students:" />
+              <Label Style="{StaticResource CourseLabelStyle}" Text="??" />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-              <Label HorizontalOptions="Center" Text="Average Age:" />
-              <Label FontAttributes="Italic" Text="{Binding Length, StringFormat='({0} hours)'}" />
+              <Label Style="{StaticResource CourseLabelStyle}" Text="Average Age:" />
+              <Label
+                FontAttributes="Italic"
+                Style="{StaticResource CourseLabelStyle}"
+                Text="??"
+                />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-              <Label HorizontalOptions="Center" Text="Common Major:" />
-              <Label FontAttributes="Italic" Text="??" />
+              <Label Style="{StaticResource CourseLabelStyle}" Text="Common Major:" />
+              <Label
+                FontAttributes="Italic"
+                Style="{StaticResource CourseLabelStyle}"
+                Text="??"
+                />
             </StackLayout>
           </StackLayout>
         </StackLayout>

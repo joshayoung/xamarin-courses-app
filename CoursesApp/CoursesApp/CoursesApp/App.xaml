@@ -2,6 +2,13 @@
 <Application
   x:Class="CoursesApp.App"
   xmlns="http://xamarin.com/schemas/2014/forms"
-  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-  <Application.Resources />
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  >
+  <Application.Resources>
+    <ResourceDictionary>
+      <Style x:Key="CourseLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="14" />
+      </Style>
+    </ResourceDictionary>
+  </Application.Resources>
 </Application>
