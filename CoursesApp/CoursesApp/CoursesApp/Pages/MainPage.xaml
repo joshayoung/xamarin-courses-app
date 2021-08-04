@@ -51,7 +51,7 @@
                     Text="{Binding Type}" />
                   <Label
                     FontAttributes="Italic"
-                    Text="{Binding Length, StringFormat='({0})'}" />
+                    Text="{Binding Length, StringFormat='({0} hours)'}" />
                 </StackLayout>
               </Frame>
             </StackLayout>

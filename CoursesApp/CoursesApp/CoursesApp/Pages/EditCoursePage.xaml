@@ -15,6 +15,12 @@
       Text="Edit Course" />
     <Label Text="Course Name:" />
     <Entry Text="{Binding Title, Mode=TwoWay}" />
+    
+    <Label Text="Course Length:" />
+    <Picker ItemsSource="{Binding CourseLengthList}" ItemDisplayBinding="{Binding .}" SelectedItem="{Binding SelectedLength}" />
+    
+    <Label Text="Course Type:" />
+    <Picker ItemsSource="{Binding CourseTypesList}" ItemDisplayBinding="{Binding .}" SelectedItem="{Binding SelectedType}" />
     <Button
       BackgroundColor="Tomato"
       Clicked="SaveCourseEdits"

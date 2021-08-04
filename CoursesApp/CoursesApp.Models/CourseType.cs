@@ -12,7 +12,7 @@ namespace CoursesApp.Models
         [Description("Lab Class")] 
         Lab,
         [Description("Independent Study Class")] 
-        IndependentStudy,
+        Independent,
         [Description("Lecture Class")] 
         Lecture,
         [Description("Discussion Class")] 

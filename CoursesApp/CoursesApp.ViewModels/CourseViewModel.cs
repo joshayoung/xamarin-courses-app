@@ -11,10 +11,9 @@ namespace CoursesApp.ViewModels
         private readonly Course course;
         private readonly CourseCollection courseCollection;
 
-        private CourseType selectedType;
         public CourseType SelectedType
         {
-            get => selectedType;
+            get => course.Type;
             set
             {
                 course.Type = value;
@@ -22,10 +21,9 @@ namespace CoursesApp.ViewModels
             }
         }
         
-        private int selectedLength;
-        public int SelectedLength
+        public float SelectedLength
         {
-            get => selectedLength;
+            get => course.Length;
             set
             {
                 course.Length = value;
@@ -33,36 +31,24 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        private List<int> courseLengthList;
-        public List<int> CourseLengthList
+        public List<float> CourseLengthList
         {
-            get => new List<int>
+            get => new List<float>
             {
                 1, 2, 3, 4
             };
-            set
-            {
-                courseLengthList = value;
-                NotifyPropertyChanged(nameof(Length));
-            }
         }
 
-        private List<CourseType> courseTypeList;
         public List<CourseType> CourseTypesList
         {
             get => new List<CourseType>
             {
                 CourseType.Seminar,
                 CourseType.Lab,
-                CourseType.IndependentStudy,
+                CourseType.Independent,
                 CourseType.Lecture,
                 CourseType.Discussion,
             };
-            set
-            {
-                courseTypeList = value;
-                NotifyPropertyChanged(nameof(Type));
-            }
         }
 
         public string Id
