@@ -21,17 +21,42 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged(nameof(Type));
             }
         }
+        
+        private int selectedLength;
+        public int SelectedLength
+        {
+            get => selectedLength;
+            set
+            {
+                course.Length = value;
+                NotifyPropertyChanged(nameof(Length));
+            }
+        }
+
+        private List<int> courseLengthList;
+        public List<int> CourseLengthList
+        {
+            get => new List<int>
+            {
+                1, 2, 3, 4
+            };
+            set
+            {
+                courseLengthList = value;
+                NotifyPropertyChanged(nameof(Length));
+            }
+        }
 
         private List<CourseType> courseTypeList;
         public List<CourseType> CourseTypesList
         {
             get => new List<CourseType>
             {
-                CourseType.Discussion,
-                CourseType.Lab,
-                CourseType.Lecture,
                 CourseType.Seminar,
-                CourseType.IndependentStudy
+                CourseType.Lab,
+                CourseType.IndependentStudy,
+                CourseType.Lecture,
+                CourseType.Discussion,
             };
             set
             {
@@ -71,6 +96,7 @@ namespace CoursesApp.ViewModels
         }
 
         private List<StudentViewModel>? students;
+
         public List<StudentViewModel>? Students
         {
             get => students;
@@ -108,7 +134,7 @@ namespace CoursesApp.ViewModels
         private void RefreshStudents()
         {
             if (course.Students == null) return;
-            
+
             IEnumerable<StudentViewModel>
                 studentList = course.Students.Select(student => new StudentViewModel(student, this));
             Students = new List<StudentViewModel>(studentList);

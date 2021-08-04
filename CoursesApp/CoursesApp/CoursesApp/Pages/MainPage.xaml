@@ -49,6 +49,9 @@
                     FontAttributes="Italic"
                     HorizontalOptions="EndAndExpand"
                     Text="{Binding Type}" />
+                  <Label
+                    FontAttributes="Italic"
+                    Text="{Binding Length, StringFormat='({0})'}" />
                 </StackLayout>
               </Frame>
             </StackLayout>
@@ -57,7 +60,7 @@
       </CollectionView.ItemTemplate>
     </CollectionView>
     <Button
-      BackgroundColor="Tomato"
+      BackgroundColor="Khaki"
       Clicked="AddCourse"
       Padding="20"
       Text="Add Course"
