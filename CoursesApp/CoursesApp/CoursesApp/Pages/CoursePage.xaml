@@ -1,39 +1,73 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <ContentPage
-  ios:Page.UseSafeArea="true"
   x:Class="CoursesApp.Pages.CoursePage"
-  x:DataType="viewModels:CourseViewModel"
   xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
   xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
   xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
-  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+  ios:Page.UseSafeArea="true"
+  x:DataType="viewModels:CourseViewModel"
+  >
   <ContentPage.Content>
     <StackLayout Margin="20">
-      <StackLayout Orientation="Horizontal">
-        <Label
-          FontSize="30"
-          HorizontalTextAlignment="Center"
-          Margin="0,0,0,20"
-          Text="Course:" />
-        <Label
-          FontSize="30"
-          HorizontalTextAlignment="Center"
-          Margin="0,0,0,20"
-          Text="{Binding Title}" />
-      </StackLayout>
+      <Label
+        Margin="0,0,0,20"
+        FontAttributes="Bold"
+        FontSize="30"
+        HorizontalOptions="Center"
+        Text="{Binding Title}"
+        />
+      <Frame
+        BackgroundColor="LightGray"
+        CornerRadius="4"
+        HasShadow="False"
+        >
+        <StackLayout Orientation="Horizontal">
+          <StackLayout>
+            <StackLayout Orientation="Horizontal">
+              <Label HorizontalOptions="Center" Text="Title:" />
+              <Label HorizontalOptions="Center" Text="{Binding Title}" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+              <Label HorizontalOptions="Center" Text="Length:" />
+              <Label FontAttributes="Italic" Text="{Binding Length, StringFormat='({0} hours)'}" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+              <Label HorizontalOptions="Center" Text="Type:" />
+              <Label HorizontalOptions="Center" Text="{Binding Type}" />
+            </StackLayout>
+          </StackLayout>
+          <StackLayout>
+            <StackLayout Orientation="Horizontal">
+              <Label HorizontalOptions="Center" Text="Number Students:" />
+              <Label HorizontalOptions="Center" Text="??" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+              <Label HorizontalOptions="Center" Text="Average Age:" />
+              <Label FontAttributes="Italic" Text="{Binding Length, StringFormat='({0} hours)'}" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+              <Label HorizontalOptions="Center" Text="Common Major:" />
+              <Label FontAttributes="Italic" Text="??" />
+            </StackLayout>
+          </StackLayout>
+        </StackLayout>
+      </Frame>
       <StackLayout BindableLayout.ItemsSource="{Binding Students}">
         <BindableLayout.ItemTemplate>
           <DataTemplate x:DataType="viewModels:StudentViewModel">
             <Frame
-              HasShadow="False"
               Margin="0"
-              Padding="0">
+              Padding="0"
+              HasShadow="False"
+              >
               <StackLayout Margin="0,0,0,10">
                 <Frame
                   BackgroundColor="Tomato"
                   CornerRadius="4"
-                  HasShadow="False">
+                  HasShadow="False"
+                  >
                   <StackLayout>
                     <StackLayout Orientation="Horizontal">
                       <Label Text="{Binding Name}" TextColor="Black" />
@@ -43,7 +77,8 @@
                         HorizontalOptions="EndAndExpand"
                         Text="{Binding Major}"
                         TextColor="DimGray"
-                        TextDecorations="Underline" />
+                        TextDecorations="Underline"
+                        />
                     </StackLayout>
                   </StackLayout>
                 </Frame>
@@ -57,13 +92,15 @@
         Clicked="EditCourse"
         Text="Edit Course"
         TextColor="Black"
-        VerticalOptions="EndAndExpand" />
+        VerticalOptions="EndAndExpand"
+        />
       <Button
         BackgroundColor="Tomato"
         Clicked="AddStudent"
         Text="Add Student"
         TextColor="Black"
-        VerticalOptions="End" />
+        VerticalOptions="End"
+        />
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>
