@@ -11,6 +11,33 @@ namespace CoursesApp.ViewModels
         private readonly Course course;
         private readonly CourseCollection courseCollection;
 
+        public int AverageStudentAage => course.Students.Sum(student => student.Age) / NumberOfStudents;
+        public int NumberOfStudents => course.Students.Count;
+
+        public string CommonMajor
+        {
+            get
+            {
+                if (course.Students.Count < 1) return "";
+
+                Dictionary<string, int> counts = new Dictionary<string, int>();
+                foreach (var student in course.Students)
+                {
+                    if (!counts.ContainsKey(student.Major))
+                    {
+                        counts.Add(student.Major, 1);
+                    }
+                    else
+                    {
+                        counts[student.Major]++;
+                    }
+                }
+
+                // TODO: Do not return the last value if all of the counts are the same
+                return counts.OrderBy(v => v.Value).ToDictionary(v => v.Key, v => v.Value).Last().Key;
+            }
+        }
+
         public CourseType SelectedType
         {
             get => course.Type;

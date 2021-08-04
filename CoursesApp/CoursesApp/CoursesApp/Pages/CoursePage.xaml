@@ -7,8 +7,7 @@
   xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
   xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
   ios:Page.UseSafeArea="true"
-  x:DataType="viewModels:CourseViewModel"
-  >
+  x:DataType="viewModels:CourseViewModel">
   <ContentPage.Content>
     <StackLayout Margin="20">
       <Label
@@ -45,14 +44,14 @@
           <StackLayout HorizontalOptions="EndAndExpand">
             <StackLayout Orientation="Horizontal">
               <Label Style="{StaticResource CourseLabelStyle}" Text="Number Students:" />
-              <Label Style="{StaticResource CourseLabelStyle}" Text="??" />
+              <Label Style="{StaticResource CourseLabelStyle}" Text="{Binding NumberOfStudents}" />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
               <Label Style="{StaticResource CourseLabelStyle}" Text="Average Age:" />
               <Label
                 FontAttributes="Italic"
                 Style="{StaticResource CourseLabelStyle}"
-                Text="??"
+                Text="{Binding AverageStudentAage}"
                 />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
@@ -60,7 +59,7 @@
               <Label
                 FontAttributes="Italic"
                 Style="{StaticResource CourseLabelStyle}"
-                Text="??"
+                Text="{Binding CommonMajor}"
                 />
             </StackLayout>
           </StackLayout>
