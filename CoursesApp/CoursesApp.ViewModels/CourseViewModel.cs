@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,9 +12,21 @@ namespace CoursesApp.ViewModels
         private readonly Course course;
         private readonly CourseCollection courseCollection;
 
-        public int AverageStudentAage => course.Students.Sum(student => student.Age) / NumberOfStudents;
+        private int averageStudentAage;
+
+        public int AverageStudentAage
+        {
+            get => GetAverageAge();
+            private set
+            {
+                averageStudentAage = value;
+                NotifyPropertyChanged(nameof(AverageStudentAage));
+            }
+        }
+
         public int NumberOfStudents => course.Students.Count;
 
+        // TODO: Refresh after adding a student
         public string CommonMajor
         {
             get
@@ -47,7 +60,7 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged(nameof(Type));
             }
         }
-        
+
         public float SelectedLength
         {
             get => course.Length;
@@ -137,11 +150,27 @@ namespace CoursesApp.ViewModels
             RefreshStudents();
             course.PropertyChanged += OnPropertyChanged;
             course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
+            course.Students.ForEach(student => student.PropertyChanged += StudentOnPropertyChanged);
+        }
+
+        private void StudentOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Student.Age)) AverageStudentAage = GetAverageAge();
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Students)) RefreshStudents();
+        }
+
+        private int GetAverageAge()
+        {
+            if (course.Students != null)
+            {
+                return course.Students.Sum(student => student.Age) / NumberOfStudents;
+            }
+
+            return 0;
         }
 
         private void RefreshStudents()
