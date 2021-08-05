@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
+             x:Class="CoursesApp.Pages.EditStudentPage">
+  <ContentPage.Content>
+    <StackLayout x:DataType="viewModels:StudentViewModel" Padding="20">
+      <Label Text="Name:" />
+      <Entry Text="{Binding Name}" />
+
+      <Label Text="Age:" />
+      <Entry Text="{Binding Age}" />
+
+      <Label Text="Major:" />
+      <Entry Text="{Binding Major}" />
+
+      <Button Clicked="SaveStudentEdits" Text="Save Student Edits" BackgroundColor="Tomato" TextColor="Black" />
+    </StackLayout>
+  </ContentPage.Content>
+</ContentPage>

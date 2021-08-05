@@ -73,6 +73,9 @@
               Padding="0"
               HasShadow="False"
               >
+              <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="EditStudent" />
+              </Frame.GestureRecognizers>
               <StackLayout Margin="0,0,0,10">
                 <Frame
                   BackgroundColor="Tomato"
