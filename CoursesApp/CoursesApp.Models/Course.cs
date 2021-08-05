@@ -88,5 +88,11 @@ namespace CoursesApp.Models
             students?.Add(student);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
         }
+
+        public void DeleteStudent(Student student)
+        {
+            students?.Remove(student);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
+        }
     }
 }

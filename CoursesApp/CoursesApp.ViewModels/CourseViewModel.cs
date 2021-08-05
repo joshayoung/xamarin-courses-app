@@ -204,6 +204,8 @@ namespace CoursesApp.ViewModels
         public void EditCourse() => courseCollection.EditCourse(course);
 
         public void AddStudent(Student student) => course.AddStudent(student);
+        
+        public void DeleteStudent(Student student) => course.DeleteStudent(student);
 
         public StudentViewModel NewStudent() =>
             new StudentViewModel(new Student(), this);

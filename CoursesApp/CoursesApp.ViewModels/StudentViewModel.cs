@@ -67,5 +67,7 @@ namespace CoursesApp.ViewModels
         }
 
         public void AddStudent() => courseViewModel.AddStudent(student);
+        
+        public void DeleteStudent() => courseViewModel.DeleteStudent(student);
     }
 }

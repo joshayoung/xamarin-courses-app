@@ -16,6 +16,7 @@
       <Entry Text="{Binding Major}" />
 
       <Button Clicked="SaveStudentEdits" Text="Save Student Edits" BackgroundColor="Tomato" TextColor="Black" />
+      <Button Clicked="DeleteStudent" Text="Delete Student" BackgroundColor="Tomato" TextColor="Black" />
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>

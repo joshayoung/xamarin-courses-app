@@ -21,5 +21,11 @@ namespace CoursesApp.Pages
             // Call out to service
             Navigation.PopAsync();
         }
+
+        private void DeleteStudent(object sender, EventArgs e)
+        {
+            studentViewModel.DeleteStudent();
+            Navigation.PopAsync();
+        }
     }
 }
