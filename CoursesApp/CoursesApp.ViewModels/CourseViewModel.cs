@@ -13,7 +13,6 @@ namespace CoursesApp.ViewModels
         private readonly CourseCollection courseCollection;
 
         private int averageStudentAage;
-
         public int AverageStudentAage
         {
             get => GetAverageAge();
@@ -24,7 +23,16 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        public int NumberOfStudents => course.Students.Count;
+        private int numberOfStudents;
+        public int NumberOfStudents
+        {
+            get => course.Students.Count;
+            set
+            {
+                numberOfStudents = value;
+                NotifyPropertyChanged(nameof(NumberOfStudents));
+            }
+        }
 
         // TODO: Refresh after adding a student
         public string CommonMajor
@@ -160,7 +168,11 @@ namespace CoursesApp.ViewModels
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Students)) RefreshStudents();
+            if (e.PropertyName == nameof(Students))
+            {
+                RefreshStudents();
+                NumberOfStudents = course.Students.Count;
+            }
         }
 
         private int GetAverageAge()
