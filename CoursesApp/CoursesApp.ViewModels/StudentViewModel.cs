@@ -12,16 +12,13 @@ namespace CoursesApp.ViewModels
 
         public List<int> Ages
         {
-            get
+            get => new List<int>()
             {
-                return new List<int>()
-                {
-                    student.Age,
-                    1,
-                    2,
-                    3
-                };
-            }
+                student.Age,
+                1,
+                2,
+                3
+            };
         }
 
         public string? Name

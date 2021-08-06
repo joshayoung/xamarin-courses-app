@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using CoursesApp.Models;
+using CoursesApp.Models.Service;
 using FluentAssertions;
 using NSubstitute;
 using Xunit;
@@ -10,13 +12,22 @@ namespace CoursesApp.ViewModels.Test
         [Fact]
         public void Constructor_ValidParams_ExpectAssignment()
         {
-            string name = "Joe";
-            int age = 31;
-            string major = "Physics";
-            var student = new Student(name, age, major);
-            var courseViewModel = Substitute.ForPartsOf<CourseViewModel>();
+            var student = new Student("Joe", 31, "Physics");
+            var course = Substitute.ForPartsOf<Course>("id", "title", 1, CourseType.Discussion, new List<Student>(0));
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
+            var courseViewModel = Substitute.ForPartsOf<CourseViewModel>(course, courseCollection);
             var studentViewModel = new StudentViewModel(student, courseViewModel);
 
+            var ages = new List<int>()
+            {
+                student.Age,
+                1,
+                2,
+                3
+            };
+
+            studentViewModel.Ages.Should().BeEquivalentTo(ages);
             studentViewModel.Name.Should().Be(student.Name);
             studentViewModel.Age.Should().Be(student.Age);
             studentViewModel.Major.Should().Be(student.Major);
@@ -29,7 +40,10 @@ namespace CoursesApp.ViewModels.Test
             int age = 31;
             string major = "Physics";
             var student = new Student(name, age, major);
-            var courseViewModel = Substitute.ForPartsOf<CourseViewModel>();
+            var course = Substitute.ForPartsOf<Course>("id", "title", 1, CourseType.Discussion, new List<Student>(0));
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
+            var courseViewModel = Substitute.ForPartsOf<CourseViewModel>(course, courseCollection);
             var studentViewModel = new StudentViewModel(student, courseViewModel);
             var nameWasChanged = false;
             var ageWasChanged = false;
@@ -58,7 +72,10 @@ namespace CoursesApp.ViewModels.Test
             int age = 31;
             string major = "Physics";
             var student = new Student(name, age, major);
-            var courseViewModel = Substitute.ForPartsOf<CourseViewModel>();
+            var course = Substitute.ForPartsOf<Course>("id", "title", 1, CourseType.Discussion, new List<Student>(0));
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
+            var courseViewModel = Substitute.ForPartsOf<CourseViewModel>(course, courseCollection);
             var studentViewModel = new StudentViewModel(student, courseViewModel);
             var wasChanged = false;
 
