@@ -1,14 +1,16 @@
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using CoursesApp.Models;
 
 namespace CoursesApp.ViewModels
 {
     public class StudentViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
         private readonly Student student;
         private readonly CourseViewModel courseViewModel;
+        
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public List<int> Ages
         {
@@ -27,7 +29,7 @@ namespace CoursesApp.ViewModels
             set
             {
                 student.Name = value;
-                NotifyPropertyChanged(nameof(Name));
+                NotifyPropertyChanged();
             }
         }
 
@@ -37,7 +39,7 @@ namespace CoursesApp.ViewModels
             set
             {
                 student.Age = value;
-                NotifyPropertyChanged(nameof(Age));
+                NotifyPropertyChanged();
             }
         }
 
@@ -47,7 +49,7 @@ namespace CoursesApp.ViewModels
             set
             {
                 student.Major = value;
-                NotifyPropertyChanged(nameof(Major));
+                NotifyPropertyChanged();
             }
         }
 
@@ -58,13 +60,13 @@ namespace CoursesApp.ViewModels
             student.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
 
-        private void NotifyPropertyChanged(string propName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
-        }
-
         public void AddStudent() => courseViewModel.AddStudent(student);
 
         public void DeleteStudent() => courseViewModel.DeleteStudent(student);
+
+        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

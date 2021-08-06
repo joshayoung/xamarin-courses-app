@@ -11,7 +11,7 @@ namespace CoursesApp.ViewModels
     {
         private readonly CourseCollection courseCollection;
         private List<CourseViewModel>? courses;
-
+        
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public List<CourseViewModel>? Courses
@@ -46,15 +46,9 @@ namespace CoursesApp.ViewModels
 
         public CourseViewModel NewCourseViewModel()
         {
-            var id = GetNextCourseId();
             return new CourseViewModel(
                 new Course(GetNextCourseId().ToString()),
                 courseCollection);
-        }
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private int GetNextCourseId()
@@ -62,6 +56,11 @@ namespace CoursesApp.ViewModels
             if (Courses.Count == 0) return 1;
             var id = Int32.Parse(Courses.Max(course => course.Id));
             return ++id;
+        }
+        
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

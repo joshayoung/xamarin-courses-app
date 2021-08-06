@@ -2,37 +2,35 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using CoursesApp.Models;
 
 namespace CoursesApp.ViewModels
 {
     public class CourseViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
         private readonly Course course;
         private readonly CourseCollection courseCollection;
 
         private int averageStudentAage;
-
         public int AverageStudentAage
         {
             get => GetAverageAge();
             private set
             {
                 averageStudentAage = value;
-                NotifyPropertyChanged(nameof(AverageStudentAage));
+                NotifyPropertyChanged();
             }
         }
 
         private int numberOfStudents;
-
         public int NumberOfStudents
         {
             get => course.Students.Count;
             set
             {
                 numberOfStudents = value;
-                NotifyPropertyChanged(nameof(NumberOfStudents));
+                NotifyPropertyChanged();
             }
         }
 
@@ -67,7 +65,7 @@ namespace CoursesApp.ViewModels
             set
             {
                 course.Type = value;
-                NotifyPropertyChanged(nameof(Type));
+                NotifyPropertyChanged();
             }
         }
 
@@ -77,7 +75,7 @@ namespace CoursesApp.ViewModels
             set
             {
                 course.Length = value;
-                NotifyPropertyChanged(nameof(Length));
+                NotifyPropertyChanged();
             }
         }
 
@@ -107,7 +105,7 @@ namespace CoursesApp.ViewModels
             set
             {
                 course.Id = value;
-                NotifyPropertyChanged(nameof(Id));
+                NotifyPropertyChanged();
             }
         }
 
@@ -117,7 +115,7 @@ namespace CoursesApp.ViewModels
             set
             {
                 course.Title = value;
-                NotifyPropertyChanged(nameof(Title));
+                NotifyPropertyChanged();
             }
         }
 
@@ -127,19 +125,18 @@ namespace CoursesApp.ViewModels
             set
             {
                 course.Length = value;
-                NotifyPropertyChanged(nameof(Length));
+                NotifyPropertyChanged();
             }
         }
 
         private List<StudentViewModel>? students;
-
         public List<StudentViewModel>? Students
         {
             get => students;
             set
             {
                 students = value;
-                NotifyPropertyChanged(nameof(Students));
+                NotifyPropertyChanged();
             }
         }
 
@@ -149,7 +146,7 @@ namespace CoursesApp.ViewModels
             set
             {
                 course.Type = value;
-                NotifyPropertyChanged(nameof(Type));
+                NotifyPropertyChanged();
             }
         }
 
@@ -166,15 +163,6 @@ namespace CoursesApp.ViewModels
         private void StudentOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Student.Age)) AverageStudentAage = GetAverageAge();
-        }
-
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(Students))
-            {
-                RefreshStudents();
-                NumberOfStudents = course.Students.Count;
-            }
         }
 
         private int GetAverageAge()
@@ -196,11 +184,6 @@ namespace CoursesApp.ViewModels
             Students = new List<StudentViewModel>(studentList);
         }
 
-        private void NotifyPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
         public void AddCourse() => courseCollection.AddCourse(course);
 
         public void EditCourse() => courseCollection.EditCourse(course);
@@ -213,5 +196,20 @@ namespace CoursesApp.ViewModels
             new StudentViewModel(new Student(), this);
 
         public void DeleteCourse() => courseCollection.DeleteCourse(course);
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Students))
+            {
+                RefreshStudents();
+                NumberOfStudents = course.Students.Count;
+            }
+        }
     }
 }

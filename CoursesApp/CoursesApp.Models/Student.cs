@@ -1,10 +1,11 @@
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace CoursesApp.Models
 {
     public class Student : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged = null!;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private string? id;
         public string? Id
@@ -13,7 +14,7 @@ namespace CoursesApp.Models
             set
             {
                 id = value;
-                NotifyPropertyChanged(nameof(Id));
+                NotifyPropertyChanged();
             }
         }
 
@@ -24,7 +25,7 @@ namespace CoursesApp.Models
             set
             {
                 name = value;
-                NotifyPropertyChanged(nameof(Name));
+                NotifyPropertyChanged();
             }
         }
 
@@ -35,7 +36,7 @@ namespace CoursesApp.Models
             set
             {
                 age = value;
-                NotifyPropertyChanged(nameof(Age));
+                NotifyPropertyChanged();
             }
         }
 
@@ -46,7 +47,7 @@ namespace CoursesApp.Models
             set
             {
                 major = value;
-                NotifyPropertyChanged(nameof(Major));
+                NotifyPropertyChanged();
             }
         }
 
@@ -57,9 +58,9 @@ namespace CoursesApp.Models
             Major = major ?? "";
         }
 
-        private void NotifyPropertyChanged(string theName)
+        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(theName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

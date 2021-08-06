@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 
 namespace CoursesApp.Models
@@ -15,7 +16,7 @@ namespace CoursesApp.Models
             set
             {
                 id = value;
-                NotifyPropertyChanged(nameof(Id));
+                NotifyPropertyChanged();
             }
         }
 
@@ -26,7 +27,7 @@ namespace CoursesApp.Models
             set
             {
                 title = value;
-                NotifyPropertyChanged(nameof(Title));
+                NotifyPropertyChanged();
             }
         }
 
@@ -37,7 +38,7 @@ namespace CoursesApp.Models
             set
             {
                 length = value;
-                NotifyPropertyChanged(nameof(Length));
+                NotifyPropertyChanged();
             }
         }
 
@@ -48,7 +49,7 @@ namespace CoursesApp.Models
             set
             {
                 students = value;
-                NotifyPropertyChanged(nameof(Students));
+                NotifyPropertyChanged();
             }
         }
 
@@ -59,7 +60,7 @@ namespace CoursesApp.Models
             set
             {
                 type = value;
-                NotifyPropertyChanged(nameof(Type));
+                NotifyPropertyChanged();
             }
         }
 
@@ -78,11 +79,6 @@ namespace CoursesApp.Models
             this.type = type;
         }
 
-        private void NotifyPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
         public void AddStudent(Student student)
         {
             students?.Add(student);
@@ -93,6 +89,12 @@ namespace CoursesApp.Models
         {
             students?.Remove(student);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
+        }
+
+
+        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
