@@ -10,6 +10,13 @@
   >
   <ContentPage.Content>
     <StackLayout Padding="20" x:DataType="viewModels:StudentViewModel">
+      <Label
+        Margin="0,0,0,20"
+        FontAttributes="Bold"
+        FontSize="30"
+        HorizontalOptions="Center"
+        Text="Edit Student"
+        />
       <Button
         Clicked="CloseModal"
         FontAttributes="Bold"
@@ -28,16 +35,11 @@
       <Entry Text="{Binding Major}" />
 
       <Button
-        BackgroundColor="Tomato"
+        BackgroundColor="Khaki"
         Clicked="SaveStudentEdits"
         Text="Save Student Edits"
         TextColor="Black"
-        />
-      <Button
-        BackgroundColor="Tomato"
-        Clicked="DeleteStudent"
-        Text="Delete Student"
-        TextColor="Black"
+        VerticalOptions="EndAndExpand"
         />
     </StackLayout>
   </ContentPage.Content>

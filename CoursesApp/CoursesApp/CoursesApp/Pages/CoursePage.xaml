@@ -66,24 +66,55 @@
           </StackLayout>
         </StackLayout>
       </Frame>
+      <BoxView
+        Margin="0,10,0,10"
+        BackgroundColor="Tomato"
+        HeightRequest="2"
+        />
       <StackLayout BindableLayout.ItemsSource="{Binding Students}">
         <BindableLayout.ItemTemplate>
           <DataTemplate x:DataType="viewModels:StudentViewModel">
             <Frame
               Margin="0"
-              Padding="0"
+              Padding="10"
+              BackgroundColor="Transparent"
               HasShadow="False"
               >
-              <Frame.GestureRecognizers>
-                <TapGestureRecognizer Tapped="EditStudent" />
-              </Frame.GestureRecognizers>
-              <StackLayout Margin="0,0,0,10">
-                <Frame
-                  BackgroundColor="Tomato"
-                  CornerRadius="4"
-                  HasShadow="False"
-                  >
-                  <StackLayout>
+              <SwipeView>
+                <SwipeView.LeftItems>
+                  <SwipeItems>
+                    <SwipeItemView Invoked="EditStudent">
+                      <Button
+                        Margin="0,0,10,0"
+                        Padding="10"
+                        BackgroundColor="Khaki"
+                        Text="Edit"
+                        TextColor="Black"
+                        VerticalOptions="Center"
+                        />
+                    </SwipeItemView>
+                  </SwipeItems>
+                </SwipeView.LeftItems>
+                <SwipeView.RightItems>
+                  <SwipeItems>
+                    <SwipeItemView Invoked="DeleteStudent">
+                      <Button
+                        Margin="10,0,0,0"
+                        Padding="10"
+                        BackgroundColor="Khaki"
+                        Text="Delete"
+                        TextColor="Black"
+                        VerticalOptions="Center"
+                        />
+                    </SwipeItemView>
+                  </SwipeItems>
+                </SwipeView.RightItems>
+                <StackLayout Margin="0">
+                  <Frame
+                    BackgroundColor="Tomato"
+                    CornerRadius="10"
+                    HasShadow="False"
+                    >
                     <StackLayout Orientation="Horizontal">
                       <Label Text="{Binding Name}" TextColor="Black" />
                       <Label Text="{Binding Age, StringFormat='({0})'}" TextColor="Black" />
@@ -95,26 +126,19 @@
                         TextDecorations="Underline"
                         />
                     </StackLayout>
-                  </StackLayout>
-                </Frame>
-              </StackLayout>
+                  </Frame>
+                </StackLayout>
+              </SwipeView>
             </Frame>
           </DataTemplate>
         </BindableLayout.ItemTemplate>
       </StackLayout>
       <Button
         BackgroundColor="Khaki"
-        Clicked="EditCourse"
-        Text="Edit Course"
-        TextColor="Black"
-        VerticalOptions="EndAndExpand"
-        />
-      <Button
-        BackgroundColor="Tomato"
         Clicked="AddStudent"
         Text="Add Student"
         TextColor="Black"
-        VerticalOptions="End"
+        VerticalOptions="EndAndExpand"
         />
     </StackLayout>
   </ContentPage.Content>

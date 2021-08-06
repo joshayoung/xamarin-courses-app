@@ -32,5 +32,11 @@ namespace CoursesApp.Pages
             var courseViewModel = (CourseViewModel)((BindableObject)sender).BindingContext;
             courseViewModel.DeleteCourse();
         }
+
+        private void EditClass(object sender, EventArgs e)
+        {
+            var courseViewModel = (CourseViewModel)((BindableObject)sender).BindingContext;
+            Navigation.PushModalAsync(new EditCoursePage(courseViewModel));
+        }
     }
 }

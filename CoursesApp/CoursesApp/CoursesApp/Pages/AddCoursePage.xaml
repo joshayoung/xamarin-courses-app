@@ -44,10 +44,11 @@
       />
 
     <Button
-      BackgroundColor="Tomato"
+      BackgroundColor="Khaki"
       Clicked="SaveCourse"
       Text="Save Course"
       TextColor="Black"
+      VerticalOptions="EndAndExpand"
       />
   </StackLayout>
 

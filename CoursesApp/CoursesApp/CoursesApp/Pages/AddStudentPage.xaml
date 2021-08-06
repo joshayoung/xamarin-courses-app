@@ -4,7 +4,9 @@
   x:Class="CoursesApp.Pages.AddStudentPage"
   xmlns="http://xamarin.com/schemas/2014/forms"
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
   xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
+  ios:Page.UseSafeArea="true"
   >
   <ContentPage.Content>
     <StackLayout Padding="20" x:DataType="viewModels:StudentViewModel">
@@ -16,6 +18,13 @@
         Text="𝘅"
         TextColor="Tomato"
         />
+      <Label
+        Margin="0,0,0,20"
+        FontAttributes="Bold"
+        FontSize="30"
+        HorizontalOptions="Center"
+        Text="Add Student"
+        />
       <Label Text="Name:" />
       <Entry Text="{Binding Name}" />
 
@@ -26,10 +35,11 @@
       <Entry Text="{Binding Major}" />
 
       <Button
-        BackgroundColor="Tomato"
+        BackgroundColor="Khaki"
         Clicked="SaveStudent"
         Text="Save Student"
         TextColor="Black"
+        VerticalOptions="EndAndExpand"
         />
     </StackLayout>
   </ContentPage.Content>

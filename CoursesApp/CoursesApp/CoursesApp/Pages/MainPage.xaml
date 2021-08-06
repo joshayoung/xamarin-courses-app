@@ -39,9 +39,22 @@
             BackgroundColor="Transparent"
             CornerRadius="10"
             HasShadow="False"
-            IsClippedToBounds="True"
             >
             <SwipeView>
+              <SwipeView.LeftItems>
+                <SwipeItems>
+                  <SwipeItemView Invoked="EditClass">
+                    <Button
+                      Margin="0,0,10,0"
+                      Padding="10"
+                      BackgroundColor="Khaki"
+                      Text="Edit"
+                      TextColor="Black"
+                      VerticalOptions="Center"
+                      />
+                  </SwipeItemView>
+                </SwipeItems>
+              </SwipeView.LeftItems>
               <SwipeView.RightItems>
                 <SwipeItems>
                   <SwipeItemView Invoked="DeleteClass">
@@ -56,7 +69,7 @@
                   </SwipeItemView>
                 </SwipeItems>
               </SwipeView.RightItems>
-              <StackLayout Margin="0,0,0,0">
+              <StackLayout Margin="0">
                 <Frame
                   BackgroundColor="Tomato"
                   CornerRadius="10"
@@ -82,7 +95,6 @@
       </CollectionView.ItemTemplate>
     </CollectionView>
     <Button
-      Padding="20"
       BackgroundColor="Khaki"
       Clicked="AddCourse"
       Text="Add Course"
