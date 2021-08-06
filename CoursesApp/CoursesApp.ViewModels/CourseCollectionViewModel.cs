@@ -59,6 +59,7 @@ namespace CoursesApp.ViewModels
 
         private int GetNextCourseId()
         {
+            if (Courses.Count == 0) return 1;
             var id = Int32.Parse(Courses.Max(course => course.Id));
             return ++id;
         }

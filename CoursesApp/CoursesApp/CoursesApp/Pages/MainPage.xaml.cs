@@ -26,5 +26,11 @@ namespace CoursesApp.Pages
         {
             Navigation.PushAsync(new AddCoursePage(courseCollectionViewModel.NewCourseViewModel()));
         }
+
+        private void DeleteClass(object sender, EventArgs e)
+        {
+            var courseViewModel = (CourseViewModel)((BindableObject) sender).BindingContext;
+            courseViewModel.DeleteCourse();
+        }
     }
 }

@@ -209,5 +209,7 @@ namespace CoursesApp.ViewModels
 
         public StudentViewModel NewStudent() =>
             new StudentViewModel(new Student(), this);
+
+        public void DeleteCourse() => courseCollection.DeleteCourse(course);
     }
 }

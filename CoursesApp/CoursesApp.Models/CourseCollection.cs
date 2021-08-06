@@ -32,5 +32,11 @@ namespace CoursesApp.Models
         {
             // This is where I could call out to my API to save this record in the DB.
         }
+
+        public void DeleteCourse(Course course)
+        {
+            Courses.Remove(course);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
+        }
     }
 }
