@@ -9,7 +9,6 @@ namespace CoursesApp.Models
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private string id;
-
         public string Id
         {
             get => id;
@@ -21,7 +20,6 @@ namespace CoursesApp.Models
         }
 
         private string? title;
-
         public string? Title
         {
             get => title;
@@ -33,7 +31,6 @@ namespace CoursesApp.Models
         }
 
         private float length;
-
         public float Length
         {
             get => length;
@@ -45,7 +42,6 @@ namespace CoursesApp.Models
         }
 
         private List<Student>? students;
-
         public List<Student>? Students
         {
             get => students;
@@ -57,7 +53,6 @@ namespace CoursesApp.Models
         }
 
         private CourseType type;
-
         public CourseType Type
         {
             get => type;

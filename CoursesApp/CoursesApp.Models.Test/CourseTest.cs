@@ -12,7 +12,8 @@ namespace CoursesApp.Models.Test
             var id = "1";
             var title = "title";
             float length = 2;
-            var students = new List<Student>();
+            var student = new Student("name", 20, "Physics");
+            var students = new List<Student> { student };
             var type = CourseType.Lab;
 
             var course = new Course(id, title, length, type, students);
@@ -21,102 +22,91 @@ namespace CoursesApp.Models.Test
             course.Title.Should().Be(title);
             course.Length.Should().Be(length);
             course.Students.Should().BeEquivalentTo(students);
+            course.Type.Should().Be(type);
         }
 
         [Fact]
-        public void Title_PropertyChanged_ExpectPropertyChangedEvent()
+        public void PropertiesChange_Called_ExpectPropertyChangedEvent()
         {
-            var id = "1";
-            var title = "title";
-            float length = 2;
-            var students = new List<Student>();
-            var type = CourseType.Lab;
-            var wasChanged = false;
+            var wasIdChanged = false;
+            var wasTitleChanged = false;
+            var wasLengthChanged = false;
+            var wasStudentsChanged = false;
+            var wasTypeChanged = false;
 
-            var course = new Course(id, title, length, type, students);
+            var course = new Course("1", "title", 2, CourseType.Lab, new List<Student>());
 
-            course.PropertyChanged += (sender, args) =>
+            course.PropertyChanged += (_, args) =>
             {
-                if (args.PropertyName == nameof(course.Title))
-                {
-                    wasChanged = true;
-                }
+                if (args.PropertyName == nameof(course.Id)) wasIdChanged = true;
+                if (args.PropertyName == nameof(course.Title)) wasTitleChanged = true;
+                if (args.PropertyName == nameof(course.Length)) wasLengthChanged = true;
+                if (args.PropertyName == nameof(course.Students)) wasStudentsChanged = true;
+                if (args.PropertyName == nameof(course.Type)) wasTypeChanged = true;
             };
 
+            course.Id = "2";
             course.Title = "new title";
-            wasChanged.Should().BeTrue();
-        }
-
-        [Fact]
-        public void Length_PropertyChanged_ExpectPropertyChangedEvent()
-        {
-            var id = "1";
-            var title = "title";
-            float length = 2;
-            var students = new List<Student>();
-            var type = CourseType.Lab;
-            var wasChanged = false;
-
-            var course = new Course(id, title, length, type, students);
-
-            course.PropertyChanged += (sender, args) =>
-            {
-                if (args.PropertyName == nameof(course.Length))
-                {
-                    wasChanged = true;
-                }
-            };
-
             course.Length = 4;
-            wasChanged.Should().BeTrue();
-        }
-
-        [Fact]
-        public void Students_PropertyChanged_ExpectPropertyChangedEvent()
-        {
-            var id = "1";
-            var title = "title";
-            float length = 2;
-            var students = new List<Student>();
-            var type = CourseType.Lab;
-            var wasChanged = false;
-
-            var course = new Course(id, title, length, type, students);
-
-            course.PropertyChanged += (sender, args) =>
-            {
-                if (args.PropertyName == nameof(course.Students))
-                {
-                    wasChanged = true;
-                }
-            };
-
-            course.Students = new List<Student>();
-            wasChanged.Should().BeTrue();
-        }
-
-        [Fact]
-        public void CourseType_PropertyChanged_ExpectPropertyChangedEvent()
-        {
-            var id = "1";
-            var title = "title";
-            float length = 2;
-            var students = new List<Student>();
-            var type = CourseType.Lab;
-            var wasChanged = false;
-
-            var course = new Course(id, title, length, type, students);
-
-            course.PropertyChanged += (sender, args) =>
-            {
-                if (args.PropertyName == nameof(course.Type))
-                {
-                    wasChanged = true;
-                }
-            };
-
+            course.Students = new List<Student> { new Student("name", 20, "Physics") };
             course.Type = CourseType.Discussion;
-            wasChanged.Should().BeTrue();
+            wasIdChanged.Should().BeTrue();
+            wasTitleChanged.Should().BeTrue();
+            wasLengthChanged.Should().BeTrue();
+            wasStudentsChanged.Should().BeTrue();
+            wasTypeChanged.Should().BeTrue();
+        }
+
+        [Fact]
+        public void AddStudent_Called_ExpectStudentsUpdated()
+        {
+            var student = new Student("name", 20, "Physics");
+            var course = new Course("1", "title", 2, CourseType.Lab, new List<Student> { student });
+            
+            course.AddStudent(student);
+
+            course.Students.Count.Should().Be(2);
+        }
+
+        [Fact]
+        public void AddStudent_Called_ExpectPropertyChangedEvent()
+        {
+            var wasStudentsChanged = false;
+            var course = new Course("1", "title", 2, CourseType.Lab, new List<Student> { });
+            course.PropertyChanged += (_, args) =>
+            {
+                if (args.PropertyName == nameof(course.Students)) wasStudentsChanged = true;
+            };
+            
+            course.AddStudent(new Student("name", 20, "Physics"));
+
+            wasStudentsChanged.Should().BeTrue();
+        }
+        
+        [Fact]
+        public void DeleteStudent_Called_ExpectStudentsUpdated()
+        {
+            var student = new Student("name", 20, "Physics");
+            var course = new Course("1", "title", 2, CourseType.Lab, new List<Student> { student });
+            
+            course.DeleteStudent(student);
+
+            course.Students.Count.Should().Be(0);
+        }
+        
+        [Fact]
+        public void DeleteStudent_Called_ExpectPropertyChangedEvent()
+        {
+            var wasStudentsChanged = false;
+            var course = new Course("1", "title", 2, CourseType.Lab, new List<Student> { });
+            course.PropertyChanged += (_, args) =>
+            {
+                if (args.PropertyName == nameof(course.Students)) wasStudentsChanged = true;
+            };
+            
+            course.DeleteStudent(new Student("name", 20, "Physics"));
+
+            wasStudentsChanged.Should().BeTrue();
         }
     }
 }

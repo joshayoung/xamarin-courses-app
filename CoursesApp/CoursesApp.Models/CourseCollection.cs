@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using CoursesApp.Models.Service;
 
 namespace CoursesApp.Models
@@ -10,7 +9,7 @@ namespace CoursesApp.Models
         private readonly CourseDataService courseDataService;
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public List<Course> Courses { get; private set; } = new List<Course>();
+        public virtual List<Course> Courses { get; private set; } = new List<Course>();
 
         public CourseCollection(CourseDataService courseDataService)
         {
@@ -20,6 +19,7 @@ namespace CoursesApp.Models
         public void RepopulateCourseList()
         {
             Courses = courseDataService.GetCourses();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
         }
 
         public void AddCourse(Course course)

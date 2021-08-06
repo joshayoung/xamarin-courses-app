@@ -7,7 +7,6 @@ namespace CoursesApp.Models
         public event PropertyChangedEventHandler PropertyChanged = null!;
 
         private string? id;
-
         public string? Id
         {
             get => id;
@@ -19,7 +18,6 @@ namespace CoursesApp.Models
         }
 
         private string? name;
-
         public string? Name
         {
             get => name;
@@ -31,7 +29,6 @@ namespace CoursesApp.Models
         }
 
         private int age;
-
         public int Age
         {
             get => age;
@@ -43,7 +40,6 @@ namespace CoursesApp.Models
         }
 
         private string? major;
-
         public string? Major
         {
             get => major;
