@@ -179,7 +179,7 @@ namespace CoursesApp.ViewModels
 
         private int GetAverageAge()
         {
-            if (course.Students != null)
+            if (course.Students != null && NumberOfStudents != 0)
             {
                 return course.Students.Sum(student => student.Age) / NumberOfStudents;
             }
