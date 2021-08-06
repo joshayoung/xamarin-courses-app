@@ -10,12 +10,20 @@
   x:DataType="viewModels:CourseViewModel"
   >
   <StackLayout Padding="20">
+    <Button
+      Clicked="CloseModal"
+      FontAttributes="Bold"
+      FontSize="40"
+      HorizontalOptions="Start"
+      Text="𝘅"
+      TextColor="Tomato"
+      />
     <Label
       Margin="0,0,0,30"
       FontAttributes="Bold"
       FontSize="30"
       HorizontalOptions="CenterAndExpand"
-      Text="Add Course"
+      Text="Add New Course"
       />
 
     <Label Text="Course Name:" />

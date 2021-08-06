@@ -27,5 +27,10 @@ namespace CoursesApp.Pages
             studentViewModel.DeleteStudent();
             Navigation.PopAsync();
         }
+
+        private void CloseModal(object sender, EventArgs e)
+        {
+            Navigation.PopModalAsync();
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace CoursesApp.Pages
 
         private void AddCourse(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new AddCoursePage(courseCollectionViewModel.NewCourseViewModel()));
+            Navigation.PushModalAsync(new AddCoursePage(courseCollectionViewModel.NewCourseViewModel()));
         }
 
         private void DeleteClass(object sender, EventArgs e)

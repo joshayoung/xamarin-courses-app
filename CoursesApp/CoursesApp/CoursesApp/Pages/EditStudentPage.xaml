@@ -1,11 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
-             x:Class="CoursesApp.Pages.EditStudentPage">
+<ContentPage
+  x:Class="CoursesApp.Pages.EditStudentPage"
+  xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+  xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
+  ios:Page.UseSafeArea="true"
+  >
   <ContentPage.Content>
-    <StackLayout x:DataType="viewModels:StudentViewModel" Padding="20">
+    <StackLayout Padding="20" x:DataType="viewModels:StudentViewModel">
+      <Button
+        Clicked="CloseModal"
+        FontAttributes="Bold"
+        FontSize="40"
+        HorizontalOptions="Start"
+        Text="𝘅"
+        TextColor="Tomato"
+        />
       <Label Text="Name:" />
       <Entry Text="{Binding Name}" />
 
@@ -15,8 +27,18 @@
       <Label Text="Major:" />
       <Entry Text="{Binding Major}" />
 
-      <Button Clicked="SaveStudentEdits" Text="Save Student Edits" BackgroundColor="Tomato" TextColor="Black" />
-      <Button Clicked="DeleteStudent" Text="Delete Student" BackgroundColor="Tomato" TextColor="Black" />
+      <Button
+        BackgroundColor="Tomato"
+        Clicked="SaveStudentEdits"
+        Text="Save Student Edits"
+        TextColor="Black"
+        />
+      <Button
+        BackgroundColor="Tomato"
+        Clicked="DeleteStudent"
+        Text="Delete Student"
+        TextColor="Black"
+        />
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>
