@@ -9,7 +9,7 @@ namespace CoursesApp.Models
     {
         private readonly CourseDataService courseDataService;
         public event PropertyChangedEventHandler? PropertyChanged;
-        
+
         public List<Course> Courses { get; private set; } = new List<Course>();
 
         public CourseCollection(CourseDataService courseDataService)

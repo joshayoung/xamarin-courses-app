@@ -1,34 +1,46 @@
 <?xml version="1.0" encoding="utf-8" ?>
+
 <ContentPage
-  ios:Page.UseSafeArea="true"
   x:Class="CoursesApp.Pages.AddCoursePage"
-  x:DataType="viewModels:CourseViewModel"
   xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
   xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
   xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
-  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+  ios:Page.UseSafeArea="true"
+  x:DataType="viewModels:CourseViewModel"
+  >
   <StackLayout Padding="20">
     <Label
+      Margin="0,0,0,30"
       FontAttributes="Bold"
       FontSize="30"
       HorizontalOptions="CenterAndExpand"
-      Margin="0,0,0,30"
-      Text="Add Course" />
-    
+      Text="Add Course"
+      />
+
     <Label Text="Course Name:" />
     <Entry Text="{Binding Title, Mode=TwoWay}" />
-    
+
     <Label Text="Course Length:" />
-    <Picker ItemsSource="{Binding CourseLengthList}" ItemDisplayBinding="{Binding .}" SelectedItem="{Binding SelectedLength}" />
-    
+    <Picker
+      ItemDisplayBinding="{Binding .}"
+      ItemsSource="{Binding CourseLengthList}"
+      SelectedItem="{Binding SelectedLength}"
+      />
+
     <Label Text="Course Type:" />
-    <Picker ItemsSource="{Binding CourseTypesList}" ItemDisplayBinding="{Binding .}" SelectedItem="{Binding SelectedType}" />
-    
+    <Picker
+      ItemDisplayBinding="{Binding .}"
+      ItemsSource="{Binding CourseTypesList}"
+      SelectedItem="{Binding SelectedType}"
+      />
+
     <Button
       BackgroundColor="Tomato"
       Clicked="SaveCourse"
       Text="Save Course"
-      TextColor="Black" />
+      TextColor="Black"
+      />
   </StackLayout>
 
 </ContentPage>

@@ -14,7 +14,7 @@ namespace CoursesApp.Models.Test
             float length = 2;
             var students = new List<Student>();
             var type = CourseType.Lab;
-            
+
             var course = new Course(id, title, length, type, students);
 
             course.Id.Should().Be(id);
@@ -32,7 +32,7 @@ namespace CoursesApp.Models.Test
             var students = new List<Student>();
             var type = CourseType.Lab;
             var wasChanged = false;
-            
+
             var course = new Course(id, title, length, type, students);
 
             course.PropertyChanged += (sender, args) =>
@@ -46,7 +46,7 @@ namespace CoursesApp.Models.Test
             course.Title = "new title";
             wasChanged.Should().BeTrue();
         }
-        
+
         [Fact]
         public void Length_PropertyChanged_ExpectPropertyChangedEvent()
         {
@@ -56,7 +56,7 @@ namespace CoursesApp.Models.Test
             var students = new List<Student>();
             var type = CourseType.Lab;
             var wasChanged = false;
-             
+
             var course = new Course(id, title, length, type, students);
 
             course.PropertyChanged += (sender, args) =>
@@ -70,7 +70,7 @@ namespace CoursesApp.Models.Test
             course.Length = 4;
             wasChanged.Should().BeTrue();
         }
-        
+
         [Fact]
         public void Students_PropertyChanged_ExpectPropertyChangedEvent()
         {
@@ -80,7 +80,7 @@ namespace CoursesApp.Models.Test
             var students = new List<Student>();
             var type = CourseType.Lab;
             var wasChanged = false;
-            
+
             var course = new Course(id, title, length, type, students);
 
             course.PropertyChanged += (sender, args) =>
@@ -94,7 +94,7 @@ namespace CoursesApp.Models.Test
             course.Students = new List<Student>();
             wasChanged.Should().BeTrue();
         }
-        
+
         [Fact]
         public void CourseType_PropertyChanged_ExpectPropertyChangedEvent()
         {
@@ -104,7 +104,7 @@ namespace CoursesApp.Models.Test
             var students = new List<Student>();
             var type = CourseType.Lab;
             var wasChanged = false;
-            
+
             var course = new Course(id, title, length, type, students);
 
             course.PropertyChanged += (sender, args) =>

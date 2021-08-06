@@ -18,7 +18,7 @@ namespace CoursesApp.Pages
 
         private void NavigateToDetails(object sender, EventArgs e)
         {
-            var courseViewModel = (CourseViewModel)((BindableObject) sender).BindingContext;
+            var courseViewModel = (CourseViewModel)((BindableObject)sender).BindingContext;
             Navigation.PushAsync(new CoursePage(courseViewModel));
         }
 
@@ -29,7 +29,7 @@ namespace CoursesApp.Pages
 
         private void DeleteClass(object sender, EventArgs e)
         {
-            var courseViewModel = (CourseViewModel)((BindableObject) sender).BindingContext;
+            var courseViewModel = (CourseViewModel)((BindableObject)sender).BindingContext;
             courseViewModel.DeleteCourse();
         }
     }

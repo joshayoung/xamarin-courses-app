@@ -1,31 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
-             x:DataType="viewModels:CourseViewModel"
-             x:Class="CoursesApp.Pages.EditCoursePage">
+<ContentPage
+  x:Class="CoursesApp.Pages.EditCoursePage"
+  xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
+  x:DataType="viewModels:CourseViewModel"
+  >
   <ContentPage.Content>
-  <StackLayout Padding="20">
-    <Label
-      FontAttributes="Bold"
-      FontSize="30"
-      HorizontalOptions="CenterAndExpand"
-      Margin="0,0,0,30"
-      Text="Edit Course" />
-    <Label Text="Course Name:" />
-    <Entry Text="{Binding Title, Mode=TwoWay}" />
-    
-    <Label Text="Course Length:" />
-    <Picker ItemsSource="{Binding CourseLengthList}" ItemDisplayBinding="{Binding .}" SelectedItem="{Binding SelectedLength}" />
-    
-    <Label Text="Course Type:" />
-    <Picker ItemsSource="{Binding CourseTypesList}" ItemDisplayBinding="{Binding .}" SelectedItem="{Binding SelectedType}" />
-    <Button
-      BackgroundColor="Tomato"
-      Clicked="SaveCourseEdits"
-      Text="Save Edits"
-      TextColor="Black" />
-  </StackLayout>
+    <StackLayout Padding="20">
+      <Label
+        Margin="0,0,0,30"
+        FontAttributes="Bold"
+        FontSize="30"
+        HorizontalOptions="CenterAndExpand"
+        Text="Edit Course"
+        />
+      <Label Text="Course Name:" />
+      <Entry Text="{Binding Title, Mode=TwoWay}" />
+
+      <Label Text="Course Length:" />
+      <Picker
+        ItemDisplayBinding="{Binding .}"
+        ItemsSource="{Binding CourseLengthList}"
+        SelectedItem="{Binding SelectedLength}"
+        />
+
+      <Label Text="Course Type:" />
+      <Picker
+        ItemDisplayBinding="{Binding .}"
+        ItemsSource="{Binding CourseTypesList}"
+        SelectedItem="{Binding SelectedType}"
+        />
+      <Button
+        BackgroundColor="Tomato"
+        Clicked="SaveCourseEdits"
+        Text="Save Edits"
+        TextColor="Black"
+        />
+    </StackLayout>
   </ContentPage.Content>
 </ContentPage>

@@ -9,7 +9,6 @@ namespace CoursesApp.ViewModels.Test
 {
     public class CourseViewModelTest
     {
-        
         [Fact]
         public void ViewModel_PropertyChanged_ExpectPropertyChangedEvents()
         {
@@ -44,8 +43,8 @@ namespace CoursesApp.ViewModels.Test
             studentsWasChanged.Should().BeTrue();
             typeWasChanged.Should().BeTrue();
         }
-        
-        
+
+
         [Fact]
         public void Model_PropertyChanged_ExpectPropertyChangedEvent()
         {
@@ -68,7 +67,7 @@ namespace CoursesApp.ViewModels.Test
             };
 
             course.Title = "a new title";
-        
+
             wasChanged.Should().BeTrue();
         }
     }

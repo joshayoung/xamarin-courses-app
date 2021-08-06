@@ -13,7 +13,7 @@ namespace CoursesApp.ViewModels.Test
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = new CourseCollection(courseDataService);
-            
+
             var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
 
             courseCollectionViewModel.Courses.Should().BeEmpty();

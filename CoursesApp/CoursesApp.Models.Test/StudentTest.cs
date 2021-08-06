@@ -11,14 +11,14 @@ namespace CoursesApp.Models.Test
             var name = "name";
             var age = 20;
             var major = "major";
-            
+
             var student = new Student(name, age, major);
 
             student.Name.Should().Be(name);
             student.Age.Should().Be(age);
             student.Major.Should().Be(major);
         }
-        
+
         [Fact]
         public void Name_PropertyChanged_ExpectPropertyChangedEvent()
         {
@@ -26,7 +26,7 @@ namespace CoursesApp.Models.Test
             var age = 20;
             var major = "major";
             var wasChanged = false;
-            
+
             var student = new Student(name, age, major);
 
             student.PropertyChanged += (sender, args) =>
@@ -40,7 +40,7 @@ namespace CoursesApp.Models.Test
             student.Name = "new name";
             wasChanged.Should().BeTrue();
         }
-        
+
         [Fact]
         public void Age_PropertyChanged_ExpectPropertyChangedEvent()
         {
@@ -48,7 +48,7 @@ namespace CoursesApp.Models.Test
             var age = 20;
             var major = "major";
             var wasChanged = false;
-            
+
             var student = new Student(name, age, major);
 
             student.PropertyChanged += (sender, args) =>
@@ -62,7 +62,7 @@ namespace CoursesApp.Models.Test
             student.Age = 24;
             wasChanged.Should().BeTrue();
         }
-        
+
         [Fact]
         public void Major_PropertyChanged_ExpectPropertyChangedEvent()
         {
@@ -70,7 +70,7 @@ namespace CoursesApp.Models.Test
             var age = 20;
             var major = "major";
             var wasChanged = false;
-            
+
             var student = new Student(name, age, major);
 
             student.PropertyChanged += (sender, args) =>

@@ -28,7 +28,7 @@ namespace CoursesApp.Pages
 
         private void EditStudent(object sender, EventArgs e)
         {
-            var studentViewModel = (StudentViewModel)((BindableObject) sender).BindingContext;
+            var studentViewModel = (StudentViewModel)((BindableObject)sender).BindingContext;
             Navigation.PushAsync(new EditStudentPage(studentViewModel));
         }
     }

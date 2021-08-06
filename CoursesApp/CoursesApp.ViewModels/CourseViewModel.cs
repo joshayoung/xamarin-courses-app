@@ -13,6 +13,7 @@ namespace CoursesApp.ViewModels
         private readonly CourseCollection courseCollection;
 
         private int averageStudentAage;
+
         public int AverageStudentAage
         {
             get => GetAverageAge();
@@ -24,6 +25,7 @@ namespace CoursesApp.ViewModels
         }
 
         private int numberOfStudents;
+
         public int NumberOfStudents
         {
             get => course.Students.Count;
@@ -204,7 +206,7 @@ namespace CoursesApp.ViewModels
         public void EditCourse() => courseCollection.EditCourse(course);
 
         public void AddStudent(Student student) => course.AddStudent(student);
-        
+
         public void DeleteStudent(Student student) => course.DeleteStudent(student);
 
         public StudentViewModel NewStudent() =>

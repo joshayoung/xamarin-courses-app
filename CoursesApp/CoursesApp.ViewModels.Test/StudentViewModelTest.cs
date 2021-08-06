@@ -41,7 +41,7 @@ namespace CoursesApp.ViewModels.Test
                 if (args.PropertyName == nameof(studentViewModel.Age)) ageWasChanged = true;
                 if (args.PropertyName == nameof(studentViewModel.Major)) majorWasChanged = true;
             };
-            
+
             studentViewModel.Name = "new name";
             studentViewModel.Age = 38;
             studentViewModel.Major = "Science";

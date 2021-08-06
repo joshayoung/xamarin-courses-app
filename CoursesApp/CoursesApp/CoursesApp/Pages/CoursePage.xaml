@@ -7,7 +7,8 @@
   xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
   xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
   ios:Page.UseSafeArea="true"
-  x:DataType="viewModels:CourseViewModel">
+  x:DataType="viewModels:CourseViewModel"
+  >
   <ContentPage.Content>
     <StackLayout Margin="20">
       <Label

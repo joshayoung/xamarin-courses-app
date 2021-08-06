@@ -23,7 +23,7 @@ namespace CoursesApp.ViewModels
                 };
             }
         }
-        
+
         public string? Name
         {
             get => student.Name;
@@ -67,7 +67,7 @@ namespace CoursesApp.ViewModels
         }
 
         public void AddStudent() => courseViewModel.AddStudent(student);
-        
+
         public void DeleteStudent() => courseViewModel.DeleteStudent(student);
     }
 }

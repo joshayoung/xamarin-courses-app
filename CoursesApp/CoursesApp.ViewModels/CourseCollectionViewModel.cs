@@ -27,7 +27,7 @@ namespace CoursesApp.ViewModels
         public CourseCollectionViewModel(CourseCollection? courseCollection)
         {
             this.courseCollection = courseCollection ?? throw new ArgumentException();
-            
+
             courseCollection.PropertyChanged += CoursesCollectionOnPropertyChanged;
             RefreshList();
         }
