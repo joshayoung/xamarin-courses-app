@@ -57,6 +57,8 @@ namespace CoursesApp.ViewModels
         {
             this.student = student;
             this.courseViewModel = courseViewModel;
+            
+            // Update the Model:
             student.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
 

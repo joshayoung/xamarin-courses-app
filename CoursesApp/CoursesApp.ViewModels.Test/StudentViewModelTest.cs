@@ -77,18 +77,60 @@ namespace CoursesApp.ViewModels.Test
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
             var courseViewModel = Substitute.ForPartsOf<CourseViewModel>(course, courseCollection);
             var studentViewModel = new StudentViewModel(student, courseViewModel);
-            var wasChanged = false;
+            var nameWasChanged = false;
+            var ageWasChanged = false;
+            var majorWasChanged = false;
 
             studentViewModel.PropertyChanged += (sender, args) =>
             {
-                if (args.PropertyName == nameof(studentViewModel.Name))
-                {
-                    wasChanged = true;
-                }
+                // TODO: Are you testing this correctly?
+                if (args.PropertyName == nameof(studentViewModel.Name)) nameWasChanged = true;
+                if (args.PropertyName == nameof(studentViewModel.Age)) ageWasChanged = true;
+                if (args.PropertyName == nameof(studentViewModel.Major)) majorWasChanged = true;
             };
 
             student.Name = "new name";
-            wasChanged.Should().BeTrue();
+            student.Age = 30;
+            student.Major = "Math";
+            nameWasChanged.Should().BeTrue();
+            ageWasChanged.Should().BeTrue();
+            majorWasChanged.Should().BeTrue();
+        }
+
+        [Fact]
+        public void AddStudent_Called_ExpectCallsCorrectMethodCalledWithValue()
+        {
+            string name = "Joe";
+            int age = 31;
+            string major = "Physics";
+            var student = new Student(name, age, major);
+            var course = Substitute.ForPartsOf<Course>("id", "title", 1, CourseType.Discussion, new List<Student>(0));
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
+            var courseViewModel = Substitute.ForPartsOf<CourseViewModel>(course, courseCollection);
+            var studentViewModel = new StudentViewModel(student, courseViewModel);
+            
+            studentViewModel.AddStudent();
+            
+            courseViewModel.Received().AddStudent(student);
+        }
+
+        [Fact]
+        public void DeleteStudent_Called_ExpectCorrectMethodCalledWithValue()
+        {
+            string name = "Joe";
+            int age = 31;
+            string major = "Physics";
+            var student = new Student(name, age, major);
+            var course = Substitute.ForPartsOf<Course>("id", "title", 1, CourseType.Discussion, new List<Student>(0));
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
+            var courseViewModel = Substitute.ForPartsOf<CourseViewModel>(course, courseCollection);
+            var studentViewModel = new StudentViewModel(student, courseViewModel);
+            
+            studentViewModel.DeleteStudent();
+            
+            courseViewModel.Received().DeleteStudent(student);
         }
     }
 }

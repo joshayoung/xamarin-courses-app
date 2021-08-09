@@ -79,13 +79,13 @@ namespace CoursesApp.Models
             this.type = type;
         }
 
-        public void AddStudent(Student student)
+        public virtual void AddStudent(Student student)
         {
             students?.Add(student);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
         }
 
-        public void DeleteStudent(Student student)
+        public virtual void DeleteStudent(Student student)
         {
             students?.Remove(student);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));

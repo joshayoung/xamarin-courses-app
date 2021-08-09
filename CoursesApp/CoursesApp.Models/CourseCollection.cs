@@ -22,18 +22,18 @@ namespace CoursesApp.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
         }
 
-        public void AddCourse(Course course)
+        public virtual void AddCourse(Course course)
         {
             Courses.Add(course);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
         }
 
-        public void EditCourse(Course course)
+        public virtual void EditCourse(Course course)
         {
             // This is where I could call out to my API to save this record in the DB.
         }
 
-        public void DeleteCourse(Course course)
+        public virtual void DeleteCourse(Course course)
         {
             Courses.Remove(course);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));

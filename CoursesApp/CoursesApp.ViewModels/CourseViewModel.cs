@@ -156,8 +156,9 @@ namespace CoursesApp.ViewModels
             this.courseCollection = courseCollection;
             RefreshStudents();
             course.PropertyChanged += OnPropertyChanged;
-            course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
             course.Students.ForEach(student => student.PropertyChanged += StudentOnPropertyChanged);
+            
+            course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
 
         private void StudentOnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -205,7 +206,7 @@ namespace CoursesApp.ViewModels
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Students))
+            if (e.PropertyName == nameof(Course.Students))
             {
                 RefreshStudents();
                 NumberOfStudents = course.Students.Count;
