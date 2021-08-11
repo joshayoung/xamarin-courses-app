@@ -54,7 +54,8 @@ namespace CoursesApp.ViewModels.Test
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = new CourseCollection(courseDataService);
-            var course = new Course("1", "title", 2, CourseType.Lab, new List<Student>());
+            var course = new Course("1", "title", 2, CourseType.Lab, new List<Student>()
+            );
             var wasIdChanged = false;
             var wasTitleChanged = false;
             var wasLengthChanged = false;
@@ -73,7 +74,7 @@ namespace CoursesApp.ViewModels.Test
             course.Id = "2";
             course.Title = "a new title";
             course.Length = 3;
-            course.Students = new List<Student>();
+            course.Students = new List<Student> { new Student("name", 30, "major") };
             course.Type = CourseType.Discussion;
 
             wasIdChanged.Should().BeTrue();
@@ -81,6 +82,78 @@ namespace CoursesApp.ViewModels.Test
             wasLengthChanged.Should().BeTrue();
             wasStudentsChanged.Should().BeTrue();
             wasTypeChanged.Should().BeTrue();
+        }
+
+        [Fact]
+        public void AverageStudentAge_PropertyChanged_ExpectPropertyChangedEvent()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            var course = new Course("1", "title", 2, CourseType.Lab,
+                new List<Student> { new Student("name", 30, "major") }
+            );
+            var wasAverageStudentAgeChanged = false;
+            var courseViewModel = new CourseViewModel(course, courseCollection);
+            courseViewModel.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(courseViewModel.AverageStudentAge)) wasAverageStudentAgeChanged = true;
+            };
+
+            course.Students.First().Age = 20;
+
+            wasAverageStudentAgeChanged.Should().BeTrue();
+        }
+
+        [Fact]
+        public void AverageStudentAge_Called_ExpectAverageAgeReturned()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            var students = new List<Student>
+            {
+                new Student("name", 20, "major"),
+                new Student("name", 40, "major"),
+            };
+            var course = new Course("1", "title", 2, CourseType.Lab, students);
+            var courseViewModel = new CourseViewModel(course, courseCollection);
+
+            var results = courseViewModel.AverageStudentAge;
+
+            results.Should().Be(30);
+        }
+
+        [Fact]
+        public void NumberOfStudents_Called_ExpectCountOfStudentsReturned()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            var students = new List<Student>
+            {
+                new Student("name", 20, "major"),
+                new Student("name", 40, "major"),
+            };
+            var course = new Course("1", "title", 2, CourseType.Lab, students);
+            var courseViewModel = new CourseViewModel(course, courseCollection);
+
+            var results = courseViewModel.NumberOfStudents;
+
+            results.Should().Be(2);
+        }
+
+        [Fact]
+        public void OldestStudent_Called_ExpectReturnsTheOldestStudentName()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            var youngest = new Student("joe", 20, "major");
+            var oldest = new Student("sam", 40, "major");
+            var students = new List<Student> { youngest, oldest };
+            var course = new Course("1", "title", 2, CourseType.Lab, students);
+            var courseViewModel = new CourseViewModel(course, courseCollection);
+
+            var results = courseViewModel.OldestStudent;
+
+            results.Should().Be(oldest.Name);
         }
 
         [Fact]
@@ -102,18 +175,91 @@ namespace CoursesApp.ViewModels.Test
         }
 
         [Fact]
+        public void RefreshStudents_ConstructorInitialized_ExpectAListOfStudentVMs()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            var student1 = new Student("sally", 20, "Math");
+            var student2 = new Student("joe", 21, "Science");
+            var students = new List<Student>()
+            {
+                student1,
+                student2
+            };
+            var course = new Course("1", "title", 2, CourseType.Lab, students);
+            var courseViewModel = new CourseViewModel(course, courseCollection);
+            var studentViewModelList = new List<StudentViewModel>
+            {
+                new StudentViewModel(student1, courseViewModel),
+                new StudentViewModel(student2, courseViewModel),
+            };
+
+            courseViewModel.Students.Should().BeEquivalentTo(studentViewModelList);
+        }
+
+        [Fact]
+        public void RefreshStudents_ConstructorInitializedWithEmptyStudentList_ExpectAEmptyListOfStudentVMs()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            var students = new List<Student>();
+            var course = new Course("1", "title", 2, CourseType.Lab, students);
+            var courseViewModel = new CourseViewModel(course, courseCollection);
+
+            courseViewModel.Students.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void RefreshStudents_StudentsModelIsUpdate_ExpectAnUpdatedListOfVMs()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            var student1 = new Student("sally", 20, "Math");
+            var student2 = new Student("joe", 21, "Science");
+            var student3 = new Student("sam", 18, "English");
+            var students = new List<Student>()
+            {
+                student1,
+                student2
+            };
+            var course = new Course("1", "title", 2, CourseType.Lab, students);
+            var courseViewModel = new CourseViewModel(course, courseCollection);
+            var studentViewModelList = new List<StudentViewModel>
+            {
+                new StudentViewModel(student1, courseViewModel),
+                new StudentViewModel(student2, courseViewModel),
+            };
+            var studentViewModelListUpdated = new List<StudentViewModel>
+            {
+                new StudentViewModel(student1, courseViewModel),
+                new StudentViewModel(student2, courseViewModel),
+                new StudentViewModel(student3, courseViewModel),
+            };
+            courseViewModel.Students.Should().BeEquivalentTo(studentViewModelList);
+
+            // In order to trigger a property change, I have to assign a new list:
+            course.Students = new List<Student>()
+            {
+                student1,
+                student2, student3
+            };
+
+            courseViewModel.Students.Should().BeEquivalentTo(studentViewModelListUpdated);
+        }
+
+        [Fact]
         public void AddCourse_Called_ExpectCallsCorrectMethodWithCorrectParam()
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
             var course = new Course("1", "title", 2, CourseType.Lab, new List<Student> { new Student() });
             var courseViewModel = new CourseViewModel(course, courseCollection);
-            
+
             courseViewModel.AddCourse();
 
             courseCollection.Received().AddCourse(course);
         }
-        
+
         [Fact]
         public void EditCourse_Called_ExpectCallsCorrectMethodWithCorrectParam()
         {
@@ -121,12 +267,12 @@ namespace CoursesApp.ViewModels.Test
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
             var course = new Course("1", "title", 2, CourseType.Lab, new List<Student> { new Student() });
             var courseViewModel = new CourseViewModel(course, courseCollection);
-            
+
             courseViewModel.EditCourse();
 
             courseCollection.Received().EditCourse(course);
         }
-        
+
         [Fact]
         public void AddStudent_Called_ExpectCallsCorrectMethodWithCorrectParam()
         {
@@ -136,12 +282,12 @@ namespace CoursesApp.ViewModels.Test
                 Substitute.ForPartsOf<Course>("1", "title", 2, CourseType.Lab, new List<Student> { new Student() });
             var student = new Student();
             var courseViewModel = new CourseViewModel(course, courseCollection);
-            
+
             courseViewModel.AddStudent(student);
 
             course.Received().AddStudent(student);
         }
-        
+
         [Fact]
         public void DeleteStudent_Called_ExpectCallsCorrectMethodWithCorrectParam()
         {
@@ -151,7 +297,7 @@ namespace CoursesApp.ViewModels.Test
                 Substitute.ForPartsOf<Course>("1", "title", 2, CourseType.Lab, new List<Student> { new Student() });
             var student = new Student();
             var courseViewModel = new CourseViewModel(course, courseCollection);
-            
+
             courseViewModel.DeleteStudent(student);
 
             course.Received().DeleteStudent(student);
@@ -165,20 +311,21 @@ namespace CoursesApp.ViewModels.Test
             var course = new Course("1", "title", 2, CourseType.Lab, new List<Student> { new Student() });
             var courseViewModel = new CourseViewModel(course, courseCollection);
             var studentViewModel = new StudentViewModel(new Student(), courseViewModel);
-            
+
             var result = courseViewModel.NewStudent();
-            
+
             result.Should().BeEquivalentTo(studentViewModel);
         }
-        
+
         [Fact]
         public void DeleteCourse_Called_ExpectCallsCorrectMethodWithCorrectParam()
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
-            var course = new Course("1", "title", 2, CourseType.Lab, new List<Student> { new Student() });
+            var course =
+                Substitute.ForPartsOf<Course>("1", "title", 2, CourseType.Lab, new List<Student> { new Student() });
             var courseViewModel = new CourseViewModel(course, courseCollection);
-            
+
             courseViewModel.DeleteCourse();
 
             courseCollection.Received().DeleteCourse(course);

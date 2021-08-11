@@ -52,15 +52,15 @@
               <Label
                 FontAttributes="Italic"
                 Style="{StaticResource CourseLabelStyle}"
-                Text="{Binding AverageStudentAage}"
+                Text="{Binding AverageStudentAge}"
                 />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-              <Label Style="{StaticResource CourseLabelStyle}" Text="Common Major:" />
+              <Label Style="{StaticResource CourseLabelStyle}" Text="Oldest Student" />
               <Label
                 FontAttributes="Italic"
                 Style="{StaticResource CourseLabelStyle}"
-                Text="{Binding CommonMajor}"
+                Text="{Binding OldestStudent}"
                 />
             </StackLayout>
           </StackLayout>
