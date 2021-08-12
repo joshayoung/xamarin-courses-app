@@ -18,8 +18,15 @@ namespace CoursesApp.Pages
 
         private void SaveCourseEdits(object sender, EventArgs e)
         {
-            courseViewModel.EditCourse();
-            Navigation.PopModalAsync();
+            try
+            {
+                courseViewModel.EditCourse();
+                Navigation.PopModalAsync();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
 
         private void CloseModal(object sender, EventArgs e) => Navigation.PopModalAsync();

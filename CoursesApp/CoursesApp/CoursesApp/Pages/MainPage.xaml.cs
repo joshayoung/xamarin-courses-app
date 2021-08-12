@@ -18,25 +18,53 @@ namespace CoursesApp.Pages
 
         private void NavigateToDetails(object sender, EventArgs e)
         {
-            var courseViewModel = (CourseViewModel)((BindableObject)sender).BindingContext;
-            Navigation.PushAsync(new CoursePage(courseViewModel));
+            try
+            {
+                var courseViewModel = (CourseViewModel)((BindableObject)sender).BindingContext;
+                Navigation.PushAsync(new CoursePage(courseViewModel));
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
 
         private void AddCourse(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new AddCoursePage(courseCollectionViewModel.NewCourseViewModel()));
+            try
+            {
+                Navigation.PushModalAsync(new AddCoursePage(courseCollectionViewModel.NewCourseViewModel()));
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
 
         private void DeleteClass(object sender, EventArgs e)
         {
-            var courseViewModel = (CourseViewModel)((BindableObject)sender).BindingContext;
-            courseViewModel.DeleteCourse();
+            try
+            {
+                var courseViewModel = (CourseViewModel)((BindableObject)sender).BindingContext;
+                courseViewModel.DeleteCourse();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         private void EditClass(object sender, EventArgs e)
         {
-            var courseViewModel = (CourseViewModel)((BindableObject)sender).BindingContext;
-            Navigation.PushModalAsync(new EditCoursePage(courseViewModel));
+            try
+            {
+                var courseViewModel = (CourseViewModel)((BindableObject)sender).BindingContext;
+                Navigation.PushModalAsync(new EditCoursePage(courseViewModel));
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
     }
 }
