@@ -123,6 +123,96 @@ namespace CoursesApp.ViewModels.Test
         }
 
         [Fact]
+        public void SelectedType_Called_ExpectReturnsCorrectValueAndPropertyChange()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            var students = new List<Student>
+            {
+                new Student("name", 20, "major"),
+                new Student("name", 40, "major"),
+            };
+            var course = new Course("1", "title", 2, CourseType.Lab, students);
+            var courseViewModel = new CourseViewModel(course, courseCollection);
+            var wasSelectedTypeChanged = false;
+
+            courseViewModel.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(CourseViewModel.SelectedType)) wasSelectedTypeChanged = true;
+            };
+
+            courseViewModel.SelectedType.Should().Be(course.Type);
+            courseViewModel.SelectedType = CourseType.Discussion;
+            wasSelectedTypeChanged.Should().BeTrue();
+        }
+        
+        [Fact]
+        public void SelectedLength_Called_ExpectReturnsCorrectValueAndPropertyChange()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            var students = new List<Student>
+            {
+                new Student("name", 20, "major"),
+                new Student("name", 40, "major"),
+            };
+            var course = new Course("1", "title", 2, CourseType.Lab, students);
+            var courseViewModel = new CourseViewModel(course, courseCollection);
+            var wasSelectedLengthChanged = false;
+
+            courseViewModel.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(CourseViewModel.SelectedLength)) wasSelectedLengthChanged = true;
+            };
+
+            courseViewModel.SelectedLength.Should().Be(course.Length);
+            courseViewModel.SelectedLength = 3;
+            wasSelectedLengthChanged.Should().BeTrue();
+        }
+
+        [Fact]
+        public void CourseLengthList_Called_ExpectCorrectReturnValue()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            var students = new List<Student>
+            {
+                new Student("name", 20, "major"),
+                new Student("name", 40, "major"),
+            };
+            var course = new Course("1", "title", 2, CourseType.Lab, students);
+            var courseViewModel = new CourseViewModel(course, courseCollection);
+            var wasSelectedLengthChanged = false;
+            var courseLengthList = new List<float> { 1, 2, 3, 4 };
+
+            courseViewModel.CourseLengthList.Should().BeEquivalentTo(courseLengthList);
+        }
+
+        [Fact]
+        public void CourseTypesList_Called_ExpectReturnsTheCorrectValue()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            var students = new List<Student>
+            {
+                new Student("name", 20, "major"),
+                new Student("name", 40, "major"),
+            };
+            var course = new Course("1", "title", 2, CourseType.Lab, students);
+            var courseViewModel = new CourseViewModel(course, courseCollection);
+            var courseTypesList = new List<CourseType>
+                {
+                    CourseType.Seminar,
+                    CourseType.Lab,
+                    CourseType.Independent,
+                    CourseType.Lecture,
+                    CourseType.Discussion,
+                };
+
+            courseViewModel.CourseTypesList.Should().BeEquivalentTo(courseTypesList);
+        }
+
+        [Fact]
         public void NumberOfStudents_Called_ExpectCountOfStudentsReturned()
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
@@ -175,6 +265,24 @@ namespace CoursesApp.ViewModels.Test
         }
 
         [Fact]
+        public void StudentOnPropertyChanged_PropertyNameDoesNotEqualAge_ExpectAverageStudentAgeNotUpdated()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            var course = new Course("1", "title", 2, CourseType.Lab, new List<Student> { new Student() });
+            var wasAgeChanged = false;
+            var courseViewModel = new CourseViewModel(course, courseCollection);
+            course.Students.ForEach(student => student.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(Student.Age)) wasAgeChanged = true;
+            });
+
+            courseViewModel.Students.First().Name = "Joe";
+
+            wasAgeChanged.Should().BeFalse();
+        }
+
+        [Fact]
         public void RefreshStudents_ConstructorInitialized_ExpectAListOfStudentVMs()
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
@@ -207,6 +315,17 @@ namespace CoursesApp.ViewModels.Test
             var courseViewModel = new CourseViewModel(course, courseCollection);
 
             courseViewModel.Students.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void RefreshStudents_CourseStudentsIsNull_ExpectStudentsViewModelEmpty()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            var course = new Course("1", "title", 2, CourseType.Lab);
+            var courseViewModel = new CourseViewModel(course, courseCollection);
+
+            courseViewModel.Students.Should().BeNull();
         }
 
         [Fact]

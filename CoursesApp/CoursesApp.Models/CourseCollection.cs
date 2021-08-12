@@ -4,7 +4,7 @@ using CoursesApp.Models.Service;
 
 namespace CoursesApp.Models
 {
-    public sealed class CourseCollection : INotifyPropertyChanged
+    public class CourseCollection : INotifyPropertyChanged
     {
         private readonly CourseDataService courseDataService;
         
@@ -33,7 +33,7 @@ namespace CoursesApp.Models
             // This is where I could call out to my API to save this record in the DB.
         }
 
-        public void DeleteCourse(Course course)
+        public virtual void DeleteCourse(Course course)
         {
             Courses.Remove(course);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));

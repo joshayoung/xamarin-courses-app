@@ -75,7 +75,7 @@ namespace CoursesApp.Models
             this.id = id;
             this.title = title ?? "";
             this.length = length;
-            this.students = students ?? new List<Student>();
+            this.students = students;
             this.type = type;
         }
 

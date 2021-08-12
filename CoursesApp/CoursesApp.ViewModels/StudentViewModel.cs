@@ -5,7 +5,7 @@ using CoursesApp.Models;
 
 namespace CoursesApp.ViewModels
 {
-    public sealed class StudentViewModel : INotifyPropertyChanged
+    public class StudentViewModel : INotifyPropertyChanged
     {
         private readonly Student student;
         private readonly CourseViewModel courseViewModel;
