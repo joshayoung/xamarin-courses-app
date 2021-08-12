@@ -21,6 +21,7 @@ namespace CoursesApp.Helpers
             formattedString.Spans.Add(spanPenultimate);
             formattedString.Spans.Add(spanFinal);
             label.FormattedText = formattedString;
+            
             return label;
         }
     }

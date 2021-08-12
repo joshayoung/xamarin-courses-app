@@ -7,14 +7,15 @@ using CoursesApp.Models;
 
 namespace CoursesApp.ViewModels
 {
-    public class CourseViewModel : INotifyPropertyChanged
+    public sealed class CourseViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
         private readonly Course course;
         private readonly CourseCollection courseCollection;
+        
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        private int averageStudentAge;
-        public int AverageStudentAge
+        private int? averageStudentAge;
+        public int? AverageStudentAge
         {
             get => GetAverageAge();
             private set
@@ -24,21 +25,25 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        private int numberOfStudents;
-        public int NumberOfStudents
+        private int? numberOfStudents;
+        public int? NumberOfStudents
         {
-            get => course.Students.Count;
+            get => course.Students?.Count;
         }
 
-        public string OldestStudent
+        public string? OldestStudent
         {
             get
             {
-            return course.Students.Count < 1 ? "" : course.Students.First(s => s.Age == students.Max(st => st.Age)).Name;
-                
+                if (course.Students != null && course.Students.Count > 0)
+                {
+                    return course.Students.First(s => students != null && s.Age == students.Max(st => st.Age)).Name;
+                }
+
+                return "";
             }
         }
-        
+
         public CourseType SelectedType
         {
             get => course.Type;
@@ -59,17 +64,10 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        public List<float> CourseLengthList
-        {
-            get => new List<float>
-            {
-                1, 2, 3, 4
-            };
-        }
+        public List<float> CourseLengthList => new List<float> { 1, 2, 3, 4 };
 
-        public List<CourseType> CourseTypesList
-        {
-            get => new List<CourseType>
+        public List<CourseType> CourseTypesList =>
+            new List<CourseType>
             {
                 CourseType.Seminar,
                 CourseType.Lab,
@@ -77,7 +75,6 @@ namespace CoursesApp.ViewModels
                 CourseType.Lecture,
                 CourseType.Discussion,
             };
-        }
 
         public string Id
         {
@@ -89,9 +86,9 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        public string Title
+        public string? Title
         {
-            get => course.Title;
+            get => course?.Title;
             set
             {
                 course.Title = value;
@@ -136,21 +133,19 @@ namespace CoursesApp.ViewModels
             this.courseCollection = courseCollection;
             RefreshStudents();
             course.PropertyChanged += OnPropertyChanged;
-            course.Students.ForEach(student => student.PropertyChanged += StudentOnPropertyChanged);
+            course.Students?.ForEach(student => student.PropertyChanged += StudentOnPropertyChanged);
             
             course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
 
         private void StudentOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Student.Age))
-            {
-                AverageStudentAge = GetAverageAge();
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AverageStudentAge)));
-            }
+            if (e.PropertyName != nameof(Student.Age)) return;
+            AverageStudentAge = GetAverageAge();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AverageStudentAge)));
         }
 
-        private int GetAverageAge()
+        private int? GetAverageAge()
         {
             if (course.Students != null && NumberOfStudents != 0)
             {
@@ -162,7 +157,7 @@ namespace CoursesApp.ViewModels
 
         private void RefreshStudents()
         {
-            // if (course.Students == null) return;
+            if (course.Students == null) return;
 
             IEnumerable<StudentViewModel>
                 studentList = course.Students.Select(student => new StudentViewModel(student, this));
@@ -177,22 +172,18 @@ namespace CoursesApp.ViewModels
 
         public void DeleteStudent(Student student) => course.DeleteStudent(student);
 
-        public StudentViewModel NewStudent() =>
-            new StudentViewModel(new Student(), this);
+        public StudentViewModel NewStudent() => new StudentViewModel(new Student(), this);
 
         public void DeleteCourse() => courseCollection.DeleteCourse(course);
 
-        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Course.Students))
-            {
-                RefreshStudents();
-            }
+            if (e.PropertyName == nameof(Course.Students)) RefreshStudents();
         }
     }
 }

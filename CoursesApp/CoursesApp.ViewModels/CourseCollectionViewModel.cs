@@ -7,7 +7,7 @@ using CoursesApp.Models;
 
 namespace CoursesApp.ViewModels
 {
-    public class CourseCollectionViewModel : INotifyPropertyChanged
+    public sealed class CourseCollectionViewModel : INotifyPropertyChanged
     {
         private readonly CourseCollection courseCollection;
         private List<CourseViewModel>? courses;
@@ -46,19 +46,19 @@ namespace CoursesApp.ViewModels
 
         public CourseViewModel NewCourseViewModel()
         {
-            return new CourseViewModel(
-                new Course(GetNextCourseId().ToString()),
-                courseCollection);
+            return new CourseViewModel(new Course(GetNextCourseId().ToString()), courseCollection);
         }
 
         private int GetNextCourseId()
         {
-            if (Courses.Count == 0) return 1;
-            var id = Int32.Parse(Courses.Max(course => course.Id));
+            if (Courses == null || Courses.Count == 0) return 1;
+            
+            var id = int.Parse(Courses.Max(course => course.Id));
+            
             return ++id;
         }
-        
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

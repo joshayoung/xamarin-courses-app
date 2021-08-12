@@ -22,15 +22,6 @@ namespace CoursesApp.Pages
             Navigation.PopModalAsync();
         }
 
-        private void DeleteStudent(object sender, EventArgs e)
-        {
-            studentViewModel.DeleteStudent();
-            Navigation.PopModalAsync();
-        }
-
-        private void CloseModal(object sender, EventArgs e)
-        {
-            Navigation.PopModalAsync();
-        }
+        private void CloseModal(object sender, EventArgs e) => Navigation.PopModalAsync();
     }
 }

@@ -8,7 +8,7 @@ namespace CoursesApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CoursePage : ContentPage
     {
-        private CourseViewModel courseViewModel;
+        private readonly CourseViewModel courseViewModel;
 
         public CoursePage(CourseViewModel courseViewModel)
         {

@@ -91,7 +91,6 @@ namespace CoursesApp.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
         }
 
-
         protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

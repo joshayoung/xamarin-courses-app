@@ -5,23 +5,15 @@ using CoursesApp.Models;
 
 namespace CoursesApp.ViewModels
 {
-    public class StudentViewModel : INotifyPropertyChanged
+    public sealed class StudentViewModel : INotifyPropertyChanged
     {
         private readonly Student student;
         private readonly CourseViewModel courseViewModel;
         
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public List<int> Ages
-        {
-            get => new List<int>()
-            {
-                student.Age,
-                1,
-                2,
-                3
-            };
-        }
+        // TODO: Change this to return reasonable ages with the student's age selected
+        public List<int> Ages => new List<int> { student.Age, 1, 2, 3 };
 
         public string? Name
         {
@@ -66,7 +58,7 @@ namespace CoursesApp.ViewModels
 
         public void DeleteStudent() => courseViewModel.DeleteStudent(student);
 
-        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

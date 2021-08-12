@@ -13,6 +13,7 @@ namespace CoursesApp.Models.Service
         public virtual List<Course> GetCourses(string path = DataPath)
         {
             var json = GetJsonString(path);
+            
             return JsonConvert.DeserializeObject<List<Course>>(json);
         }
 

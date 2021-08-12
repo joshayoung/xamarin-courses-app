@@ -22,9 +22,6 @@ namespace CoursesApp.Pages
             Navigation.PopModalAsync();
         }
 
-        private void CloseModal(object sender, EventArgs e)
-        {
-            Navigation.PopModalAsync();
-        }
+        private void CloseModal(object sender, EventArgs e) => Navigation.PopModalAsync();
     }
 }

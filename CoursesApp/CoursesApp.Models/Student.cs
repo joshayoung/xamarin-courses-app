@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace CoursesApp.Models
 {
-    public class Student : INotifyPropertyChanged
+    public sealed class Student : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -58,7 +58,7 @@ namespace CoursesApp.Models
             Major = major ?? "";
         }
 
-        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

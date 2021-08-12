@@ -117,7 +117,7 @@
                     >
                     <StackLayout Orientation="Horizontal">
                       <Label Text="{Binding Name}" TextColor="Black" />
-                      <Label Text="{Binding Age, StringFormat='({0})'}" TextColor="Black" />
+                      <Label Text="{Binding Age, StringFormat='({0} yrs)'}" TextColor="Black" />
                       <Label
                         FontAttributes="Bold"
                         HorizontalOptions="EndAndExpand"

@@ -4,12 +4,12 @@ using CoursesApp.Models.Service;
 
 namespace CoursesApp.Models
 {
-    public class CourseCollection : INotifyPropertyChanged
+    public sealed class CourseCollection : INotifyPropertyChanged
     {
         private readonly CourseDataService courseDataService;
+        
         public event PropertyChangedEventHandler? PropertyChanged;
-
-        public virtual List<Course> Courses { get; private set; } = new List<Course>();
+        public List<Course> Courses { get; private set; } = new List<Course>();
 
         public CourseCollection(CourseDataService courseDataService)
         {
@@ -22,18 +22,18 @@ namespace CoursesApp.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
         }
 
-        public virtual void AddCourse(Course course)
+        public void AddCourse(Course course)
         {
             Courses.Add(course);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
         }
 
-        public virtual void EditCourse(Course course)
+        public void EditCourse(Course course)
         {
             // This is where I could call out to my API to save this record in the DB.
         }
 
-        public virtual void DeleteCourse(Course course)
+        public void DeleteCourse(Course course)
         {
             Courses.Remove(course);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
