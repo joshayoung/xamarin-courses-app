@@ -30,8 +30,9 @@
       BackgroundColor="Tomato"
       HeightRequest="2"
       />
-    <CollectionView ItemsSource="{Binding Courses}">
-      <CollectionView.ItemTemplate>
+
+    <StackLayout BindableLayout.ItemsSource="{Binding Courses}">
+      <BindableLayout.ItemTemplate>
         <DataTemplate x:DataType="viewModels:CourseViewModel">
           <Frame
             Margin="0"
@@ -92,8 +93,17 @@
             </SwipeView>
           </Frame>
         </DataTemplate>
-      </CollectionView.ItemTemplate>
-    </CollectionView>
+      </BindableLayout.ItemTemplate>
+    </StackLayout>
+    <Grid>
+      <Label
+        FontAttributes="Italic"
+        FontSize="14"
+        HorizontalOptions="Center"
+        Text="[Swipe left or right to edit or delete a course.]"
+        TextColor="#448EFF"
+        />
+    </Grid>
     <Button
       BackgroundColor="Khaki"
       Clicked="AddCourse"

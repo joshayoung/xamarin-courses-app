@@ -133,6 +133,15 @@
           </DataTemplate>
         </BindableLayout.ItemTemplate>
       </StackLayout>
+      <Grid>
+        <Label
+          FontAttributes="Italic"
+          FontSize="14"
+          HorizontalOptions="Center"
+          Text="[Swipe left or right to edit or delete a student.]"
+          TextColor="#448EFF"
+          />
+      </Grid>
       <Button
         BackgroundColor="Khaki"
         Clicked="AddStudent"
