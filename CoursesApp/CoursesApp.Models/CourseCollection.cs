@@ -37,6 +37,7 @@ namespace CoursesApp.Models
 
         public virtual void DeleteCourse(Course course)
         {
+            // TODO: Also remove student if only in this course
             Courses.Remove(course);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
         }

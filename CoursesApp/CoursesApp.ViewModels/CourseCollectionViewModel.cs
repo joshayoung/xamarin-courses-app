@@ -4,16 +4,16 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using CoursesApp.Models;
-using Xamarin.Forms.Internals;
 
 namespace CoursesApp.ViewModels
 {
     public sealed class CourseCollectionViewModel : INotifyPropertyChanged
     {
         private readonly CourseCollection courseCollection;
-        
-        private List<CourseViewModel>? courses;
+
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        private List<CourseViewModel>? courses;
 
         public List<CourseViewModel>? Courses
         {
@@ -24,8 +24,9 @@ namespace CoursesApp.ViewModels
                 OnPropertyChanged();
             }
         }
-        
+
         private List<StudentViewModel>? students;
+
         public List<StudentViewModel>? Students
         {
             get => students;
@@ -38,6 +39,7 @@ namespace CoursesApp.ViewModels
 
         public CourseCollectionViewModel(CourseCollection? courseCollection)
         {
+            Courses = new List<CourseViewModel>();
             this.courseCollection = courseCollection ?? throw new ArgumentException();
 
             courseCollection.PropertyChanged += CoursesCollectionOnPropertyChanged;
@@ -51,57 +53,27 @@ namespace CoursesApp.ViewModels
 
         private void RefreshList()
         {
-
-            // foreach (var course in courseCollection.Courses)
-            // {
-            //     var vm = new CourseViewModel(course, courseCollection);
-            //     var studentVmList = new List<StudentViewModel>();
-            //     foreach (var id in course.Students)
-            //     {
-            //         var student = courseCollection.Students.First(student => student.Id == id);
-            //         // studentVmList.Add(student);
-            //         Console.WriteLine("test");
-            //     }
-            //     // vm.Students = new
-            //
-            // }
-
-
-            // IEnumerable<CourseViewModel> courseList =
-            //     courseCollection.Courses.Select(course => new CourseViewModel(course, courseCollection));
-            // Courses = new List<CourseViewModel>(courseList);
-
-            Courses = new List<CourseViewModel>();
-            
+            var courseList = new List<CourseViewModel>();
             foreach (var course in courseCollection.Courses)
             {
-                var studentIds = course.Students;
+                var vm = new CourseViewModel(course, courseCollection);
                 var studentList = new List<StudentViewModel>();
-
-                foreach (var id in studentIds)
+                if (course.Students != null)
                 {
-                    var student = courseCollection.Students.First(student => student.Id == id);
-                    studentList.Add(new StudentViewModel(student));
+                    foreach (var id in course.Students)
+                    {
+                        var student = courseCollection.Students.First(student => student.Id == id);
+                        studentList.Add(new StudentViewModel(student));
+                    }
+
+                    Students = studentList;
                 }
 
-                var vm = new CourseViewModel(course, courseCollection);
-                vm.Students = studentList;
-                Courses.Add(vm);
+                courseList.Add(vm);
             }
 
-            // IEnumerable<StudentViewModel> studentList =
-            //     courseCollection.Students.Select(student => new StudentViewModel(student));
-            // Students = new List<StudentViewModel>(studentList);
-            //
-            // IEnumerable<CourseViewModel> courseList =
-            //     courseCollection.Courses.Select(course => new CourseViewModel(course, courseCollection));
-            // Courses = new List<CourseViewModel>(courseList);
-            //
-            // foreach (var courseVm in Courses)
-            // {
-            //     courseVm.Students = new List<StudentViewModel>();
-            //
-            // }
+            // Has to assign to invoke a PropertyChange:
+            Courses = courseList;
         }
 
         public CourseViewModel NewCourseViewModel()
@@ -112,9 +84,9 @@ namespace CoursesApp.ViewModels
         private int GetNextCourseId()
         {
             if (Courses == null || Courses.Count == 0) return 1;
-            
+
             var id = int.Parse(Courses.Max(course => course.Id));
-            
+
             return ++id;
         }
 
