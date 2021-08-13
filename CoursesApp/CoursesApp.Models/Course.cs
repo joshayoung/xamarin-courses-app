@@ -81,6 +81,7 @@ namespace CoursesApp.Models
 
         public virtual void AddStudent(Student student)
         {
+            students ??= new List<Student>();
             students?.Add(student);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
         }
