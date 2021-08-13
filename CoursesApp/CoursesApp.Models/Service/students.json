@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "James",
+    "age": 21,
+    "major": "Biology"
+  },
+  {
+    "id": 2,
+    "name": "Sarah",
+    "age": 18,
+    "major": "History"
+  },
+  {
+    "id": 3,
+    "name": "Joe",
+    "age": 20,
+    "major": "English"
+  },
+  {
+    "id": 4,
+    "name": "Janet",
+    "age": 22,
+    "major": "Physics"
+  },
+  {
+    "id": 5,
+    "name": "Joe",
+    "age": 20,
+    "major": "English"
+  },
+  {
+    "id": 6,
+    "name": "Jim",
+    "age": 21,
+    "major": "History"
+  },
+  {
+    "id": 7,
+    "name": "Sally",
+    "age": 19,
+    "major": "Math"
+  },
+  {
+    "id": 8,
+    "name": "Peter",
+    "age": 20,
+    "major": "Physical Education"
+  },
+  {
+    "id": 9,
+    "name": "Jim",
+    "age": 21,
+    "major": "History"
+  },
+  {
+    "id": 10,
+    "name": "Sue",
+    "age": 18,
+    "major": "Physics"
+  }
+]

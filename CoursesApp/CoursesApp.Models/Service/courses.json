@@ -3,89 +3,44 @@
     "id": 1,
     "title": "English III",
     "length": 3,
+    "type": 3,
     "students": [
-      {
-        "name": "James",
-        "age": 21,
-        "major": "Biology"
-      },
-      {
-        "name": "Sarah",
-        "age": 18,
-        "major": "History"
-      }
-    ],
-    "teachers": [
-      {
-        "name": "Frank",
-        "age": 40,
-        "experience": 20
-      }
-    ],
-    "type": 3
+      "1",
+      "2",
+      "3"
+    ]
   },
   {
     "id": 2,
     "title": "Algebra I",
     "length": 2,
+    "type": 3,
     "students": [
-      {
-        "name": "Joe",
-        "age": 20,
-        "major": "English"
-      },
-      {
-        "name": "Janet",
-        "age": 22,
-        "major": "Physics"
-      }
-    ],
-    "type": 3
+      "4",
+      "5",
+      "6"
+    ]
   },
   {
     "id": 3,
     "title": "Advanced Math",
     "length": 3,
+    "type": 2,
     "students": [
-      {
-        "name": "Joe",
-        "age": 20,
-        "major": "English"
-      },
-      {
-        "name": "Jim",
-        "age": 21,
-        "major": "History"
-      },
-      {
-        "name": "Sally",
-        "age": 19,
-        "major": "Math"
-      }
-    ],
-    "type": 2
+      "7",
+      "8",
+      "9"
+    ]
   },
   {
     "id": 4,
     "title": "Physical Science",
     "length": 4,
+    "type": 3,
     "students": [
-      {
-        "name": "Peter",
-        "age": 20,
-        "major": "Physical Education"
-      },
-      {
-        "name": "Jim",
-        "age": 21,
-        "major": "History"
-      },
-      {
-        "name": "Sue",
-        "age": 18,
-        "major": "Physics"
-      }
-    ],
-    "type": 3
+      "10",
+      "1",
+      "2"
+    ]
   }
 ]

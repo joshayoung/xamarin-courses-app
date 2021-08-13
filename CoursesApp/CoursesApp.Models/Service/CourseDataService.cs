@@ -8,13 +8,21 @@ namespace CoursesApp.Models.Service
 {
     public class CourseDataService
     {
-        private const string DataPath = "CoursesApp.Models.Service.courses.json";
+        private const string CourseDataPath = "CoursesApp.Models.Service.courses.json";
+        private const string StudentDataPath = "CoursesApp.Models.Service.students.json";
 
-        public virtual List<Course> GetCourses(string path = DataPath)
+        public virtual List<Course> GetCourses(string path = CourseDataPath)
         {
             var json = GetJsonString(path);
             
             return JsonConvert.DeserializeObject<List<Course>>(json);
+        }
+
+        public List<Student> GetStudents(string path = StudentDataPath)
+        {
+            var json = GetJsonString(path);
+            
+            return JsonConvert.DeserializeObject<List<Student>>(json);
         }
 
         private static string GetJsonString(string json)

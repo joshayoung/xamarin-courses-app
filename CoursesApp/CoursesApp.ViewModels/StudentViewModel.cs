@@ -45,7 +45,8 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        public StudentViewModel(Student student, CourseViewModel courseViewModel)
+        //public StudentViewModel(Student student, CourseViewModel courseViewModel)
+        public StudentViewModel(Student student)
         {
             this.student = student;
             this.courseViewModel = courseViewModel;
@@ -54,9 +55,9 @@ namespace CoursesApp.ViewModels
             student.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
 
-        public void AddStudent() => courseViewModel.AddStudent(student);
+        // public void AddStudent() => courseViewModel.AddStudent(student);
 
-        public void DeleteStudent() => courseViewModel.DeleteStudent(student);
+        // public void DeleteStudent() => courseViewModel.DeleteStudent(student);
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
         {

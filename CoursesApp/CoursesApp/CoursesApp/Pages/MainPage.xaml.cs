@@ -16,7 +16,7 @@ namespace CoursesApp.Pages
             welcome.Children.Add(PageHelper.WelcomeText());
         }
 
-        private void NavigateToDetails(object sender, EventArgs e)
+        private void ViewCourseDetails(object sender, EventArgs e)
         {
             try
             {

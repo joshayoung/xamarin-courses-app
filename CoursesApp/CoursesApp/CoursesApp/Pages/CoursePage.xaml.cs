@@ -18,14 +18,14 @@ namespace CoursesApp.Pages
 
         private void AddStudent(object sender, EventArgs e)
         {
-            try
-            {
-                Navigation.PushModalAsync(new AddStudentPage(courseViewModel.NewStudent()));
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception);
-            }
+            // try
+            // {
+            //     Navigation.PushModalAsync(new AddStudentPage(courseViewModel.NewStudent()));
+            // }
+            // catch (Exception exception)
+            // {
+            //     Console.WriteLine(exception);
+            // }
         }
 
         private void EditStudent(object sender, EventArgs e)
@@ -46,7 +46,7 @@ namespace CoursesApp.Pages
             try
             {
                 var studentViewModel = (StudentViewModel)((BindableObject)sender).BindingContext;
-                studentViewModel.DeleteStudent();
+                // studentViewModel.DeleteStudent();
                 Navigation.PopModalAsync();
             }
             catch (Exception ex)

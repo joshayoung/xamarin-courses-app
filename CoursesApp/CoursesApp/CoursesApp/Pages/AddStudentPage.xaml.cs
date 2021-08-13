@@ -20,7 +20,7 @@ namespace CoursesApp.Pages
         {
             try
             {
-                studentViewModel.AddStudent();
+                // studentViewModel.AddStudent();
                 Navigation.PopModalAsync();
             }
             catch (Exception ex)

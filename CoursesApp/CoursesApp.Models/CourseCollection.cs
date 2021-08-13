@@ -10,6 +10,7 @@ namespace CoursesApp.Models
         
         public event PropertyChangedEventHandler? PropertyChanged;
         public List<Course> Courses { get; private set; } = new List<Course>();
+        public List<Student> Students { get; private set; } = new List<Student>();
 
         public CourseCollection(CourseDataService courseDataService)
         {
@@ -19,6 +20,7 @@ namespace CoursesApp.Models
         public void RepopulateCourseList()
         {
             Courses = courseDataService.GetCourses();
+            Students = courseDataService.GetStudents();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
         }
 

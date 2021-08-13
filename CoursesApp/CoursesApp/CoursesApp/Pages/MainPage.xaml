@@ -77,7 +77,7 @@
                   HasShadow="False"
                   >
                   <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="NavigateToDetails" />
+                    <TapGestureRecognizer Tapped="ViewCourseDetails" />
                   </Frame.GestureRecognizers>
                   <StackLayout Orientation="Horizontal">
                     <Label HorizontalOptions="Start" Text="{Binding Title}" />
