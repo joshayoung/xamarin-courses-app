@@ -110,13 +110,22 @@ namespace CoursesApp.ViewModels
 
         private void RefreshStudents()
         {
-            Console.WriteLine("test");
-            // TODO: just for testing:
-            Course cs = courseCollection.Courses.First(cs => cs == course);
+            try
+            {
+                Course cs = courseCollection.Courses.First(cs => cs == course);
             IEnumerable<StudentViewModel>
                 studentList = cs.Students.Select(student => new StudentViewModel(GetStudent(student), this));
             Students = new List<StudentViewModel>(studentList);
             // PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
+            }
+            catch (Exception ex)
+            {
+                
+                // Prevent crashing for new course addition:
+                return;
+            }
+
+
         }
 
         private Student GetStudent(int id)
@@ -149,10 +158,8 @@ namespace CoursesApp.ViewModels
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            // if (e.PropertyName == nameof(CourseCollection.Students))
-            // {
-                RefreshStudents();
-            // }
+            // TODO: This needs to target a particular name and not everything:
+            RefreshStudents();
         }
     }
 }
