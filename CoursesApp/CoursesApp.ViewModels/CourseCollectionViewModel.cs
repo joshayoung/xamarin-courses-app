@@ -14,46 +14,41 @@ namespace CoursesApp.ViewModels
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private List<CourseViewModel>? courses;
+
         public List<CourseViewModel>? Courses
         {
             get => courses;
             set
             {
                 courses = value;
+                // Needed to repopulate the course list after adding/removing a course:
                 OnPropertyChanged();
             }
         }
 
         private List<StudentViewModel>? students;
+
         public List<StudentViewModel>? Students
         {
             get => students;
-            set
+            private set
             {
                 students = value;
                 OnPropertyChanged();
             }
         }
 
-        public CourseCollectionViewModel(CourseCollection? courseCollection)
+        public CourseCollectionViewModel(CourseCollection courseCollection)
         {
-            this.courseCollection = courseCollection ?? throw new ArgumentException();
-
+            this.courseCollection = courseCollection;
             courseCollection.PropertyChanged += CoursesCollectionOnPropertyChanged;
             RefreshList();
         }
 
         private void CoursesCollectionOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(CourseCollection.Courses))
-            {
-                RefreshList();
-            }
-
-            if (e.PropertyName == nameof(CourseCollection.Students))
-            {
-                RefreshList();
-            }
+            if (e.PropertyName == nameof(CourseCollection.Courses)) RefreshList();
+            if (e.PropertyName == nameof(CourseCollection.Students)) RefreshList();
         }
 
         private void RefreshList()
@@ -63,17 +58,15 @@ namespace CoursesApp.ViewModels
             {
                 var vm = new CourseViewModel(course, courseCollection);
                 var studentList = new List<StudentViewModel>();
-                if (course.Students != null)
+                foreach (var id in course.Students)
                 {
-                    foreach (var id in course.Students)
-                    {
-                        var student = courseCollection.Students.First(student => student.Id == id);
-                        // TODO: Ideally this would be passed the CourseCollectionVM so i can call it directly, instead of passing through the CourseVM
-                        studentList.Add(new StudentViewModel(student, vm));
-                    }
-
-                    Students = studentList;
+                    var student = courseCollection.Students.First(student => student.Id == id);
+                    // TODO: Ideally this would be passed the CourseCollectionVM so i can call it directly, instead of passing through the CourseVM
+                    studentList.Add(new StudentViewModel(student, vm));
                 }
+
+                Students = studentList;
+                vm.Students = new List<StudentViewModel>(studentList);
 
                 courseList.Add(vm);
             }

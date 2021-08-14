@@ -9,30 +9,11 @@ namespace CoursesApp.Models
     {
         private readonly CourseDataService courseDataService;
 
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        private List<Course> courses;
+        public List<Course> Courses { get; set; } = new List<Course>();
 
-        public List<Course> Courses
-        {
-            get => courses;
-            private set
-            {
-                courses = value ?? new List<Course>();
-                OnPropertyChanged();
-            }
-        }
-
-        private List<Student> students;
-
-        public List<Student> Students
-        {
-            get => students;
-            private set
-            {
-                students = value ?? new List<Student>();
-                OnPropertyChanged();
-            }
-        }
+        public List<Student> Students { get; set; } = new List<Student>();
 
         public CourseCollection(CourseDataService courseDataService)
         {
@@ -43,8 +24,6 @@ namespace CoursesApp.Models
         {
             Courses = courseDataService.GetCourses();
             Students = courseDataService.GetStudents();
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
         }
 
         public void AddCourse(Course course)
@@ -53,10 +32,8 @@ namespace CoursesApp.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
         }
 
-        public void EditCourse(Course course)
-        {
-            // This is where I could call out to my API to save this record in the DB.
-        }
+        // This is where I could call out to my API to save this record in the DB.
+        public void EditCourse(Course course) { }
 
         public virtual void DeleteCourse(Course course)
         {
@@ -69,13 +46,7 @@ namespace CoursesApp.Models
         {
             Students.Add(student);
             course.Students.Add(student.Id);
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
         }
     }
 }

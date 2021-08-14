@@ -103,27 +103,20 @@ namespace CoursesApp.ViewModels
             this.courseCollection = courseCollection;
             RefreshStudents();
             course.PropertyChanged += OnPropertyChanged;
-            // course.Students?.ForEach(student => student.PropertyChanged += StudentOnPropertyChanged);
-            
-            course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
-        }
+            courseCollection.PropertyChanged += OnPropertyChanged;
 
-        private void StudentOnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName != nameof(Student.Age)) return;
-            // AverageStudentAge = GetAverageAge();
-            // PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AverageStudentAge)));
+            // course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
 
         private void RefreshStudents()
         {
-            Course cs = courseCollection.Courses.Last();
-
+            Console.WriteLine("test");
+            // TODO: just for testing:
+            Course cs = courseCollection.Courses.First(cs => cs == course);
             IEnumerable<StudentViewModel>
                 studentList = cs.Students.Select(student => new StudentViewModel(GetStudent(student), this));
             Students = new List<StudentViewModel>(studentList);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
-            Console.WriteLine("Looks like it is updating Students, but not the page?");
+            // PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
         }
 
         private Student GetStudent(int id)
@@ -144,7 +137,6 @@ namespace CoursesApp.ViewModels
             if (course.Students.Count == 0) return 1;
             
             int maxLength = course.Students.Max();
-            Console.WriteLine("test");
             return maxLength + 1;
         }
 
@@ -157,10 +149,10 @@ namespace CoursesApp.ViewModels
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(course.Students))
-            {
+            // if (e.PropertyName == nameof(CourseCollection.Students))
+            // {
                 RefreshStudents();
-            }
+            // }
         }
     }
 }
