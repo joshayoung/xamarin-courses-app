@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using CoursesApp.Models;
-using Xamarin.Forms.Internals;
 
 namespace CoursesApp.ViewModels
 {
@@ -14,36 +13,6 @@ namespace CoursesApp.ViewModels
         private readonly CourseCollection courseCollection;
         
         public event PropertyChangedEventHandler? PropertyChanged;
-
-        // private int? averageStudentAge;
-        // public int? AverageStudentAge
-        // {
-        //     get => GetAverageAge();
-        //     private set
-        //     {
-        //         averageStudentAge = value;
-        //         NotifyPropertyChanged();
-        //     }
-        // }
-
-        // private int? numberOfStudents;
-        // public int? NumberOfStudents
-        // {
-        //     get => course.Students?.Count;
-        // }
-
-        // public string? OldestStudent
-        // {
-        //     get
-        //     {
-        //         if (course.Students != null && course.Students.Count > 0)
-        //         {
-        //             return course.Students.First(s => students != null && s.Age == students.Max(st => st.Age)).Name;
-        //         }
-        //
-        //         return "";
-        //     }
-        // }
 
         public CourseType SelectedType
         {
@@ -107,8 +76,8 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        private List<StudentViewModel>? students;
-        public List<StudentViewModel>? Students
+        private List<StudentViewModel> students;
+        public List<StudentViewModel> Students
         {
             get => students;
             set
@@ -132,8 +101,8 @@ namespace CoursesApp.ViewModels
         {
             this.course = course;
             this.courseCollection = courseCollection;
-            // RefreshStudents();
-            // course.PropertyChanged += OnPropertyChanged;
+            RefreshStudents();
+            course.PropertyChanged += OnPropertyChanged;
             // course.Students?.ForEach(student => student.PropertyChanged += StudentOnPropertyChanged);
             
             course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
@@ -146,34 +115,38 @@ namespace CoursesApp.ViewModels
             // PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AverageStudentAge)));
         }
 
-        // private int? GetAverageAge()
-        // {
-        //     if (course.Students != null && NumberOfStudents != 0)
-        //     {
-        //         return course.Students.Sum(student => student.Age) / NumberOfStudents;
-        //     }
-        //
-        //     return 0;
-        // }
-        //
-        // private void RefreshStudents()
-        // {
-        //     if (course.Students == null) return;
-        //
-        //     IEnumerable<StudentViewModel>
-        //         studentList = course.Students.Select(student => new StudentViewModel(student, this));
-        //     Students = new List<StudentViewModel>(studentList);
-        // }
+        private void RefreshStudents()
+        {
+            Course cs = courseCollection.Courses.Last();
+
+            IEnumerable<StudentViewModel>
+                studentList = cs.Students.Select(student => new StudentViewModel(GetStudent(student), this));
+            Students = new List<StudentViewModel>(studentList);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
+            Console.WriteLine("Looks like it is updating Students, but not the page?");
+        }
+
+        private Student GetStudent(int id)
+        {
+            return courseCollection.Students.Find(student => student.Id == id);
+        }
 
         public void AddCourse() => courseCollection.AddCourse(course);
 
         public void EditCourse() => courseCollection.EditCourse(course);
 
-        // public void AddStudent(Student student) => course.AddStudent(student);
+        public void AddStudent(Student student) => courseCollection.AddStudent(course, student);
 
-        // public void DeleteStudent(Student student) => course.DeleteStudent(student);
-
-        // public StudentViewModel NewStudent() => new StudentViewModel(new Student(), this);
+        public StudentViewModel NewStudent() => new StudentViewModel(new Student(GetNextCourseId()), this);
+        
+        private int GetNextCourseId()
+        {
+            if (course.Students.Count == 0) return 1;
+            
+            int maxLength = course.Students.Max();
+            Console.WriteLine("test");
+            return maxLength + 1;
+        }
 
         public void DeleteCourse() => courseCollection.DeleteCourse(course);
 
@@ -182,9 +155,12 @@ namespace CoursesApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        // private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        // {
-        //     if (e.PropertyName == nameof(Course.Students)) RefreshStudents();
-        // }
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(course.Students))
+            {
+                RefreshStudents();
+            }
+        }
     }
 }

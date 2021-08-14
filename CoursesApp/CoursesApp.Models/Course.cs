@@ -42,8 +42,8 @@ namespace CoursesApp.Models
             }
         }
 
-        private List<string>? students;
-        public List<string>? Students
+        private List<int> students;
+        public List<int> Students
         {
             get => students;
             set
@@ -70,26 +70,13 @@ namespace CoursesApp.Models
             string title = "",
             float length = 0,
             CourseType type = CourseType.Lecture,
-            List<string>? studentIds = null)
+            List<int>? students = null)
         {
             this.id = id;
             this.title = title ?? "";
             this.length = length;
-            this.students = studentIds;
+            this.students = students ?? new List<int>();
             this.type = type;
-        }
-
-        public virtual void AddStudent(string studentId)
-        {
-            students ??= new List<string>();
-            students?.Add(studentId);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
-        }
-
-        public virtual void DeleteStudent(string student)
-        {
-            students?.Remove(student);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
         }
 
         protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)

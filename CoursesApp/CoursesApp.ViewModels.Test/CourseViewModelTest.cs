@@ -436,18 +436,18 @@ namespace CoursesApp.ViewModels.Test
         //     result.Should().BeEquivalentTo(studentViewModel);
         // }
 
-        [Fact]
-        public void DeleteCourse_Called_ExpectCallsCorrectMethodWithCorrectParam()
-        {
-            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
-            var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
-            var course =
-                Substitute.ForPartsOf<Course>("1", "title", 2, CourseType.Lab, new List<Student> { new Student() });
-            var courseViewModel = new CourseViewModel(course, courseCollection);
-
-            courseViewModel.DeleteCourse();
-
-            courseCollection.Received().DeleteCourse(course);
-        }
+        // [Fact]
+        // public void DeleteCourse_Called_ExpectCallsCorrectMethodWithCorrectParam()
+        // {
+        //     var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+        //     var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
+        //     var course =
+        //         Substitute.ForPartsOf<Course>("1", "title", 2, CourseType.Lab, new List<Student> { new Student() });
+        //     var courseViewModel = new CourseViewModel(course, courseCollection);
+        //
+        //     courseViewModel.DeleteCourse();
+        //
+        //     courseCollection.Received().DeleteCourse(course);
+        // }
     }
 }

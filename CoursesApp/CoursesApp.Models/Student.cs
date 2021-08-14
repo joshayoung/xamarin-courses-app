@@ -7,8 +7,8 @@ namespace CoursesApp.Models
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private string? id;
-        public string? Id
+        private int id;
+        public int Id
         {
             get => id;
             set
@@ -51,8 +51,9 @@ namespace CoursesApp.Models
             }
         }
 
-        public Student(string? name = null, int? age = null, string? major = null)
+        public Student(int id, string? name = null, int? age = null, string? major = null)
         {
+            Id = id;
             Name = name ?? "";
             Age = age ?? 0;
             Major = major ?? "";

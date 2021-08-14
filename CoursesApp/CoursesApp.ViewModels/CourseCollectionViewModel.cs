@@ -14,7 +14,6 @@ namespace CoursesApp.ViewModels
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private List<CourseViewModel>? courses;
-
         public List<CourseViewModel>? Courses
         {
             get => courses;
@@ -26,7 +25,6 @@ namespace CoursesApp.ViewModels
         }
 
         private List<StudentViewModel>? students;
-
         public List<StudentViewModel>? Students
         {
             get => students;
@@ -39,7 +37,6 @@ namespace CoursesApp.ViewModels
 
         public CourseCollectionViewModel(CourseCollection? courseCollection)
         {
-            Courses = new List<CourseViewModel>();
             this.courseCollection = courseCollection ?? throw new ArgumentException();
 
             courseCollection.PropertyChanged += CoursesCollectionOnPropertyChanged;
@@ -48,7 +45,15 @@ namespace CoursesApp.ViewModels
 
         private void CoursesCollectionOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(CourseCollection.Courses)) RefreshList();
+            if (e.PropertyName == nameof(CourseCollection.Courses))
+            {
+                RefreshList();
+            }
+
+            if (e.PropertyName == nameof(CourseCollection.Students))
+            {
+                RefreshList();
+            }
         }
 
         private void RefreshList()
@@ -63,7 +68,8 @@ namespace CoursesApp.ViewModels
                     foreach (var id in course.Students)
                     {
                         var student = courseCollection.Students.First(student => student.Id == id);
-                        studentList.Add(new StudentViewModel(student));
+                        // TODO: Ideally this would be passed the CourseCollectionVM so i can call it directly, instead of passing through the CourseVM
+                        studentList.Add(new StudentViewModel(student, vm));
                     }
 
                     Students = studentList;
@@ -72,7 +78,6 @@ namespace CoursesApp.ViewModels
                 courseList.Add(vm);
             }
 
-            // Has to assign to invoke a PropertyChange:
             Courses = courseList;
         }
 

@@ -18,16 +18,8 @@ namespace CoursesApp.Pages
 
         private void SaveStudent(object sender, EventArgs e)
         {
-            try
-            {
-                // studentViewModel.AddStudent();
+                studentViewModel.AddStudent();
                 Navigation.PopModalAsync();
-            }
-            catch (Exception ex)
-            {
-                // TODO: Log the error
-                Console.WriteLine(ex);
-            }
         }
 
         private void CloseModal(object sender, EventArgs e) => Navigation.PopModalAsync();
