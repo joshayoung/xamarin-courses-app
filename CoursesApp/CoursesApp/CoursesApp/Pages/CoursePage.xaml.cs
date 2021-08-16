@@ -6,11 +6,11 @@ using Xamarin.Forms;
 
 namespace CoursesApp.Pages
 {
-    public partial class MainPage : ContentPage
+    public partial class CoursePage : ContentPage
     {
         private readonly CourseCollectionViewModel courseCollectionViewModel;
 
-        public MainPage(CourseCollectionViewModel courseCollectionViewModel)
+        public CoursePage(CourseCollectionViewModel courseCollectionViewModel)
         {
             InitializeComponent();
             BindingContext = this.courseCollectionViewModel = courseCollectionViewModel;
