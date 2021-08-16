@@ -46,6 +46,19 @@ namespace CoursesApp.Models
         {
             Students.Add(student);
             course.Students.Add(student.Id);
+            
+            // Trigger a Change for Both Lists:
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
+        }
+
+        public void DeleteStudent(Course course, Student student)
+        {
+            Students.Remove(student);
+            course.Students.Remove(student.Id);
+            
+            // Trigger a Change for Both Lists:
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
         }
     }

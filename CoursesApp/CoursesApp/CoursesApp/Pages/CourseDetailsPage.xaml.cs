@@ -31,7 +31,7 @@ namespace CoursesApp.Pages
         private void DeleteStudent(object sender, EventArgs e)
         {
                 var studentViewModel = (StudentViewModel)((BindableObject)sender).BindingContext;
-                // studentViewModel.DeleteStudent();
+                studentViewModel.DeleteStudent();
                 Navigation.PopModalAsync();
         }
     }

@@ -67,7 +67,6 @@ namespace CoursesApp.ViewModels
 
                 Students = studentList;
                 vm.Students = new List<StudentViewModel>(studentList);
-
                 courseList.Add(vm);
             }
 
