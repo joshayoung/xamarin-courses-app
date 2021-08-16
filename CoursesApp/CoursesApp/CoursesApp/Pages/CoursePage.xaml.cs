@@ -25,7 +25,7 @@ namespace CoursesApp.Pages
 
         private void AddCourse(object sender, EventArgs e)
         {
-                Navigation.PushModalAsync(new AddCoursePage(courseCollectionViewModel.NewCourseViewModel()));
+                Navigation.PushModalAsync(new AddCourseModal(courseCollectionViewModel.NewCourseViewModel()));
         }
 
         private void DeleteClass(object sender, EventArgs e)
@@ -37,7 +37,7 @@ namespace CoursesApp.Pages
         private void EditClass(object sender, EventArgs e)
         {
                 var courseViewModel = (CourseViewModel)((BindableObject)sender).BindingContext;
-                Navigation.PushModalAsync(new EditCoursePage(courseViewModel));
+                Navigation.PushModalAsync(new EditCourseModal(courseViewModel));
         }
     }
 }

@@ -19,13 +19,13 @@ namespace CoursesApp.Pages
 
         private void AddStudent(object sender, EventArgs e)
         {
-                Navigation.PushModalAsync(new AddStudentPage(courseViewModel.NewStudent()));
+                Navigation.PushModalAsync(new AddStudentModal(courseViewModel.NewStudent()));
         }
 
         private void EditStudent(object sender, EventArgs e)
         {
                 var studentViewModel = (StudentViewModel)((BindableObject)sender).BindingContext;
-                Navigation.PushModalAsync(new EditStudentPage(studentViewModel));
+                Navigation.PushModalAsync(new EditStudentModal(studentViewModel));
         }
         
         private void DeleteStudent(object sender, EventArgs e)

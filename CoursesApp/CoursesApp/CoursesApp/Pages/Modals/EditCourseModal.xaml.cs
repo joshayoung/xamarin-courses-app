@@ -6,11 +6,11 @@ using Xamarin.Forms.Xaml;
 namespace CoursesApp.Pages.modals
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class EditCoursePage : ContentPage
+    public partial class EditCourseModal : ContentPage
     {
         private readonly CourseViewModel courseViewModel;
 
-        public EditCoursePage(CourseViewModel courseViewModel)
+        public EditCourseModal(CourseViewModel courseViewModel)
         {
             InitializeComponent();
             BindingContext = this.courseViewModel = courseViewModel;
