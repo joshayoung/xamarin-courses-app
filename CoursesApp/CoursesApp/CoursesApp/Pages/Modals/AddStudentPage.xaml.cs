@@ -3,7 +3,7 @@ using CoursesApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace CoursesApp.Pages
+namespace CoursesApp.Pages.modals
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddStudentPage : ContentPage

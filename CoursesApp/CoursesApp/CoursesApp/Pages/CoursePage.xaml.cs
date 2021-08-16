@@ -1,4 +1,5 @@
 using System;
+using CoursesApp.Pages.modals;
 using CoursesApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

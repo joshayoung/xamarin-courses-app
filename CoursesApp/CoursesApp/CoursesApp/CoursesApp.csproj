@@ -32,5 +32,21 @@
         <DependentUpon>MainPage.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="Pages\modals\AddCoursePage.xaml.cs">
+        <DependentUpon>AddCoursePage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Pages\modals\AddStudentPage.xaml.cs">
+        <DependentUpon>AddStudentPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Pages\modals\EditCoursePage.xaml.cs">
+        <DependentUpon>EditCoursePage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Pages\modals\EditStudentPage.xaml.cs">
+        <DependentUpon>EditStudentPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 </Project>
