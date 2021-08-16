@@ -20,7 +20,7 @@ namespace CoursesApp.Pages
         private void ViewCourseDetails(object sender, EventArgs e)
         {
                 var courseViewModel = (CourseViewModel)((BindableObject)sender).BindingContext;
-                Navigation.PushAsync(new CoursePage(courseViewModel));
+                Navigation.PushAsync(new CourseDetailsPage(courseViewModel));
         }
 
         private void AddCourse(object sender, EventArgs e)

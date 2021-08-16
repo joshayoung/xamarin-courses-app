@@ -24,7 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Pages\CoursePage.xaml.cs">
+      <Compile Update="Pages\CourseDetailsPage.xaml.cs">
         <DependentUpon>StatsPage.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
