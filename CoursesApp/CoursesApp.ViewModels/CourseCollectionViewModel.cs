@@ -51,6 +51,7 @@ namespace CoursesApp.ViewModels
             if (e.PropertyName == nameof(CourseCollection.Students)) RefreshList();
         }
 
+        // TODO: Clean this up:
         private void RefreshList()
         {
             var courseList = new List<CourseViewModel>();

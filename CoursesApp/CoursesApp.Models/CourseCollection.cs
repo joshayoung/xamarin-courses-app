@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using System.Linq;
 using CoursesApp.Models.Service;
 
 namespace CoursesApp.Models
@@ -32,8 +32,11 @@ namespace CoursesApp.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
         }
 
-        // This is where I could call out to my API to save this record in the DB.
-        public void EditCourse(Course course) { }
+        public void EditCourse(Course course)
+        {
+            // Right now, all of the local changes are handled through Pub/Sub.
+            // This is where I could call out to my API to save this record in the DB.
+        }
 
         public virtual void DeleteCourse(Course course)
         {
@@ -54,7 +57,12 @@ namespace CoursesApp.Models
 
         public void DeleteStudent(Course course, Student student)
         {
-            Students.Remove(student);
+            var students = Courses.Where(c => c.Students.Contains(student.Id)).ToList();
+            // If student not in multiple courses:
+            if (students.Count == 1)
+            {
+                Students.Remove(student);
+            }
             course.Students.Remove(student.Id);
             
             // Trigger a Change for Both Lists:

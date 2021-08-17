@@ -46,11 +46,11 @@ namespace CoursesApp.Models
         public List<int> Students
         {
             get => students;
-            set
-            {
-                students = value;
-                NotifyPropertyChanged();
-            }
+            // set
+            // {
+            //     students = value;
+            //     NotifyPropertyChanged();
+            // }
         }
 
         private CourseType type;

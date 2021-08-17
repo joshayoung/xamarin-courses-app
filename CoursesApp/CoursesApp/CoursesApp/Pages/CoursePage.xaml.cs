@@ -19,25 +19,23 @@ namespace CoursesApp.Pages
 
         private void ViewCourseDetails(object sender, EventArgs e)
         {
-                var courseViewModel = (CourseViewModel)((BindableObject)sender).BindingContext;
-                Navigation.PushAsync(new CourseDetailsPage(courseViewModel));
+            var courseViewModel = (CourseViewModel)((BindableObject)sender).BindingContext;
+            Navigation.PushAsync(new CourseDetailsPage(courseViewModel));
         }
 
-        private void AddCourse(object sender, EventArgs e)
-        {
-                Navigation.PushModalAsync(new AddCourseModal(courseCollectionViewModel.NewCourseViewModel()));
-        }
+        private void AddCourse(object sender, EventArgs e) =>
+            Navigation.PushModalAsync(new AddCourseModal(courseCollectionViewModel.NewCourseViewModel()));
 
         private void DeleteClass(object sender, EventArgs e)
         {
-                var courseViewModel = (CourseViewModel)((BindableObject)sender).BindingContext;
-                courseViewModel.DeleteCourse();
+            var courseViewModel = (CourseViewModel)((BindableObject)sender).BindingContext;
+            courseViewModel.DeleteCourse();
         }
 
         private void EditClass(object sender, EventArgs e)
         {
-                var courseViewModel = (CourseViewModel)((BindableObject)sender).BindingContext;
-                Navigation.PushModalAsync(new EditCourseModal(courseViewModel));
+            var courseViewModel = (CourseViewModel)((BindableObject)sender).BindingContext;
+            Navigation.PushModalAsync(new EditCourseModal(courseViewModel));
         }
     }
 }

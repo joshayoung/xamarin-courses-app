@@ -105,7 +105,7 @@ namespace CoursesApp.ViewModels
             course.PropertyChanged += OnPropertyChanged;
             courseCollection.PropertyChanged += OnPropertyChanged;
 
-            // course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
+            course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
 
         private void RefreshStudents()
@@ -116,7 +116,6 @@ namespace CoursesApp.ViewModels
             IEnumerable<StudentViewModel>
                 studentList = cs.Students.Select(student => new StudentViewModel(GetStudent(student), this));
             Students = new List<StudentViewModel>(studentList);
-            // PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
             }
             catch (Exception ex)
             {
@@ -124,8 +123,6 @@ namespace CoursesApp.ViewModels
                 // Prevent crashing for new course addition:
                 return;
             }
-
-
         }
 
         private Student GetStudent(int id)
