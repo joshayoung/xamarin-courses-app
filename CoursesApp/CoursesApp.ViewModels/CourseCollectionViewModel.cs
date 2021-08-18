@@ -61,8 +61,7 @@ namespace CoursesApp.ViewModels
                 foreach (var id in course.Students)
                 {
                     var student = courseCollection.Students.First(student => student.Id == id);
-                    // TODO: Ideally this would be passed the CourseCollectionVM so i can call it directly, instead of passing through the CourseVM
-                    studentList.Add(new StudentViewModel(student, vm));
+                    studentList.Add(new StudentViewModel(student, course, courseCollection));
                 }
 
                 Students = studentList;

@@ -8,7 +8,8 @@ namespace CoursesApp.ViewModels
     public class StudentViewModel : INotifyPropertyChanged
     {
         private readonly Student student;
-        private readonly CourseViewModel courseViewModel;
+        private readonly Course course;
+        private readonly CourseCollection courseCollection;
         
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -45,16 +46,17 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        public StudentViewModel(Student student, CourseViewModel courseViewModel)
+        public StudentViewModel(Student student, Course course, CourseCollection courseCollection)
         {
             this.student = student;
-            this.courseViewModel = courseViewModel;
+            this.course = course;
+            this.courseCollection = courseCollection;
             
             student.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
 
-        public void AddStudent() => courseViewModel.AddStudent(student);
-        public void DeleteStudent() => courseViewModel.DeleteStudent(student);
+        public void AddStudent() => courseCollection.AddStudent(course, student);
+        public void DeleteStudent() => courseCollection.DeleteStudent(course, student);
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
         {

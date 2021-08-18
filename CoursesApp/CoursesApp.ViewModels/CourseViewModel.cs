@@ -115,7 +115,7 @@ namespace CoursesApp.ViewModels
             var cs = courseCollection.Courses.First(cs => cs == course);
 
             IEnumerable<StudentViewModel>
-                studentList = cs.Students.Select(student => new StudentViewModel(GetStudent(student), this));
+                studentList = cs.Students.Select(student => new StudentViewModel(GetStudent(student), cs, courseCollection));
             Students = new List<StudentViewModel>(studentList);
         }
 
@@ -129,7 +129,7 @@ namespace CoursesApp.ViewModels
 
         public void AddStudent(Student student) => courseCollection.AddStudent(course, student);
 
-        public StudentViewModel NewStudent() => new StudentViewModel(new Student(GetNextCourseId()), this);
+        public StudentViewModel NewStudent() => new StudentViewModel(new Student(GetNextCourseId()), course, courseCollection);
 
         private int GetNextCourseId() => courseCollection.Students.Max(student => student.Id) + 1;
 
