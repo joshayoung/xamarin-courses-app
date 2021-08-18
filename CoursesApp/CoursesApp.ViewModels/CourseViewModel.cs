@@ -123,11 +123,7 @@ namespace CoursesApp.ViewModels
 
         public void AddCourse() => courseCollection.AddCourse(course);
 
-        public void DeleteStudent(Student student) => courseCollection.DeleteStudent(course, student);
-
         public void EditCourse() => courseCollection.EditCourse(course);
-
-        public void AddStudent(Student student) => courseCollection.AddStudent(course, student);
 
         public StudentViewModel NewStudent() => new StudentViewModel(new Student(GetNextCourseId()), course, courseCollection);
 

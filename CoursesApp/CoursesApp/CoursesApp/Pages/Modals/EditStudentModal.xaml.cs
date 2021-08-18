@@ -18,7 +18,7 @@ namespace CoursesApp.Pages.modals
 
         private void SaveStudentEdits(object sender, EventArgs e)
         {
-            // TODO: Add method for calling service here
+            studentViewModel.EditStudent();
             Navigation.PopModalAsync();
         }
 

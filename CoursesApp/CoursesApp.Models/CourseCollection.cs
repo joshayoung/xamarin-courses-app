@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -53,6 +52,12 @@ namespace CoursesApp.Models
             // Trigger a Change for Both Lists:
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
+        }
+        
+        public void EditStudent(Course course, Student student)
+        {
+            // Right now, all of the local changes are handled through Pub/Sub.
+            // This is where I could call out to my API to save this record in the DB.
         }
 
         public void DeleteStudent(Course course, Student student)
