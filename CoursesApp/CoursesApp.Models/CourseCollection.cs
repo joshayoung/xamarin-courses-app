@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -40,7 +41,6 @@ namespace CoursesApp.Models
 
         public virtual void DeleteCourse(Course course)
         {
-            // TODO: Also remove student if only in this course
             Courses.Remove(course);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
         }
@@ -49,7 +49,7 @@ namespace CoursesApp.Models
         {
             Students.Add(student);
             course.Students.Add(student.Id);
-            
+
             // Trigger a Change for Both Lists:
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
@@ -59,12 +59,9 @@ namespace CoursesApp.Models
         {
             var students = Courses.Where(c => c.Students.Contains(student.Id)).ToList();
             // If student not in multiple courses:
-            if (students.Count == 1)
-            {
-                Students.Remove(student);
-            }
+            if (students.Count == 1) Students.Remove(student);
             course.Students.Remove(student.Id);
-            
+
             // Trigger a Change for Both Lists:
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
