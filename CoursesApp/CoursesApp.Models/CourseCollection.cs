@@ -19,6 +19,8 @@ namespace CoursesApp.Models
         {
             this.courseDataService = courseDataService;
         }
+        
+        public Student GetStudent(int id) => Students.Find(student => student.Id == id);
 
         public void RepopulateCourseList()
         {

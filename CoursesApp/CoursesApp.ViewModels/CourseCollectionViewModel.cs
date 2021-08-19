@@ -50,26 +50,31 @@ namespace CoursesApp.ViewModels
             if (e.PropertyName == nameof(CourseCollection.Students)) RefreshList();
         }
 
-        // TODO: Clean this up:
         private void RefreshList()
         {
             var courseList = new List<CourseViewModel>();
-            foreach (var course in courseCollection.Courses)
+            var studentList = new List<StudentViewModel>();
+            courseCollection.Courses.ForEach(cs =>
             {
-                var vm = new CourseViewModel(course, courseCollection);
-                var studentList = new List<StudentViewModel>();
-                foreach (var id in course.Students)
-                {
-                    var student = courseCollection.Students.First(student => student.Id == id);
-                    studentList.Add(new StudentViewModel(student, course, courseCollection));
-                }
-
-                Students = studentList;
-                vm.Students = new List<StudentViewModel>(studentList);
-                courseList.Add(vm);
-            }
-
+                studentList = cs.Students.Select(id => StudentVm(id, cs)).ToList();
+                courseList.Add(CourseVm(cs, studentList));
+            });
+            Students = studentList;
             Courses = courseList;
+        }
+
+        private CourseViewModel? CourseVm(Course cs, IEnumerable<StudentViewModel> studentList)
+        {
+            var courseVm = new CourseViewModel(cs, courseCollection)
+            {
+                Students = new List<StudentViewModel>(studentList)
+            };
+            return courseVm;
+        }
+
+        private StudentViewModel StudentVm(int id, Course? cs)
+        {
+            return new StudentViewModel(courseCollection.GetStudent(id), cs, courseCollection);
         }
 
         public CourseViewModel NewCourseViewModel()

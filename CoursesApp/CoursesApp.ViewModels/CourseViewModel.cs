@@ -115,11 +115,9 @@ namespace CoursesApp.ViewModels
             var cs = courseCollection.Courses.First(cs => cs == course);
 
             IEnumerable<StudentViewModel>
-                studentList = cs.Students.Select(student => new StudentViewModel(GetStudent(student), cs, courseCollection));
+                studentList = cs.Students.Select(student => new StudentViewModel(courseCollection.GetStudent(student), cs, courseCollection));
             Students = new List<StudentViewModel>(studentList);
         }
-
-        private Student GetStudent(int id) => courseCollection.Students.Find(student => student.Id == id);
 
         public void AddCourse() => courseCollection.AddCourse(course);
 
