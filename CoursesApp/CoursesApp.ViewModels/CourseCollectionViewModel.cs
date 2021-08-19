@@ -12,6 +12,17 @@ namespace CoursesApp.ViewModels
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        private bool isRefreshing;
+        public bool IsRefreshing
+        {
+            get => isRefreshing;
+            set
+            {
+                isRefreshing = value;
+                OnPropertyChanged();
+            }
+        }
+
         private List<CourseViewModel>? courses;
 
         public List<CourseViewModel>? Courses
@@ -89,6 +100,13 @@ namespace CoursesApp.ViewModels
             var id = int.Parse(Courses.Max(course => course.Id));
 
             return ++id;
+        }
+
+        public void Refresh()
+        {
+            IsRefreshing = true;
+            courseCollection.RepopulateCourseList();
+            IsRefreshing = false;
         }
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)

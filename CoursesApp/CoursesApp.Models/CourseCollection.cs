@@ -26,6 +26,8 @@ namespace CoursesApp.Models
         {
             Courses = courseDataService.GetCourses();
             Students = courseDataService.GetStudents();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
         }
 
         public void AddCourse(Course course)

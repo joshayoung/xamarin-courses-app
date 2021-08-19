@@ -31,81 +31,83 @@
       HeightRequest="2"
       />
 
-    <CollectionView ItemsSource="{Binding Courses}">
-      <CollectionView.Footer>
-        <Grid>
-          <Label
-            FontAttributes="Italic"
-            FontSize="14"
-            HorizontalOptions="Center"
-            Text="[Swipe left or right to edit or delete a course.]"
-            TextColor="#448EFF"
-            />
-        </Grid>
-      </CollectionView.Footer>
-      <CollectionView.ItemTemplate>
-        <DataTemplate x:DataType="viewModels:CourseViewModel">
-          <Frame
-            Margin="0"
-            Padding="10"
-            BackgroundColor="Transparent"
-            CornerRadius="10"
-            HasShadow="False"
-            >
-            <SwipeView>
-              <SwipeView.LeftItems>
-                <SwipeItems>
-                  <SwipeItemView Invoked="EditClass">
-                    <Button
-                      Margin="0,0,10,0"
-                      Padding="10"
-                      BackgroundColor="Khaki"
-                      Text="Edit"
-                      TextColor="Black"
-                      VerticalOptions="Center"
-                      />
-                  </SwipeItemView>
-                </SwipeItems>
-              </SwipeView.LeftItems>
-              <SwipeView.RightItems>
-                <SwipeItems>
-                  <SwipeItemView Invoked="DeleteClass">
-                    <Button
-                      Margin="10,0,0,0"
-                      Padding="10"
-                      BackgroundColor="Khaki"
-                      Text="Delete"
-                      TextColor="Black"
-                      VerticalOptions="Center"
-                      />
-                  </SwipeItemView>
-                </SwipeItems>
-              </SwipeView.RightItems>
-              <StackLayout Margin="0">
-                <Frame
-                  BackgroundColor="Tomato"
-                  CornerRadius="10"
-                  HasShadow="False"
-                  >
-                  <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="ViewCourseDetails" />
-                  </Frame.GestureRecognizers>
-                  <StackLayout Orientation="Horizontal">
-                    <Label HorizontalOptions="Start" Text="{Binding Title}" />
-                    <Label
-                      FontAttributes="Italic"
-                      HorizontalOptions="EndAndExpand"
-                      Text="{Binding Type}"
-                      />
-                    <Label FontAttributes="Italic" Text="{Binding Length, StringFormat='({0} hours)'}" />
-                  </StackLayout>
-                </Frame>
-              </StackLayout>
-            </SwipeView>
-          </Frame>
-        </DataTemplate>
-      </CollectionView.ItemTemplate>
-    </CollectionView>
+    <RefreshView IsRefreshing="{Binding IsRefreshing}" Refreshing="RefreshView_OnRefreshing">
+      <CollectionView ItemsSource="{Binding Courses}">
+        <CollectionView.Footer>
+          <Grid>
+            <Label
+              FontAttributes="Italic"
+              FontSize="14"
+              HorizontalOptions="Center"
+              Text="[Swipe left or right to edit or delete a course.]"
+              TextColor="#448EFF"
+              />
+          </Grid>
+        </CollectionView.Footer>
+        <CollectionView.ItemTemplate>
+          <DataTemplate x:DataType="viewModels:CourseViewModel">
+            <Frame
+              Margin="0"
+              Padding="10"
+              BackgroundColor="Transparent"
+              CornerRadius="10"
+              HasShadow="False"
+              >
+              <SwipeView>
+                <SwipeView.LeftItems>
+                  <SwipeItems>
+                    <SwipeItemView Invoked="EditClass">
+                      <Button
+                        Margin="0,0,10,0"
+                        Padding="10"
+                        BackgroundColor="Khaki"
+                        Text="Edit"
+                        TextColor="Black"
+                        VerticalOptions="Center"
+                        />
+                    </SwipeItemView>
+                  </SwipeItems>
+                </SwipeView.LeftItems>
+                <SwipeView.RightItems>
+                  <SwipeItems>
+                    <SwipeItemView Invoked="DeleteClass">
+                      <Button
+                        Margin="10,0,0,0"
+                        Padding="10"
+                        BackgroundColor="Khaki"
+                        Text="Delete"
+                        TextColor="Black"
+                        VerticalOptions="Center"
+                        />
+                    </SwipeItemView>
+                  </SwipeItems>
+                </SwipeView.RightItems>
+                <StackLayout Margin="0">
+                  <Frame
+                    BackgroundColor="Tomato"
+                    CornerRadius="10"
+                    HasShadow="False"
+                    >
+                    <Frame.GestureRecognizers>
+                      <TapGestureRecognizer Tapped="ViewCourseDetails" />
+                    </Frame.GestureRecognizers>
+                    <StackLayout Orientation="Horizontal">
+                      <Label HorizontalOptions="Start" Text="{Binding Title}" />
+                      <Label
+                        FontAttributes="Italic"
+                        HorizontalOptions="EndAndExpand"
+                        Text="{Binding Type}"
+                        />
+                      <Label FontAttributes="Italic" Text="{Binding Length, StringFormat='({0} hours)'}" />
+                    </StackLayout>
+                  </Frame>
+                </StackLayout>
+              </SwipeView>
+            </Frame>
+          </DataTemplate>
+        </CollectionView.ItemTemplate>
+      </CollectionView>
+    </RefreshView>
 
     <Button
       BackgroundColor="Khaki"
