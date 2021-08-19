@@ -1,58 +1,50 @@
 # xamarin-courses-app-v1
 
 ### Diagram Version 1:
-![Diagram V1](docs/diagram-v1.png)
+![Diagram V1](docs/diagram-v2.png)
 ```plantuml
   skinparam class {
-  BackgroundColor aliceblue
-  ArrowColor blue
-  BorderColor blue
+    BackgroundColor aliceblue
+    ArrowColor blue
+    BorderColor blue
   }
 
   @startuml
+    hide circle
+    skinparam linetype ortho
 
-  hide circle
-  skinparam linetype ortho
+    entity "Course" as c {
+      +Id : string
+      --
+      +Title : string
+      --
+      +Length : float
+      --
+      +Students : List<int>
+      --
+      +Type : CourseType
+    }
 
-  entity "Course" as c {
-    +Title : string
-    --
-    +Length : float
-    --
-    +Students : List<Student>
-    --
-    +Teachers : List<Student>
-    --
-    +Type : CourseType
-  }
+    entity "CourseType" as ct {
+      Seminar
+      Lab
+      Independent Study
+      Lecture
+      Discussion
+    }
 
-  entity "CourseType" as ct {
-    Seminar
-    Lab
-    Independent Study
-    Lecture
-    Discussion
-  }
+    entity "Student" as s {
+      +Id : int
+      --
+      +Name : string
+      --
+      +Age : int
+      --
+      +Major : string
+    }
 
-  entity "Student" as s {
-    +Name : string
-    --
-    +Age : int
-    --
-    +Major : string
-  }
-
-  entity "Teacher" as t {
-    +Name : string
-    --
-    +Age : int
-    --
-    +Experience : int
-  }
-
-  c::CourseType ||..|| ct
-  c::Students |o..|{ s
-  c::Teachers |o..|{ t
+    c::CourseType ||..|| ct
+    c::Students |o..|{ s
   @enduml
 ```
 
