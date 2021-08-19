@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-
 <ContentPage
   x:Class="CoursesApp.Pages.modals.AddStudentModal"
   xmlns="http://xamarin.com/schemas/2014/forms"
@@ -27,13 +26,10 @@
         />
       <Label Text="Name:" />
       <Entry Text="{Binding Name}" />
-
       <Label Text="Age:" />
       <Entry Text="{Binding Age}" />
-
       <Label Text="Major:" />
       <Entry Text="{Binding Major}" />
-
       <Button
         BackgroundColor="Khaki"
         Clicked="SaveStudent"

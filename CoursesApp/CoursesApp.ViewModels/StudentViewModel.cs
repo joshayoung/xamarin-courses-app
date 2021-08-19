@@ -13,8 +13,8 @@ namespace CoursesApp.ViewModels
         
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        // TODO: Change this to return reasonable ages with the student's age selected
-        public List<int> Ages => new List<int> { student.Age, 1, 2, 3 };
+        // TODO: Select the student's age
+        public List<int> Ages => new List<int> { student.Age, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 };
 
         public string? Name
         {
@@ -57,7 +57,6 @@ namespace CoursesApp.ViewModels
 
         public void AddStudent() => courseCollection.AddStudent(course, student);
         public void DeleteStudent() => courseCollection.DeleteStudent(course, student);
-        public void EditStudent() => courseCollection.EditStudent(course, student);
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)
         {

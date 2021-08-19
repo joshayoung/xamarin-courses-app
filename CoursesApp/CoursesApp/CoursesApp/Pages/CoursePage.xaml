@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-
 <ContentPage
   x:Class="CoursesApp.Pages.CoursePage"
   xmlns="http://xamarin.com/schemas/2014/forms"
@@ -30,7 +29,6 @@
       BackgroundColor="Tomato"
       HeightRequest="2"
       />
-
     <RefreshView IsRefreshing="{Binding IsRefreshing}" Refreshing="RefreshView_OnRefreshing">
       <CollectionView ItemsSource="{Binding Courses}" Margin="0,20,0,0">
         <CollectionView.Footer>
@@ -108,7 +106,6 @@
         </CollectionView.ItemTemplate>
       </CollectionView>
     </RefreshView>
-
     <Button
       BackgroundColor="Khaki"
       Clicked="AddCourse"

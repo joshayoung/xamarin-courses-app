@@ -11,7 +11,7 @@ namespace CoursesApp.Models
         public int Id
         {
             get => id;
-            set
+            private set
             {
                 id = value;
                 NotifyPropertyChanged();
@@ -51,12 +51,13 @@ namespace CoursesApp.Models
             }
         }
 
-        public Student(int id, string? name = null, int? age = null, string? major = null)
+        public Student(int id, string? name = "", int? age = 0, string? major = "")
         {
-            Id = id;
-            Name = name ?? "";
-            Age = age ?? 0;
-            Major = major ?? "";
+            this.id = id;
+            this.name = name;
+            // TODO: Why do I need this here?
+            this.age = age ?? 0;
+            this.major = major;
         }
 
         // TODO: Is using '!' here a good idea:

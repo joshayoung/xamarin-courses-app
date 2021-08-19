@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-
 <ContentPage
   x:Class="CoursesApp.Pages.modals.EditCourseModal"
   xmlns="http://xamarin.com/schemas/2014/forms"
@@ -28,14 +27,12 @@
         />
       <Label Text="Course Name:" />
       <Entry Text="{Binding Title, Mode=TwoWay}" />
-
       <Label Text="Course Length:" />
       <Picker
         ItemDisplayBinding="{Binding .}"
         ItemsSource="{x:Static viewModels:CourseViewModel.CourseLengthList}"
         SelectedItem="{Binding SelectedLength}"
         />
-
       <Label Text="Course Type:" />
       <Picker
         ItemDisplayBinding="{Binding .}"

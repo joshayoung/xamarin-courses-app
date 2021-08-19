@@ -23,16 +23,8 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        private bool coursesExist;
-        public bool CoursesExist
-        {
-            get => Courses.Count > 0;
-            set
-            {
-                coursesExist = value;
-                OnPropertyChanged();
-            }
-        }
+        // TODO: How is this updated with no 'OnPropertyChanged()':
+        public bool CoursesExist => Courses.Count > 0;
 
         private List<CourseViewModel> courses;
 
@@ -120,6 +112,7 @@ namespace CoursesApp.ViewModels
 
         public void Refresh()
         {
+            // TODO: Is setting this to true, then false necessary?
             IsRefreshing = true;
             courseCollection.RepopulateCourseList();
             IsRefreshing = false;

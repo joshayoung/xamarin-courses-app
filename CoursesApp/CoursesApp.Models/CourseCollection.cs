@@ -36,9 +36,6 @@ namespace CoursesApp.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
         }
 
-        // Call an API to save this record:
-        public void EditCourse(Course course) { }
-
         public virtual void DeleteCourse(Course course)
         {
             Courses.Remove(course);
@@ -54,9 +51,6 @@ namespace CoursesApp.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
         }
-        
-        // Call an API to save this record:
-        public void EditStudent(Course course, Student student) { }
 
         public void DeleteStudent(Course course, Student student)
         {

@@ -13,6 +13,7 @@ namespace CoursesApp.Models
         public string Id
         {
             get => id;
+            // TODO: Is this value getting used?
             set
             {
                 id = value;

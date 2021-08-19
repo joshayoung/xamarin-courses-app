@@ -22,7 +22,7 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged();
             }
         }
-        
+
         public bool StudentsExist => Students.Count > 0;
 
         public float SelectedLength
@@ -79,7 +79,7 @@ namespace CoursesApp.ViewModels
                 students = value;
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(StudentsExist));
-            } 
+            }
         }
 
         public CourseType Type
@@ -111,15 +111,15 @@ namespace CoursesApp.ViewModels
             var cs = courseCollection.Courses.First(cs => cs == course);
 
             IEnumerable<StudentViewModel>
-                studentList = cs.Students.Select(student => new StudentViewModel(courseCollection.GetStudent(student), cs, courseCollection));
+                studentList = cs.Students.Select(student =>
+                    new StudentViewModel(courseCollection.GetStudent(student), cs, courseCollection));
             Students = new List<StudentViewModel>(studentList);
         }
 
         public void AddCourse() => courseCollection.AddCourse(course);
 
-        public void EditCourse() => courseCollection.EditCourse(course);
-
-        public StudentViewModel NewStudent() => new StudentViewModel(new Student(GetNextCourseId()), course, courseCollection);
+        public StudentViewModel NewStudent() =>
+            new StudentViewModel(new Student(GetNextCourseId()), course, courseCollection);
 
         private int GetNextCourseId() => courseCollection.Students.Max(student => student.Id) + 1;
 

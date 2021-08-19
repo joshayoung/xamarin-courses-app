@@ -21,13 +21,13 @@ namespace CoursesApp.ViewModels.Test
             courseCollectionViewModel.Courses.Should().BeEmpty();
         }
 
-        [Fact]
-        public void Constructor_NullParams_ExpectException()
-        {
-            Action testAction = () => new CourseCollectionViewModel(null);
-
-            testAction.Should().Throw<ArgumentException>();
-        }
+        // [Fact]
+        // public void Constructor_NullParams_ExpectException()
+        // {
+        //     Action testAction = () => new CourseCollectionViewModel(null);
+        //
+        //     testAction.Should().Throw<ArgumentException>();
+        // }
 
         // [Fact]
         // public void Constructor_Called_ExpectViewModelListUpdatedWithModel()
