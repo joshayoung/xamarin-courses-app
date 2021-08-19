@@ -55,3 +55,6 @@
   c::Teachers |o..|{ t
   @enduml
 ```
+
+### Resources:
+[Pull-to-refresh with Xamarin.Forms RefreshView](https://devblogs.microsoft.com/xamarin/refreshview-xamarin-forms/)
