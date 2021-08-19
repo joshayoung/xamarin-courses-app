@@ -72,6 +72,7 @@ namespace CoursesApp.Models
             CourseType type = CourseType.Lecture,
             List<int>? students = null)
         {
+            // TODO: The best way to do this?
             this.id = id;
             this.title = title ?? "";
             this.length = length;
@@ -79,7 +80,7 @@ namespace CoursesApp.Models
             this.type = type;
         }
 
-        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

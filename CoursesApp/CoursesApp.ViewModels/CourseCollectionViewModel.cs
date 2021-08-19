@@ -2,9 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.ComTypes;
 using CoursesApp.Models;
-using Xamarin.Forms;
 
 namespace CoursesApp.ViewModels
 {
@@ -28,7 +26,7 @@ namespace CoursesApp.ViewModels
         private bool coursesExist;
         public bool CoursesExist
         {
-            get { return (Courses?.Count > 0); }
+            get => Courses.Count > 0;
             set
             {
                 coursesExist = value;
@@ -36,23 +34,25 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        private List<CourseViewModel>? courses;
+        private List<CourseViewModel> courses;
 
-        public List<CourseViewModel>? Courses
+        public List<CourseViewModel> Courses
         {
             get => courses;
             set
             {
                 courses = value;
-                // Needed to repopulate the course list after adding/removing a course:
+                // Repopulate courses after modifying course:
                 OnPropertyChanged();
+                
+                // Also Update This Value:
                 OnPropertyChanged(nameof(CoursesExist));
             }
         }
 
-        private List<StudentViewModel>? students;
+        private List<StudentViewModel> students;
 
-        public List<StudentViewModel>? Students
+        public List<StudentViewModel> Students
         {
             get => students;
             private set
@@ -64,6 +64,8 @@ namespace CoursesApp.ViewModels
 
         public CourseCollectionViewModel(CourseCollection courseCollection)
         {
+            courses = new List<CourseViewModel>();
+            students = new List<StudentViewModel>();
             this.courseCollection = courseCollection;
             courseCollection.PropertyChanged += CoursesCollectionOnPropertyChanged;
             RefreshList();
@@ -88,16 +90,16 @@ namespace CoursesApp.ViewModels
             Courses = courseList;
         }
 
-        private CourseViewModel? CourseVm(Course cs, IEnumerable<StudentViewModel> studentList)
+        private CourseViewModel CourseVm(Course cs, List<StudentViewModel> studentList)
         {
             var courseVm = new CourseViewModel(cs, courseCollection)
             {
-                Students = new List<StudentViewModel>(studentList)
+                Students = studentList
             };
             return courseVm;
         }
 
-        private StudentViewModel StudentVm(int id, Course? cs)
+        private StudentViewModel StudentVm(int id, Course cs)
         {
             return new StudentViewModel(courseCollection.GetStudent(id), cs, courseCollection);
         }
@@ -109,7 +111,7 @@ namespace CoursesApp.ViewModels
 
         private int GetNextCourseId()
         {
-            if (Courses == null || Courses.Count == 0) return 1;
+            if (Courses.Count == 0) return 1;
 
             var id = int.Parse(Courses.Max(course => course.Id));
 
@@ -123,7 +125,7 @@ namespace CoursesApp.ViewModels
             IsRefreshing = false;
         }
 
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null!)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

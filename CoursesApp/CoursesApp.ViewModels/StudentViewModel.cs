@@ -59,7 +59,7 @@ namespace CoursesApp.ViewModels
         public void DeleteStudent() => courseCollection.DeleteStudent(course, student);
         public void EditStudent() => courseCollection.EditStudent(course, student);
 
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

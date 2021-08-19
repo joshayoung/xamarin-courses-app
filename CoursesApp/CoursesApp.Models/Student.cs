@@ -59,7 +59,8 @@ namespace CoursesApp.Models
             Major = major ?? "";
         }
 
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
+        // TODO: Is using '!' here a good idea:
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

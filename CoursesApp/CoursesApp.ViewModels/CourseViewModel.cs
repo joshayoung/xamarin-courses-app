@@ -23,16 +23,7 @@ namespace CoursesApp.ViewModels
             }
         }
         
-        private bool studentsExist;
-        public bool StudentsExist
-        {
-            get { return (Students?.Count > 0); }
-            set
-            {
-                studentsExist = value;
-                NotifyPropertyChanged();
-            }
-        }
+        public bool StudentsExist => Students.Count > 0;
 
         public float SelectedLength
         {
@@ -44,9 +35,9 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        public List<float> CourseLengthList => new List<float> { 1, 2, 3, 4 };
+        public static List<float> CourseLengthList => new List<float> { 1, 2, 3, 4 };
 
-        public List<CourseType> CourseTypesList =>
+        public static List<CourseType> CourseTypesList =>
             new List<CourseType>
             {
                 CourseType.Seminar,
@@ -56,19 +47,11 @@ namespace CoursesApp.ViewModels
                 CourseType.Discussion,
             };
 
-        public string Id
-        {
-            get => course.Id;
-            set
-            {
-                course.Id = value;
-                NotifyPropertyChanged();
-            }
-        }
+        public string Id => course.Id;
 
         public string? Title
         {
-            get => course?.Title;
+            get => course.Title;
             set
             {
                 course.Title = value;
@@ -96,7 +79,7 @@ namespace CoursesApp.ViewModels
                 students = value;
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(StudentsExist));
-            }
+            } 
         }
 
         public CourseType Type
@@ -111,6 +94,7 @@ namespace CoursesApp.ViewModels
 
         public CourseViewModel(Course course, CourseCollection courseCollection)
         {
+            students = new List<StudentViewModel>();
             this.course = course;
             this.courseCollection = courseCollection;
             RefreshStudents();
@@ -141,7 +125,7 @@ namespace CoursesApp.ViewModels
 
         public void DeleteCourse() => courseCollection.DeleteCourse(course);
 
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

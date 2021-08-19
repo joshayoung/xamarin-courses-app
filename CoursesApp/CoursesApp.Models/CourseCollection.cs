@@ -36,11 +36,8 @@ namespace CoursesApp.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
         }
 
-        public void EditCourse(Course course)
-        {
-            // Right now, all of the local changes are handled through Pub/Sub.
-            // This is where I could call out to my API to save this record in the DB.
-        }
+        // Call an API to save this record:
+        public void EditCourse(Course course) { }
 
         public virtual void DeleteCourse(Course course)
         {
@@ -58,11 +55,8 @@ namespace CoursesApp.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
         }
         
-        public void EditStudent(Course course, Student student)
-        {
-            // Right now, all of the local changes are handled through Pub/Sub.
-            // This is where I could call out to my API to save this record in the DB.
-        }
+        // Call an API to save this record:
+        public void EditStudent(Course course, Student student) { }
 
         public void DeleteStudent(Course course, Student student)
         {

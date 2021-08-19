@@ -15,7 +15,9 @@ namespace CoursesApp
 
             Dependencies.Init();
             var courseCollection = Dependencies.CourseCollection;
-            courseCollection?.RepopulateCourseList();
+            if (courseCollection == null) return;
+            
+            courseCollection.RepopulateCourseList();
             MainPage = new NavigationPage(new CoursePage(new CourseCollectionViewModel(courseCollection)));
         }
 
