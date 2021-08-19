@@ -2,7 +2,9 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.ComTypes;
 using CoursesApp.Models;
+using Xamarin.Forms;
 
 namespace CoursesApp.ViewModels
 {
@@ -23,6 +25,17 @@ namespace CoursesApp.ViewModels
             }
         }
 
+        private bool coursesExist;
+        public bool CoursesExist
+        {
+            get { return (Courses?.Count > 0); }
+            set
+            {
+                coursesExist = value;
+                OnPropertyChanged();
+            }
+        }
+
         private List<CourseViewModel>? courses;
 
         public List<CourseViewModel>? Courses
@@ -33,6 +46,7 @@ namespace CoursesApp.ViewModels
                 courses = value;
                 // Needed to repopulate the course list after adding/removing a course:
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(CoursesExist));
             }
         }
 

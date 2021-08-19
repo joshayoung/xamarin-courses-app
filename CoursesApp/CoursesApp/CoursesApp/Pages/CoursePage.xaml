@@ -34,7 +34,7 @@
     <RefreshView IsRefreshing="{Binding IsRefreshing}" Refreshing="RefreshView_OnRefreshing">
       <CollectionView ItemsSource="{Binding Courses}">
         <CollectionView.Footer>
-          <Grid>
+          <Grid IsVisible="{Binding CoursesExist}">
             <Label
               FontAttributes="Italic"
               FontSize="14"

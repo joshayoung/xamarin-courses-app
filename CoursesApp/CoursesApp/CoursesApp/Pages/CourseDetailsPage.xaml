@@ -133,7 +133,7 @@
           </DataTemplate>
         </BindableLayout.ItemTemplate>
       </StackLayout>
-      <Grid>
+      <Grid IsVisible="{Binding StudentsExist}">
         <Label
           FontAttributes="Italic"
           FontSize="14"

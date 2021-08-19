@@ -22,6 +22,17 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged();
             }
         }
+        
+        private bool studentsExist;
+        public bool StudentsExist
+        {
+            get { return (Students?.Count > 0); }
+            set
+            {
+                studentsExist = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public float SelectedLength
         {
@@ -84,6 +95,7 @@ namespace CoursesApp.ViewModels
             {
                 students = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(StudentsExist));
             }
         }
 
