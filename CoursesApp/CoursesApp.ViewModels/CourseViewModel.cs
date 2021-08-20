@@ -37,13 +37,14 @@ namespace CoursesApp.ViewModels
 
         public static List<float> CourseLengthList => new List<float> { 1, 2, 3, 4 };
         
-        // TODO: Add property change calls:
         public int NumberOfStudents => course.Students.Count;
 
         public int AverageStudentAge
         {
             get
             {
+                if (course.Students.Count == 0) return 0;
+                
                 var sum = 0;
                 foreach (var id in course.Students)
                 {
@@ -55,10 +56,11 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        // TODO: Add property change calls:
         public string? OldestStudent {
             get
             {
+                if (course.Students.Count == 0) return "";
+                
                 var age = 0;
                 string? name = null;
                 foreach (var student in course.Students.Select(id => courseCollection.GetStudent(id)).Where(student => student.Age > age))
@@ -71,7 +73,6 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        // TODO: Add property change calls:
         public static List<CourseType> CourseTypesList =>
             new List<CourseType>
             {
@@ -114,6 +115,9 @@ namespace CoursesApp.ViewModels
                 students = value;
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(StudentsExist));
+                NotifyPropertyChanged(nameof(OldestStudent));
+                NotifyPropertyChanged(nameof(NumberOfStudents));
+                NotifyPropertyChanged(nameof(AverageStudentAge));
             }
         }
 

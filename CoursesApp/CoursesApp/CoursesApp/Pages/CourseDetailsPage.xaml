@@ -55,7 +55,7 @@
               />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-              <Label Style="{StaticResource CourseLabelStyle}" Text="Oldest Student" />
+              <Label Style="{StaticResource CourseLabelStyle}" Text="Oldest Student:" />
               <Label
               FontAttributes="Italic"
               Style="{StaticResource CourseLabelStyle}"

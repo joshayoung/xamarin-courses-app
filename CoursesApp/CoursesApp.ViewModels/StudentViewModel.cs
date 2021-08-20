@@ -11,10 +11,24 @@ namespace CoursesApp.ViewModels
         private readonly Course course;
         private readonly CourseCollection courseCollection;
         
+        // TODO: Move this to a helper method:
+        private readonly List<int> ageList = new List<int>
+        {
+                17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30
+        };
+        
         public event PropertyChangedEventHandler? PropertyChanged;
 
         // TODO: Select the student's age
-        public List<int> Ages => new List<int> { student.Age, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 };
+        public List<int> Ages
+        {
+            get
+            {
+                var myList = new List<int> { student.Age };
+                myList.InsertRange(1, ageList);
+                return myList;
+            }
+        }
 
         public string? Name
         {
