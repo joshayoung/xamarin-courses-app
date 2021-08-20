@@ -1,153 +1,139 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-  x:Class="CoursesApp.Pages.CourseDetailsPage"
-  xmlns="http://xamarin.com/schemas/2014/forms"
-  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-  xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-  xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
-  ios:Page.UseSafeArea="true"
-  x:DataType="viewModels:CourseViewModel"
-  >
-  <ContentPage.Content>
-    <StackLayout Margin="20">
-      <Label
-        Margin="0,0,0,20"
-        FontAttributes="Bold"
-        FontSize="30"
-        HorizontalOptions="Center"
-        Text="{Binding Title}"
-        />
-      <Frame
-        BackgroundColor="LightGray"
-        CornerRadius="4"
-        HasShadow="False"
-        >
-        <StackLayout Orientation="Horizontal">
-          <StackLayout>
-            <StackLayout Orientation="Horizontal">
-              <Label Style="{StaticResource CourseLabelStyle}" Text="Title:" />
-              <Label Style="{StaticResource CourseLabelStyle}" Text="{Binding Title}" />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-              <Label Style="{StaticResource CourseLabelStyle}" Text="Length:" />
-              <Label
-                FontAttributes="Italic"
-                Style="{StaticResource CourseLabelStyle}"
-                Text="{Binding Length, StringFormat='({0} hours)'}"
-                />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-              <Label Style="{StaticResource CourseLabelStyle}" Text="Type:" />
-              <Label Style="{StaticResource CourseLabelStyle}" Text="{Binding Type}" />
-            </StackLayout>
-          </StackLayout>
-          <StackLayout HorizontalOptions="EndAndExpand">
-            <StackLayout Orientation="Horizontal">
-              <Label Style="{StaticResource CourseLabelStyle}" Text="Number Students:" />
-              <Label Style="{StaticResource CourseLabelStyle}" Text="{Binding NumberOfStudents}" />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-              <Label Style="{StaticResource CourseLabelStyle}" Text="Average Age:" />
-              <Label
-              FontAttributes="Italic"
-              Style="{StaticResource CourseLabelStyle}"
-              Text="{Binding AverageStudentAge}"
-              />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-              <Label Style="{StaticResource CourseLabelStyle}" Text="Oldest Student:" />
-              <Label
-              FontAttributes="Italic"
-              Style="{StaticResource CourseLabelStyle}"
-              Text="{Binding OldestStudent}"
-              />
-            </StackLayout>
-          </StackLayout>
-        </StackLayout>
-      </Frame>
-      <BoxView
-        Margin="0,10,0,10"
-        BackgroundColor="Tomato"
-        HeightRequest="2"
-        />
-      <StackLayout BindableLayout.ItemsSource="{Binding Students}">
-        <BindableLayout.ItemTemplate>
-          <DataTemplate x:DataType="viewModels:StudentViewModel">
+    x:Class="CoursesApp.Pages.CourseDetailsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
+    ios:Page.UseSafeArea="true"
+    x:DataType="viewModels:CourseViewModel">
+    <ContentPage.Content>
+        <StackLayout Margin="20">
+            <Label
+                Margin="0,0,0,20"
+                FontAttributes="Bold"
+                FontSize="30"
+                HorizontalOptions="Center"
+                Text="{Binding Title}" />
             <Frame
-              Margin="0"
-              Padding="10"
-              BackgroundColor="Transparent"
-              HasShadow="False"
-              >
-              <SwipeView>
-                <SwipeView.LeftItems>
-                  <SwipeItems>
-                    <SwipeItemView Invoked="EditStudent">
-                      <Button
-                        Margin="0,0,10,0"
-                        Padding="10"
-                        BackgroundColor="Khaki"
-                        Text="Edit"
-                        TextColor="Black"
-                        VerticalOptions="Center"
-                        />
-                    </SwipeItemView>
-                  </SwipeItems>
-                </SwipeView.LeftItems>
-                <SwipeView.RightItems>
-                  <SwipeItems>
-                    <SwipeItemView Invoked="DeleteStudent">
-                      <Button
-                        Margin="10,0,0,0"
-                        Padding="10"
-                        BackgroundColor="Khaki"
-                        Text="Delete"
-                        TextColor="Black"
-                        VerticalOptions="Center"
-                        />
-                    </SwipeItemView>
-                  </SwipeItems>
-                </SwipeView.RightItems>
-                <StackLayout Margin="0">
-                  <Frame
-                    BackgroundColor="Tomato"
-                    CornerRadius="10"
-                    HasShadow="False"
-                    >
-                    <StackLayout Orientation="Horizontal">
-                      <Label Text="{Binding Name}" TextColor="Black" />
-                      <Label Text="{Binding Age, StringFormat='({0} yrs)'}" TextColor="Black" />
-                      <Label
-                        FontAttributes="Bold"
-                        HorizontalOptions="EndAndExpand"
-                        Text="{Binding Major}"
-                        TextColor="DimGray"
-                        TextDecorations="Underline"
-                        />
+                BackgroundColor="LightGray"
+                CornerRadius="4"
+                HasShadow="False">
+                <StackLayout Orientation="Horizontal">
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Style="{StaticResource CourseLabelStyle}" Text="Title:" />
+                            <Label Style="{StaticResource CourseLabelStyle}" Text="{Binding Title}" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Style="{StaticResource CourseLabelStyle}" Text="Length:" />
+                            <Label
+                                FontAttributes="Italic"
+                                Style="{StaticResource CourseLabelStyle}"
+                                Text="{Binding Length, StringFormat='({0} hours)'}" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Style="{StaticResource CourseLabelStyle}" Text="Type:" />
+                            <Label Style="{StaticResource CourseLabelStyle}" Text="{Binding Type}" />
+                        </StackLayout>
                     </StackLayout>
-                  </Frame>
+                    <StackLayout HorizontalOptions="EndAndExpand">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Style="{StaticResource CourseLabelStyle}" Text="Number Students:" />
+                            <Label Style="{StaticResource CourseLabelStyle}" Text="{Binding NumberOfStudents}" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Style="{StaticResource CourseLabelStyle}" Text="Average Age:" />
+                            <Label
+                                FontAttributes="Italic"
+                                Style="{StaticResource CourseLabelStyle}"
+                                Text="{Binding AverageStudentAge}" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Style="{StaticResource CourseLabelStyle}" Text="Oldest Student:" />
+                            <Label
+                                FontAttributes="Italic"
+                                Style="{StaticResource CourseLabelStyle}"
+                                Text="{Binding OldestStudent}" />
+                        </StackLayout>
+                    </StackLayout>
                 </StackLayout>
-              </SwipeView>
             </Frame>
-          </DataTemplate>
-        </BindableLayout.ItemTemplate>
-      </StackLayout>
-      <Grid IsVisible="{Binding StudentsExist}">
-        <Label
-          FontAttributes="Italic"
-          FontSize="14"
-          HorizontalOptions="Center"
-          Text="[Swipe left or right to edit or delete a student.]"
-          TextColor="#448EFF"
-          />
-      </Grid>
-      <Button
-        BackgroundColor="Khaki"
-        Clicked="AddStudent"
-        Text="Add Student"
-        TextColor="Black"
-        VerticalOptions="EndAndExpand"
-        />
-    </StackLayout>
-  </ContentPage.Content>
+            <BoxView
+                Margin="0,10,0,10"
+                BackgroundColor="Tomato"
+                HeightRequest="2" />
+            <StackLayout BindableLayout.ItemsSource="{Binding Students}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="viewModels:StudentViewModel">
+                        <Frame
+                            Margin="0"
+                            Padding="10"
+                            BackgroundColor="Transparent"
+                            HasShadow="False">
+                            <SwipeView>
+                                <SwipeView.LeftItems>
+                                    <SwipeItems>
+                                        <SwipeItemView Invoked="EditStudent">
+                                            <Button
+                                                Margin="0,0,10,0"
+                                                Padding="10"
+                                                BackgroundColor="Khaki"
+                                                Text="Edit"
+                                                TextColor="Black"
+                                                VerticalOptions="Center" />
+                                        </SwipeItemView>
+                                    </SwipeItems>
+                                </SwipeView.LeftItems>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItemView Invoked="DeleteStudent">
+                                            <Button
+                                                Margin="10,0,0,0"
+                                                Padding="10"
+                                                BackgroundColor="Khaki"
+                                                Text="Delete"
+                                                TextColor="Black"
+                                                VerticalOptions="Center" />
+                                        </SwipeItemView>
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <StackLayout Margin="0">
+                                    <Frame
+                                        BackgroundColor="Tomato"
+                                        CornerRadius="10"
+                                        HasShadow="False">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding Name}" TextColor="Black" />
+                                            <Label Text="{Binding Age, StringFormat='({0} yrs)'}" TextColor="Black" />
+                                            <Label
+                                                FontAttributes="Bold"
+                                                HorizontalOptions="EndAndExpand"
+                                                Text="{Binding Major}"
+                                                TextColor="DimGray"
+                                                TextDecorations="Underline" />
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </SwipeView>
+                        </Frame>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+            <Grid IsVisible="{Binding StudentsExist}">
+                <Label
+                    FontAttributes="Italic"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="[Swipe left or right to edit or delete a student.]"
+                    TextColor="#448EFF" />
+            </Grid>
+            <Button
+                BackgroundColor="Khaki"
+                Clicked="AddStudent"
+                Text="Add Student"
+                TextColor="Black"
+                VerticalOptions="EndAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

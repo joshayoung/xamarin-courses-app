@@ -1,42 +1,38 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-  x:Class="CoursesApp.Pages.modals.AddStudentModal"
-  xmlns="http://xamarin.com/schemas/2014/forms"
-  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-  xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-  xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
-  ios:Page.UseSafeArea="true"
-  >
-  <ContentPage.Content>
-    <StackLayout Padding="20" x:DataType="viewModels:StudentViewModel">
-      <Button
-        Clicked="CloseModal"
-        FontAttributes="Bold"
-        FontSize="40"
-        HorizontalOptions="Start"
-        Text="𝘅"
-        TextColor="Tomato"
-        />
-      <Label
-        Margin="0,0,0,20"
-        FontAttributes="Bold"
-        FontSize="30"
-        HorizontalOptions="Center"
-        Text="Add Student"
-        />
-      <Label Text="Name:" />
-      <Entry Text="{Binding Name}" />
-      <Label Text="Age:" />
-      <Entry Text="{Binding Age}" />
-      <Label Text="Major:" />
-      <Entry Text="{Binding Major}" />
-      <Button
-        BackgroundColor="Khaki"
-        Clicked="SaveStudent"
-        Text="Save Student"
-        TextColor="Black"
-        VerticalOptions="EndAndExpand"
-        />
-    </StackLayout>
-  </ContentPage.Content>
+    x:Class="CoursesApp.Pages.modals.AddStudentModal"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
+    ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <StackLayout Padding="20" x:DataType="viewModels:StudentViewModel">
+            <Button
+                Clicked="CloseModal"
+                FontAttributes="Bold"
+                FontSize="40"
+                HorizontalOptions="Start"
+                Text="𝘅"
+                TextColor="Tomato" />
+            <Label
+                Margin="0,0,0,20"
+                FontAttributes="Bold"
+                FontSize="30"
+                HorizontalOptions="Center"
+                Text="Add Student" />
+            <Label Text="Name:" />
+            <Entry Text="{Binding Name}" />
+            <Label Text="Age:" />
+            <Entry Text="{Binding Age}" />
+            <Label Text="Major:" />
+            <Entry Text="{Binding Major}" />
+            <Button
+                BackgroundColor="Khaki"
+                Clicked="SaveStudent"
+                Text="Save Student"
+                TextColor="Black"
+                VerticalOptions="EndAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

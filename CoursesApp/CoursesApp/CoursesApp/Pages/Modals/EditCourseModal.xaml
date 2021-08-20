@@ -1,50 +1,44 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-  x:Class="CoursesApp.Pages.modals.EditCourseModal"
-  xmlns="http://xamarin.com/schemas/2014/forms"
-  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-  xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-  xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
-  ios:Page.UseSafeArea="true"
-  x:DataType="viewModels:CourseViewModel"
-  >
-  <ContentPage.Content>
-    <StackLayout Padding="20">
-      <Button
-        Clicked="CloseModal"
-        FontAttributes="Bold"
-        FontSize="40"
-        HorizontalOptions="Start"
-        Text="𝘅"
-        TextColor="Tomato"
-        />
-      <Label
-        Margin="0,0,0,30"
-        FontAttributes="Bold"
-        FontSize="30"
-        HorizontalOptions="CenterAndExpand"
-        Text="Edit This Course"
-        />
-      <Label Text="Course Name:" />
-      <Entry Text="{Binding Title, Mode=TwoWay}" />
-      <Label Text="Course Length:" />
-      <Picker
-        ItemDisplayBinding="{Binding .}"
-        ItemsSource="{x:Static viewModels:CourseViewModel.CourseLengthList}"
-        SelectedItem="{Binding SelectedLength}"
-        />
-      <Label Text="Course Type:" />
-      <Picker
-        ItemDisplayBinding="{Binding .}"
-        ItemsSource="{x:Static viewModels:CourseViewModel.CourseTypesList}"
-        SelectedItem="{Binding SelectedType}"
-        />
-      <Button
-        BackgroundColor="Tomato"
-        Clicked="SaveCourseEdits"
-        Text="Save Edits"
-        TextColor="Black"
-        />
-    </StackLayout>
-  </ContentPage.Content>
+    x:Class="CoursesApp.Pages.modals.EditCourseModal"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:viewModels="clr-namespace:CoursesApp.ViewModels;assembly=CoursesApp.ViewModels"
+    ios:Page.UseSafeArea="true"
+    x:DataType="viewModels:CourseViewModel">
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Button
+                Clicked="CloseModal"
+                FontAttributes="Bold"
+                FontSize="40"
+                HorizontalOptions="Start"
+                Text="𝘅"
+                TextColor="Tomato" />
+            <Label
+                Margin="0,0,0,30"
+                FontAttributes="Bold"
+                FontSize="30"
+                HorizontalOptions="CenterAndExpand"
+                Text="Edit This Course" />
+            <Label Text="Course Name:" />
+            <Entry Text="{Binding Title, Mode=TwoWay}" />
+            <Label Text="Course Length:" />
+            <Picker
+                ItemDisplayBinding="{Binding .}"
+                ItemsSource="{x:Static viewModels:CourseViewModel.CourseLengthList}"
+                SelectedItem="{Binding SelectedLength}" />
+            <Label Text="Course Type:" />
+            <Picker
+                ItemDisplayBinding="{Binding .}"
+                ItemsSource="{x:Static viewModels:CourseViewModel.CourseTypesList}"
+                SelectedItem="{Binding SelectedType}" />
+            <Button
+                BackgroundColor="Tomato"
+                Clicked="SaveCourseEdits"
+                Text="Save Edits"
+                TextColor="Black" />
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
