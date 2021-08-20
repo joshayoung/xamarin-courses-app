@@ -44,23 +44,23 @@
           <StackLayout HorizontalOptions="EndAndExpand">
             <StackLayout Orientation="Horizontal">
               <Label Style="{StaticResource CourseLabelStyle}" Text="Number Students:" />
-              <!-- <Label Style="{StaticResource CourseLabelStyle}" Text="{Binding NumberOfStudents}" /> -->
+              <Label Style="{StaticResource CourseLabelStyle}" Text="{Binding NumberOfStudents}" />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
               <Label Style="{StaticResource CourseLabelStyle}" Text="Average Age:" />
-              <!--  <Label  -->
-              <!--  FontAttributes="Italic"  -->
-              <!--  Style="{StaticResource CourseLabelStyle}"  -->
-              <!--  Text="{Binding AverageStudentAge}"  -->
-              <!--  />  -->
+              <Label
+              FontAttributes="Italic"
+              Style="{StaticResource CourseLabelStyle}"
+              Text="{Binding AverageStudentAge}"
+              />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
               <Label Style="{StaticResource CourseLabelStyle}" Text="Oldest Student" />
-              <!--  <Label  -->
-              <!--  FontAttributes="Italic"  -->
-              <!--  Style="{StaticResource CourseLabelStyle}"  -->
-              <!--  Text="{Binding OldestStudent}"  -->
-              <!--  />  -->
+              <Label
+              FontAttributes="Italic"
+              Style="{StaticResource CourseLabelStyle}"
+              Text="{Binding OldestStudent}"
+              />
             </StackLayout>
           </StackLayout>
         </StackLayout>

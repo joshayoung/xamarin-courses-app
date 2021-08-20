@@ -60,16 +60,16 @@ namespace CoursesApp.ViewModels
             students = new List<StudentViewModel>();
             this.courseCollection = courseCollection;
             courseCollection.PropertyChanged += CoursesCollectionOnPropertyChanged;
-            RefreshList();
+            RefreshCourses();
         }
 
         private void CoursesCollectionOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(CourseCollection.Courses)) RefreshList();
-            if (e.PropertyName == nameof(CourseCollection.Students)) RefreshList();
+            if (e.PropertyName == nameof(CourseCollection.Courses)) RefreshCourses();
+            if (e.PropertyName == nameof(CourseCollection.Students)) RefreshCourses();
         }
 
-        private void RefreshList()
+        private void RefreshCourses()
         {
             var courseList = new List<CourseViewModel>();
             var studentList = new List<StudentViewModel>();

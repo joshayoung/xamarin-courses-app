@@ -36,7 +36,42 @@ namespace CoursesApp.ViewModels
         }
 
         public static List<float> CourseLengthList => new List<float> { 1, 2, 3, 4 };
+        
+        // TODO: Add property change calls:
+        public int NumberOfStudents => course.Students.Count;
 
+        public int AverageStudentAge
+        {
+            get
+            {
+                var sum = 0;
+                foreach (var id in course.Students)
+                {
+                    Student student = courseCollection.GetStudent(id);
+                    sum += student.Age;
+                }
+
+                return sum / course.Students.Count;
+            }
+        }
+
+        // TODO: Add property change calls:
+        public string? OldestStudent {
+            get
+            {
+                var age = 0;
+                string? name = null;
+                foreach (var student in course.Students.Select(id => courseCollection.GetStudent(id)).Where(student => student.Age > age))
+                {
+                    age = student.Age;
+                    name = student.Name;
+                }
+
+                return name;
+            }
+        }
+
+        // TODO: Add property change calls:
         public static List<CourseType> CourseTypesList =>
             new List<CourseType>
             {
