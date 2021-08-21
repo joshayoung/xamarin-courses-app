@@ -77,8 +77,8 @@ namespace CoursesApp.Models
             this.id = id;
             this.title = title ?? "";
             this.length = length;
-            this.students = students ?? new List<int>();
             this.type = type;
+            this.students = students ?? new List<int>();
         }
 
         protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)

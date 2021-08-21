@@ -18,7 +18,7 @@ namespace CoursesApp.Models.Service
             return JsonConvert.DeserializeObject<List<Course>>(json);
         }
 
-        public List<Student> GetStudents(string path = StudentDataPath)
+        public virtual List<Student> GetStudents(string path = StudentDataPath)
         {
             var json = GetJsonString(path);
             
