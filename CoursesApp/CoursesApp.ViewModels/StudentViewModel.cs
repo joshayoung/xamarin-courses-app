@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using CoursesApp.Models;
+using CoursesApp.Models.Helpers;
 
 namespace CoursesApp.ViewModels
 {
@@ -10,12 +11,7 @@ namespace CoursesApp.ViewModels
         private readonly Student student;
         private readonly Course course;
         private readonly CourseCollection courseCollection;
-        
-        // TODO: Move this to a helper method:
-        private readonly List<int> ageList = new List<int>
-        {
-                17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30
-        };
+        private readonly List<int> ageList = ModelHelper.Ages();
         
         public event PropertyChangedEventHandler? PropertyChanged;
 

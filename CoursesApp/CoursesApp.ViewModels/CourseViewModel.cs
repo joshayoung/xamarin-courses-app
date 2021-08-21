@@ -36,7 +36,7 @@ namespace CoursesApp.ViewModels
         }
 
         public static List<float> CourseLengthList => new List<float> { 1, 2, 3, 4 };
-        
+
         public int NumberOfStudents => course.Students.Count;
 
         public int AverageStudentAge
@@ -44,26 +44,24 @@ namespace CoursesApp.ViewModels
             get
             {
                 if (course.Students.Count == 0) return 0;
-                
-                var sum = 0;
-                foreach (var id in course.Students)
-                {
-                    Student student = courseCollection.GetStudent(id);
-                    sum += student.Age;
-                }
 
-                return sum / course.Students.Count;
+                return course.Students
+                    .Select(id => courseCollection.GetStudent(id))
+                    .Select(student => student.Age)
+                    .Sum() / course.Students.Count;
             }
         }
 
-        public string? OldestStudent {
+        public string? OldestStudent
+        {
             get
             {
                 if (course.Students.Count == 0) return "";
-                
+
                 var age = 0;
                 string? name = null;
-                foreach (var student in course.Students.Select(id => courseCollection.GetStudent(id)).Where(student => student.Age > age))
+                foreach (var student in course.Students.Select(id => courseCollection.GetStudent(id))
+                    .Where(student => student.Age > age))
                 {
                     age = student.Age;
                     name = student.Name;

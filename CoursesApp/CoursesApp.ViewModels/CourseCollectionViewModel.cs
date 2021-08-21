@@ -13,6 +13,7 @@ namespace CoursesApp.ViewModels
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private bool isRefreshing;
+
         public bool IsRefreshing
         {
             get => isRefreshing;
@@ -36,7 +37,7 @@ namespace CoursesApp.ViewModels
                 courses = value;
                 // Repopulate courses after modifying course:
                 OnPropertyChanged();
-                
+
                 // Also Update This Value:
                 OnPropertyChanged(nameof(CoursesExist));
             }
@@ -92,14 +93,10 @@ namespace CoursesApp.ViewModels
         }
 
         private StudentViewModel StudentVm(int id, Course cs)
-        {
-            return new StudentViewModel(courseCollection.GetStudent(id), cs, courseCollection);
-        }
+            => new StudentViewModel(courseCollection.GetStudent(id), cs, courseCollection);
 
         public CourseViewModel NewCourseViewModel()
-        {
-            return new CourseViewModel(new Course(GetNextCourseId().ToString()), courseCollection);
-        }
+            => new CourseViewModel(new Course(GetNextCourseId().ToString()), courseCollection);
 
         private int GetNextCourseId()
         {

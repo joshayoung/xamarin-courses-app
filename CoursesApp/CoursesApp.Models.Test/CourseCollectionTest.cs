@@ -10,12 +10,15 @@ namespace CoursesApp.Models.Test
 {
     public class CourseCollectionTest
     {
-        private const string Json = "[{\"id\": 4, \"title\": \"Physical Science\", \"length\": 4, \"type\": 3, \"students\": []}]";
-        private readonly List<Course> deserializedCourse;
+        private const string JsonC = "[{\"id\": 4, \"title\": \"Physical Science\", \"length\": 4, \"type\": 3, \"students\": []}]";
+        private const string JsonS = "[{\"id\":2,\"name\":\"Sarah\",\"age\":18,\"major\":\"History\"}]";
+        private readonly List<Course> deserializedCourses;
+        private readonly List<Student> deserializedStudents;
 
         public CourseCollectionTest()
         {
-            deserializedCourse = JsonConvert.DeserializeObject<List<Course>>(Json);
+            deserializedCourses = JsonConvert.DeserializeObject<List<Course>>(JsonC);
+            deserializedStudents = JsonConvert.DeserializeObject<List<Student>>(JsonS);
         }
 
         [Fact]
@@ -25,13 +28,15 @@ namespace CoursesApp.Models.Test
             var courseCollection = new CourseCollection(courseDataService);
 
             courseCollection.Courses.Should().BeEmpty();
+            courseCollection.Students.Should().BeEmpty();
         }
 
         [Fact]
         public void RepopulateCourseList_Called_ExpectAPropertyChangedEvent()
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
-            courseDataService.Configure().GetCourses().Returns(deserializedCourse);
+            courseDataService.Configure().GetCourses().Returns(deserializedCourses);
+            courseDataService.Configure().GetStudents().Returns(deserializedStudents);
             var courseCollection = new CourseCollection(courseDataService);
             var coursesWasChanged = false;
             courseCollection.PropertyChanged += (_, __) => coursesWasChanged = true;
@@ -45,12 +50,14 @@ namespace CoursesApp.Models.Test
         public void RepopulateCourseList_Called_ExpectCoursesToChange()
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
-            courseDataService.Configure().GetCourses().Returns(deserializedCourse);
+            courseDataService.Configure().GetCourses().Returns(deserializedCourses);
+            courseDataService.Configure().GetStudents().Returns(deserializedStudents);
             var courseCollection = new CourseCollection(courseDataService);
             
             courseCollection.RepopulateCourseList();
 
-            courseCollection.Courses.Should().BeEquivalentTo(deserializedCourse);
+            courseCollection.Courses.Should().BeEquivalentTo(deserializedCourses);
+            courseCollection.Students.Should().BeEquivalentTo(deserializedStudents);
         }
 
         [Fact]

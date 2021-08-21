@@ -38,9 +38,6 @@ namespace CoursesApp.Pages
             Navigation.PushModalAsync(new EditCourseModal(courseViewModel));
         }
         
-        private void RefreshView_OnRefreshing(object sender, EventArgs e)
-        {
-            courseCollectionViewModel.Refresh();
-        }
+        private void RefreshView_OnRefreshing(object sender, EventArgs e) => courseCollectionViewModel.Refresh();
     }
 }
