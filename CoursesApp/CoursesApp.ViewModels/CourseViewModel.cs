@@ -180,5 +180,21 @@ namespace CoursesApp.ViewModels
             if (e.PropertyName == nameof(CourseCollection.Courses)) RefreshStudents();
             if (e.PropertyName == nameof(CourseCollection.Students)) RefreshStudents();
         }
+
+        public CourseViewModel EditCourseCopy(int id)
+        {
+            var newCourse = new Course(id.ToString(), course.Title ?? "", course.Length, CourseType.Discussion);
+            return new CourseViewModel(newCourse, courseCollection);
+        }
+
+        // TODO: Save to API Here too
+        public void SaveCourse(string id)
+        {
+            Course editCourse = courseCollection.Courses.First(c => c.Id == id);
+            // In this case, I am only saving the values in the form:
+            editCourse.Title = course.Title;
+            editCourse.Length = course.Length;
+            editCourse.Type = course.Type;
+        }
     }
 }

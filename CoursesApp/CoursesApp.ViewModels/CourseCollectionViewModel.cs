@@ -98,7 +98,7 @@ namespace CoursesApp.ViewModels
         public CourseViewModel NewCourseViewModel()
             => new CourseViewModel(new Course(GetNextCourseId().ToString()), courseCollection);
 
-        private int GetNextCourseId()
+        public int GetNextCourseId()
         {
             if (Courses.Count == 0) return 1;
 

@@ -35,9 +35,10 @@ namespace CoursesApp.Pages
         private void EditClass(object sender, EventArgs e)
         {
             var courseViewModel = (CourseViewModel)((BindableObject)sender).BindingContext;
-            Navigation.PushModalAsync(new EditCourseModal(courseViewModel));
+            Navigation.PushModalAsync(new EditCourseModal(courseViewModel.Id,
+                courseViewModel.EditCourseCopy(courseCollectionViewModel.GetNextCourseId())));
         }
-        
+
         private void RefreshView_OnRefreshing(object sender, EventArgs e) => courseCollectionViewModel.Refresh();
     }
 }
