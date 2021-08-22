@@ -8,15 +8,18 @@ namespace CoursesApp.Pages.modals
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditStudentModal : ContentPage
     {
-        public EditStudentModal(StudentViewModel studentViewModel)
+        private readonly StudentViewModel studentViewModel;
+        private readonly int id;
+        public EditStudentModal(int id, StudentViewModel studentViewModel)
         {
             InitializeComponent();
-            BindingContext = studentViewModel;
+            this.id = id;
+            BindingContext = this.studentViewModel = studentViewModel;
         }
 
         private void SaveStudentEdits(object sender, EventArgs e)
         {
-            // TODO: Save to API Here
+            studentViewModel.SaveStudent(id, studentViewModel);
             Navigation.PopModalAsync();
         }
 

@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using CoursesApp.Models;
 using CoursesApp.Models.Helpers;
+using CoursesApp.Models.Service;
 
 namespace CoursesApp.ViewModels
 {
@@ -14,6 +16,8 @@ namespace CoursesApp.ViewModels
         private readonly List<int> ageList = ModelHelper.Ages();
         
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        public int Id => student.Id;
 
         // TODO: Select the student's age
         public List<int> Ages
@@ -68,9 +72,24 @@ namespace CoursesApp.ViewModels
         public void AddStudent() => courseCollection.AddStudent(course, student);
         public void DeleteStudent() => courseCollection.DeleteStudent(course, student);
 
+        // TODO: Save to API Here too
+        public void SaveStudent(int id, StudentViewModel svm)
+        {
+            Student editedStudent = courseCollection.Students.First(s => s.Id == id);
+            editedStudent.Name = svm.Name;
+            editedStudent.Age = svm.Age;
+            editedStudent.Major = svm.Major;
+        }
+
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public StudentViewModel EditStudentCopy()
+        {
+            var newStudent = new Student(student.Id, student.Name, student.Age, student.Major);
+            return new StudentViewModel(newStudent, course, courseCollection);
         }
     }
 }

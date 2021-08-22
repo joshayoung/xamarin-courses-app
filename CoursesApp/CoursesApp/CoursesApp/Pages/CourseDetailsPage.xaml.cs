@@ -23,7 +23,7 @@ namespace CoursesApp.Pages
         private void EditStudent(object sender, EventArgs e)
         {
             var studentViewModel = (StudentViewModel)((BindableObject)sender).BindingContext;
-            Navigation.PushModalAsync(new EditStudentModal(studentViewModel));
+            Navigation.PushModalAsync(new EditStudentModal(studentViewModel.Id, studentViewModel.EditStudentCopy()));
         }
 
         private void DeleteStudent(object sender, EventArgs e)
