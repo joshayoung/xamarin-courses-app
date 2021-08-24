@@ -19,16 +19,7 @@ namespace CoursesApp.ViewModels
 
         public int Id => student.Id;
 
-        // TODO: Select the student's age
-        public List<int> Ages
-        {
-            get
-            {
-                var myList = new List<int> { student.Age };
-                myList.InsertRange(1, ageList);
-                return myList;
-            }
-        }
+        public List<int> Ages => new List<int>(ageList);
 
         public string? Name
         {

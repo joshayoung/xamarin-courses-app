@@ -109,7 +109,6 @@ namespace CoursesApp.ViewModels
 
         public void Refresh()
         {
-            // TODO: Is setting this to true, then false necessary?
             IsRefreshing = true;
             courseCollection.RepopulateCourseList();
             IsRefreshing = false;

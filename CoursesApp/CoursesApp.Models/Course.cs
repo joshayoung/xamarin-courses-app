@@ -75,7 +75,7 @@ namespace CoursesApp.Models
         {
             // TODO: The best way to do this?
             this.id = id;
-            this.title = title ?? "";
+            this.title = title;
             this.length = length;
             this.type = type;
             this.students = students ?? new List<int>();

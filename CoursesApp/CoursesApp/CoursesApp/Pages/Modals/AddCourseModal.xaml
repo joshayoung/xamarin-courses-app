@@ -12,27 +12,29 @@
             Clicked="CloseModal"
             FontAttributes="Bold"
             FontSize="40"
-            HorizontalOptions="Start"
             Text="𝘅"
-            TextColor="Tomato" />
+            TextColor="Tomato"
+            HorizontalOptions="Start" />
         <Label
             Margin="0,0,0,30"
             FontAttributes="Bold"
             FontSize="30"
-            HorizontalOptions="CenterAndExpand"
-            Text="Add New Course" />
+            Text="Add New Course"
+            HorizontalOptions="CenterAndExpand" />
         <Label Text="Course Name:" />
         <Entry Text="{Binding Title, Mode=TwoWay}" />
         <Label Text="Course Length:" />
         <Picker
+            Title="Select Course Length"
             ItemDisplayBinding="{Binding .}"
             ItemsSource="{x:Static viewModels:CourseViewModel.CourseLengthList}"
-            SelectedItem="{Binding SelectedLength}" />
+            SelectedItem="{Binding Length}" />
         <Label Text="Course Type:" />
         <Picker
+            Title="Select Course Type"
             ItemDisplayBinding="{Binding .}"
             ItemsSource="{x:Static viewModels:CourseViewModel.CourseTypesList}"
-            SelectedItem="{Binding SelectedType}" />
+            SelectedItem="{Binding Type}" />
         <Button
             BackgroundColor="Khaki"
             Clicked="SaveCourse"
