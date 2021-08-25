@@ -13,29 +13,9 @@ namespace CoursesApp.ViewModels
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public CourseType SelectedType
-        {
-            get => course.Type;
-            set
-            {
-                course.Type = value;
-                NotifyPropertyChanged();
-            }
-        }
-
         public bool StudentsExist => Students.Count > 0;
 
-        public float SelectedLength
-        {
-            get => course.Length;
-            set
-            {
-                course.Length = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        public static List<float> CourseLengthList => new List<float> { 1, 2, 3, 4 };
+        public List<float> CourseLengthList => new List<float> { 1, 2, 3, 4 };
 
         public int NumberOfStudents => course.Students.Count;
 
@@ -71,14 +51,14 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        public static List<CourseType> CourseTypesList =>
+        public List<CourseType> CourseTypesList =>
             new List<CourseType>
             {
                 CourseType.Seminar,
                 CourseType.Lab,
                 CourseType.Independent,
                 CourseType.Lecture,
-                CourseType.Discussion,
+                CourseType.Discussion
             };
 
         public string Id => course.Id;
@@ -183,7 +163,7 @@ namespace CoursesApp.ViewModels
 
         public CourseViewModel EditCourseCopy(int id)
         {
-            var newCourse = new Course(id.ToString(), course.Title ?? "", course.Length, CourseType.Discussion);
+            var newCourse = new Course(id.ToString(), course.Title ?? "", course.Length, course.Type);
             return new CourseViewModel(newCourse, courseCollection);
         }
 

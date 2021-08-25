@@ -24,7 +24,6 @@
             <Label Text="Name:" />
             <Entry Text="{Binding Name}" />
             <Label Text="Age:" />
-            <!-- <Entry Text="{Binding Age}" /> -->
             <Picker
                 ItemDisplayBinding="{Binding .}"
                 ItemsSource="{Binding Ages}"
