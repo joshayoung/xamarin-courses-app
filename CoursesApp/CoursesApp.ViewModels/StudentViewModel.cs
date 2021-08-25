@@ -13,14 +13,11 @@ namespace CoursesApp.ViewModels
         private readonly Student student;
         private readonly Course course;
         private readonly CourseCollection courseCollection;
-        private readonly List<int> ageList = ModelHelper.Ages();
         
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public int Id => student.Id;
-
-        public List<int> Ages => new List<int>(ageList);
-
+        
         public string? Name
         {
             get => student.Name;
@@ -40,6 +37,8 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged();
             }
         }
+        
+        public static List<int> Ages => ModelHelper.StudentAges();
 
         public string? Major
         {

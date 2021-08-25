@@ -27,13 +27,13 @@
         <Picker
             Title="Select Course Length"
             ItemDisplayBinding="{Binding .}"
-            ItemsSource="{Binding CourseLengthList}"
+            ItemsSource="{x:Static viewModels:CourseViewModel.Lengths}"
             SelectedItem="{Binding Length}" />
         <Label Text="Course Type:" />
         <Picker
             Title="Select Course Type"
             ItemDisplayBinding="{Binding .}"
-            ItemsSource="{Binding CourseTypesList}"
+            ItemsSource="{x:Static viewModels:CourseViewModel.Types}"
             SelectedItem="{Binding Type}" />
         <Button
             BackgroundColor="Khaki"

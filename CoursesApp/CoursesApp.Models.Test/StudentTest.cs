@@ -24,7 +24,6 @@ namespace CoursesApp.Models.Test
         [Fact]
         public void Properties_Changed_ExpectPropertyChangedEvent()
         {
-            var wasIdChanged = false;
             var wasNameChanged = false;
             var wasAgeChanged = false;
             var wasMajorChanged = false;

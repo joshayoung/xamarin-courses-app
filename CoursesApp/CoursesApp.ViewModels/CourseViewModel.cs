@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using CoursesApp.Models;
+using CoursesApp.Models.Helpers;
 
 namespace CoursesApp.ViewModels
 {
@@ -14,8 +15,6 @@ namespace CoursesApp.ViewModels
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public bool StudentsExist => Students.Count > 0;
-
-        public List<float> CourseLengthList => new List<float> { 1, 2, 3, 4 };
 
         public int NumberOfStudents => course.Students.Count;
 
@@ -51,16 +50,6 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        public List<CourseType> CourseTypesList =>
-            new List<CourseType>
-            {
-                CourseType.Seminar,
-                CourseType.Lab,
-                CourseType.Independent,
-                CourseType.Lecture,
-                CourseType.Discussion
-            };
-
         public string Id => course.Id;
 
         public string? Title
@@ -82,6 +71,8 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged();
             }
         }
+        
+        public static List<float> Lengths => ModelHelper.CourseLengths;
 
         private List<StudentViewModel> students;
 
@@ -108,6 +99,8 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged();
             }
         }
+        
+        public static List<CourseType> Types => ModelHelper.CourseTypes;
 
         public CourseViewModel(Course course, CourseCollection courseCollection)
         {

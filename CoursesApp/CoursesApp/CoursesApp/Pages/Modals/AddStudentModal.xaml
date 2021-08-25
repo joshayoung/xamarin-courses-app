@@ -27,7 +27,7 @@
             <Picker
                 Title="Select an Age"
                 ItemDisplayBinding="{Binding .}"
-                ItemsSource="{Binding Ages}"
+                ItemsSource="{x:Static viewModels:StudentViewModel.Ages}"
                 SelectedItem="{Binding Age}" />
             <Label Text="Major:" />
             <Entry Text="{Binding Major}" />
