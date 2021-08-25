@@ -11,6 +11,7 @@ namespace CoursesApp.Models
         [Description("Lab Class")] Lab,
         [Description("Independent Study Class")] Independent,
         [Description("Lecture Class")] Lecture,
-        [Description("Discussion Class")] Discussion
+        [Description("Discussion Class")] Discussion,
+        [Description("Default for New Items")] None
     }
 }

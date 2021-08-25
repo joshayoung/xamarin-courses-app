@@ -12,19 +12,23 @@
                 Margin="0,0,0,20"
                 FontAttributes="Bold"
                 FontSize="30"
-                HorizontalOptions="Center"
-                Text="Edit Student" />
+                Text="Edit Student"
+                HorizontalOptions="Center" />
             <Button
                 Clicked="CloseModal"
                 FontAttributes="Bold"
                 FontSize="40"
-                HorizontalOptions="Start"
                 Text="𝘅"
-                TextColor="Tomato" />
+                TextColor="Tomato"
+                HorizontalOptions="Start" />
             <Label Text="Name:" />
             <Entry Text="{Binding Name}" />
             <Label Text="Age:" />
-            <Entry Text="{Binding Age}" />
+            <!-- <Entry Text="{Binding Age}" /> -->
+            <Picker
+                ItemDisplayBinding="{Binding .}"
+                ItemsSource="{Binding Ages}"
+                SelectedItem="{Binding Age}" />
             <Label Text="Major:" />
             <Entry Text="{Binding Major}" />
             <Button

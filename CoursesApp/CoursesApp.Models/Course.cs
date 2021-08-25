@@ -70,7 +70,7 @@ namespace CoursesApp.Models
             string id,
             string title = "",
             float length = 0,
-            CourseType type = CourseType.Lecture,
+            CourseType type = CourseType.None,
             List<int>? students = null)
         {
             // TODO: The best way to do this?
