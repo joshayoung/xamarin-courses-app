@@ -9,20 +9,10 @@ namespace CoursesApp.Models
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private string id;
-        public string Id
-        {
-            get => id;
-            // TODO: Is this value getting used?
-            set
-            {
-                id = value;
-                NotifyPropertyChanged();
-            }
-        }
+        public string Id { get; }
 
-        private string? title;
-        public string? Title
+        private string title;
+        public string Title
         {
             get => title;
             set
@@ -73,8 +63,7 @@ namespace CoursesApp.Models
             CourseType type = CourseType.None,
             List<int>? students = null)
         {
-            // TODO: The best way to do this?
-            this.id = id;
+            Id = id;
             this.title = title;
             this.length = length;
             this.type = type;

@@ -45,16 +45,6 @@ namespace CoursesApp.ViewModels
 
         private List<StudentViewModel> students;
 
-        public List<StudentViewModel> Students
-        {
-            get => students;
-            private set
-            {
-                students = value;
-                OnPropertyChanged();
-            }
-        }
-
         public CourseCollectionViewModel(CourseCollection courseCollection)
         {
             courses = new List<CourseViewModel>();
@@ -79,7 +69,7 @@ namespace CoursesApp.ViewModels
                 studentList = cs.Students.Select(id => StudentVm(id, cs)).ToList();
                 courseList.Add(CourseVm(cs, studentList));
             });
-            Students = studentList;
+            students = studentList;
             Courses = courseList;
         }
 

@@ -115,7 +115,6 @@ namespace CoursesApp.Models.Test
 
         private void ValidateCourse(Course course, Course newCourse)
         {
-            course.Id.Should().Be(newCourse.Id);
             course.Title.Should().Be(newCourse.Title);
             course.Length.Should().Be(newCourse.Length);
             course.Type.Should().Be(newCourse.Type);

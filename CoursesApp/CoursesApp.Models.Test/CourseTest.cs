@@ -17,7 +17,6 @@ namespace CoursesApp.Models.Test
         
             var course = new Course(id, title, length, type, students);
         
-            course.Id.Should().Be(id);
             course.Title.Should().Be(title);
             course.Length.Should().Be(length);
             course.Students.Should().BeEquivalentTo(students);
@@ -37,14 +36,12 @@ namespace CoursesApp.Models.Test
         
             course.PropertyChanged += (_, args) =>
             {
-                if (args.PropertyName == nameof(course.Id)) wasIdChanged = true;
                 if (args.PropertyName == nameof(course.Title)) wasTitleChanged = true;
                 if (args.PropertyName == nameof(course.Length)) wasLengthChanged = true;
                 if (args.PropertyName == nameof(course.Students)) wasStudentsChanged = true;
                 if (args.PropertyName == nameof(course.Type)) wasTypeChanged = true;
             };
         
-            course.Id = "2";
             course.Title = "new title";
             course.Length = 4;
             course.Students = new List<int> { 1 };

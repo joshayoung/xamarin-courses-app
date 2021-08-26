@@ -4,7 +4,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using CoursesApp.Models;
 using CoursesApp.Models.Helpers;
-using CoursesApp.Models.Service;
 
 namespace CoursesApp.ViewModels
 {
@@ -18,7 +17,7 @@ namespace CoursesApp.ViewModels
 
         public int Id => student.Id;
         
-        public string? Name
+        public string Name
         {
             get => student.Name;
             set
@@ -40,7 +39,7 @@ namespace CoursesApp.ViewModels
         
         public static List<int> Ages => ModelHelper.StudentAges();
 
-        public string? Major
+        public string Major
         {
             get => student.Major;
             set
@@ -62,7 +61,6 @@ namespace CoursesApp.ViewModels
         public void AddStudent() => courseCollection.AddStudent(course, student);
         public void DeleteStudent() => courseCollection.DeleteStudent(course, student);
 
-        // TODO: Save to API Here too
         public void SaveStudent(int id, StudentViewModel svm)
         {
             Student editedStudent = courseCollection.Students.First(s => s.Id == id);

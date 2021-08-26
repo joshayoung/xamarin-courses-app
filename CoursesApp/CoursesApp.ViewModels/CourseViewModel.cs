@@ -52,7 +52,7 @@ namespace CoursesApp.ViewModels
 
         public string Id => course.Id;
 
-        public string? Title
+        public string Title
         {
             get => course.Title;
             set
@@ -160,11 +160,9 @@ namespace CoursesApp.ViewModels
             return new CourseViewModel(newCourse, courseCollection);
         }
 
-        // TODO: Save to API Here too
         public void SaveCourse(string id)
         {
             Course editCourse = courseCollection.Courses.First(c => c.Id == id);
-            // In this case, I am only saving the values in the form:
             editCourse.Title = course.Title;
             editCourse.Length = course.Length;
             editCourse.Type = course.Type;

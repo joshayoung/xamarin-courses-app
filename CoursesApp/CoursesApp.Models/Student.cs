@@ -7,19 +7,10 @@ namespace CoursesApp.Models
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private int id;
-        public int Id
-        {
-            get => id;
-            private set
-            {
-                id = value;
-                NotifyPropertyChanged();
-            }
-        }
+        public int Id { get; }
 
-        private string? name;
-        public string? Name
+        private string name;
+        public string Name
         {
             get => name;
             set
@@ -40,8 +31,8 @@ namespace CoursesApp.Models
             }
         }
 
-        private string? major;
-        public string? Major
+        private string major;
+        public string Major
         {
             get => major;
             set
@@ -51,16 +42,14 @@ namespace CoursesApp.Models
             }
         }
 
-        public Student(int id, string? name = "", int? age = 0, string? major = "")
+        public Student(int id, string name = "", int age = 0, string major = "")
         {
-            this.id = id;
+            Id = id;
             this.name = name;
-            // TODO: Why do I need this here?
-            this.age = age ?? 0;
+            this.age = age;
             this.major = major;
         }
 
-        // TODO: Is using '!' here a good idea:
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
