@@ -108,7 +108,7 @@ namespace CoursesApp.ViewModels
             this.course = course;
             this.courseCollection = courseCollection;
             RefreshStudents();
-            courseCollection.PropertyChanged += OnPropertyChanged;
+            courseCollection.PropertyChanged += StudentsCollectionOnPropertyChanged;
             courseCollection.Students.ForEach(student => student.PropertyChanged += StudentOnPropertyChanged);
 
             course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
@@ -148,9 +148,8 @@ namespace CoursesApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void OnPropertyChanged(object _, PropertyChangedEventArgs e)
+        private void StudentsCollectionOnPropertyChanged(object _, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(CourseCollection.Courses)) RefreshStudents();
             if (e.PropertyName == nameof(CourseCollection.Students)) RefreshStudents();
         }
 

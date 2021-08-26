@@ -11,9 +11,9 @@ namespace CoursesApp.Models
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public List<Course> Courses { get; set; } = new List<Course>();
+        public List<Course> Courses { get; private set; } = new List<Course>();
 
-        public List<Student> Students { get; set; } = new List<Student>();
+        public List<Student> Students { get; private set; } = new List<Student>();
 
         public CourseCollection(CourseDataService courseDataService)
         {
@@ -46,9 +46,6 @@ namespace CoursesApp.Models
         {
             Students.Add(student);
             course.Students.Add(student.Id);
-
-            // Trigger a Change for Both Lists:
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
         }
 
@@ -58,9 +55,6 @@ namespace CoursesApp.Models
             // If student not in multiple courses:
             if (students.Count == 1) Students.Remove(student);
             course.Students.Remove(student.Id);
-
-            // Trigger a Change for Both Lists:
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
         }
     }

@@ -6,7 +6,7 @@ using CoursesApp.Models;
 
 namespace CoursesApp.ViewModels
 {
-    public sealed class CourseCollectionViewModel : INotifyPropertyChanged
+    public class CourseCollectionViewModel : INotifyPropertyChanged
     {
         private readonly CourseCollection courseCollection;
 
@@ -14,7 +14,7 @@ namespace CoursesApp.ViewModels
 
         private bool isRefreshing;
 
-        public bool IsRefreshing
+        public virtual bool IsRefreshing
         {
             get => isRefreshing;
             set
@@ -23,9 +23,6 @@ namespace CoursesApp.ViewModels
                 OnPropertyChanged();
             }
         }
-
-        // TODO: How is this updated with no 'OnPropertyChanged()':
-        public bool CoursesExist => Courses.Count > 0;
 
         private List<CourseViewModel> courses;
 
@@ -54,10 +51,33 @@ namespace CoursesApp.ViewModels
             RefreshCourses();
         }
 
+        // TODO: How is this updated with no 'OnPropertyChanged()':
+        public bool CoursesExist => Courses.Count > 0;
+
+        public int GetNextCourseId()
+        {
+            if (Courses.Count == 0) return 1;
+
+            var id = int.Parse(Courses.Max(course => course.Id));
+
+            return ++id;
+        }
+
+        public void Refresh()
+        {
+            IsRefreshing = true;
+            courseCollection.RepopulateCourseList();
+            IsRefreshing = false;
+        }
+
+        public CourseViewModel NewCourseViewModel()
+        {
+            return new CourseViewModel(new Course(GetNextCourseId().ToString()), courseCollection);
+        }
+
         private void CoursesCollectionOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(CourseCollection.Courses)) RefreshCourses();
-            if (e.PropertyName == nameof(CourseCollection.Students)) RefreshCourses();
         }
 
         private void RefreshCourses()
@@ -84,26 +104,7 @@ namespace CoursesApp.ViewModels
 
         private StudentViewModel StudentVm(int id, Course cs)
             => new StudentViewModel(courseCollection.GetStudent(id), cs, courseCollection);
-
-        public CourseViewModel NewCourseViewModel()
-            => new CourseViewModel(new Course(GetNextCourseId().ToString()), courseCollection);
-
-        public int GetNextCourseId()
-        {
-            if (Courses.Count == 0) return 1;
-
-            var id = int.Parse(Courses.Max(course => course.Id));
-
-            return ++id;
-        }
-
-        public void Refresh()
-        {
-            IsRefreshing = true;
-            courseCollection.RepopulateCourseList();
-            IsRefreshing = false;
-        }
-
+        
         private void OnPropertyChanged([CallerMemberName] string propertyName = null!)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
