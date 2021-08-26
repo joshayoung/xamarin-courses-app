@@ -8,10 +8,10 @@ namespace CoursesApp.Models.Test
         [Fact]
         public void Constructor_ValidParams_ExpectAssignment()
         {
-            var id = 1;
-            var name = "name";
-            var age = 20;
-            var major = "major";
+            const int id = 1;
+            const string name = "name";
+            const int age = 20;
+            const string major = "major";
         
             var student = new Student(id, name, age, major);
         
@@ -19,6 +19,19 @@ namespace CoursesApp.Models.Test
             student.Name.Should().Be(name);
             student.Age.Should().Be(age);
             student.Major.Should().Be(major);
+        }
+        
+        [Fact]
+        public void Constructor_DefaultParams_ExpectAssignment()
+        {
+            const int id = 1;
+        
+            var student = new Student(id);
+        
+            student.Id.Should().Be(id);
+            student.Name.Should().Be("");
+            student.Age.Should().Be(0);
+            student.Major.Should().Be("");
         }
 
         [Fact]
