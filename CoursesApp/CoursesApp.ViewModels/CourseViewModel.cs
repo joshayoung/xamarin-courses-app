@@ -62,12 +62,10 @@ namespace CoursesApp.ViewModels
                 
                 // TODO: Move to model?
                 NotifyPropertyChanged(nameof(StudentsExist));
-                NotifyPropertyChanged(nameof(OldestStudent));
-                NotifyPropertyChanged(nameof(NumberOfStudents));
                 
                 // TODO: Call in model?
-                UpdateAverageAge();
-                UpdateOldestStudent();
+                // UpdateAverageAge();
+                // UpdateOldestStudent();
             }
         }
 

@@ -58,9 +58,21 @@ namespace CoursesApp.ViewModels
             student.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
 
-        public void AddStudent() => courseCollection.AddStudent(course, student);
+        public void AddStudent()
+        {
+            courseCollection.AddStudent(course, student);
+            course.UpdateAverageAge(courseCollection);
+            course.UpdateOldestStudent(courseCollection);
+        }
 
-        public void DeleteStudent() => courseCollection.DeleteStudent(course, student);
+
+        public void DeleteStudent()
+        {
+            courseCollection.DeleteStudent(course, student);
+            course.UpdateAverageAge(courseCollection);
+            course.UpdateOldestStudent(courseCollection);
+        }
+
 
         public void SaveStudent(int id, StudentViewModel svm)
         {
