@@ -59,6 +59,7 @@ namespace CoursesApp.ViewModels
         }
 
         public void AddStudent() => courseCollection.AddStudent(course, student);
+        
         public void DeleteStudent() => courseCollection.DeleteStudent(course, student);
 
         public void SaveStudent(int id, StudentViewModel svm)
@@ -70,15 +71,15 @@ namespace CoursesApp.ViewModels
             course.UpdateAverageAge(courseCollection);
         }
 
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public StudentViewModel EditStudentCopy()
         {
             var newStudent = new Student(student.Id, student.Name, student.Age, student.Major);
             return new StudentViewModel(newStudent, course, courseCollection);
+        }
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

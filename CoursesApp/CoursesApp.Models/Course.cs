@@ -12,7 +12,7 @@ namespace CoursesApp.Models
 
         public int AverageStudentAge { get; private set; }
 
-        public void UpdateAverageAge(CourseCollection courseCollection)
+        public virtual void UpdateAverageAge(CourseCollection courseCollection)
         {
                 if (Students.Count == 0) return;
 
