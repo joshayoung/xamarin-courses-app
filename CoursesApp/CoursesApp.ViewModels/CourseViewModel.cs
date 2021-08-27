@@ -77,7 +77,8 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged(nameof(StudentsExist));
                 NotifyPropertyChanged(nameof(OldestStudent));
                 NotifyPropertyChanged(nameof(NumberOfStudents));
-                NotifyPropertyChanged(nameof(AverageStudentAge));
+                //NotifyPropertyChanged(nameof(AverageStudentAge));
+                UpdateAverageAge();
             }
         }
 
@@ -103,38 +104,13 @@ namespace CoursesApp.ViewModels
             course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
 
-        private void RefreshStudents()
-        {
-            // Account for a new class:
-            if (!courseCollection.Courses.Contains(course)) return;
-
-            var cs = courseCollection.Courses.First(cs => cs == course);
-
-            IEnumerable<StudentViewModel>
-                studentList = cs.Students.Select(student =>
-                    new StudentViewModel(courseCollection.GetStudent(student), cs, courseCollection));
-            Students = new List<StudentViewModel>(studentList);
-        }
-
         public void AddCourse() => courseCollection.AddCourse(course);
 
         public StudentViewModel NewStudent() =>
             new StudentViewModel(new Student(GetNextCourseId()), course, courseCollection);
 
-        private int GetNextCourseId() => courseCollection.Students.Max(student => student.Id) + 1;
-
         public void DeleteCourse() => courseCollection.DeleteCourse(course);
-
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private void StudentsCollectionOnPropertyChanged(object _, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(CourseCollection.Students)) RefreshStudents();
-        }
-
+        
         public CourseViewModel EditCourseCopy(int id)
         {
             var newCourse = new Course(id.ToString(), course.Title ?? "", course.Length, course.Type);
@@ -147,6 +123,31 @@ namespace CoursesApp.ViewModels
             editCourse.Title = course.Title;
             editCourse.Length = course.Length;
             editCourse.Type = course.Type;
+        }
+        
+        private int GetNextCourseId() => courseCollection.Students.Max(student => student.Id) + 1;
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void StudentsCollectionOnPropertyChanged(object _, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(CourseCollection.Students)) RefreshStudents();
+        }
+
+        private void RefreshStudents()
+        {
+            // Account for a new class:
+            if (!courseCollection.Courses.Contains(course)) return;
+
+            var cs = courseCollection.Courses.First(cs => cs == course);
+
+            IEnumerable<StudentViewModel>
+                studentList = cs.Students.Select(student =>
+                    new StudentViewModel(courseCollection.GetStudent(student), cs, courseCollection));
+            Students = new List<StudentViewModel>(studentList);
         }
     }
 }
