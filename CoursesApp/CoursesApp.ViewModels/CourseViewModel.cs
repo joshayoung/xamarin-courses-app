@@ -21,17 +21,6 @@ namespace CoursesApp.ViewModels
         public void UpdateAverageAge() => course.UpdateAverageAge(courseCollection);
 
         public int AverageStudentAge => course.AverageStudentAge;
-        // {
-        //     get
-        //     {
-        //         if (course.Students.Count == 0) return 0;
-        //
-        //         return course.Students
-        //             .Select(id => courseCollection.GetStudent(id))
-        //             .Select(student => student.Age)
-        //             .Sum() / course.Students.Count;
-        //     }
-        // }
 
         public string? OldestStudent
         {
@@ -111,17 +100,8 @@ namespace CoursesApp.ViewModels
             this.courseCollection = courseCollection;
             RefreshStudents();
             courseCollection.PropertyChanged += StudentsCollectionOnPropertyChanged;
-            // courseCollection.Students.ForEach(student => student.PropertyChanged += StudentOnPropertyChanged);
-
             course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
-
-        // If a student is edited, update:
-        // private void StudentOnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        // {
-        //     if (e.PropertyName == nameof(Student.Age)) NotifyPropertyChanged(nameof(AverageStudentAge));
-        //     if (e.PropertyName == nameof(Student.Age)) NotifyPropertyChanged(nameof(OldestStudent));
-        // }
 
         private void RefreshStudents()
         {
