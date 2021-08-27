@@ -27,7 +27,7 @@ namespace CoursesApp.ViewModels.Test
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = new CourseCollection(courseDataService);
-            var course = new Course("1", "title", 2, CourseType.Lab, new List<int>());
+            var course = new Course(1, "title", 2, CourseType.Lab, new List<int>());
             courseCollection.AddCourse(course);
             var courseViewModelList = new List<CourseViewModel>
             {
@@ -44,7 +44,7 @@ namespace CoursesApp.ViewModels.Test
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = new CourseCollection(courseDataService);
-            var course = new Course("1", "title", 2, CourseType.Lab, new List<int>());
+            var course = new Course(1, "title", 2, CourseType.Lab, new List<int>());
             courseCollection.AddCourse(course);
             var wasIsRefreshingChanged = false;
             var wasCoursesChanged = false;
@@ -68,7 +68,7 @@ namespace CoursesApp.ViewModels.Test
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = new CourseCollection(courseDataService);
-            var course = new Course("1", "title", 2, CourseType.Lab, new List<int>());
+            var course = new Course(1, "title", 2, CourseType.Lab, new List<int>());
             var wasCoursesExistChanged = false;
             var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
             courseCollectionViewModel.PropertyChanged += (sender, args) =>
@@ -90,7 +90,7 @@ namespace CoursesApp.ViewModels.Test
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = new CourseCollection(courseDataService);
-            var course = new Course("1", "title", 2, CourseType.Lab, new List<int>());
+            var course = new Course(1, "title", 2, CourseType.Lab, new List<int>());
             var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
             var courseViewModelList = new List<CourseViewModel>
             {
@@ -118,7 +118,7 @@ namespace CoursesApp.ViewModels.Test
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
-            var course = new Course("1", "title", 2, CourseType.Lab, new List<int>());
+            var course = new Course(1, "title", 2, CourseType.Lab, new List<int>());
             var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
             courseCollection.AddCourse(course);
 
@@ -142,7 +142,7 @@ namespace CoursesApp.ViewModels.Test
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = new CourseCollection(courseDataService);
-            var course = new Course("1", "title", 2, CourseType.Lab, new List<int>());
+            var course = new Course(1, "title", 2, CourseType.Lab, new List<int>());
             var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
             courseCollection.AddCourse(course);
 
@@ -156,7 +156,7 @@ namespace CoursesApp.ViewModels.Test
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
-            var course = new Course("1", "title", 2, CourseType.Lab, new List<int>());
+            var course = new Course(1, "title", 2, CourseType.Lab, new List<int>());
             var courseCollectionViewModel = Substitute.ForPartsOf<CourseCollectionViewModel>(courseCollection);
             courseCollection.AddCourse(course);
 
@@ -173,7 +173,7 @@ namespace CoursesApp.ViewModels.Test
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = new CourseCollection(courseDataService);
             var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
-            var courseViewModel = new CourseViewModel(new Course("1"), courseCollection);
+            var courseViewModel = new CourseViewModel(new Course(1), courseCollection);
 
             var results = courseCollectionViewModel.NewCourseViewModel();
 

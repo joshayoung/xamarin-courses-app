@@ -45,7 +45,7 @@ namespace CoursesApp.Models
                 NotifyPropertyChanged(nameof(AverageStudentAge));
         }
         
-        public string Id { get; }
+        public int Id { get; }
 
         private string title;
         public string Title
@@ -93,7 +93,7 @@ namespace CoursesApp.Models
 
         [JsonConstructor]
         public Course(
-            string id,
+            int id,
             string title = "",
             float length = 0,
             CourseType type = CourseType.None,

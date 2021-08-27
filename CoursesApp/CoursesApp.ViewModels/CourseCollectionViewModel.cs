@@ -58,7 +58,7 @@ namespace CoursesApp.ViewModels
         {
             if (Courses.Count == 0) return 1;
 
-            var id = int.Parse(Courses.Max(course => course.Id));
+            var id = Courses.Max(course => course.Id);
 
             return ++id;
         }
@@ -72,7 +72,7 @@ namespace CoursesApp.ViewModels
 
         public CourseViewModel NewCourseViewModel()
         {
-            return new CourseViewModel(new Course(GetNextCourseId().ToString()), courseCollection);
+            return new CourseViewModel(new Course(GetNextCourseId()), courseCollection);
         }
 
         private void CoursesCollectionOnPropertyChanged(object sender, PropertyChangedEventArgs e)

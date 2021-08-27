@@ -11,7 +11,7 @@ namespace CoursesApp.Models.Test
         [Fact]
         public void Constructor_ValidParams_ExpectAssignment()
         {
-            const string id = "1";
+            const int id = 1;
             const string title = "title";
             const float length = 2;
             var students = new List<int> { 1 };
@@ -29,7 +29,7 @@ namespace CoursesApp.Models.Test
         [Fact]
         public void Constructor_DefaultParams_ExpectAssignment()
         {
-            const string id = "1";
+            const int id = 1;
 
             var course = new Course(id);
 
@@ -49,7 +49,7 @@ namespace CoursesApp.Models.Test
             var wasStudentsChanged = false;
             var wasTypeChanged = false;
 
-            var course = new Course("1", "title", 2, CourseType.Lab, new List<int>());
+            var course = new Course(1, "title", 2, CourseType.Lab, new List<int>());
 
             course.PropertyChanged += (_, args) =>
             {
@@ -77,7 +77,7 @@ namespace CoursesApp.Models.Test
             {
                 Students = { new Student(1) },
             };
-            var course = new Course("1", "title", 2, CourseType.Discussion, new List<int>() { 1 });
+            var course = new Course(1, "title", 2, CourseType.Discussion, new List<int>() { 1 });
             courseCollection.Courses.Add(course);
             var wasAverageUpdated = false;
             course.PropertyChanged += (sender, args) =>
@@ -98,7 +98,7 @@ namespace CoursesApp.Models.Test
             courseCollection.Students.Add(new Student(1, "Joe", 20, "Math"));
             courseCollection.Students.Add(new Student(2, "Sally", 30, "Math"));
             var students = new List<int>() { 1, 2 };
-            var course = new Course("1", "title", 2, CourseType.Lab, students);
+            var course = new Course(1, "title", 2, CourseType.Lab, students);
 
             course.UpdateAverageAge(courseCollection);
             var results = course.AverageStudentAge;
@@ -111,7 +111,7 @@ namespace CoursesApp.Models.Test
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
-            var course = new Course("1", "title", 2, CourseType.Lab, null);
+            var course = new Course(1, "title", 2, CourseType.Lab, null);
 
             course.UpdateAverageAge(courseCollection);
             var results = course.AverageStudentAge;
