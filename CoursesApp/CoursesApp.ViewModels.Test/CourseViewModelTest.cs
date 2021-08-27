@@ -82,6 +82,8 @@ namespace CoursesApp.ViewModels.Test
             var courseCollection = new CourseCollection(courseDataService);
             var course = new Course("1", "title", 2, CourseType.Lab, new List<int> { 1 });
             var courseViewModel = new CourseViewModel(course, courseCollection);
+            courseCollection.Students.Add(new Student(1, "name", 20, "major"));
+            courseCollection.Students.Add(new Student(2, "name", 21, "major"));
             var wasTitleUpdated = false;
             var wasLengthUpdated = false;
             var wasStudentsUpdated = false;
@@ -208,7 +210,7 @@ namespace CoursesApp.ViewModels.Test
             
             courseViewModel.AddCourse();
             
-            courseCollection.Received().AddCourse(Arg.Is(course));
+            courseCollection.Received().AddCourse(course);
         }
         
         // `DeleteCourse` returns the next ID:
@@ -222,7 +224,7 @@ namespace CoursesApp.ViewModels.Test
             
             courseViewModel.DeleteCourse();
             
-            courseCollection.Received().DeleteCourse(Arg.Is(course));
+            courseCollection.Received().DeleteCourse(course);
         }
         
         // `EditCourseCopy` returns a new vm with a copy of data:
