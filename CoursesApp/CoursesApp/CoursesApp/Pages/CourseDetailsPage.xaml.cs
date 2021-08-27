@@ -14,15 +14,10 @@ namespace CoursesApp.Pages
         public CourseDetailsPage(CourseViewModel courseViewModel)
         {
             InitializeComponent();
-            BindingContext = this.courseViewModel = courseViewModel;
             courseViewModel.UpdateAverageAge();
+            courseViewModel.UpdateOldestStudent();
+            BindingContext = this.courseViewModel = courseViewModel;
         }
-
-        // protected override void OnAppearing()
-        // {
-        //     base.OnAppearing();
-        //     courseViewModel.UpdateAverageAge();
-        // }
 
         private void AddStudent(object sender, EventArgs e) =>
             Navigation.PushModalAsync(new AddStudentModal(courseViewModel.NewStudent()));

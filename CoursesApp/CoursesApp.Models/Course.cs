@@ -11,6 +11,28 @@ namespace CoursesApp.Models
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public int AverageStudentAge { get; private set; }
+        
+        public string? OldestStudent { get; private set; }
+
+        public void UpdateOldestStudent(CourseCollection courseCollection)
+        {
+            if (Students.Count == 0)
+            {
+                OldestStudent = "1";
+            }
+
+            var age = 0;
+            string? name = null;
+            foreach (var student in Students.Select(id => courseCollection.GetStudent(id))
+                .Where(student => student.Age > age))
+            {
+                age = student.Age;
+                name = student.Name;
+            }
+
+            OldestStudent = name;
+            NotifyPropertyChanged(nameof(OldestStudent));
+        }
 
         public virtual void UpdateAverageAge(CourseCollection courseCollection)
         {
