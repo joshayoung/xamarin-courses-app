@@ -15,7 +15,7 @@ namespace CoursesApp.ViewModels.Test
         public void Constructor_ValidParams_ExpectAssignment()
         {
             var student = new Student(1, "Joe", 31, "Physics");
-            var course = Substitute.ForPartsOf<Course>("id", "title", 1, CourseType.Discussion, new List<int>());
+            var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
             var studentViewModel = new StudentViewModel(student, course, courseCollection);
@@ -32,7 +32,7 @@ namespace CoursesApp.ViewModels.Test
             int age = 31;
             string major = "Physics";
             var student = new Student(1, name, age, major);
-            var course = Substitute.ForPartsOf<Course>("id", "title", 1, CourseType.Discussion, new List<int>());
+            var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
             var studentViewModel = new StudentViewModel(student, course, courseCollection);
@@ -63,7 +63,7 @@ namespace CoursesApp.ViewModels.Test
             int age = 31;
             string major = "Physics";
             var student = new Student(1, name, age, major);
-            var course = Substitute.ForPartsOf<Course>("id", "title", 1, CourseType.Discussion, new List<int>());
+            var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
             var studentViewModel = new StudentViewModel(student, course, courseCollection);
@@ -93,7 +93,7 @@ namespace CoursesApp.ViewModels.Test
         {
             var student1 = new Student(1, "Joe", 31, "Physics");
             var student2 = new Student(2, "Joe", 31, "Physics");
-            var course = new Course("1", "title", 1, CourseType.Discussion);
+            var course = new Course(1, "title", 1, CourseType.Discussion);
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
             courseCollection.Courses.Add(course);
@@ -114,7 +114,7 @@ namespace CoursesApp.ViewModels.Test
             int age = 31;
             string major = "Physics";
             var student = new Student(1, name, age, major);
-            var course = Substitute.ForPartsOf<Course>("id", "title", 1, CourseType.Discussion, new List<int>());
+            var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
             var studentViewModel = new StudentViewModel(student, course, courseCollection);
@@ -133,7 +133,7 @@ namespace CoursesApp.ViewModels.Test
         {
             var student = new Student(1, "Joe", 30, "Physics");
             var student2 = new Student(2, "Sally", 20, "Math");
-            var course = Substitute.ForPartsOf<Course>("id", "title", 1, CourseType.Discussion, new List<int>());
+            var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
             courseCollection.Students.Add(student);
@@ -156,7 +156,7 @@ namespace CoursesApp.ViewModels.Test
             int age = 31;
             string major = "Physics";
             var student = new Student(1, name, age, major);
-            var course = Substitute.ForPartsOf<Course>("id", "title", 1, CourseType.Discussion, new List<int>());
+            var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
             var studentViewModel = new StudentViewModel(student, course, courseCollection);

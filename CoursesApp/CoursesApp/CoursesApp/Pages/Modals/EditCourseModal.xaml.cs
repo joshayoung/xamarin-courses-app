@@ -8,10 +8,10 @@ namespace CoursesApp.Pages.modals
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditCourseModal : ContentPage
     {
-        private readonly string id;
+        private readonly int id;
         private readonly CourseViewModel courseViewModel;
         
-        public EditCourseModal(string id, CourseViewModel courseViewModel)
+        public EditCourseModal(int id, CourseViewModel courseViewModel)
         {
             InitializeComponent();
             this.id = id;

@@ -65,7 +65,7 @@ namespace CoursesApp.Models.Test
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
-            var course = Substitute.ForPartsOf<Course>("id", "title", 1, CourseType.Discussion, new List<int>());
+            var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
             
             courseCollection.AddCourse(course);
             
@@ -77,7 +77,7 @@ namespace CoursesApp.Models.Test
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
-            var course = Substitute.ForPartsOf<Course>("id", "title", 1, CourseType.Discussion, new List<int>());
+            var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
             var coursesWasChanged = false;
             courseCollection.PropertyChanged += (_, __) => coursesWasChanged = true;
             
@@ -91,7 +91,7 @@ namespace CoursesApp.Models.Test
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
-            var course = Substitute.ForPartsOf<Course>("id", "title", 1, CourseType.Discussion, new List<int>());
+            var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
             courseCollection.Courses.Add(course);
             
             courseCollection.DeleteCourse(course);
@@ -104,7 +104,7 @@ namespace CoursesApp.Models.Test
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
-            var course = Substitute.ForPartsOf<Course>("id", "title", 1, CourseType.Discussion, new List<int>());
+            var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
             var coursesWasChanged = false;
             courseCollection.PropertyChanged += (_, __) => coursesWasChanged = true;
             

@@ -26,7 +26,7 @@ namespace CoursesApp.ViewModels
         
         public void UpdateOldestStudent() => course.UpdateOldestStudent(courseCollection);
 
-        public string Id => course.Id;
+        public int Id => course.Id;
 
         public string Title
         {
@@ -102,11 +102,11 @@ namespace CoursesApp.ViewModels
         
         public CourseViewModel EditCourseCopy(int id)
         {
-            var newCourse = new Course(id.ToString(), course.Title ?? "", course.Length, course.Type);
+            var newCourse = new Course(id, course.Title ?? "", course.Length, course.Type);
             return new CourseViewModel(newCourse, courseCollection);
         }
 
-        public void SaveCourse(string id)
+        public void SaveCourse(int id)
         {
             Course editCourse = courseCollection.Courses.First(c => c.Id == id);
             editCourse.Title = course.Title;
