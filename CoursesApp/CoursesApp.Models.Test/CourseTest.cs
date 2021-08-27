@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using CoursesApp.Models.Service;
 using FluentAssertions;
+using NSubstitute;
 using Xunit;
 
 namespace CoursesApp.Models.Test
@@ -14,9 +16,9 @@ namespace CoursesApp.Models.Test
             const float length = 2;
             var students = new List<int> { 1 };
             const CourseType type = CourseType.Lab;
-        
+
             var course = new Course(id, title, length, type, students);
-        
+
             course.Id.Should().Be(id);
             course.Title.Should().Be(title);
             course.Length.Should().Be(length);
@@ -28,15 +30,40 @@ namespace CoursesApp.Models.Test
         public void Constructor_DefaultParams_ExpectAssignment()
         {
             const string id = "1";
-        
+
             var course = new Course(id);
-        
+
             course.Id.Should().Be(id);
             course.Title.Should().Be("");
             course.Length.Should().Be(0);
             course.Type.Should().Be(CourseType.None);
             course.Students.Should().BeEmpty();
         }
+
+
+        [Fact]
+        public void UpdateAverageAge_Called_ExpectCorrectResults()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService)
+            {
+                Students = { new Student(1) },
+            };
+            var course = new Course("1", "title", 2, CourseType.Discussion, new List<int>() { 1 });
+            courseCollection.Courses.Add(course);
+            var wasAverageUpdated = false;
+            
+
+            course.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(Course.AverageStudentAge)) wasAverageUpdated = true;
+            };
+            
+            course.UpdateAverageAge(courseCollection);
+
+            wasAverageUpdated.Should().BeTrue();
+        }
+
 
         [Fact]
         public void PropertiesChange_Called_ExpectPropertyChangedEvent()
@@ -45,9 +72,9 @@ namespace CoursesApp.Models.Test
             var wasLengthChanged = false;
             var wasStudentsChanged = false;
             var wasTypeChanged = false;
-        
+
             var course = new Course("1", "title", 2, CourseType.Lab, new List<int>());
-        
+
             course.PropertyChanged += (_, args) =>
             {
                 if (args.PropertyName == nameof(course.Title)) wasTitleChanged = true;
@@ -55,7 +82,7 @@ namespace CoursesApp.Models.Test
                 if (args.PropertyName == nameof(course.Students)) wasStudentsChanged = true;
                 if (args.PropertyName == nameof(course.Type)) wasTypeChanged = true;
             };
-        
+
             course.Title = "new title";
             course.Length = 4;
             course.Type = CourseType.Discussion;

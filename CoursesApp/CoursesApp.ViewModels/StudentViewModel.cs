@@ -67,6 +67,7 @@ namespace CoursesApp.ViewModels
             editedStudent.Name = svm.Name;
             editedStudent.Age = svm.Age;
             editedStudent.Major = svm.Major;
+            course.UpdateAverageAge(courseCollection);
         }
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)
