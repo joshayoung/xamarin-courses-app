@@ -18,28 +18,13 @@ namespace CoursesApp.ViewModels
 
         public int NumberOfStudents => course.Students.Count;
 
-        public void UpdateAverageAge() => course.UpdateAverageAge(courseCollection);
-
         public int AverageStudentAge => course.AverageStudentAge;
 
-        public string? OldestStudent
-        {
-            get
-            {
-                if (course.Students.Count == 0) return "";
-
-                var age = 0;
-                string? name = null;
-                foreach (var student in course.Students.Select(id => courseCollection.GetStudent(id))
-                    .Where(student => student.Age > age))
-                {
-                    age = student.Age;
-                    name = student.Name;
-                }
-
-                return name;
-            }
-        }
+        public string? OldestStudent => course.OldestStudent;
+        
+        public void UpdateAverageAge() => course.UpdateAverageAge(courseCollection);
+        
+        public void UpdateOldestStudent() => course.UpdateOldestStudent(courseCollection);
 
         public string Id => course.Id;
 
@@ -74,11 +59,15 @@ namespace CoursesApp.ViewModels
             {
                 students = value;
                 NotifyPropertyChanged();
+                
+                // TODO: Move to model?
                 NotifyPropertyChanged(nameof(StudentsExist));
                 NotifyPropertyChanged(nameof(OldestStudent));
                 NotifyPropertyChanged(nameof(NumberOfStudents));
-                //NotifyPropertyChanged(nameof(AverageStudentAge));
+                
+                // TODO: Call in model?
                 UpdateAverageAge();
+                UpdateOldestStudent();
             }
         }
 

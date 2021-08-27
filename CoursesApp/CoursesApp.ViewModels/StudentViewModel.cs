@@ -59,7 +59,7 @@ namespace CoursesApp.ViewModels
         }
 
         public void AddStudent() => courseCollection.AddStudent(course, student);
-        
+
         public void DeleteStudent() => courseCollection.DeleteStudent(course, student);
 
         public void SaveStudent(int id, StudentViewModel svm)
@@ -69,6 +69,7 @@ namespace CoursesApp.ViewModels
             editedStudent.Age = svm.Age;
             editedStudent.Major = svm.Major;
             course.UpdateAverageAge(courseCollection);
+            course.UpdateOldestStudent(courseCollection);
         }
 
         public StudentViewModel EditStudentCopy()
