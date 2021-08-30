@@ -14,17 +14,13 @@ namespace CoursesApp.ViewModels
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public bool StudentsExist => Students.Count > 0;
+        public bool StudentsExist => course.StudentsExist;
 
-        public int NumberOfStudents => course.Students.Count;
+        public int NumberOfStudents => course.NumberOfStudents;
 
         public int AverageStudentAge => course.AverageStudentAge;
 
         public string? OldestStudent => course.OldestStudent;
-        
-        public void UpdateAverageAge() => course.UpdateAverageAge(courseCollection);
-        
-        public void UpdateOldestStudent() => course.UpdateOldestStudent(courseCollection);
 
         public int Id => course.Id;
 
@@ -59,15 +55,10 @@ namespace CoursesApp.ViewModels
             {
                 students = value;
                 NotifyPropertyChanged();
-                
-                // TODO: Move to model?
-                NotifyPropertyChanged(nameof(StudentsExist));
-                NotifyPropertyChanged(nameof(OldestStudent));
-                NotifyPropertyChanged(nameof(NumberOfStudents));
-                
-                // TODO: Call in model?
-                UpdateAverageAge();
-                UpdateOldestStudent();
+                course.UpdateAverageAge(courseCollection);
+                course.UpdateOldestStudent(courseCollection);
+                course.UpdateStudentCount();
+                course.UpdateStudentsExist();
             }
         }
 

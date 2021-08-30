@@ -12,38 +12,11 @@ namespace CoursesApp.Models
 
         public int AverageStudentAge { get; private set; }
         
-        public string? OldestStudent { get; private set; }
+        public string OldestStudent { get; private set; }
 
-        public void UpdateOldestStudent(CourseCollection courseCollection)
-        {
-            if (Students.Count == 0)
-            {
-                OldestStudent = "1";
-            }
+        public bool StudentsExist { get; private set; }
 
-            var age = 0;
-            string? name = null;
-            foreach (var student in Students.Select(id => courseCollection.GetStudent(id))
-                .Where(student => student.Age > age))
-            {
-                age = student.Age;
-                name = student.Name;
-            }
-
-            OldestStudent = name;
-            NotifyPropertyChanged(nameof(OldestStudent));
-        }
-
-        public virtual void UpdateAverageAge(CourseCollection courseCollection)
-        {
-                if (Students.Count == 0) return;
-
-                AverageStudentAge = Students
-                    .Select(id => courseCollection.GetStudent(id))
-                    .Select(student => student.Age)
-                    .Sum() / Students.Count;
-                NotifyPropertyChanged(nameof(AverageStudentAge));
-        }
+        public int NumberOfStudents { get; private set; }
         
         public int Id { get; }
 
@@ -109,6 +82,54 @@ namespace CoursesApp.Models
         protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void UpdateStudentCount()
+        {
+            NumberOfStudents = Students.Count;
+            NotifyPropertyChanged(nameof(NumberOfStudents));
+        }
+        
+        public void UpdateOldestStudent(CourseCollection courseCollection)
+        {
+            if (Students.Count == 0)
+            {
+                OldestStudent = "1";
+            }
+
+            var age = 0;
+            string? name = null;
+            foreach (var student in Students.Select(id => courseCollection.GetStudent(id))
+                .Where(student => student.Age > age))
+            {
+                age = student.Age;
+                name = student.Name;
+            }
+
+            OldestStudent = name;
+            NotifyPropertyChanged(nameof(OldestStudent));
+        }
+
+        public virtual void UpdateAverageAge(CourseCollection courseCollection)
+        {
+            if (Students.Count == 0)
+            {
+                AverageStudentAge = 0;
+                NotifyPropertyChanged(nameof(AverageStudentAge));
+                return;
+            }
+
+            AverageStudentAge = Students
+                .Select(id => courseCollection.GetStudent(id))
+                .Select(student => student.Age)
+                .Sum() / Students.Count;
+            NotifyPropertyChanged(nameof(AverageStudentAge));
+        }
+
+        public void UpdateStudentsExist()
+        {
+            StudentsExist = Students.Count > 0;
+            NotifyPropertyChanged(nameof(StudentsExist));
         }
     }
 }

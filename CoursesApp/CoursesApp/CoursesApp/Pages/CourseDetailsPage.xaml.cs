@@ -14,8 +14,6 @@ namespace CoursesApp.Pages
         public CourseDetailsPage(CourseViewModel courseViewModel)
         {
             InitializeComponent();
-            courseViewModel.UpdateAverageAge();
-            courseViewModel.UpdateOldestStudent();
             BindingContext = this.courseViewModel = courseViewModel;
         }
 
