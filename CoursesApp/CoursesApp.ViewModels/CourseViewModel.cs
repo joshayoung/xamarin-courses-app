@@ -35,9 +35,17 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged();
             }
         }
-        
-        public static List<float> Lengths => ModelHelper.CourseLengths;
 
+        public CourseType Type
+        {
+            get => course.Type;
+            set
+            {
+                course.Type = value;
+                NotifyPropertyChanged();
+            }
+        }
+        
         private List<StudentViewModel> students;
 
         public List<StudentViewModel> Students
@@ -53,16 +61,8 @@ namespace CoursesApp.ViewModels
                 course.UpdateStudentsExist();
             }
         }
-
-        public CourseType Type
-        {
-            get => course.Type;
-            set
-            {
-                course.Type = value;
-                NotifyPropertyChanged();
-            }
-        }
+        
+        public static List<float> Lengths => ModelHelper.CourseLengths;
         
         public static List<CourseType> Types => ModelHelper.CourseTypes;
         
@@ -86,8 +86,10 @@ namespace CoursesApp.ViewModels
 
         public void AddCourse() => courseCollection.AddCourse(course);
 
-        public StudentViewModel NewStudent() =>
-            new StudentViewModel(new Student(GetNextCourseId()), course, courseCollection);
+        public StudentViewModel NewStudent()
+        {
+            return new StudentViewModel(new Student(GetNextCourseId()), course, courseCollection);
+        }
 
         public void DeleteCourse() => courseCollection.DeleteCourse(course);
         
@@ -107,11 +109,6 @@ namespace CoursesApp.ViewModels
         
         private int GetNextCourseId() => courseCollection.Students.Max(student => student.Id) + 1;
 
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         private void StudentsCollectionOnPropertyChanged(object _, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(CourseCollection.Students)) RefreshStudents();
@@ -128,6 +125,11 @@ namespace CoursesApp.ViewModels
                 studentList = cs.Students.Select(student =>
                     new StudentViewModel(courseCollection.GetStudent(student), cs, courseCollection));
             Students = new List<StudentViewModel>(studentList);
+        }
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

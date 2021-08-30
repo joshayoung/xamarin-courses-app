@@ -8,13 +8,13 @@ namespace CoursesApp.ViewModels
 {
     public class CourseCollectionViewModel : INotifyPropertyChanged
     {
-        private readonly CourseCollection courseCollection;
-
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public int GetNextId => courseCollection.GetNextCourseId();
 
         private bool isRefreshing;
+        
+        private readonly CourseCollection courseCollection;
 
         public virtual bool IsRefreshing
         {
@@ -42,12 +42,9 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        private List<StudentViewModel> students;
-
         public CourseCollectionViewModel(CourseCollection courseCollection)
         {
             courses = new List<CourseViewModel>();
-            students = new List<StudentViewModel>();
             this.courseCollection = courseCollection;
             courseCollection.PropertyChanged += CoursesCollectionOnPropertyChanged;
             RefreshCourses();
@@ -76,13 +73,11 @@ namespace CoursesApp.ViewModels
         private void RefreshCourses()
         {
             var courseList = new List<CourseViewModel>();
-            var studentList = new List<StudentViewModel>();
             courseCollection.Courses.ForEach(cs =>
             {
-                studentList = cs.Students.Select(id => StudentVm(id, cs)).ToList();
+                List<StudentViewModel> studentList = cs.Students.Select(id => StudentVm(id, cs)).ToList();
                 courseList.Add(CourseVm(cs, studentList));
             });
-            students = studentList;
             Courses = courseList;
             courseCollection.UpdateCoursesExist();
         }
@@ -93,11 +88,14 @@ namespace CoursesApp.ViewModels
             {
                 Students = studentList
             };
+            
             return courseVm;
         }
 
         private StudentViewModel StudentVm(int id, Course cs)
-            => new StudentViewModel(courseCollection.GetStudent(id), cs, courseCollection);
+        {
+            return new StudentViewModel(courseCollection.GetStudent(id), cs, courseCollection);
+        }
         
         private void OnPropertyChanged([CallerMemberName] string propertyName = null!)
         {

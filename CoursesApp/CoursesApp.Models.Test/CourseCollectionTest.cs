@@ -113,6 +113,31 @@ namespace CoursesApp.Models.Test
             coursesWasChanged.Should().BeTrue();
         }
 
+        [Fact]
+        public void GetNextCourseId_NoCoursesInList_OneReturned()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+
+            var result = courseCollection.GetNextCourseId();
+
+            result.Should().Be(1);
+        }
+
+        [Fact]
+        public void GetNextCourseId_Called_IncrementedValueReturned()
+        {
+            var course = new Course(1, "title", 2, CourseType.Lab, new List<int>());
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+
+            courseCollection.AddCourse(course);
+
+            var result = courseCollection.GetNextCourseId();
+
+            result.Should().Be(2);
+        }
+
         private void ValidateCourse(Course course, Course newCourse)
         {
             course.Title.Should().Be(newCourse.Title);

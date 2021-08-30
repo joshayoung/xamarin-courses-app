@@ -34,17 +34,6 @@ namespace CoursesApp.Models
             }
         }
 
-        private List<int> students;
-        public List<int> Students
-        {
-            get => students;
-            set
-            {
-                students = value;
-                NotifyPropertyChanged();
-            }
-        }
-
         private CourseType type;
         public CourseType Type
         {
@@ -56,13 +45,24 @@ namespace CoursesApp.Models
             }
         }
 
+        private List<int> students;
+        public List<int> Students
+        {
+            get => students;
+            set
+            {
+                students = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public int AverageStudentAge { get; private set; }
 
-        public string OldestStudent { get; private set; }
-
-        public bool StudentsExist { get; private set; }
+        public string OldestStudent { get; private set; } = "";
 
         public int NumberOfStudents { get; private set; }
+        
+        public bool StudentsExist { get; private set; }
 
         [JsonConstructor]
         public Course(
@@ -77,7 +77,6 @@ namespace CoursesApp.Models
             this.length = length;
             this.type = type;
             this.students = students ?? new List<int>();
-            OldestStudent = "";
         }
 
         public void UpdateStudentCount()

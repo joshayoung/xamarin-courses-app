@@ -126,32 +126,6 @@ namespace CoursesApp.ViewModels.Test
         }
 
         [Fact]
-        public void GetNextCourseId_NoCoursesInList_OneReturned()
-        {
-            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
-            var courseCollection = new CourseCollection(courseDataService);
-            var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
-
-            var result = courseCollectionViewModel.GetNextCourseId();
-
-            result.Should().Be(1);
-        }
-
-        [Fact]
-        public void GetNextCourseId_Called_IncrementedValueReturned()
-        {
-            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
-            var courseCollection = new CourseCollection(courseDataService);
-            var course = new Course(1, "title", 2, CourseType.Lab, new List<int>());
-            var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
-            courseCollection.AddCourse(course);
-
-            var result = courseCollectionViewModel.GetNextCourseId();
-
-            result.Should().Be(2);
-        }
-
-        [Fact]
         public void Refresh_Called_SetsCorrectValuesAndCallsCorrectMethod()
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();

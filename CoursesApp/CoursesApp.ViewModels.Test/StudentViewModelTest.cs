@@ -129,7 +129,7 @@ namespace CoursesApp.ViewModels.Test
         
         // SaveStudent
         [Fact]
-        public void SaveStudent_Called_ExpectStudentUpdateAndAverageUpdated()
+        public void SaveStudent_Called_ExpectStudentUpdate()
         {
             var student = new Student(1, "Joe", 30, "Physics");
             var student2 = new Student(2, "Sally", 20, "Math");
@@ -146,7 +146,6 @@ namespace CoursesApp.ViewModels.Test
             editedStudent.Name.Should().Be(studentViewModel.Name);
             editedStudent.Age.Should().Be(studentViewModel.Age);
             editedStudent.Major.Should().Be(studentViewModel.Major);
-            course.Received().UpdateAverageAge(courseCollection);
         }
 
         [Fact]

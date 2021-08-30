@@ -23,7 +23,7 @@ namespace CoursesApp.ViewModels.Test
             courseViewModel.StudentsExist.Should().BeFalse();
             courseViewModel.NumberOfStudents.Should().Be(0);
             courseViewModel.AverageStudentAge.Should().Be(0);
-            courseViewModel.OldestStudent.Should().BeNull();
+            courseViewModel.OldestStudent.Should().Be("");
             courseViewModel.Id.Should().Be(course.Id);
             courseViewModel.Title.Should().Be(course.Title);
             courseViewModel.Length.Should().Be(course.Length);

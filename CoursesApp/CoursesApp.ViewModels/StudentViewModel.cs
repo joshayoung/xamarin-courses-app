@@ -37,8 +37,6 @@ namespace CoursesApp.ViewModels
             }
         }
         
-        public static List<int> Ages => ModelHelper.StudentAges();
-
         public string Major
         {
             get => student.Major;
@@ -48,6 +46,8 @@ namespace CoursesApp.ViewModels
                 NotifyPropertyChanged();
             }
         }
+        
+        public static List<int> Ages => ModelHelper.StudentAges();
 
         public StudentViewModel(Student student, Course course, CourseCollection courseCollection)
         {
@@ -68,8 +68,6 @@ namespace CoursesApp.ViewModels
             editedStudent.Name = svm.Name;
             editedStudent.Age = svm.Age;
             editedStudent.Major = svm.Major;
-            course.UpdateAverageAge(courseCollection);
-            course.UpdateOldestStudent(courseCollection);
         }
 
         public StudentViewModel EditStudentCopy()
