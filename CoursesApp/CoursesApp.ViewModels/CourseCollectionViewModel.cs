@@ -49,10 +49,10 @@ namespace CoursesApp.ViewModels
             this.courseCollection = courseCollection;
             courseCollection.PropertyChanged += CoursesCollectionOnPropertyChanged;
             RefreshCourses();
+            courseCollection.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
 
-        // TODO: How is this updated with no 'OnPropertyChanged()':
-        public bool CoursesExist => Courses.Count > 0;
+        public bool CoursesExist => courseCollection.CoursesExist;
 
         public int GetNextCourseId()
         {
@@ -91,6 +91,7 @@ namespace CoursesApp.ViewModels
             });
             students = studentList;
             Courses = courseList;
+            courseCollection.UpdateCoursesExist();
         }
 
         private CourseViewModel CourseVm(Course cs, List<StudentViewModel> studentList)

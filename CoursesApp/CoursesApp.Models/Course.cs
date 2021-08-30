@@ -9,14 +9,6 @@ namespace CoursesApp.Models
     public class Course : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-
-        public int AverageStudentAge { get; private set; }
-        
-        public string OldestStudent { get; private set; }
-
-        public bool StudentsExist { get; private set; }
-
-        public int NumberOfStudents { get; private set; }
         
         public int Id { get; }
 
@@ -64,6 +56,14 @@ namespace CoursesApp.Models
             }
         }
 
+        public int AverageStudentAge { get; private set; }
+
+        public string OldestStudent { get; private set; }
+
+        public bool StudentsExist { get; private set; }
+
+        public int NumberOfStudents { get; private set; }
+
         [JsonConstructor]
         public Course(
             int id,
@@ -77,11 +77,7 @@ namespace CoursesApp.Models
             this.length = length;
             this.type = type;
             this.students = students ?? new List<int>();
-        }
-
-        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            OldestStudent = "";
         }
 
         public void UpdateStudentCount()
@@ -92,14 +88,12 @@ namespace CoursesApp.Models
         
         public void UpdateOldestStudent(CourseCollection courseCollection)
         {
-            if (Students.Count == 0)
-            {
-                OldestStudent = "1";
-            }
-
             var age = 0;
-            string? name = null;
-            foreach (var student in Students.Select(id => courseCollection.GetStudent(id))
+            string name = "";
+            
+            if (Students.Count == 0) name = "1";
+
+            foreach (var student in Students.Select(courseCollection.GetStudent)
                 .Where(student => student.Age > age))
             {
                 age = student.Age;
@@ -115,14 +109,15 @@ namespace CoursesApp.Models
             if (Students.Count == 0)
             {
                 AverageStudentAge = 0;
-                NotifyPropertyChanged(nameof(AverageStudentAge));
-                return;
+            }
+            else
+            {
+                AverageStudentAge = Students
+                    .Select(courseCollection.GetStudent)
+                    .Select(student => student.Age)
+                    .Sum() / Students.Count;
             }
 
-            AverageStudentAge = Students
-                .Select(id => courseCollection.GetStudent(id))
-                .Select(student => student.Age)
-                .Sum() / Students.Count;
             NotifyPropertyChanged(nameof(AverageStudentAge));
         }
 
@@ -130,6 +125,11 @@ namespace CoursesApp.Models
         {
             StudentsExist = Students.Count > 0;
             NotifyPropertyChanged(nameof(StudentsExist));
+        }
+
+        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

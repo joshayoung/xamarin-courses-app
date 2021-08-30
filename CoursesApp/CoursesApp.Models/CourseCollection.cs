@@ -10,6 +10,7 @@ namespace CoursesApp.Models
         private readonly CourseDataService courseDataService;
 
         public event PropertyChangedEventHandler? PropertyChanged;
+        public bool CoursesExist { get; private set; }
 
         public List<Course> Courses { get; private set; } = new List<Course>();
 
@@ -21,6 +22,12 @@ namespace CoursesApp.Models
         }
         
         public Student GetStudent(int id) => Students.Find(student => student.Id == id);
+
+        public void UpdateCoursesExist()
+        {
+            CoursesExist = Courses.Count > 0;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CoursesExist)));
+        }
 
         public void RepopulateCourseList()
         {
@@ -48,12 +55,14 @@ namespace CoursesApp.Models
             course.Students.Add(student.Id);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
         }
+        
+        
 
         public void DeleteStudent(Course course, Student student)
         {
-            var students = Courses.Where(c => c.Students.Contains(student.Id)).ToList();
+            var coursesThatHaveStudent = Courses.Where(c => c.Students.Contains(student.Id)).ToList();
             // If student not in multiple courses:
-            if (students.Count == 1) Students.Remove(student);
+            if (coursesThatHaveStudent.Count == 1) Students.Remove(student);
             course.Students.Remove(student.Id);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
         }
