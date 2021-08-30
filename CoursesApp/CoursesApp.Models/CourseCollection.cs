@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using CoursesApp.Models.Service;
 
 namespace CoursesApp.Models
@@ -26,45 +27,57 @@ namespace CoursesApp.Models
         public void UpdateCoursesExist()
         {
             CoursesExist = Courses.Count > 0;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CoursesExist)));
+            OnPropertyChanged(nameof(CoursesExist));
         }
 
         public void RepopulateCourseList()
         {
             Courses = courseDataService.GetCourses();
             Students = courseDataService.GetStudents();
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
+            OnPropertyChanged(nameof(Courses));
+            OnPropertyChanged(nameof(Students));
         }
 
         public void AddCourse(Course course)
         {
             Courses.Add(course);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
+            OnPropertyChanged(nameof(Courses));
         }
 
         public virtual void DeleteCourse(Course course)
         {
             Courses.Remove(course);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Courses)));
+            OnPropertyChanged(nameof(Courses));
         }
 
         public void AddStudent(Course course, Student student)
         {
             Students.Add(student);
             course.Students.Add(student.Id);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
+            OnPropertyChanged(nameof(Students));
         }
         
-        
+        public int GetNextCourseId()
+        {
+            if (Courses.Count == 0) return 1;
 
+            var id = Courses.Max(course => course.Id);
+
+            return ++id;
+        }
+        
         public void DeleteStudent(Course course, Student student)
         {
             var coursesThatHaveStudent = Courses.Where(c => c.Students.Contains(student.Id)).ToList();
             // If student not in multiple courses:
             if (coursesThatHaveStudent.Count == 1) Students.Remove(student);
             course.Students.Remove(student.Id);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Students)));
+            OnPropertyChanged(nameof(Students));
+        }
+        
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null!)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

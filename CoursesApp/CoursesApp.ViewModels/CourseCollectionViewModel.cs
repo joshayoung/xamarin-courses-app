@@ -54,15 +54,6 @@ namespace CoursesApp.ViewModels
 
         public bool CoursesExist => courseCollection.CoursesExist;
 
-        public int GetNextCourseId()
-        {
-            if (Courses.Count == 0) return 1;
-
-            var id = Courses.Max(course => course.Id);
-
-            return ++id;
-        }
-
         public void Refresh()
         {
             IsRefreshing = true;
@@ -72,7 +63,7 @@ namespace CoursesApp.ViewModels
 
         public CourseViewModel NewCourseViewModel()
         {
-            return new CourseViewModel(new Course(GetNextCourseId()), courseCollection);
+            return new CourseViewModel(new Course(courseCollection.GetNextCourseId()), courseCollection);
         }
 
         private void CoursesCollectionOnPropertyChanged(object sender, PropertyChangedEventArgs e)
