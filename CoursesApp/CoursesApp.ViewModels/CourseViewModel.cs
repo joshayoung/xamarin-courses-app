@@ -14,14 +14,6 @@ namespace CoursesApp.ViewModels
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public bool StudentsExist => course.StudentsExist;
-
-        public int NumberOfStudents => course.NumberOfStudents;
-
-        public int AverageStudentAge => course.AverageStudentAge;
-
-        public string? OldestStudent => course.OldestStudent;
-
         public int Id => course.Id;
 
         public string Title
@@ -73,6 +65,14 @@ namespace CoursesApp.ViewModels
         }
         
         public static List<CourseType> Types => ModelHelper.CourseTypes;
+        
+        public bool StudentsExist => course.StudentsExist;
+
+        public int NumberOfStudents => course.NumberOfStudents;
+
+        public int AverageStudentAge => course.AverageStudentAge;
+
+        public string OldestStudent => course.OldestStudent;
 
         public CourseViewModel(Course course, CourseCollection courseCollection)
         {

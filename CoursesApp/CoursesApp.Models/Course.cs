@@ -91,7 +91,7 @@ namespace CoursesApp.Models
             var age = 0;
             string name = "";
             
-            if (Students.Count == 0) name = "1";
+            if (Students.Count == 0) name = "";
 
             foreach (var student in Students.Select(courseCollection.GetStudent)
                 .Where(student => student.Age > age))

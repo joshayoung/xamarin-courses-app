@@ -12,6 +12,8 @@ namespace CoursesApp.ViewModels
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        public int GetNextId => courseCollection.GetNextCourseId();
+
         private bool isRefreshing;
 
         public virtual bool IsRefreshing

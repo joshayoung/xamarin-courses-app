@@ -36,7 +36,7 @@ namespace CoursesApp.Pages
         {
             var courseViewModel = (CourseViewModel)((BindableObject)sender).BindingContext;
             Navigation.PushModalAsync(new EditCourseModal(courseViewModel.Id,
-                courseViewModel.EditCourseCopy(courseCollectionViewModel.GetNextCourseId())));
+                courseViewModel.EditCourseCopy(courseCollectionViewModel.GetNextId)));
         }
 
         private void RefreshView_OnRefreshing(object sender, EventArgs e) => courseCollectionViewModel.Refresh();
