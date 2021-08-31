@@ -3,6 +3,7 @@ using CoursesApp.Models.Service;
 using FluentAssertions;
 using Newtonsoft.Json;
 using NSubstitute;
+using NSubstitute.Exceptions;
 using NSubstitute.Extensions;
 using Xunit;
 
@@ -136,6 +137,67 @@ namespace CoursesApp.Models.Test
             var result = courseCollection.GetNextCourseId();
 
             result.Should().Be(2);
+        }
+
+        [Fact]
+        public void AddStudent_Called_ExpectUpdatesStudentsAndCoursesAndEmitsAPropertyChanged()
+        {
+            var course = Substitute.ForPartsOf<Course>(1, "title", 2, CourseType.Lab, null);
+            var student = new Student(1, "Joe", 25, "Liberal Arts");
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            var studentsWasUpdated = false;
+            courseCollection.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(CourseCollection.Students)) studentsWasUpdated = true;
+            };
+
+            courseCollection.AddStudent(course, student);
+
+            courseCollection.Students.Should().BeEquivalentTo(new List<Student>
+            {
+                student
+            });
+            course.Students.Should().BeEquivalentTo(new List<int> { student.Id });
+            studentsWasUpdated.Should().BeTrue();
+        }
+
+        [Fact]
+        public void DeleteStudent_StudentNotInMultipleCourses_ExpectStudentRemoved()
+        {
+            var course = Substitute.ForPartsOf<Course>(1, "title", 2, CourseType.Lab, new List<int> { 1 });
+            var student = new Student(1, "Joe", 25, "Liberal Arts");
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            courseCollection.Courses.Add(course);
+            courseCollection.Students.Add(student);
+
+            courseCollection.DeleteStudent(course, student);
+
+            courseCollection.Students.Should().BeEmpty();
+        }
+        
+        [Fact]
+        public void DeleteStudent_StudentInMultipleCourses_ExpectStudentRemovedFromCourseAndPropertyChange()
+        {
+            var course1 = Substitute.ForPartsOf<Course>(1, "title", 2, CourseType.Lab, new List<int> { 1 });
+            var course2 = Substitute.ForPartsOf<Course>(2, "title", 2, CourseType.Lab, new List<int> { 1 });
+            var student = new Student(1, "Joe", 25, "Liberal Arts");
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            courseCollection.Courses.Add(course1);
+            courseCollection.Courses.Add(course2);
+            var studentWasRemoved = false;
+            courseCollection.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(CourseCollection.Students)) studentWasRemoved = true;
+            };
+
+            courseCollection.DeleteStudent(course1, student);
+
+            course1.Students.Should().BeEmpty();
+            course2.Students.Should().BeEquivalentTo(new List<int> { 1 });
+            studentWasRemoved.Should().BeTrue();
         }
 
         private void ValidateCourse(Course course, Course newCourse)

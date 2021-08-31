@@ -49,13 +49,6 @@ namespace CoursesApp.Models
             Courses.Remove(course);
             OnPropertyChanged(nameof(Courses));
         }
-
-        public void AddStudent(Course course, Student student)
-        {
-            Students.Add(student);
-            course.Students.Add(student.Id);
-            OnPropertyChanged(nameof(Students));
-        }
         
         public int GetNextCourseId()
         {
@@ -64,6 +57,13 @@ namespace CoursesApp.Models
             var id = Courses.Max(course => course.Id);
 
             return ++id;
+        }
+
+        public void AddStudent(Course course, Student student)
+        {
+            Students.Add(student);
+            course.Students.Add(student.Id);
+            OnPropertyChanged(nameof(Students));
         }
         
         public void DeleteStudent(Course course, Student student)
