@@ -10,6 +10,7 @@ namespace CoursesApp.ViewModels
     public class CourseViewModel : INotifyPropertyChanged
     {
         private readonly Course course;
+        
         private readonly CourseCollection courseCollection;
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -47,7 +48,6 @@ namespace CoursesApp.ViewModels
         }
         
         private List<StudentViewModel> students;
-
         public List<StudentViewModel> Students
         {
             get => students;
@@ -76,11 +76,12 @@ namespace CoursesApp.ViewModels
 
         public CourseViewModel(Course course, CourseCollection courseCollection)
         {
-            students = new List<StudentViewModel>();
             this.course = course;
             this.courseCollection = courseCollection;
+            students = new List<StudentViewModel>();
             RefreshStudents();
             courseCollection.PropertyChanged += StudentsCollectionOnPropertyChanged;
+            
             course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
 
@@ -96,6 +97,7 @@ namespace CoursesApp.ViewModels
         public CourseViewModel EditCourseCopy(int id)
         {
             var newCourse = new Course(id, course.Title ?? "", course.Length, course.Type);
+            
             return new CourseViewModel(newCourse, courseCollection);
         }
 
@@ -120,7 +122,6 @@ namespace CoursesApp.ViewModels
             if (!courseCollection.Courses.Contains(course)) return;
 
             var cs = courseCollection.Courses.First(cs => cs == course);
-
             IEnumerable<StudentViewModel>
                 studentList = cs.Students.Select(student =>
                     new StudentViewModel(courseCollection.GetStudent(student), cs, courseCollection));

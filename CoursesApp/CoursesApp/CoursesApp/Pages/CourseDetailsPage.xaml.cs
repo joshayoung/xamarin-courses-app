@@ -17,8 +17,10 @@ namespace CoursesApp.Pages
             BindingContext = this.courseViewModel = courseViewModel;
         }
 
-        private void AddStudent(object sender, EventArgs e) =>
+        private void AddStudent(object sender, EventArgs e)
+        {
             Navigation.PushModalAsync(new AddStudentModal(courseViewModel.NewStudent()));
+        }
 
         private void EditStudent(object sender, EventArgs e)
         {

@@ -11,6 +11,7 @@ namespace CoursesApp.Models
         private readonly CourseDataService courseDataService;
 
         public event PropertyChangedEventHandler? PropertyChanged;
+        
         public bool CoursesExist { get; private set; }
 
         public List<Course> Courses { get; private set; } = new List<Course>();

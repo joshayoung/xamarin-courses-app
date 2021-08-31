@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Newtonsoft.Json;
 
 namespace CoursesApp.Models
 {
@@ -64,7 +63,6 @@ namespace CoursesApp.Models
         
         public bool StudentsExist { get; private set; }
 
-        [JsonConstructor]
         public Course(
             int id,
             string title = "",
@@ -108,14 +106,13 @@ namespace CoursesApp.Models
             if (Students.Count == 0)
             {
                 AverageStudentAge = 0;
+                NotifyPropertyChanged(nameof(AverageStudentAge));
+                return;
             }
-            else
-            {
-                AverageStudentAge = Students
-                    .Select(courseCollection.GetStudent)
-                    .Select(student => student.Age)
-                    .Sum() / Students.Count;
-            }
+            AverageStudentAge = Students
+                .Select(courseCollection.GetStudent)
+                .Select(student => student.Age)
+                .Sum() / Students.Count;
 
             NotifyPropertyChanged(nameof(AverageStudentAge));
         }

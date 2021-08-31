@@ -12,10 +12,9 @@ namespace CoursesApp.ViewModels
 
         public int GetNextId => courseCollection.GetNextCourseId();
 
-        private bool isRefreshing;
-        
         private readonly CourseCollection courseCollection;
 
+        private bool isRefreshing;
         public virtual bool IsRefreshing
         {
             get => isRefreshing;
@@ -27,18 +26,13 @@ namespace CoursesApp.ViewModels
         }
 
         private List<CourseViewModel> courses;
-
         public List<CourseViewModel> Courses
         {
             get => courses;
             set
             {
                 courses = value;
-                // Repopulate courses after modifying course:
                 OnPropertyChanged();
-
-                // Also Update This Value:
-                OnPropertyChanged(nameof(CoursesExist));
             }
         }
 
@@ -48,6 +42,7 @@ namespace CoursesApp.ViewModels
             this.courseCollection = courseCollection;
             courseCollection.PropertyChanged += CoursesCollectionOnPropertyChanged;
             RefreshCourses();
+            
             courseCollection.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
 
@@ -84,12 +79,7 @@ namespace CoursesApp.ViewModels
 
         private CourseViewModel CourseVm(Course cs, List<StudentViewModel> studentList)
         {
-            var courseVm = new CourseViewModel(cs, courseCollection)
-            {
-                Students = studentList
-            };
-            
-            return courseVm;
+            return new CourseViewModel(cs, courseCollection) { Students = studentList };
         }
 
         private StudentViewModel StudentVm(int id, Course cs)

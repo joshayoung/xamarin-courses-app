@@ -10,7 +10,9 @@ namespace CoursesApp.ViewModels
     public class StudentViewModel : INotifyPropertyChanged
     {
         private readonly Student student;
+        
         private readonly Course course;
+        
         private readonly CourseCollection courseCollection;
         
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -73,6 +75,7 @@ namespace CoursesApp.ViewModels
         public StudentViewModel EditStudentCopy()
         {
             var newStudent = new Student(student.Id, student.Name, student.Age, student.Major);
+            
             return new StudentViewModel(newStudent, course, courseCollection);
         }
 

@@ -23,8 +23,10 @@ namespace CoursesApp.Pages
             Navigation.PushAsync(new CourseDetailsPage(courseViewModel));
         }
 
-        private void AddCourse(object sender, EventArgs e) =>
+        private void AddCourse(object sender, EventArgs e)
+        {
             Navigation.PushModalAsync(new AddCourseModal(courseCollectionViewModel.NewCourseViewModel()));
+        }
 
         private void DeleteClass(object sender, EventArgs e)
         {
