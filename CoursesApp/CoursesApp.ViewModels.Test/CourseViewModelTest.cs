@@ -213,9 +213,26 @@ namespace CoursesApp.ViewModels.Test
             courseCollection.Received().AddCourse(course);
         }
         
+        // Tests `NewStudent` call:
+        [Fact]
+        public void NewStudent_Called_ExpectReturnsCorrectResults()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
+            var course = new Course(1, "title", 2, CourseType.Lab, new List<int> { 1, 2 });
+            var courseViewModel = new CourseViewModel(course, courseCollection);
+            var student = new Student(1);
+            courseCollection.Students.Add(student);
+            var newStudent = new StudentViewModel(new Student(2), course, courseCollection);
+                        
+            var results = courseViewModel.NewStudent();
+                        
+            results.Should().BeEquivalentTo(newStudent);
+        }
+        
         // `DeleteCourse` returns the next ID:
         [Fact]
-        public void GetNextCourseId_Called_ExpectReturnsCorrectId()
+        public void DeleteCourse_Called_ExpectReturnsCorrectId()
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);

@@ -62,29 +62,24 @@ namespace CoursesApp.ViewModels.Test
             wasIsRefreshingChanged.Should().BeTrue();
             wasCoursesChanged.Should().BeTrue();
         }
-        
+
         [Fact]
-        public void CoursesExist_CoursesUpdated_ExpectPropertyChangedEvent()
+        public void GetNextId_Called_ExpectNextCourseId()
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = new CourseCollection(courseDataService);
             var course = new Course(1, "title", 2, CourseType.Lab, new List<int>());
-            var wasCoursesExistChanged = false;
+            courseCollection.AddCourse(course);
             var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
-            courseCollectionViewModel.PropertyChanged += (sender, args) =>
-            {
-                if (args.PropertyName == nameof(CourseCollectionViewModel.CoursesExist))
-                {
-                    wasCoursesExistChanged = true;
-                }
-            };
 
             courseCollectionViewModel.Courses =
                 new List<CourseViewModel> { new CourseViewModel(course, courseCollection) };
 
-            wasCoursesExistChanged.Should().BeTrue();
-        }
+            var result = courseCollectionViewModel.GetNextId;
 
+            result.Should().Be(2);
+        }
+        
         [Fact]
         public void CourseCollection_CoursesChange_ExpectRefreshedCourses()
         {

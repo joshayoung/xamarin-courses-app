@@ -89,6 +89,17 @@ namespace CoursesApp.ViewModels.Test
         }
 
         [Fact]
+        public void Ages_Called_ExpectReturnsCorrectResults()
+        {
+            var ages = new List<int>
+            {
+                17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30
+            };
+
+            StudentViewModel.Ages.Should().BeEquivalentTo(ages);
+        }
+
+        [Fact]
         public void AddStudent_Called_ExpectCallsCorrectMethodCalledWithValue()
         {
             var student1 = new Student(1, "Joe", 31, "Physics");
