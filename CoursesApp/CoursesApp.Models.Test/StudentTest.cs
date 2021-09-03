@@ -6,6 +6,19 @@ namespace CoursesApp.Models.Test
     public class StudentTest
     {
         [Fact]
+        public void Constructor_DefaultParams_ExpectAssignment()
+        {
+            const int id = 1;
+        
+            var student = new Student(id);
+        
+            student.Id.Should().Be(id);
+            student.Name.Should().Be("");
+            student.Age.Should().Be(0);
+            student.Major.Should().Be("");
+        }
+        
+        [Fact]
         public void Constructor_ValidParams_ExpectAssignment()
         {
             const int id = 1;
@@ -21,19 +34,6 @@ namespace CoursesApp.Models.Test
             student.Major.Should().Be(major);
         }
         
-        [Fact]
-        public void Constructor_DefaultParams_ExpectAssignment()
-        {
-            const int id = 1;
-        
-            var student = new Student(id);
-        
-            student.Id.Should().Be(id);
-            student.Name.Should().Be("");
-            student.Age.Should().Be(0);
-            student.Major.Should().Be("");
-        }
-
         [Fact]
         public void Properties_Changed_ExpectPropertyChangedEvent()
         {

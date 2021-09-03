@@ -8,11 +8,11 @@ namespace CoursesApp.Models.Test.Helpers
     public class ModelHelperTest
     {
         [Fact]
-        public void StudentAges_Called_ExpectCorrectResults()
+        public void StudentAges_Called_ExpectListOfInts()
         {
             var ages = new List<int>
                 {
-                    17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30
+                    17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39
                 };
 
             ModelHelper.StudentAges().Should().BeEquivalentTo(ages);

@@ -76,6 +76,22 @@ namespace CoursesApp.Models
             this.type = type;
             this.students = students ?? new List<int>();
         }
+        
+        public virtual void UpdateAverageAge(CourseCollection courseCollection)
+        {
+            if (Students.Count == 0)
+            {
+                AverageStudentAge = 0;
+                NotifyPropertyChanged(nameof(AverageStudentAge));
+                return;
+            }
+            AverageStudentAge = Students
+                .Select(courseCollection.GetStudent)
+                .Select(student => student.Age)
+                .Sum() / Students.Count;
+
+            NotifyPropertyChanged(nameof(AverageStudentAge));
+        }
 
         public void UpdateStudentCount()
         {
@@ -99,22 +115,6 @@ namespace CoursesApp.Models
 
             OldestStudent = name;
             NotifyPropertyChanged(nameof(OldestStudent));
-        }
-
-        public virtual void UpdateAverageAge(CourseCollection courseCollection)
-        {
-            if (Students.Count == 0)
-            {
-                AverageStudentAge = 0;
-                NotifyPropertyChanged(nameof(AverageStudentAge));
-                return;
-            }
-            AverageStudentAge = Students
-                .Select(courseCollection.GetStudent)
-                .Select(student => student.Age)
-                .Sum() / Students.Count;
-
-            NotifyPropertyChanged(nameof(AverageStudentAge));
         }
 
         public void UpdateStudentsExist()
