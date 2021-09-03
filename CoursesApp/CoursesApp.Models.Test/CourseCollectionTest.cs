@@ -3,7 +3,6 @@ using CoursesApp.Models.Service;
 using FluentAssertions;
 using Newtonsoft.Json;
 using NSubstitute;
-using NSubstitute.Exceptions;
 using NSubstitute.Extensions;
 using Xunit;
 
@@ -30,6 +29,7 @@ namespace CoursesApp.Models.Test
 
             courseCollection.Courses.Should().BeEmpty();
             courseCollection.Students.Should().BeEmpty();
+            courseCollection.CoursesExist.Should().BeFalse();
         }
 
         [Fact]
@@ -40,15 +40,21 @@ namespace CoursesApp.Models.Test
             courseDataService.Configure().GetStudents().Returns(deserializedStudents);
             var courseCollection = new CourseCollection(courseDataService);
             var coursesWasChanged = false;
-            courseCollection.PropertyChanged += (_, __) => coursesWasChanged = true;
-            
+            var studentsWasChanged = false;
+            courseCollection.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(CourseCollection.Courses)) coursesWasChanged = true;
+                if (args.PropertyName == nameof(CourseCollection.Students)) studentsWasChanged = true;
+            };
+                
             courseCollection.RepopulateCourseList();
 
             coursesWasChanged.Should().BeTrue();
+            studentsWasChanged.Should().BeTrue();
         }
 
         [Fact]
-        public void RepopulateCourseList_Called_ExpectCoursesToChange()
+        public void RepopulateCourseList_Called_ExpectCoursesAndStudentsUpdated()
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             courseDataService.Configure().GetCourses().Returns(deserializedCourses);
@@ -60,21 +66,9 @@ namespace CoursesApp.Models.Test
             courseCollection.Courses.Should().BeEquivalentTo(deserializedCourses);
             courseCollection.Students.Should().BeEquivalentTo(deserializedStudents);
         }
-
-        [Fact]
-        public void AddCourse_Called_ExpectANewCourseAddedToList()
-        {
-            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
-            var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
-            var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
-            
-            courseCollection.AddCourse(course);
-            
-            courseCollection.Courses.ForEach(c => ValidateCourse(course, c));
-        }
         
         [Fact]
-        public void AddCourse_Called_ExpectCoursesToChange()
+        public void AddCourse_Called_ExpectCoursesPropertyChange()
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
@@ -83,6 +77,33 @@ namespace CoursesApp.Models.Test
             courseCollection.PropertyChanged += (_, __) => coursesWasChanged = true;
             
             courseCollection.AddCourse(course);
+
+            coursesWasChanged.Should().BeTrue();
+        }
+
+        [Fact]
+        public void AddCourse_Called_ExpectANewCourseAddedToList()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
+            var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
+            var courses = new List<Course> { course };
+            
+            courseCollection.AddCourse(course);
+            
+            courseCollection.Courses.Should().BeEquivalentTo(courses);
+        }
+        
+        [Fact]
+        public void DeleteCourse_Called_ExpectCoursesPropertyChangeEvent()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
+            var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
+            var coursesWasChanged = false;
+            courseCollection.PropertyChanged += (_, __) => coursesWasChanged = true;
+            
+            courseCollection.DeleteCourse(course);
 
             coursesWasChanged.Should().BeTrue();
         }
@@ -99,23 +120,9 @@ namespace CoursesApp.Models.Test
 
             courseCollection.Courses.Should().BeEmpty();
         }
-        
-        [Fact]
-        public void DeleteCourse_Called_ExpectCoursesToChange()
-        {
-            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
-            var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
-            var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
-            var coursesWasChanged = false;
-            courseCollection.PropertyChanged += (_, __) => coursesWasChanged = true;
-            
-            courseCollection.DeleteCourse(course);
-
-            coursesWasChanged.Should().BeTrue();
-        }
 
         [Fact]
-        public void GetNextCourseId_NoCoursesInList_OneReturned()
+        public void GetNextCourseId_NoCoursesInList_ReturnsTheNumberOne()
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = new CourseCollection(courseDataService);
@@ -140,6 +147,36 @@ namespace CoursesApp.Models.Test
         }
 
         [Fact]
+        public void UpdateCoursesExist_Called_ExpectCoursesExistPropertyChanged()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            var wasCoursesExistUpdated = false;
+
+            courseCollection.PropertyChanged += (sender, args) =>
+            {
+                wasCoursesExistUpdated = true;
+            };
+
+            courseCollection.UpdateCoursesExist();
+
+            wasCoursesExistUpdated.Should().BeTrue();
+        }
+        
+        [Fact]
+        public void UpdateCoursesExist_Called_ExpectCoursesExistUpdated()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            courseCollection.Courses.Add(new Course(1));
+
+            courseCollection.UpdateCoursesExist();
+
+            courseCollection.CoursesExist.Should().BeTrue();
+        }
+
+        // I tested the property change and the two List additions with one test here:
+        [Fact]
         public void AddStudent_Called_ExpectUpdatesStudentsAndCoursesAndEmitsAPropertyChanged()
         {
             var course = Substitute.ForPartsOf<Course>(1, "title", 2, CourseType.Lab, null);
@@ -147,6 +184,10 @@ namespace CoursesApp.Models.Test
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = new CourseCollection(courseDataService);
             var studentsWasUpdated = false;
+            var courseCollectionStudents = new List<Student>
+            {
+                student
+            };
             courseCollection.PropertyChanged += (sender, args) =>
             {
                 if (args.PropertyName == nameof(CourseCollection.Students)) studentsWasUpdated = true;
@@ -154,31 +195,13 @@ namespace CoursesApp.Models.Test
 
             courseCollection.AddStudent(course, student);
 
-            courseCollection.Students.Should().BeEquivalentTo(new List<Student>
-            {
-                student
-            });
+            courseCollection.Students.Should().BeEquivalentTo(courseCollectionStudents);
             course.Students.Should().BeEquivalentTo(new List<int> { student.Id });
             studentsWasUpdated.Should().BeTrue();
         }
-
-        [Fact]
-        public void DeleteStudent_StudentNotInMultipleCourses_ExpectStudentRemoved()
-        {
-            var course = Substitute.ForPartsOf<Course>(1, "title", 2, CourseType.Lab, new List<int> { 1 });
-            var student = new Student(1, "Joe", 25, "Liberal Arts");
-            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
-            var courseCollection = new CourseCollection(courseDataService);
-            courseCollection.Courses.Add(course);
-            courseCollection.Students.Add(student);
-
-            courseCollection.DeleteStudent(course, student);
-
-            courseCollection.Students.Should().BeEmpty();
-        }
         
         [Fact]
-        public void DeleteStudent_StudentInMultipleCourses_ExpectStudentRemovedFromCourseAndPropertyChange()
+        public void DeleteStudent_StudentInMultipleCourses_ExpectStudentRemovedFromCourseNotRemovedFromCollectionAndPropertyChange()
         {
             var course1 = Substitute.ForPartsOf<Course>(1, "title", 2, CourseType.Lab, new List<int> { 1 });
             var course2 = Substitute.ForPartsOf<Course>(2, "title", 2, CourseType.Lab, new List<int> { 1 });
@@ -187,6 +210,7 @@ namespace CoursesApp.Models.Test
             var courseCollection = new CourseCollection(courseDataService);
             courseCollection.Courses.Add(course1);
             courseCollection.Courses.Add(course2);
+            courseCollection.Students.Add(student);
             var studentWasRemoved = false;
             courseCollection.PropertyChanged += (sender, args) =>
             {
@@ -196,15 +220,46 @@ namespace CoursesApp.Models.Test
             courseCollection.DeleteStudent(course1, student);
 
             course1.Students.Should().BeEmpty();
-            course2.Students.Should().BeEquivalentTo(new List<int> { 1 });
+            courseCollection.Students.Should().BeEquivalentTo(new List<Student>{student});
             studentWasRemoved.Should().BeTrue();
         }
 
-        private void ValidateCourse(Course course, Course newCourse)
+        [Fact]
+        public void DeleteStudent_StudentNotInMultipleCourses_ExpectStudentRemovedFromCollectionStudentRemovedFromCourseAndPropertyChange()
         {
-            course.Title.Should().Be(newCourse.Title);
-            course.Length.Should().Be(newCourse.Length);
-            course.Type.Should().Be(newCourse.Type);
+            var course = Substitute.ForPartsOf<Course>(1, "title", 2, CourseType.Lab, new List<int> { 1 });
+            var student = new Student(1, "Joe", 25, "Liberal Arts");
+
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            courseCollection.Courses.Add(course);
+            courseCollection.Students.Add(student);
+            var studentWasRemoved = false;
+            courseCollection.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(CourseCollection.Students)) studentWasRemoved = true;
+            };
+
+            courseCollection.DeleteStudent(course, student);
+
+            course.Students.Should().BeEmpty();
+            courseCollection.Students.Should().BeEmpty();
+            studentWasRemoved.Should().BeTrue();
+        }
+
+        [Fact]
+        public void GetStudent_Called_ExpectReturnsAStudentObjectThatMatchesIdParam()
+        {
+            var course = Substitute.ForPartsOf<Course>(1, "title", 2, CourseType.Lab, new List<int> { 1 });
+            var student = new Student(1, "Joe", 25, "Liberal Arts");
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            courseCollection.Courses.Add(course);
+            courseCollection.Students.Add(student);
+
+            var results = courseCollection.GetStudent(1);
+
+            results.Should().BeEquivalentTo(student);
         }
     }
 }

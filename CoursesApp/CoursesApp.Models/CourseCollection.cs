@@ -11,25 +11,17 @@ namespace CoursesApp.Models
         private readonly CourseDataService courseDataService;
 
         public event PropertyChangedEventHandler? PropertyChanged;
-        
-        // TODO: Add a test for this:
-        public bool CoursesExist { get; private set; }
 
         public List<Course> Courses { get; private set; } = new List<Course>();
 
         public List<Student> Students { get; private set; } = new List<Student>();
+        
+        // TODO: Add a test for this:
+        public bool CoursesExist { get; private set; }
 
         public CourseCollection(CourseDataService courseDataService)
         {
             this.courseDataService = courseDataService;
-        }
-        
-        public Student GetStudent(int id) => Students.Find(student => student.Id == id);
-
-        public void UpdateCoursesExist()
-        {
-            CoursesExist = Courses.Count > 0;
-            OnPropertyChanged(nameof(CoursesExist));
         }
 
         public void RepopulateCourseList()
@@ -61,6 +53,12 @@ namespace CoursesApp.Models
             return ++id;
         }
 
+        public void UpdateCoursesExist()
+        {
+            CoursesExist = Courses.Count > 0;
+            OnPropertyChanged(nameof(CoursesExist));
+        }
+
         public void AddStudent(Course course, Student student)
         {
             Students.Add(student);
@@ -76,6 +74,8 @@ namespace CoursesApp.Models
             course.Students.Remove(student.Id);
             OnPropertyChanged(nameof(Students));
         }
+        
+        public Student GetStudent(int id) => Students.Find(student => student.Id == id);
         
         private void OnPropertyChanged([CallerMemberName] string propertyName = null!)
         {
