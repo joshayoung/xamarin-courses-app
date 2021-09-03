@@ -62,6 +62,22 @@ namespace CoursesApp.ViewModels
             }
         }
         
+        public CourseViewModel(Course course, CourseCollection courseCollection)
+        {
+            this.course = course;
+            this.courseCollection = courseCollection;
+            students = new List<StudentViewModel>();
+            RefreshStudents();
+            courseCollection.PropertyChanged += StudentsCollectionOnPropertyChanged;
+            
+            course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
+        }
+
+        private void StudentsCollectionOnPropertyChanged(object _, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(CourseCollection.Students)) RefreshStudents();
+        }
+        
         public static List<float> Lengths => ModelHelper.CourseLengths;
         
         public static List<CourseType> Types => ModelHelper.CourseTypes;
@@ -73,17 +89,6 @@ namespace CoursesApp.ViewModels
         public int AverageStudentAge => course.AverageStudentAge;
 
         public string OldestStudent => course.OldestStudent;
-
-        public CourseViewModel(Course course, CourseCollection courseCollection)
-        {
-            this.course = course;
-            this.courseCollection = courseCollection;
-            students = new List<StudentViewModel>();
-            RefreshStudents();
-            courseCollection.PropertyChanged += StudentsCollectionOnPropertyChanged;
-            
-            course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
-        }
 
         public void AddCourse() => courseCollection.AddCourse(course);
 
@@ -110,11 +115,6 @@ namespace CoursesApp.ViewModels
         }
         
         private int GetNextCourseId() => courseCollection.Students.Max(student => student.Id) + 1;
-
-        private void StudentsCollectionOnPropertyChanged(object _, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(CourseCollection.Students)) RefreshStudents();
-        }
 
         private void RefreshStudents()
         {
