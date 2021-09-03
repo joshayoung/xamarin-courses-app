@@ -96,11 +96,8 @@ namespace CoursesApp.Models.Test
         public void UpdateAverageAge_CalledWithZeroStudents_PropertyChangeForAverageStudentAge()
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
-            var courseCollection = new CourseCollection(courseDataService)
-            {
-                Students = { new Student(1) },
-            };
-            var course = new Course(1, "title", 2, CourseType.Discussion, null);
+            var courseCollection = new CourseCollection(courseDataService) { Students = { new Student(1) } };
+            var course = new Course(1, "title", 2, CourseType.Discussion);
             courseCollection.Courses.Add(course);
             var wasAverageUpdated = false;
             course.PropertyChanged += (sender, args) =>
@@ -117,11 +114,8 @@ namespace CoursesApp.Models.Test
         public void UpdateAverageAge_NoStudents_ExpectAverageStudentAgeSetToZero()
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
-            var courseCollection = new CourseCollection(courseDataService)
-            {
-                Students = { new Student(1) }
-            };
-            var course = new Course(1, "title", 2, CourseType.Discussion, null);
+            var courseCollection = new CourseCollection(courseDataService) { Students = { new Student(1) } };
+            var course = new Course(1, "title", 2, CourseType.Discussion);
             courseCollection.Courses.Add(course);
 
             course.UpdateAverageAge(courseCollection);
@@ -137,7 +131,7 @@ namespace CoursesApp.Models.Test
             {
                 Students = { new Student(1, "joe", 30), new Student(2, "sally", 20) }
             };
-            var course = new Course(1, "title", 2, CourseType.Discussion, new List<int>{1,2});
+            var course = new Course(1, "title", 2, CourseType.Discussion, new List<int>{ 1, 2 });
             courseCollection.Courses.Add(course);
 
             course.UpdateAverageAge(courseCollection);
@@ -148,7 +142,7 @@ namespace CoursesApp.Models.Test
         [Fact]
         public void UpdateStudentCount_Called_ExpectPropertyChangeForNumberOfStudents()
         {
-            var course = new Course(1, "title", 2, CourseType.Discussion, null);
+            var course = new Course(1, "title", 2, CourseType.Discussion);
             var wasNumberOfStudentsChanged = false;
             course.PropertyChanged += (sender, args) =>
             {
@@ -163,7 +157,7 @@ namespace CoursesApp.Models.Test
         [Fact]
         public void UpdateStudentCount_Called_ExpectNumberOfStudents()
         {
-            var course = new Course(1, "title", 2, CourseType.Discussion, new List<int>{1,2,3});
+            var course = new Course(1, "title", 2, CourseType.Discussion, new List<int>{ 1, 2, 3 });
 
             course.UpdateStudentCount();
 
@@ -178,7 +172,7 @@ namespace CoursesApp.Models.Test
             {
                 Students = { new Student(1, "Joe", 30), new Student(2, "Sally", 20) }
             };
-            var course = new Course(1, "title", 2, CourseType.Discussion, new List<int>{1,2});
+            var course = new Course(1, "title", 2, CourseType.Discussion, new List<int>{ 1, 2 });
             courseCollection.Courses.Add(course);
             var wasOldestStudentUpdated = false;
             course.PropertyChanged += (sender, args) =>
@@ -215,7 +209,7 @@ namespace CoursesApp.Models.Test
             {
                 Students = { new Student(1, "Joe", 30), new Student(2, "Sally", 20) }
             };
-            var course = new Course(1, "title", 2, CourseType.Discussion, new List<int>{1,2});
+            var course = new Course(1, "title", 2, CourseType.Discussion, new List<int>{ 1, 2 });
             courseCollection.Courses.Add(course);
 
             course.UpdateOldestStudent(courseCollection);
@@ -226,7 +220,7 @@ namespace CoursesApp.Models.Test
         [Fact]
         public void UpdateStudentsExist_Called_ExpectStudentsExistPropertyChanged()
         {
-            var course = new Course(1, "title", 2, CourseType.Discussion, null);
+            var course = new Course(1, "title", 2, CourseType.Discussion);
             var wasStudentsExistUpdated = false;
             course.PropertyChanged += (sender, args) =>
             {
@@ -241,7 +235,7 @@ namespace CoursesApp.Models.Test
         [Fact]
         public void UpdateStudentsExist_Called_ExpectStudentsExistUpdated()
         {
-            var course = new Course(1, "title", 2, CourseType.Discussion, new List<int>{1});
+            var course = new Course(1, "title", 2, CourseType.Discussion, new List<int> { 1 });
 
             course.UpdateStudentsExist();
 

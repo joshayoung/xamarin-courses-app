@@ -40,7 +40,6 @@ namespace CoursesApp.ViewModels
             this.courseCollection = courseCollection;
             courseCollection.PropertyChanged += CoursesCollectionOnPropertyChanged;
             RefreshCourses();
-            
             courseCollection.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
 

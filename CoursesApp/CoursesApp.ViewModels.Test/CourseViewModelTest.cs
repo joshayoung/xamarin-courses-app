@@ -77,7 +77,6 @@ namespace CoursesApp.ViewModels.Test
             var wasLengthUpdated = false;
             var wasTypeUpdated = false;
             var wasStudentsUpdated = false;
-
             courseViewModel.PropertyChanged += (sender, args) =>
             {
                 if (args.PropertyName == nameof(CourseViewModel.Title)) wasTitleUpdated = true;
@@ -109,7 +108,6 @@ namespace CoursesApp.ViewModels.Test
             var wasLengthUpdated = false;
             var wasTypeUpdated = false;
             var wasStudentsUpdated = false;
-
             courseViewModel.PropertyChanged += (sender, args) =>
             {
                 if (args.PropertyName == nameof(CourseViewModel.Title)) wasTitleUpdated = true;

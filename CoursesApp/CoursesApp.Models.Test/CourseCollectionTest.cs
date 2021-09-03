@@ -184,10 +184,7 @@ namespace CoursesApp.Models.Test
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = new CourseCollection(courseDataService);
             var studentsWasUpdated = false;
-            var courseCollectionStudents = new List<Student>
-            {
-                student
-            };
+            var courseCollectionStudents = new List<Student> { student };
             courseCollection.PropertyChanged += (sender, args) =>
             {
                 if (args.PropertyName == nameof(CourseCollection.Students)) studentsWasUpdated = true;
@@ -229,7 +226,6 @@ namespace CoursesApp.Models.Test
         {
             var course = Substitute.ForPartsOf<Course>(1, "title", 2, CourseType.Lab, new List<int> { 1 });
             var student = new Student(1, "Joe", 25, "Liberal Arts");
-
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = new CourseCollection(courseDataService);
             courseCollection.Courses.Add(course);

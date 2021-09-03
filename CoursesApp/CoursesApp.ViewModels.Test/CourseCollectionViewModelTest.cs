@@ -29,10 +29,7 @@ namespace CoursesApp.ViewModels.Test
             var courseCollection = new CourseCollection(courseDataService);
             var course = new Course(1, "title", 2, CourseType.Lab, new List<int>());
             courseCollection.AddCourse(course);
-            var courseViewModelList = new List<CourseViewModel>
-            {
-                new CourseViewModel(course, courseCollection)
-            };
+            var courseViewModelList = new List<CourseViewModel> { new CourseViewModel(course, courseCollection) };
 
             var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
 
@@ -48,10 +45,7 @@ namespace CoursesApp.ViewModels.Test
             var courseCollection = new CourseCollection(courseDataService);
             var course = new Course(1, "title", 2, CourseType.Lab, new List<int>());
             var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
-            var courseViewModelList = new List<CourseViewModel>
-            {
-                new CourseViewModel(course, courseCollection)
-            };
+            var courseViewModelList = new List<CourseViewModel> { new CourseViewModel(course, courseCollection) };
 
             courseCollection.AddCourse(course);
 

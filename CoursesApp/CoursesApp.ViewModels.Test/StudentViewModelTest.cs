@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using CoursesApp.Models;
 using CoursesApp.Models.Service;
 using FluentAssertions;
@@ -115,10 +114,7 @@ namespace CoursesApp.ViewModels.Test
         [Fact]
         public void DeleteStudent_Called_ExpectCorrectMethodCalledWithValue()
         {
-            string name = "Joe";
-            int age = 31;
-            string major = "Physics";
-            var student = new Student(1, name, age, major);
+            var student = new Student(1, "Joe", 31, "Physics");
             var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
@@ -155,10 +151,7 @@ namespace CoursesApp.ViewModels.Test
         [Fact]
         public void EditStudentCopy_Called_ExpectNewVmWithStudentValues()
         {
-            string name = "Joe";
-            int age = 31;
-            string major = "Physics";
-            var student = new Student(1, name, age, major);
+            var student = new Student(1, "Joe", 31, "Physics");
             var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
