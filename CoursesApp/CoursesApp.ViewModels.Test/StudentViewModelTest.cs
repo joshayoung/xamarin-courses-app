@@ -147,6 +147,24 @@ namespace CoursesApp.ViewModels.Test
             student2.Age.Should().Be(studentViewModel.Age);
             student2.Major.Should().Be(studentViewModel.Major);
         }
+        
+        [Fact]
+        public void SaveStudent_Called_ExpectUpdateAverageAgeAndOldestStudent()
+        {
+            var student = new Student(1, "Joe", 30, "Physics");
+            var student2 = new Student(2, "Sally", 20, "Math");
+            var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
+            courseCollection.Students.Add(student);
+            courseCollection.Students.Add(student2);
+            var studentViewModel = new StudentViewModel(student, course, courseCollection);
+
+            studentViewModel.SaveStudent(2, studentViewModel);
+            
+            course.Received().UpdateAverageAge(courseCollection);
+            course.Received().UpdateOldestStudent(courseCollection);
+        }
 
         [Fact]
         public void EditStudentCopy_Called_ExpectNewVmWithStudentValues()

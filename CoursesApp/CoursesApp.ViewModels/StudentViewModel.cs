@@ -70,6 +70,8 @@ namespace CoursesApp.ViewModels
             editedStudent.Name = svm.Name;
             editedStudent.Age = svm.Age;
             editedStudent.Major = svm.Major;
+            course.UpdateAverageAge(courseCollection);
+            course.UpdateOldestStudent(courseCollection);
         }
 
         public StudentViewModel EditStudentCopy()
