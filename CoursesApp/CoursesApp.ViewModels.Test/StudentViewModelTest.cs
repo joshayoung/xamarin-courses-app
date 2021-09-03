@@ -4,7 +4,6 @@ using CoursesApp.Models;
 using CoursesApp.Models.Service;
 using FluentAssertions;
 using NSubstitute;
-using NSubstitute.Extensions;
 using Xunit;
 
 namespace CoursesApp.ViewModels.Test
@@ -20,6 +19,7 @@ namespace CoursesApp.ViewModels.Test
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
             var studentViewModel = new StudentViewModel(student, course, courseCollection);
 
+            studentViewModel.Id.Should().Be(student.Id);
             studentViewModel.Name.Should().Be(student.Name);
             studentViewModel.Age.Should().Be(student.Age);
             studentViewModel.Major.Should().Be(student.Major);
@@ -28,10 +28,7 @@ namespace CoursesApp.ViewModels.Test
         [Fact]
         public void ViewModel_PropertyChanged_ExpectPropertyChangedEvents()
         {
-            string name = "Joe";
-            int age = 31;
-            string major = "Physics";
-            var student = new Student(1, name, age, major);
+            var student = new Student(1, "joe", 31, "Physics");
             var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
@@ -39,7 +36,6 @@ namespace CoursesApp.ViewModels.Test
             var nameWasChanged = false;
             var ageWasChanged = false;
             var majorWasChanged = false;
-
             studentViewModel.PropertyChanged += (sender, args) =>
             {
                 if (args.PropertyName == nameof(studentViewModel.Name)) nameWasChanged = true;
@@ -59,10 +55,7 @@ namespace CoursesApp.ViewModels.Test
         [Fact]
         public void Model_PropertyChanged_ExpectPropertyChangedEvent()
         {
-            string name = "Joe";
-            int age = 31;
-            string major = "Physics";
-            var student = new Student(1, name, age, major);
+            var student = new Student(1, "joe", 31, "Physics");
             var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
@@ -70,7 +63,6 @@ namespace CoursesApp.ViewModels.Test
             var nameWasChanged = false;
             var ageWasChanged = false;
             var majorWasChanged = false;
-
             studentViewModel.PropertyChanged += (sender, args) =>
             {
                 // TODO: Are you testing this correctly?
@@ -93,10 +85,12 @@ namespace CoursesApp.ViewModels.Test
         {
             var ages = new List<int>
             {
-                17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30
+                17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39
             };
+            
+            var results = StudentViewModel.Ages;
 
-            StudentViewModel.Ages.Should().BeEquivalentTo(ages);
+            results.Should().BeEquivalentTo(ages);
         }
 
         [Fact]
@@ -149,14 +143,13 @@ namespace CoursesApp.ViewModels.Test
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
             courseCollection.Students.Add(student);
             courseCollection.Students.Add(student2);
-            var editedStudent = courseCollection.Students.First(s => s.Id == 2);
             var studentViewModel = new StudentViewModel(student, course, courseCollection);
 
             studentViewModel.SaveStudent(2, studentViewModel);
 
-            editedStudent.Name.Should().Be(studentViewModel.Name);
-            editedStudent.Age.Should().Be(studentViewModel.Age);
-            editedStudent.Major.Should().Be(studentViewModel.Major);
+            student2.Name.Should().Be(studentViewModel.Name);
+            student2.Age.Should().Be(studentViewModel.Age);
+            student2.Major.Should().Be(studentViewModel.Major);
         }
 
         [Fact]

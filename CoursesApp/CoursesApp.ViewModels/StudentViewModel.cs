@@ -49,8 +49,6 @@ namespace CoursesApp.ViewModels
             }
         }
         
-        public static List<int> Ages => ModelHelper.StudentAges();
-
         public StudentViewModel(Student student, Course course, CourseCollection courseCollection)
         {
             this.student = student;
@@ -59,6 +57,8 @@ namespace CoursesApp.ViewModels
             
             student.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
+        
+        public static List<int> Ages => ModelHelper.StudentAges();
 
         public void AddStudent() => courseCollection.AddStudent(course, student);
 
