@@ -12,6 +12,7 @@ namespace CoursesApp.Models
 
         public event PropertyChangedEventHandler? PropertyChanged;
         
+        // TODO: Add a test for this:
         public bool CoursesExist { get; private set; }
 
         public List<Course> Courses { get; private set; } = new List<Course>();

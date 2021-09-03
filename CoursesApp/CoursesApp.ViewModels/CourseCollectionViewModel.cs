@@ -10,8 +10,6 @@ namespace CoursesApp.ViewModels
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public int GetNextId => courseCollection.GetNextCourseId();
-
         private readonly CourseCollection courseCollection;
 
         private bool isRefreshing;
@@ -35,7 +33,7 @@ namespace CoursesApp.ViewModels
                 OnPropertyChanged();
             }
         }
-
+        
         public CourseCollectionViewModel(CourseCollection courseCollection)
         {
             courses = new List<CourseViewModel>();
@@ -46,8 +44,15 @@ namespace CoursesApp.ViewModels
             courseCollection.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
 
+        private void CoursesCollectionOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(CourseCollection.Courses)) RefreshCourses();
+        }
+        
+        public int GetNextId => courseCollection.GetNextCourseId();
+        
         public bool CoursesExist => courseCollection.CoursesExist;
-
+        
         public void Refresh()
         {
             IsRefreshing = true;
@@ -58,11 +63,6 @@ namespace CoursesApp.ViewModels
         public CourseViewModel NewCourseViewModel()
         {
             return new CourseViewModel(new Course(courseCollection.GetNextCourseId()), courseCollection);
-        }
-
-        private void CoursesCollectionOnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(CourseCollection.Courses)) RefreshCourses();
         }
 
         private void RefreshCourses()

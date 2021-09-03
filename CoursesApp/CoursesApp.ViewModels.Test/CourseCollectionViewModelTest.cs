@@ -37,6 +37,39 @@ namespace CoursesApp.ViewModels.Test
             var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
 
             courseCollectionViewModel.Courses.Should().BeEquivalentTo(courseViewModelList);
+            courseCollectionViewModel.CoursesExist.Should().BeTrue();
+        }
+        
+        // Tests: 'courseCollection.PropertyChanged += CoursesCollectionOnPropertyChanged;' in constructor
+        [Fact]
+        public void CourseCollection_CoursesChange_ExpectRefreshedCourses()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            var course = new Course(1, "title", 2, CourseType.Lab, new List<int>());
+            var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
+            var courseViewModelList = new List<CourseViewModel>
+            {
+                new CourseViewModel(course, courseCollection)
+            };
+
+            courseCollection.AddCourse(course);
+
+            // TODO: This could probably do a better job of comparing the object:
+            courseCollectionViewModel.Courses.Should().BeEquivalentTo(courseViewModelList);
+        }
+        
+        [Fact]
+        public void Constructor_RefreshCourses_ExpectUpdateCoursesExistCalled()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
+            var course = new Course(1, "title", 2, CourseType.Lab, new List<int>());
+            courseCollection.AddCourse(course);
+
+            new CourseCollectionViewModel(courseCollection);
+            
+            courseCollection.Received().UpdateCoursesExist();
         }
 
         [Fact]
@@ -64,16 +97,16 @@ namespace CoursesApp.ViewModels.Test
         }
 
         [Fact]
-        public void GetNextId_Called_ExpectNextCourseId()
+        public void GetNextId_Called_ExpectCorrectValueReturned()
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = new CourseCollection(courseDataService);
             var course = new Course(1, "title", 2, CourseType.Lab, new List<int>());
             courseCollection.AddCourse(course);
-            var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
-
-            courseCollectionViewModel.Courses =
-                new List<CourseViewModel> { new CourseViewModel(course, courseCollection) };
+            var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection)
+            {
+                Courses = new List<CourseViewModel> { new CourseViewModel(course, courseCollection) }
+            };
 
             var result = courseCollectionViewModel.GetNextId;
 
@@ -81,41 +114,13 @@ namespace CoursesApp.ViewModels.Test
         }
         
         [Fact]
-        public void CourseCollection_CoursesChange_ExpectRefreshedCourses()
-        {
-            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
-            var courseCollection = new CourseCollection(courseDataService);
-            var course = new Course(1, "title", 2, CourseType.Lab, new List<int>());
-            var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
-            var courseViewModelList = new List<CourseViewModel>
-            {
-                new CourseViewModel(course, courseCollection)
-            };
-
-            courseCollection.AddCourse(course);
-
-            // TODO: This could probably do a better job of comparing the object:
-            courseCollectionViewModel.Courses.Should().BeEquivalentTo(courseViewModelList);
-        }
-        
-        [Fact]
-        public void CoursesExist_NoCourses_ReturnsFalse()
-        {
-            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
-            var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
-            var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
-
-            courseCollectionViewModel.CoursesExist.Should().BeFalse();
-        }
-
-        [Fact]
-        public void CoursesExist_OneOrMoreCourses_ReturnsTrue()
+        public void CoursesExist_Called_ReturnsCorrectResults()
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
             var course = new Course(1, "title", 2, CourseType.Lab, new List<int>());
+            courseCollection.Courses.Add(course);
             var courseCollectionViewModel = new CourseCollectionViewModel(courseCollection);
-            courseCollection.AddCourse(course);
 
             courseCollectionViewModel.CoursesExist.Should().BeTrue();
         }
