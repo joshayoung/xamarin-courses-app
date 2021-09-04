@@ -19,6 +19,7 @@ namespace CoursesApp.ViewModels.Test
 
             courseCollectionViewModel.IsRefreshing.Should().BeFalse();
             courseCollectionViewModel.Courses.Should().BeEmpty();
+            courseCollectionViewModel.CoursesExist.Should().BeFalse();
         }
         
         // Tests: 'courseCollection.PropertyChanged += CoursesCollectionOnPropertyChanged;' in constructor
@@ -33,6 +34,7 @@ namespace CoursesApp.ViewModels.Test
 
             courseCollection.AddCourse(course);
 
+            courseCollectionViewModel.IsRefreshing.Should().BeFalse();
             courseCollectionViewModel.Courses.Should().BeEquivalentTo(courseViewModelList);
             courseCollectionViewModel.CoursesExist.Should().BeTrue();
         }

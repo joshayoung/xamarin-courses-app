@@ -25,6 +25,10 @@ namespace CoursesApp.ViewModels.Test
             courseViewModel.Length.Should().Be(course.Length);
             courseViewModel.Type.Should().Be(course.Type);
             courseViewModel.Students.Should().BeEmpty();
+            courseViewModel.AverageStudentAge.Should().Be(0);
+            courseViewModel.OldestStudent.Should().Be("");
+            courseViewModel.NumberOfStudents.Should().Be(0);
+            courseViewModel.StudentsExist.Should().BeFalse();
         }
         
         // Tests the `RefreshStudents()` call in my constructor:
@@ -35,7 +39,7 @@ namespace CoursesApp.ViewModels.Test
             var courseCollection = new CourseCollection(courseDataService);
             var course = new Course(1, "title", 2, CourseType.Lab, new List<int> { 1, 2 });
             var student1 = new Student(1, "one", 18, "Liberal Studies");
-            var student2 = new Student(2, "two", 18, "Liberal Studies");
+            var student2 = new Student(2, "two", 32, "Liberal Studies");
             courseCollection.Courses.Add(course);
             courseCollection.Students.Add(student1);
             courseCollection.Students.Add(student2);
@@ -48,6 +52,10 @@ namespace CoursesApp.ViewModels.Test
             var courseViewModel = new CourseViewModel(course, courseCollection);
 
             courseViewModel.Students.Should().BeEquivalentTo(students);
+            courseViewModel.AverageStudentAge.Should().Be(25);
+            courseViewModel.OldestStudent.Should().Be("two");
+            courseViewModel.NumberOfStudents.Should().Be(2);
+            courseViewModel.StudentsExist.Should().BeTrue();
         }
         
         // Test `RefreshStudents()` early return with an empty list of Courses:
@@ -171,66 +179,6 @@ namespace CoursesApp.ViewModels.Test
             };
 
             CourseViewModel.Types.Should().BeEquivalentTo(results);
-        }
-        
-        [Fact]
-        public void StudentsExist_Called_ExpectBooleanValue()
-        {
-            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
-            var courseCollection = new CourseCollection(courseDataService);
-            var course = new Course(1, "title", 2, CourseType.Lab, new List<int> { 1 });
-            var courseViewModel = new CourseViewModel(course, courseCollection);
-            course.UpdateStudentsExist();
-
-            var result = courseViewModel.StudentsExist;
-
-            result.Should().BeTrue();
-        }
-
-        [Fact]
-        public void NumberOfStudents_Called_ExpectReturnsAnInt()
-        {
-            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
-            var courseCollection = new CourseCollection(courseDataService);
-            var course = new Course(1, "title", 2, CourseType.Lab, new List<int> { 1 });
-            var courseViewModel = new CourseViewModel(course, courseCollection);
-            course.UpdateStudentCount();
-
-            var result = courseViewModel.NumberOfStudents;
-
-            result.Should().Be(1);
-        }
-
-        [Fact]
-        public void AverageStudentAge_Called_ExpectReturnsAnInt()
-        {
-            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
-            var courseCollection = new CourseCollection(courseDataService);
-            courseCollection.Students.Add(new Student(1, "Jill", 20));
-            courseCollection.Students.Add(new Student(2, "Joe", 40));
-            var course = new Course(1, "title", 2, CourseType.Lab, new List<int> { 1, 2 });
-            var courseViewModel = new CourseViewModel(course, courseCollection);
-            course.UpdateAverageAge(courseCollection);
-
-            var result = courseViewModel.AverageStudentAge;
-
-            result.Should().Be(30);
-        }
-        
-        [Fact]
-        public void OldestStudent_Called_ExpectReturnsAnString()
-        {
-            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
-            var courseCollection = new CourseCollection(courseDataService);
-            courseCollection.Students.Add(new Student(1, "Jill", 20));
-            courseCollection.Students.Add(new Student(2, "Joe", 40));
-            var course = new Course(1, "title", 2, CourseType.Lab, new List<int> { 1, 2 });
-            var courseViewModel = new CourseViewModel(course, courseCollection);
-            course.UpdateOldestStudent(courseCollection);
-
-            var result = courseViewModel.OldestStudent;
-
-            result.Should().Be("Joe");
         }
         
         [Fact]

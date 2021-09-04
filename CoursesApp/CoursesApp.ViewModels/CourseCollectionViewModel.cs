@@ -24,7 +24,12 @@ namespace CoursesApp.ViewModels
         }
 
         public List<CourseViewModel> Courses { get; set; }
-    
+        
+        // NOTE: I do not need a Students property here, because my students
+        // are added to my Courses List with RefreshCourses().
+        
+        public bool CoursesExist => courseCollection.CoursesExist;
+        
         public CourseCollectionViewModel(CourseCollection courseCollection)
         {
             Courses = new List<CourseViewModel>();
@@ -32,13 +37,18 @@ namespace CoursesApp.ViewModels
             courseCollection.PropertyChanged += CoursesCollectionOnPropertyChanged;
             RefreshCourses();
             
-            // Update the VM's Courses if the Models Courses changes:
+            // Update the VM's Courses, CoursesExist if the Models Courses changes:
             // This could also be done with a longer get/set and using 'OnPropertyChanged();':
             courseCollection.PropertyChanged += (sender, args) =>
             {
-                if (args.PropertyName == nameof(CourseCollection.Courses) || args.PropertyName == nameof(courseCollection.CoursesExist))
+                if (args.PropertyName == nameof(CourseCollection.Courses))
                 {
-                    PropertyChanged?.Invoke(this, args);
+                    NotifyPropertyChanged(nameof(courseCollection.Courses));
+                }
+                
+                if (args.PropertyName == nameof(CourseCollection.CoursesExist))
+                {
+                    NotifyPropertyChanged(nameof(courseCollection.CoursesExist));
                 }
             };
         }
@@ -49,8 +59,6 @@ namespace CoursesApp.ViewModels
         }
         
         public int GetNextId => courseCollection.GetNextCourseId();
-        
-        public bool CoursesExist => courseCollection.CoursesExist;
         
         public void Refresh()
         {

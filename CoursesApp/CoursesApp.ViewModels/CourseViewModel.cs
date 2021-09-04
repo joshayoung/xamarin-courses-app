@@ -62,6 +62,18 @@ namespace CoursesApp.ViewModels
             }
         }
         
+        public int AverageStudentAge => course.AverageStudentAge;
+        
+        public string OldestStudent => course.OldestStudent;
+
+        public int NumberOfStudents => course.NumberOfStudents;
+        
+        public bool StudentsExist => course.StudentsExist;
+        
+        public static List<float> Lengths => ModelHelper.CourseLengths;
+        
+        public static List<CourseType> Types => ModelHelper.CourseTypes;
+
         public CourseViewModel(Course course, CourseCollection courseCollection)
         {
             this.course = course;
@@ -77,18 +89,6 @@ namespace CoursesApp.ViewModels
             if (e.PropertyName == nameof(CourseCollection.Students)) RefreshStudents();
         }
         
-        public static List<float> Lengths => ModelHelper.CourseLengths;
-        
-        public static List<CourseType> Types => ModelHelper.CourseTypes;
-        
-        public bool StudentsExist => course.StudentsExist;
-
-        public int NumberOfStudents => course.NumberOfStudents;
-
-        public int AverageStudentAge => course.AverageStudentAge;
-
-        public string OldestStudent => course.OldestStudent;
-
         public void AddCourse() => courseCollection.AddCourse(course);
 
         public StudentViewModel NewStudent()
