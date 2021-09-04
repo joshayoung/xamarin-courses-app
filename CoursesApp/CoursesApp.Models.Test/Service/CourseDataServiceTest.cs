@@ -9,7 +9,7 @@ namespace CoursesApp.Models.Test.Service
     public class CourseDataServiceTest
     {
         [Fact]
-        public void GetCourses_Called_ExpectJSONResults()
+        public void GetCourses_Called_ExpectCorrectResults()
         {
             var data = new CourseDataService();
 
@@ -19,7 +19,7 @@ namespace CoursesApp.Models.Test.Service
         }
         
         [Fact]
-        public void GetStudents_Called_ExpectJSONResults()
+        public void GetStudents_Called_ExpectCorrectResults()
         {
             var data = new CourseDataService();
 
@@ -33,9 +33,9 @@ namespace CoursesApp.Models.Test.Service
         {
             var service = new CourseDataService();
 
-            Action testAction = () => service.GetCourses("bad path");
+            Action getCourses = () => service.GetCourses("bad path");
 
-            testAction.Should().Throw<InvalidOperationException>()
+            getCourses.Should().Throw<InvalidOperationException>()
                 .WithMessage("Error reading JSON file");
         }
         
@@ -44,9 +44,9 @@ namespace CoursesApp.Models.Test.Service
         {
             var service = new CourseDataService();
 
-            Action testAction = () => service.GetStudents("bad path");
+            Action getStudents = () => service.GetStudents("bad path");
 
-            testAction.Should().Throw<InvalidOperationException>()
+            getStudents.Should().Throw<InvalidOperationException>()
                 .WithMessage("Error reading JSON file");
         }
     }

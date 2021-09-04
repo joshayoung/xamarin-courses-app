@@ -19,7 +19,7 @@ namespace CoursesApp.Models.Test
         }
         
         [Fact]
-        public void Constructor_ValidParams_ExpectAssignment()
+        public void Constructor_NonDefaultParams_ExpectAssignment()
         {
             const int id = 1;
             const string name = "name";

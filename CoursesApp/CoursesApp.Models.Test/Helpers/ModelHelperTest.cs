@@ -8,7 +8,7 @@ namespace CoursesApp.Models.Test.Helpers
     public class ModelHelperTest
     {
         [Fact]
-        public void StudentAges_Called_ExpectListOfInts()
+        public void StudentAges_Called_ExpectCorrectResult()
         {
             var ages = new List<int>
                 {

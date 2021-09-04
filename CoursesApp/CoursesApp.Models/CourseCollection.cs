@@ -16,7 +16,6 @@ namespace CoursesApp.Models
 
         public List<Student> Students { get; private set; } = new List<Student>();
         
-        // TODO: Add a test for this:
         public bool CoursesExist { get; private set; }
 
         public CourseCollection(CourseDataService courseDataService)

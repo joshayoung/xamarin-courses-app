@@ -27,7 +27,7 @@ namespace CoursesApp.Models.Test
         }
         
         [Fact]
-        public void Constructor_ValidParams_ExpectAssignment()
+        public void Constructor_NonDefaultParams_ExpectAssignment()
         {
             const int id = 1;
             const string title = "title";
@@ -75,10 +75,7 @@ namespace CoursesApp.Models.Test
         public void UpdateAverageAge_Called_PropertyChangeForAverageStudentAge()
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
-            var courseCollection = new CourseCollection(courseDataService)
-            {
-                Students = { new Student(1) },
-            };
+            var courseCollection = new CourseCollection(courseDataService) { Students = { new Student(1) } };
             var course = new Course(1, "title", 2, CourseType.Discussion, new List<int>() { 1 });
             courseCollection.Courses.Add(course);
             var wasAverageUpdated = false;
@@ -124,12 +121,14 @@ namespace CoursesApp.Models.Test
         }
         
         [Fact]
-        public void UpdateAverageAge_Students_ExpectAverageStudentAgeSet()
+        public void UpdateAverageAge_HasStudents_ExpectAverageStudentAgeSet()
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = new CourseCollection(courseDataService)
             {
-                Students = { new Student(1, "joe", 30), new Student(2, "sally", 20) }
+                Students = { new Student(1, "joe", 30), 
+                             new Student(2, "sally", 20) 
+                }
             };
             var course = new Course(1, "title", 2, CourseType.Discussion, new List<int>{ 1, 2 });
             courseCollection.Courses.Add(course);
@@ -155,7 +154,7 @@ namespace CoursesApp.Models.Test
         }
         
         [Fact]
-        public void UpdateStudentCount_Called_ExpectNumberOfStudents()
+        public void UpdateStudentCount_Called_ExpectNumberOfStudentsSet()
         {
             var course = new Course(1, "title", 2, CourseType.Discussion, new List<int>{ 1, 2, 3 });
 

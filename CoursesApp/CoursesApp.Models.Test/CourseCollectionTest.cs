@@ -152,10 +152,9 @@ namespace CoursesApp.Models.Test
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = new CourseCollection(courseDataService);
             var wasCoursesExistUpdated = false;
-
             courseCollection.PropertyChanged += (sender, args) =>
             {
-                wasCoursesExistUpdated = true;
+                if (args.PropertyName == nameof(CourseCollection.CoursesExist)) wasCoursesExistUpdated = true;
             };
 
             courseCollection.UpdateCoursesExist();
@@ -217,7 +216,7 @@ namespace CoursesApp.Models.Test
             courseCollection.DeleteStudent(course1, student);
 
             course1.Students.Should().BeEmpty();
-            courseCollection.Students.Should().BeEquivalentTo(new List<Student>{student});
+            courseCollection.Students.Should().BeEquivalentTo(new List<Student> { student });
             studentWasRemoved.Should().BeTrue();
         }
 
