@@ -27,20 +27,20 @@ namespace CoursesApp.Models
         {
             Courses = courseDataService.GetCourses();
             Students = courseDataService.GetStudents();
-            OnPropertyChanged(nameof(Courses));
-            OnPropertyChanged(nameof(Students));
+            NotifyPropertyChanged(nameof(Courses));
+            NotifyPropertyChanged(nameof(Students));
         }
 
         public void AddCourse(Course course)
         {
             Courses.Add(course);
-            OnPropertyChanged(nameof(Courses));
+            NotifyPropertyChanged(nameof(Courses));
         }
 
         public virtual void DeleteCourse(Course course)
         {
             Courses.Remove(course);
-            OnPropertyChanged(nameof(Courses));
+            NotifyPropertyChanged(nameof(Courses));
         }
         
         public int GetNextCourseId()
@@ -55,14 +55,14 @@ namespace CoursesApp.Models
         public void UpdateCoursesExist()
         {
             CoursesExist = Courses.Count > 0;
-            OnPropertyChanged(nameof(CoursesExist));
+            NotifyPropertyChanged(nameof(CoursesExist));
         }
 
         public void AddStudent(Course course, Student student)
         {
             Students.Add(student);
             course.Students.Add(student.Id);
-            OnPropertyChanged(nameof(Students));
+            NotifyPropertyChanged(nameof(Students));
         }
         
         public void DeleteStudent(Course course, Student student)
@@ -71,12 +71,12 @@ namespace CoursesApp.Models
             // If student not in multiple courses:
             if (coursesThatHaveStudent.Count == 1) Students.Remove(student);
             course.Students.Remove(student.Id);
-            OnPropertyChanged(nameof(Students));
+            NotifyPropertyChanged(nameof(Students));
         }
         
         public Student GetStudent(int id) => Students.Find(student => student.Id == id);
         
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null!)
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

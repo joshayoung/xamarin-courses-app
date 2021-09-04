@@ -19,7 +19,7 @@ namespace CoursesApp.ViewModels
             set
             {
                 isRefreshing = value;
-                OnPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
 
@@ -86,7 +86,7 @@ namespace CoursesApp.ViewModels
             return new StudentViewModel(courseCollection.GetStudent(id), cs, courseCollection);
         }
         
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null!)
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
