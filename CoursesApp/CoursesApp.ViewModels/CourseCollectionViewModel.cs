@@ -23,24 +23,24 @@ namespace CoursesApp.ViewModels
             }
         }
 
-        private List<CourseViewModel> courses;
-        public List<CourseViewModel> Courses
-        {
-            get => courses;
-            set
-            {
-                courses = value;
-                OnPropertyChanged();
-            }
-        }
-        
+        public List<CourseViewModel> Courses { get; set; }
+    
         public CourseCollectionViewModel(CourseCollection courseCollection)
         {
-            courses = new List<CourseViewModel>();
+            Courses = new List<CourseViewModel>();
             this.courseCollection = courseCollection;
             courseCollection.PropertyChanged += CoursesCollectionOnPropertyChanged;
             RefreshCourses();
-            courseCollection.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
+            
+            // Update the VM's Courses if the Models Courses changes:
+            // This could also be done with a longer get/set and using 'OnPropertyChanged();':
+            courseCollection.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(CourseCollection.Courses))
+                {
+                    PropertyChanged?.Invoke(this, args);
+                }
+            };
         }
 
         private void CoursesCollectionOnPropertyChanged(object sender, PropertyChangedEventArgs e)
