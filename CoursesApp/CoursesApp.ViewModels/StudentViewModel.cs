@@ -54,7 +54,6 @@ namespace CoursesApp.ViewModels
             this.student = student;
             this.course = course;
             this.courseCollection = courseCollection;
-            
             student.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
         

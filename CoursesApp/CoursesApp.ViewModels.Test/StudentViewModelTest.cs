@@ -65,9 +65,9 @@ namespace CoursesApp.ViewModels.Test
             studentViewModel.PropertyChanged += (sender, args) =>
             {
                 // TODO: Are you testing this correctly?
-                if (args.PropertyName == nameof(studentViewModel.Name)) nameWasChanged = true;
-                if (args.PropertyName == nameof(studentViewModel.Age)) ageWasChanged = true;
-                if (args.PropertyName == nameof(studentViewModel.Major)) majorWasChanged = true;
+                if (args.PropertyName == nameof(Student.Name)) nameWasChanged = true;
+                if (args.PropertyName == nameof(Student.Age)) ageWasChanged = true;
+                if (args.PropertyName == nameof(Student.Major)) majorWasChanged = true;
             };
 
             student.Name = "new name";
@@ -80,7 +80,7 @@ namespace CoursesApp.ViewModels.Test
         }
 
         [Fact]
-        public void Ages_Called_ExpectReturnsCorrectResults()
+        public void Ages_Called_ReturnsCorrectResults()
         {
             var ages = new List<int>
             {
@@ -93,7 +93,7 @@ namespace CoursesApp.ViewModels.Test
         }
 
         [Fact]
-        public void AddStudent_Called_ExpectCallsCorrectMethodCalledWithValue()
+        public void AddStudent_Called_CallsCorrectMethodCalledWithValue()
         {
             var student1 = new Student(1, "Joe", 31, "Physics");
             var student2 = new Student(2, "Joe", 31, "Physics");
@@ -128,7 +128,6 @@ namespace CoursesApp.ViewModels.Test
             // courseCollection.Received().DeleteStudent(Arg.Is(course), Arg.Is(student));
         }
         
-        // SaveStudent
         [Fact]
         public void SaveStudent_Called_ExpectStudentUpdate()
         {

@@ -10,7 +10,7 @@ namespace CoursesApp.ViewModels.Test
 {
     public class CourseViewModelTest
     {
-        // Also test 'if (!courseCollection.Courses.Contains(course)) return;' in RefreshStudents():
+        // Test 'if (!courseCollection.Courses.Contains(course)) return;' in RefreshStudents():
         [Fact]
         public void Constructor_DefaultParams_ExpectAssignment()
         {
@@ -151,7 +151,7 @@ namespace CoursesApp.ViewModels.Test
         }
         
         [Fact]
-        public void Lengths_Called_ExpectListOfCourseLengths()
+        public void Lengths_Called_ReturnsCorrectResults()
         {
             var results = new List<float> { 1, 2, 3, 4 };
 
@@ -159,7 +159,7 @@ namespace CoursesApp.ViewModels.Test
         }
 
         [Fact]
-        public void Types_Called_ExpectListOfTypes()
+        public void Types_Called_ReturnsCorrectResults()
         {
             var results = new List<CourseType>
             {
@@ -173,7 +173,6 @@ namespace CoursesApp.ViewModels.Test
             CourseViewModel.Types.Should().BeEquivalentTo(results);
         }
         
-        // TODO: Test the return value her or test the value called?
         [Fact]
         public void StudentsExist_Called_ExpectBooleanValue()
         {
@@ -188,7 +187,6 @@ namespace CoursesApp.ViewModels.Test
             result.Should().BeTrue();
         }
 
-        // TODO: Test the return value her or test the value called?
         [Fact]
         public void NumberOfStudents_Called_ExpectReturnsAnInt()
         {
@@ -203,7 +201,6 @@ namespace CoursesApp.ViewModels.Test
             result.Should().Be(1);
         }
 
-        // TODO: Test the return value her or test the value called?
         [Fact]
         public void AverageStudentAge_Called_ExpectReturnsAnInt()
         {
@@ -220,7 +217,6 @@ namespace CoursesApp.ViewModels.Test
             result.Should().Be(30);
         }
         
-        // TODO: Test the return value her or test the value called?
         [Fact]
         public void OldestStudent_Called_ExpectReturnsAnString()
         {
@@ -250,7 +246,6 @@ namespace CoursesApp.ViewModels.Test
             courseCollection.Received().AddCourse(course);
         }
         
-        // Tests `NewStudent` call:
         [Fact]
         public void NewStudent_Called_ExpectReturnsCorrectResults()
         {
@@ -280,7 +275,6 @@ namespace CoursesApp.ViewModels.Test
             courseCollection.Received().DeleteCourse(course);
         }
         
-        // `EditCourseCopy` returns a new vm with a copy of data:
         [Fact]
         public void EditCourseCopy_Called_ExpectReturnsNewVM()
         {
@@ -295,7 +289,6 @@ namespace CoursesApp.ViewModels.Test
             result.Should().BeEquivalentTo(newVm);
         }
         
-        // `SaveCourse` modifies course based off ID passed in:
         [Fact]
         public void SaveCourse_Called_ExpectModifiesCourse()
         {

@@ -69,7 +69,6 @@ namespace CoursesApp.ViewModels
             students = new List<StudentViewModel>();
             RefreshStudents();
             courseCollection.PropertyChanged += StudentsCollectionOnPropertyChanged;
-            
             course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
         }
 
