@@ -36,7 +36,7 @@ namespace CoursesApp.ViewModels
             // This could also be done with a longer get/set and using 'OnPropertyChanged();':
             courseCollection.PropertyChanged += (sender, args) =>
             {
-                if (args.PropertyName == nameof(CourseCollection.Courses))
+                if (args.PropertyName == nameof(CourseCollection.Courses) || args.PropertyName == nameof(courseCollection.CoursesExist))
                 {
                     PropertyChanged?.Invoke(this, args);
                 }
