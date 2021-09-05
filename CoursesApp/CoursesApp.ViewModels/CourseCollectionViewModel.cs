@@ -38,17 +38,16 @@ namespace CoursesApp.ViewModels
             RefreshCourses();
             
             // Update the VM's Courses, CoursesExist if the Models Courses changes:
-            // This could also be done with a longer get/set and using 'OnPropertyChanged();':
             courseCollection.PropertyChanged += (sender, args) =>
             {
-                if (args.PropertyName == nameof(CourseCollection.Courses))
+                switch (args.PropertyName)
                 {
-                    NotifyPropertyChanged(nameof(courseCollection.Courses));
-                }
-                
-                if (args.PropertyName == nameof(CourseCollection.CoursesExist))
-                {
-                    NotifyPropertyChanged(nameof(courseCollection.CoursesExist));
+                    case nameof(CourseCollection.Courses):
+                        NotifyPropertyChanged(nameof(courseCollection.Courses));
+                        break;
+                    case nameof(CourseCollection.CoursesExist):
+                        NotifyPropertyChanged(nameof(courseCollection.CoursesExist));
+                        break;
                 }
             };
         }

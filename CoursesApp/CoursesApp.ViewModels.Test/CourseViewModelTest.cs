@@ -103,6 +103,23 @@ namespace CoursesApp.ViewModels.Test
             wasTypeUpdated.Should().BeTrue();
             wasStudentsUpdated.Should().BeTrue();
         }
+
+        [Fact]
+        public void Students_Set_ExpectCallsToMethods()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            var course = Substitute.ForPartsOf<Course>(1, "title", 2, CourseType.Lab, new List<int> { 1 });
+            var courseViewModel = new CourseViewModel(course, courseCollection);
+            courseCollection.Students.Add(new Student(1, "name", 20, "major"));
+
+            courseViewModel.Students = new List<StudentViewModel>();
+            
+            course.Received().UpdateAverageAge(courseCollection);
+            course.Received().UpdateOldestStudent(courseCollection);
+            course.Received().UpdateStudentCount();
+            course.Received().UpdateStudentsExist();
+        }
         
         // Tests: 'course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);' in constructor:
         [Fact]

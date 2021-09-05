@@ -21,7 +21,6 @@ namespace CoursesApp.ViewModels
         {
             get => course.Title;
             set => course.Title = value;
-            
         }
 
         public float Length
@@ -44,8 +43,6 @@ namespace CoursesApp.ViewModels
             {
                 students = value;
                 NotifyPropertyChanged();
-                
-                // TODO: Add tests for these:
                 course.UpdateAverageAge(courseCollection);
                 course.UpdateOldestStudent(courseCollection);
                 course.UpdateStudentCount();
