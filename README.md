@@ -1,4 +1,4 @@
-# xamarin-courses-app-v1
+# Xamarin Courses App
 
 ### Diagram Version 1:
 ![Diagram V1](docs/diagram-v2.png)
