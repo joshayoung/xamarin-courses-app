@@ -17,7 +17,7 @@ namespace CoursesApp.ViewModels
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public int Id => student.Id;
-        
+
         public string Name
         {
             get => student.Name;

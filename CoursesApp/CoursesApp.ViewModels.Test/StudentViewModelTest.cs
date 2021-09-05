@@ -4,6 +4,7 @@ using CoursesApp.Models.Service;
 using FluentAssertions;
 using NSubstitute;
 using Xunit;
+using Xunit.Sdk;
 
 namespace CoursesApp.ViewModels.Test
 {
@@ -49,6 +50,27 @@ namespace CoursesApp.ViewModels.Test
             nameWasChanged.Should().BeTrue();
             ageWasChanged.Should().BeTrue();
             majorWasChanged.Should().BeTrue();
+        }
+
+        [Fact]
+        public void Setters_Called_ExpectPropertiesUpdated()
+        {
+            var student = new Student(1, "joe", 31, "Physics");
+            var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
+            var studentViewModel = new StudentViewModel(student, course, courseCollection);
+            var name = "new name";
+            var age = 30;
+            var major = "Math";
+
+            studentViewModel.Name = name;
+            studentViewModel.Age = age;
+            studentViewModel.Major = major;
+
+            studentViewModel.Name.Should().Be(name);
+            studentViewModel.Age.Should().Be(age);
+            studentViewModel.Major.Should().Be(major);
         }
 
         [Fact]

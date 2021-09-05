@@ -4,6 +4,7 @@ using CoursesApp.Models;
 using CoursesApp.Models.Service;
 using FluentAssertions;
 using NSubstitute;
+using NSubstitute.Exceptions;
 using Xunit;
 
 namespace CoursesApp.ViewModels.Test
@@ -151,7 +152,32 @@ namespace CoursesApp.ViewModels.Test
             wasNumberOfStudentsUpdated.Should().BeTrue();
             wasStudentsExistUpdated.Should().BeTrue();
         }
+
+        [Fact]
+        public void Setters_Called_ExpectPropertiesUpdated()
+        {
+            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
+            var courseCollection = new CourseCollection(courseDataService);
+            courseCollection.Students.Add(new Student(1));
+            var course = new Course(1, "title", 2, CourseType.Lab, new List<int> { 1 });
+            var courseViewModel = new CourseViewModel(course, courseCollection);
+            var title = "new title";
+            var length = 2;
+            var type = CourseType.Discussion;
+            var students = new List<StudentViewModel> { new StudentViewModel(new Student(1), course, courseCollection) };
+
+            courseViewModel.Title = title;
+            courseViewModel.Length = length;
+            courseViewModel.Type = type;
+            courseViewModel.Students = students;
+
+            courseViewModel.Title.Should().Be(title);
+            courseViewModel.Length.Should().Be(length);
+            courseViewModel.Type.Should().Be(type);
+            courseViewModel.Students.Should().BeEquivalentTo(students);
+        }
         
+
         // Tests `StudentsCollectionOnPropertyChanged` call in constructor:
         [Fact]
         public void StudentsCollectionOnPropertyChanged_StudentsAdded_ExpectRefreshStudentsCalled()
