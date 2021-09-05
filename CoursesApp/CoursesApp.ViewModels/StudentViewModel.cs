@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using CoursesApp.Models;
 using CoursesApp.Models.Helpers;
 
@@ -22,31 +21,19 @@ namespace CoursesApp.ViewModels
         public string Name
         {
             get => student.Name;
-            set
-            {
-                student.Name = value;
-                NotifyPropertyChanged();
-            }
+            set => student.Name = value;
         }
 
         public int Age
         {
             get => student.Age;
-            set
-            {
-                student.Age = value;
-                NotifyPropertyChanged();
-            }
+            set => student.Age = value;
         }
         
         public string Major
         {
             get => student.Major;
-            set
-            {
-                student.Major = value;
-                NotifyPropertyChanged();
-            }
+            set => student.Major = value;
         }
         
         public StudentViewModel(Student student, Course course, CourseCollection courseCollection)
@@ -78,11 +65,6 @@ namespace CoursesApp.ViewModels
             var newStudent = new Student(student.Id, student.Name, student.Age, student.Major);
             
             return new StudentViewModel(newStudent, course, courseCollection);
-        }
-
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null!)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
