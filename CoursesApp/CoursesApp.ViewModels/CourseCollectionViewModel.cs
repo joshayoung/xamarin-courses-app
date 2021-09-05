@@ -24,7 +24,7 @@ namespace CoursesApp.ViewModels
         }
 
         public List<CourseViewModel> Courses { get; set; }
-        
+
         // NOTE: I do not need a Students property here, because my students
         // are added to my Courses List with RefreshCourses().
         
@@ -43,10 +43,10 @@ namespace CoursesApp.ViewModels
                 switch (args.PropertyName)
                 {
                     case nameof(CourseCollection.Courses):
-                        NotifyPropertyChanged(nameof(courseCollection.Courses));
+                        NotifyPropertyChanged(nameof(Courses));
                         break;
                     case nameof(CourseCollection.CoursesExist):
-                        NotifyPropertyChanged(nameof(courseCollection.CoursesExist));
+                        NotifyPropertyChanged(nameof(CoursesExist));
                         break;
                 }
             };

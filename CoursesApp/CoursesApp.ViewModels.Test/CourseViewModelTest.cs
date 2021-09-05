@@ -71,36 +71,24 @@ namespace CoursesApp.ViewModels.Test
             courseViewModel.Students.Should().BeEmpty();
         }
          
-        //Tests view-model Property Change Events:
+        // Test the VM Property Change.
+        // I only need to test this one, because this is the only property using: 'NotifyPropertyChanged()'.
         [Fact]
-        public void ViewModel_PropertyChanges_ExpectPropertyChangeEvent()
+        public void Student_PropertyChanges_ExpectPropertyChangeEvent()
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = new CourseCollection(courseDataService);
             var course = new Course(1, "title", 2, CourseType.Lab, new List<int> { 1 });
             var courseViewModel = new CourseViewModel(course, courseCollection);
             courseCollection.Students.Add(new Student(1, "name", 20, "major"));
-            courseCollection.Students.Add(new Student(2, "name", 21, "major"));
-            var wasTitleUpdated = false;
-            var wasLengthUpdated = false;
-            var wasTypeUpdated = false;
             var wasStudentsUpdated = false;
             courseViewModel.PropertyChanged += (sender, args) =>
             {
-                if (args.PropertyName == nameof(CourseViewModel.Title)) wasTitleUpdated = true;
-                if (args.PropertyName == nameof(CourseViewModel.Length)) wasLengthUpdated = true;
-                if (args.PropertyName == nameof(CourseViewModel.Type)) wasTypeUpdated = true;
                 if (args.PropertyName == nameof(CourseViewModel.Students)) wasStudentsUpdated = true;
             };
 
-            courseViewModel.Title = "new title";
-            courseViewModel.Length = 1;
-            courseViewModel.Type = CourseType.Discussion;
             courseViewModel.Students = new List<StudentViewModel>();
 
-            wasTitleUpdated.Should().BeTrue();
-            wasLengthUpdated.Should().BeTrue();
-            wasTypeUpdated.Should().BeTrue();
             wasStudentsUpdated.Should().BeTrue();
         }
 
@@ -121,7 +109,6 @@ namespace CoursesApp.ViewModels.Test
             course.Received().UpdateStudentsExist();
         }
         
-        // Tests: 'course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);' in constructor:
         [Fact]
         public void Model_PropertyChanges_ExpectPropertyChangeEvent()
         {

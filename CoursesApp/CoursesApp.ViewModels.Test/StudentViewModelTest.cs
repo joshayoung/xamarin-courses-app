@@ -25,33 +25,6 @@ namespace CoursesApp.ViewModels.Test
         }
 
         [Fact]
-        public void ViewModel_PropertyChanged_ExpectPropertyChangedEvents()
-        {
-            var student = new Student(1, "joe", 31, "Physics");
-            var course = Substitute.ForPartsOf<Course>(1, "title", 1, CourseType.Discussion, new List<int>());
-            var courseDataService = Substitute.ForPartsOf<CourseDataService>();
-            var courseCollection = Substitute.ForPartsOf<CourseCollection>(courseDataService);
-            var studentViewModel = new StudentViewModel(student, course, courseCollection);
-            var nameWasChanged = false;
-            var ageWasChanged = false;
-            var majorWasChanged = false;
-            studentViewModel.PropertyChanged += (sender, args) =>
-            {
-                if (args.PropertyName == nameof(studentViewModel.Name)) nameWasChanged = true;
-                if (args.PropertyName == nameof(studentViewModel.Age)) ageWasChanged = true;
-                if (args.PropertyName == nameof(studentViewModel.Major)) majorWasChanged = true;
-            };
-
-            studentViewModel.Name = "new name";
-            studentViewModel.Age = 38;
-            studentViewModel.Major = "Science";
-
-            nameWasChanged.Should().BeTrue();
-            ageWasChanged.Should().BeTrue();
-            majorWasChanged.Should().BeTrue();
-        }
-
-        [Fact]
         public void Model_PropertyChanged_ExpectPropertyChangedEvent()
         {
             var student = new Student(1, "joe", 31, "Physics");
@@ -64,7 +37,6 @@ namespace CoursesApp.ViewModels.Test
             var majorWasChanged = false;
             studentViewModel.PropertyChanged += (sender, args) =>
             {
-                // TODO: Are you testing this correctly?
                 if (args.PropertyName == nameof(Student.Name)) nameWasChanged = true;
                 if (args.PropertyName == nameof(Student.Age)) ageWasChanged = true;
                 if (args.PropertyName == nameof(Student.Major)) majorWasChanged = true;

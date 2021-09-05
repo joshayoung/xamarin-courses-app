@@ -136,7 +136,7 @@ namespace CoursesApp.ViewModels
         {
             // Account for a new class:
             if (!courseCollection.Courses.Contains(course)) return;
-
+            
             var cs = courseCollection.Courses.First(cs => cs == course);
             IEnumerable<StudentViewModel>
                 studentList = cs.Students.Select(student =>
