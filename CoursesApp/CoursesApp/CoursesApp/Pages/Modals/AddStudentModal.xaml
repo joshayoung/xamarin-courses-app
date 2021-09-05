@@ -9,6 +9,7 @@
     <ContentPage.Content>
         <StackLayout Padding="20" x:DataType="viewModels:StudentViewModel">
             <Button
+                BackgroundColor="Transparent"
                 Clicked="CloseModal"
                 FontAttributes="Bold"
                 FontSize="40"

@@ -10,6 +10,7 @@
         <StackLayout Padding="20" x:DataType="viewModels:StudentViewModel">
             <Label
                 Margin="0,0,0,20"
+                BackgroundColor="Transparent"
                 FontAttributes="Bold"
                 FontSize="30"
                 Text="Edit Student"

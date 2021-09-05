@@ -9,6 +9,7 @@
     x:DataType="viewModels:CourseViewModel">
     <StackLayout Padding="20">
         <Button
+            BackgroundColor="Transparent"
             Clicked="CloseModal"
             FontAttributes="Bold"
             FontSize="40"
