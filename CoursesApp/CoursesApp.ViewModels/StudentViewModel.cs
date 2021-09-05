@@ -42,6 +42,7 @@ namespace CoursesApp.ViewModels
             this.course = course;
             this.courseCollection = courseCollection;
             
+            // NOTE: If you update model value, update viewmodel value too
             student.PropertyChanged += (sender, args) =>
             {
                 switch (args.PropertyName)

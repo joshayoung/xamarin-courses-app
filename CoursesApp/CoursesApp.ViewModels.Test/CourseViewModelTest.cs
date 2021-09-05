@@ -114,29 +114,42 @@ namespace CoursesApp.ViewModels.Test
         {
             var courseDataService = Substitute.ForPartsOf<CourseDataService>();
             var courseCollection = new CourseCollection(courseDataService);
+            courseCollection.Students.Add(new Student(1));
             var course = new Course(1, "title", 2, CourseType.Lab, new List<int> { 1 });
             var courseViewModel = new CourseViewModel(course, courseCollection);
             var wasTitleUpdated = false;
             var wasLengthUpdated = false;
             var wasTypeUpdated = false;
-            var wasStudentsUpdated = false;
+            var wasAverageStudentAgeUpdate = false;
+            var wasOldestStudentUpdated = false;
+            var wasNumberOfStudentsUpdated = false;
+            var wasStudentsExistUpdated = false;
             courseViewModel.PropertyChanged += (sender, args) =>
             {
-                if (args.PropertyName == nameof(CourseViewModel.Title)) wasTitleUpdated = true;
-                if (args.PropertyName == nameof(CourseViewModel.Length)) wasLengthUpdated = true;
-                if (args.PropertyName == nameof(CourseViewModel.Type)) wasTypeUpdated = true;
-                if (args.PropertyName == nameof(CourseViewModel.Students)) wasStudentsUpdated = true;
+                if (args.PropertyName == nameof(Course.Title)) wasTitleUpdated = true;
+                if (args.PropertyName == nameof(Course.Length)) wasLengthUpdated = true;
+                if (args.PropertyName == nameof(Course.Type)) wasTypeUpdated = true;
+                if (args.PropertyName == nameof(Course.AverageStudentAge)) wasAverageStudentAgeUpdate = true;
+                if (args.PropertyName == nameof(Course.OldestStudent)) wasOldestStudentUpdated = true;
+                if (args.PropertyName == nameof(Course.NumberOfStudents)) wasNumberOfStudentsUpdated = true;
+                if (args.PropertyName == nameof(Course.StudentsExist)) wasStudentsExistUpdated = true;
             };
 
             course.Title = "new title";
             course.Length = 1;
             course.Type = CourseType.Discussion;
-            course.Students = new List<int>();
-
+            course.UpdateAverageAge(courseCollection);
+            course.UpdateOldestStudent(courseCollection);
+            course.UpdateStudentCount();
+            course.UpdateStudentsExist();
+            
             wasTitleUpdated.Should().BeTrue();
             wasLengthUpdated.Should().BeTrue();
             wasTypeUpdated.Should().BeTrue();
-            wasStudentsUpdated.Should().BeTrue();
+            wasAverageStudentAgeUpdate.Should().BeTrue();
+            wasOldestStudentUpdated.Should().BeTrue();
+            wasNumberOfStudentsUpdated.Should().BeTrue();
+            wasStudentsExistUpdated.Should().BeTrue();
         }
         
         // Tests `StudentsCollectionOnPropertyChanged` call in constructor:

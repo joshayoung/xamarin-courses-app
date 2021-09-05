@@ -27,19 +27,21 @@ namespace CoursesApp.Models
         {
             Courses = courseDataService.GetCourses();
             Students = courseDataService.GetStudents();
+            // NOTE: Refresh Courses (used when pulling down to refresh):
             NotifyPropertyChanged(nameof(Courses));
-            NotifyPropertyChanged(nameof(Students));
         }
 
         public void AddCourse(Course course)
         {
             Courses.Add(course);
+            // NOTE: Refresh Courses, otherwise the new course will not appear in the list:
             NotifyPropertyChanged(nameof(Courses));
         }
 
         public virtual void DeleteCourse(Course course)
         {
             Courses.Remove(course);
+            // NOTE: Refresh Courses, otherwise course will not be removed from the list:
             NotifyPropertyChanged(nameof(Courses));
         }
         
@@ -55,6 +57,7 @@ namespace CoursesApp.Models
         public void UpdateCoursesExist()
         {
             CoursesExist = Courses.Count > 0;
+            // NOTE: Refresh CoursesExist, otherwise view will not see the property change
             NotifyPropertyChanged(nameof(CoursesExist));
         }
 
@@ -62,6 +65,7 @@ namespace CoursesApp.Models
         {
             Students.Add(student);
             course.Students.Add(student.Id);
+            // NOTE Refresh Students otherwise list will not see the new student
             NotifyPropertyChanged(nameof(Students));
         }
         
@@ -71,6 +75,7 @@ namespace CoursesApp.Models
             // If student not in multiple courses:
             if (coursesThatHaveStudent.Count == 1) Students.Remove(student);
             course.Students.Remove(student.Id);
+            // NOTE Refresh Students otherwise list will not see the deleted student
             NotifyPropertyChanged(nameof(Students));
         }
         

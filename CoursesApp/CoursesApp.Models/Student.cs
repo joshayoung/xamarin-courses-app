@@ -16,6 +16,7 @@ namespace CoursesApp.Models
             set
             {
                 name = value;
+                // NOTE: Refresh property when changed:
                 NotifyPropertyChanged();
             }
         }
@@ -27,6 +28,7 @@ namespace CoursesApp.Models
             set
             {
                 age = value;
+                // NOTE: Refresh property when changed:
                 NotifyPropertyChanged();
             }
         }
@@ -38,6 +40,7 @@ namespace CoursesApp.Models
             set
             {
                 major = value;
+                // NOTE: Refresh property when changed:
                 NotifyPropertyChanged();
             }
         }

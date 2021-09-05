@@ -50,25 +50,21 @@ namespace CoursesApp.Models.Test
             var wasTitleChanged = false;
             var wasLengthChanged = false;
             var wasTypeChanged = false;
-            var wasStudentsChanged = false;
             var course = new Course(1, "title", 2, CourseType.Lab, new List<int>());
             course.PropertyChanged += (_, args) =>
             {
                 if (args.PropertyName == nameof(course.Title)) wasTitleChanged = true;
                 if (args.PropertyName == nameof(course.Length)) wasLengthChanged = true;
                 if (args.PropertyName == nameof(course.Type)) wasTypeChanged = true;
-                if (args.PropertyName == nameof(course.Students)) wasStudentsChanged = true;
             };
 
             course.Title = "new title";
             course.Length = 4;
             course.Type = CourseType.Discussion;
-            course.Students = new List<int> { 1 };
             
             wasTitleChanged.Should().BeTrue();
             wasLengthChanged.Should().BeTrue();
             wasTypeChanged.Should().BeTrue();
-            wasStudentsChanged.Should().BeTrue();
         }
 
         [Fact]

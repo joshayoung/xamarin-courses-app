@@ -40,17 +40,14 @@ namespace CoursesApp.Models.Test
             courseDataService.Configure().GetStudents().Returns(deserializedStudents);
             var courseCollection = new CourseCollection(courseDataService);
             var coursesWasChanged = false;
-            var studentsWasChanged = false;
             courseCollection.PropertyChanged += (sender, args) =>
             {
                 if (args.PropertyName == nameof(CourseCollection.Courses)) coursesWasChanged = true;
-                if (args.PropertyName == nameof(CourseCollection.Students)) studentsWasChanged = true;
             };
                 
             courseCollection.RepopulateCourseList();
 
             coursesWasChanged.Should().BeTrue();
-            studentsWasChanged.Should().BeTrue();
         }
 
         [Fact]

@@ -18,6 +18,7 @@ namespace CoursesApp.Models
             set
             {
                 title = value;
+                // NOTE: Refresh property when changed:
                 NotifyPropertyChanged();
             }
         }
@@ -29,6 +30,7 @@ namespace CoursesApp.Models
             set
             {
                 length = value;
+                // NOTE: Refresh property when changed:
                 NotifyPropertyChanged();
             }
         }
@@ -40,20 +42,12 @@ namespace CoursesApp.Models
             set
             {
                 type = value;
+                // NOTE: Refresh property when changed:
                 NotifyPropertyChanged();
             }
         }
 
-        private List<int> students;
-        public List<int> Students
-        {
-            get => students;
-            set
-            {
-                students = value;
-                NotifyPropertyChanged();
-            }
-        }
+        public List<int> Students { get; set; }
 
         public int AverageStudentAge { get; private set; }
 
@@ -74,7 +68,7 @@ namespace CoursesApp.Models
             this.title = title;
             this.length = length;
             this.type = type;
-            this.students = students ?? new List<int>();
+            this.Students = students ?? new List<int>();
         }
         
         public virtual void UpdateAverageAge(CourseCollection courseCollection)
@@ -82,6 +76,7 @@ namespace CoursesApp.Models
             if (Students.Count == 0)
             {
                 AverageStudentAge = 0;
+                // Note: Trigger a property change after update:
                 NotifyPropertyChanged(nameof(AverageStudentAge));
                 return;
             }
@@ -90,6 +85,7 @@ namespace CoursesApp.Models
                 .Select(student => student.Age)
                 .Sum() / Students.Count;
 
+            // Note: Trigger a property change after update:
             NotifyPropertyChanged(nameof(AverageStudentAge));
         }
 
@@ -114,12 +110,14 @@ namespace CoursesApp.Models
             }
 
             OldestStudent = name;
+            // Note: Trigger a property change after update:
             NotifyPropertyChanged(nameof(OldestStudent));
         }
 
         public void UpdateStudentsExist()
         {
             StudentsExist = Students.Count > 0;
+            // Note: Trigger a property change after update:
             NotifyPropertyChanged(nameof(StudentsExist));
         }
 

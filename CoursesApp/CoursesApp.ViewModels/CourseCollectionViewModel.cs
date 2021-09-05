@@ -19,6 +19,7 @@ namespace CoursesApp.ViewModels
             set
             {
                 isRefreshing = value;
+                // NOTE: Refresh property when changed (otherwise the pull to refresh will not close spinner):
                 NotifyPropertyChanged();
             }
         }
@@ -54,6 +55,7 @@ namespace CoursesApp.ViewModels
 
         private void CoursesCollectionOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            // NOTE: this listens for property changes after deleting or adding a course and refreshes the list:
             if (e.PropertyName == nameof(CourseCollection.Courses)) RefreshCourses();
         }
         

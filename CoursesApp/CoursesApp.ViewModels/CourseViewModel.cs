@@ -42,6 +42,7 @@ namespace CoursesApp.ViewModels
             set
             {
                 students = value;
+                // NOTE: Refreshes property, I think this is what causes the list to refresh after RefreshStudents():
                 NotifyPropertyChanged();
                 course.UpdateAverageAge(courseCollection);
                 course.UpdateOldestStudent(courseCollection);
@@ -69,6 +70,8 @@ namespace CoursesApp.ViewModels
             students = new List<StudentViewModel>();
             RefreshStudents();
             courseCollection.PropertyChanged += StudentsCollectionOnPropertyChanged;
+            
+            // NOTE: If my model value changes, update the vm value
             course.PropertyChanged += (sender, args) =>
             {
                 switch (args.PropertyName)
@@ -81,9 +84,6 @@ namespace CoursesApp.ViewModels
                         break;
                     case nameof(Course.Type):
                         NotifyPropertyChanged(nameof(Type));
-                        break;
-                    case nameof(Course.Students):
-                        NotifyPropertyChanged(nameof(Students));
                         break;
                     case nameof(Course.AverageStudentAge):
                         NotifyPropertyChanged(nameof(AverageStudentAge));
@@ -103,6 +103,7 @@ namespace CoursesApp.ViewModels
 
         private void StudentsCollectionOnPropertyChanged(object _, PropertyChangedEventArgs e)
         {
+            // NOTE: Refresh list after deleting or adding a student
             if (e.PropertyName == nameof(CourseCollection.Students)) RefreshStudents();
         }
         
