@@ -41,7 +41,22 @@ namespace CoursesApp.ViewModels
             this.student = student;
             this.course = course;
             this.courseCollection = courseCollection;
-            student.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
+            
+            student.PropertyChanged += (sender, args) =>
+            {
+                switch (args.PropertyName)
+                {
+                    case nameof(Student.Name):
+                        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Name)));
+                        break;
+                    case nameof(Student.Age):
+                        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Age)));
+                        break;
+                    case nameof(Student.Major):
+                        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Major)));
+                        break;
+                }
+            };
         }
         
         public static List<int> Ages => ModelHelper.StudentAges();

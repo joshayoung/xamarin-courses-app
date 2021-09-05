@@ -20,31 +20,20 @@ namespace CoursesApp.ViewModels
         public string Title
         {
             get => course.Title;
-            set
-            {
-                course.Title = value;
-                NotifyPropertyChanged();
-            }
+            set => course.Title = value;
+            
         }
 
         public float Length
         {
             get => course.Length;
-            set
-            {
-                course.Length = value;
-                NotifyPropertyChanged();
-            }
+            set => course.Length = value;
         }
 
         public CourseType Type
         {
             get => course.Type;
-            set
-            {
-                course.Type = value;
-                NotifyPropertyChanged();
-            }
+            set => course.Type = value;
         }
         
         private List<StudentViewModel> students;
@@ -55,6 +44,8 @@ namespace CoursesApp.ViewModels
             {
                 students = value;
                 NotifyPropertyChanged();
+                
+                // TODO: Add tests for these:
                 course.UpdateAverageAge(courseCollection);
                 course.UpdateOldestStudent(courseCollection);
                 course.UpdateStudentCount();
@@ -81,7 +72,36 @@ namespace CoursesApp.ViewModels
             students = new List<StudentViewModel>();
             RefreshStudents();
             courseCollection.PropertyChanged += StudentsCollectionOnPropertyChanged;
-            course.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(this, args);
+            course.PropertyChanged += (sender, args) =>
+            {
+                switch (args.PropertyName)
+                {
+                    case nameof(Course.Title):
+                        NotifyPropertyChanged(nameof(Title));
+                        break;
+                    case nameof(Course.Length):
+                        NotifyPropertyChanged(nameof(Length));
+                        break;
+                    case nameof(Course.Type):
+                        NotifyPropertyChanged(nameof(Type));
+                        break;
+                    case nameof(Course.Students):
+                        NotifyPropertyChanged(nameof(Students));
+                        break;
+                    case nameof(Course.AverageStudentAge):
+                        NotifyPropertyChanged(nameof(AverageStudentAge));
+                        break;
+                    case nameof(Course.OldestStudent):
+                        NotifyPropertyChanged(nameof(OldestStudent));
+                        break;
+                    case nameof(Course.NumberOfStudents):
+                        NotifyPropertyChanged(nameof(NumberOfStudents));
+                        break;
+                    case nameof(Course.StudentsExist):
+                        NotifyPropertyChanged(nameof(StudentsExist));
+                        break;
+                }
+            };
         }
 
         private void StudentsCollectionOnPropertyChanged(object _, PropertyChangedEventArgs e)
