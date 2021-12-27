@@ -9,42 +9,6 @@ namespace CoursesApp.Models.Test
     public class CourseTest
     {
         [Fact]
-        public void Constructor_DefaultParams_ExpectAssignment()
-        {
-            const int id = 1;
-
-            var course = new Course(id);
-
-            course.Id.Should().Be(id);
-            course.Title.Should().Be("");
-            course.Length.Should().Be(0);
-            course.Type.Should().Be(CourseType.None);
-            course.Students.Should().BeEmpty();
-            course.AverageStudentAge.Should().Be(0);
-            course.OldestStudent.Should().Be("");
-            course.NumberOfStudents.Should().Be(0);
-            course.StudentsExist.Should().BeFalse();
-        }
-        
-        [Fact]
-        public void Constructor_NonDefaultParams_ExpectAssignment()
-        {
-            const int id = 1;
-            const string title = "title";
-            const float length = 2;
-            const CourseType type = CourseType.Lab;
-            var students = new List<int> { 1 };
-
-            var course = new Course(id, title, length, type, students);
-
-            course.Id.Should().Be(id);
-            course.Title.Should().Be(title);
-            course.Length.Should().Be(length);
-            course.Type.Should().Be(type);
-            course.Students.Should().BeEquivalentTo(students);
-        }
-
-        [Fact]
         public void PropertiesChange_Called_ExpectPropertyChangedEvent()
         {
             var wasTitleChanged = false;
